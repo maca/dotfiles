@@ -1,13 +1,22 @@
 " Example Vim graphical configuration.
 " Copy to ~/.gvimrc or ~/_gvimrc.
 
-set guifont=Inconsolata:h20            " Font family and font size.
 set antialias                     " MacVim: smooth fonts.
 set encoding=utf-8                " Use UTF-8 everywhere.
 set guioptions-=T                 " Hide toolbar.
-set background=light              " Background.
-set lines=25 columns=100          " Window dimensions.
+" set background=light              " Background.
+set lines=60 columns=160          " Window dimensions.
+" set guioptions-=r                 " Don't show right scrollbar
 
-set guioptions-=r                 " Don't show right scrollbar
+noremap i :highlight Normal guibg=#2F0804<cr>i
+noremap o :highlight Normal guibg=#2F0804<cr>o
+noremap s :highlight Normal guibg=#2F0804<cr>s
+noremap a :highlight Normal guibg=#2F0804<cr>a
+noremap I :highlight Normal guibg=#2F0804<cr>I
+noremap O :highlight Normal guibg=#2F0804<cr>O
+noremap S :highlight Normal guibg=#2F0804<cr>S
+noremap A :highlight Normal guibg=#2F0804<cr>A
 
-
+"You need the next line to change the color back when you hit escape.
+"
+inoremap <Esc> <Esc>:highlight Normal guibg=black<cr> 

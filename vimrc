@@ -56,6 +56,10 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*Cap
 colorscheme vividchalk 
 colorscheme vividchalk " second time to change bg to transparent 
 
+" Map leader to ,
+let mapleader = ","
+let g:mapleader = ","
+
 " Tab mappings.
 map <leader>tt :tabnew<cr>
 map <leader>te :tabedit

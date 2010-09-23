@@ -10,3 +10,21 @@
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git 
+[submodule "vim/bundle/tpope-vim-rails"]
+	path = vim/bundle/tpope-vim-rails
+	url = git://github.com/tpope/vim-rails.git
+[submodule "vim/bundle/tsaleh-vim-tcomment"]
+	path = vim/bundle/tsaleh-vim-tcomment
+  url = git://github.com/tsaleh/vim-tcomment.git
+[submodule "vim/bundle/vim-haml"]
+	path = vim/bundle/vim-haml
+	url = git://github.com/tpope/vim-haml.git 
+[submodule "vim/bundle/vim-makegreen"]
+	path = vim/bundle/vim-makegreen
+	url = git://github.com/reinh/vim-makegreen.git
+[submodule "vim/bundle/autoclose"]
+	path = vim/bundle/autoclose
+	url = git://github.com/vim-scripts/AutoClose.git
