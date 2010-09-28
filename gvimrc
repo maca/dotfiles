@@ -5,8 +5,26 @@ set antialias                     " MacVim: smooth fonts.
 set encoding=utf-8                " Use UTF-8 everywhere.
 set guioptions-=T                 " Hide toolbar.
 " set background=light              " Background.
-set lines=60 columns=160          " Window dimensions.
+set lines=60 columns=190          " Window dimensions.
 " set guioptions-=r                 " Don't show right scrollbar
+
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Monospace\ 9
+  elseif has("gui_photon")
+    set guifont=Monospace:9
+  elseif has("gui_kde")
+    set guifont=Monospace/9/-1/5/50/0/0/0/1/0
+  elseif has("x11")
+    set guifont=-*-monospace-medium-r-normal-*-*-180-*-*-m-*-*
+  else
+    set guifont=Monospace:h9:cDEFAULT
+  endif
+endif
+
+" nmap <F2>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR> 
+" nmap <F3>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR> 
+colorscheme ir_black
 
 noremap i :highlight Normal guibg=#2F0804<cr>i
 noremap o :highlight Normal guibg=#2F0804<cr>o
