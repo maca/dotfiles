@@ -89,11 +89,11 @@ map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
 " reload chromium on save certain files
-function! RefreshBrowser()
-  if &modified
-    write
-    silent !refresh-chromium
-  endif
-endfunction
-
-autocmd BufWriteCmd *.html,*.css,*.haml,*.erb,*.sass,*.scss :call RefreshBrowser()
+" function! RefreshBrowser()
+"   if &modified
+"     write
+"     silent !refresh-chromium
+"   endif
+" endfunction
+" 
+" autocmd BufWriteCmd *.html,*.css,*.haml,*.erb,*.sass,*.scss :call RefreshBrowser()
