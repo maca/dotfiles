@@ -73,6 +73,7 @@ map <leader>tm :tabmove
 " map <Leader>f :FuzzyFinderTextMate<Enter>
 map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 
+" Fix tmux arrows in insert mode issue
 
 " Controversial...swap colon and semicolon for easier commands
 "nnoremap ; :
@@ -97,3 +98,7 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 " endfunction
 " 
 " autocmd BufWriteCmd *.html,*.css,*.haml,*.erb,*.sass,*.scss :call RefreshBrowser()
+
+if &term=="screen"
+  set term=xterm-256color
+endif

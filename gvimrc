@@ -3,10 +3,12 @@
 
 set antialias                     " MacVim: smooth fonts.
 set encoding=utf-8                " Use UTF-8 everywhere.
-" set guioptions-=T                 " Hide toolbar.
+set guioptions-=T                 " Hide toolbar.
+set guioptions-=l " No left scrollbar
+set guioptions-=L " .. even if vertical split
+set guioptions-=r " No right scrollbar
+set guioptions-=b " No bottom scrollbar
 " set background=light              " Background.
-set lines=60 columns=190          " Window dimensions.
-" set guioptions-=r                 " Don't show right scrollbar
 
 if has("gui_running")
   if has("gui_gtk2")
@@ -21,6 +23,7 @@ if has("gui_running")
     set guifont=Inconsolata:h16
     set linespace=3
     set transparency=15
+      set lines=60 columns=240          " Window dimensions.
   endif
 endif
 
