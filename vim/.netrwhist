@@ -1,9 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/macario/Sites/sos_vestidos'
-let g:netrw_dirhist_2='/home/macario/.gnome2'
-let g:netrw_dirhist_3='/home/macario/.rvm/gems/ruby-1.8.7-p302/gems/actionpack-3.0.0'
-let g:netrw_dirhist_4='/home/macario/.vim'
-let g:netrw_dirhist_5='/home/macario/Sites/cenart/.git'
-let g:netrw_dirhist_6='/home/vermelho/.rvm'
-let g:netrw_dirhist_7='/Users/vermelho/Code/jQuery/jquery-ui-map-2.0.1'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/Users/vermelho/imaginacion'
