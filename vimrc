@@ -102,3 +102,6 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 if &term=="screen"
   set term=xterm-256color
 endif
+
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p

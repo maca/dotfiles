@@ -20,10 +20,11 @@ if has("gui_running")
   elseif has("x11")
     set guifont=-*-monospace-medium-r-normal-*-*-180-*-*-m-*-*
   else
-    set guifont=Inconsolata:h14
+    set guifont=Inconsolata:h12
     set linespace=4
     set transparency=15
-      set lines=160 columns=340          " Window dimensions.
+    set lines=160 columns=340          " Window dimensions.
+    set fu
   endif
 endif
 
