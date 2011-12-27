@@ -1,11 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/vermelho/imaginacion'
-let g:netrw_dirhist_2='/Users/vermelho/Downloads/jquery-ui-map'
-let g:netrw_dirhist_3='/Users/vermelho/Downloads/web'
-let g:netrw_dirhist_4='/Users/vermelho/Apps/web'
-let g:netrw_dirhist_5='/Users/vermelho/Downloads/css3-jrte.jquery'
-let g:netrw_dirhist_6='/Users/vermelho/Code/Gems/Web/sinatra/lib/sinatra'
-let g:netrw_dirhist_7='/Users/vermelho/Code/Gems/Web/trails'
-let g:netrw_dirhist_8='/Users/vermelho/Apps/campainha.dev'
-let g:netrw_dirhist_9='/Users/vermelho/Code/jQuery/spin.js'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/vermelho/.offlineimap'
+let g:netrw_dirhist_2='/opt/nginx/conf'
