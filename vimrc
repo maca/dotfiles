@@ -8,6 +8,7 @@ filetype plugin indent on         " Turn on file type detection.
 
 runtime macros/matchit.vim        " Load the matchit plugin.
 
+set encoding=utf-8                " Use UTF-8 everywhere.
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in.
 
@@ -48,11 +49,6 @@ set expandtab                    " Use spaces instead of tabs
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
-
-" Or use vividchalk
-" set t_Co=256
-colorscheme vividchalk 
-colorscheme vividchalk " second time to change bg to transparent 
 
 " Map leader to ,
 let mapleader = ","
@@ -103,5 +99,26 @@ if &term=="screen"
   set term=xterm-256color
 endif
 
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Monospace\ 9
+  elseif has("gui_photon")
+    set guifont=Monospace:9
+  elseif has("gui_kde")
+    set guifont=Monospace/9/-1/5/50/0/0/0/1/0
+  elseif has("x11")
+    set guifont=-*-monospace-medium-r-normal-*-*-180-*-*-m-*-*
+  else
+    set guifont=Inconsolata:h12
+    set linespace=4
+    set transparency=15
+    set lines=160 columns=340          " Window dimensions.
+    set fu
+  endif
+endif
+
+" nmap <F2>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR> 
+" nmap <F3>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR> 
+colorscheme ir_black
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
