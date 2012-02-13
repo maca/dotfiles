@@ -69,14 +69,8 @@ map <leader>tm :tabmove
 " map <Leader>f :FuzzyFinderTextMate<Enter>
 map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 
-" Fix tmux arrows in insert mode issue
-
-" Controversial...swap colon and semicolon for easier commands
-"nnoremap ; :
-"nnoremap : ;
-
-"vnoremap ; :
-"vnoremap : ;
+" Switch between two files
+nnoremap ,, <C-^>
 
 " Automatic fold settings for specific files. Uncomment to use.
 " autocmd FileType ruby setlocal foldmethod=syntax
@@ -122,3 +116,51 @@ endif
 colorscheme ir_black
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
+
+let g:ConqueTerm_EscKey = '<C-Esc>'
+let g:ConqueTerm_TERM = 'xterm'
+
+hi normal ctermfg=cyan guifg=cyan
+au InsertEnter * hi normal ctermfg=white guifg=white
+au InsertLeave * hi normal ctermfg=cyan guifg=cyan
+
+" Ought to move out of here
+function! MyGrep(...)
+  if a:0 < 2
+    echo "Usage: MyGrep <options> <pattern> <dir>"
+    echo 'Example: MyGrep -r "cow" ~/Desktop/*'
+    return
+  endif
+  if a:0 == 2
+    let options = '-rsinI'
+    let pattern = a:1
+    let dir = a:2
+  else
+    let options = a:1 . 'snI'
+    let pattern = a:2
+    let dir = a:3
+  endif
+  let exclude = 'grep -v "/.svn"'
+  let cmd = 'grep '.options.' '.pattern.' '.dir. '| '.exclude
+  let cmd_output = system(cmd)
+  if cmd_output == ""
+    echomsg "Pattern " . pattern . " not found"
+    return
+  endif
+
+  let tmpfile = tempname()
+  exe "redir! > " . tmpfile
+  silent echon '[grep search for "'.pattern.'" with options "'.options.'"]'."\n"
+  silent echon cmd_output
+  redir END
+
+  let old_efm = &efm
+  set efm=%f:%\\s%#%l:%m
+
+  execute "silent! cgetfile " . tmpfile
+  let &efm = old_efm
+  botright copen
+
+  call delete(tmpfile)
+endfunction
+command! -nargs=* -complete=file MyGrep call MyGrep(<f-args>)

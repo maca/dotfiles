@@ -52,3 +52,9 @@
 [submodule "vim/bundle/conqueshell"]
 	path = vim/bundle/conqueshell
 	url = https://github.com/vim-scripts/Conque-Shell.git
+[submodule "vim/bundle/conque-term"]
+	path = vim/bundle/conque-term
+	url = https://github.com/rosenfeld/conque-term.git
+[submodule "vim/bundle/greplace"]
+	path = vim/bundle/greplace
+	url = https://github.com/vim-scripts/greplace.vim.git
