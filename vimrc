@@ -1,6 +1,8 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+set shell=/bin/zsh\ -i
+
 set nocompatible                  " Must come first because it changes other options.
 
 syntax enable                     " Turn on syntax highlighting.
@@ -78,6 +80,9 @@ nnoremap ,, <C-^>
 
 " For the MakeGreen plugin and Ruby RSpec. Uncomment to use.
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
+
+" auto reload .vimrc after editing
+autocmd BufWritePost .vimrc source $MYVIMRC
 
 " reload chromium on save certain files
 " function! RefreshBrowser()

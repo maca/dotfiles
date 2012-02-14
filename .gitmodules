@@ -58,3 +58,6 @@
 [submodule "vim/bundle/greplace"]
 	path = vim/bundle/greplace
 	url = https://github.com/vim-scripts/greplace.vim.git
+[submodule "vim/bundle/qargs"]
+	path = vim/bundle/qargs
+	url = https://github.com/nelstrom/vim-qargs.git
