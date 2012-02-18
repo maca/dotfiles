@@ -73,7 +73,6 @@ map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 
 " Switch between two files
 nnoremap ,, <C-^>
-
 " Automatic fold settings for specific files. Uncomment to use.
 " autocmd FileType ruby setlocal foldmethod=syntax
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
@@ -93,6 +92,9 @@ autocmd BufWritePost .vimrc source $MYVIMRC
 " endfunction
 " 
 " autocmd BufWriteCmd *.html,*.css,*.haml,*.erb,*.sass,*.scss :call RefreshBrowser()
+
+" quick escape
+imap ;; <Esc>
 
 if &term=="screen"
   set term=xterm-256color
@@ -119,8 +121,8 @@ endif
 " nmap <F2>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR> 
 " nmap <F3>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR> 
 colorscheme ir_black
-vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
+vmap ,c y:call system("pbcopy", getreg("\""))<CR>
+nmap ,v :call setreg("\"",system("pbpaste"))<CR>p
 
 let g:ConqueTerm_EscKey = '<C-Esc>'
 let g:ConqueTerm_TERM = 'xterm'
