@@ -3,6 +3,7 @@ call pathogen#helptags()
 
 set shell=/bin/zsh\ -i
 
+
 set nocompatible                  " Must come first because it changes other options.
 
 syntax enable                     " Turn on syntax highlighting.
@@ -96,9 +97,7 @@ autocmd BufWritePost .vimrc source $MYVIMRC
 " quick escape
 imap ;; <Esc>
 
-if &term=="screen"
-  set term=xterm-256color
-endif
+colorscheme tir_black 
 
 if has("gui_running")
   if has("gui_gtk2")
@@ -120,9 +119,19 @@ endif
 
 " nmap <F2>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR> 
 " nmap <F3>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR> 
-colorscheme ir_black
-vmap ,c y:call system("pbcopy", getreg("\""))<CR>
-nmap ,v :call setreg("\"",system("pbpaste"))<CR>p
+" solarized options 
+
+" system copy/paste 
+vmap ,c "*y
+nmap ,v "*p
+
+" history tree
+nnoremap ,h :GundoToggle<CR>
+
+" "
+map <Space> <c-W>w
+nnoremap <C-w>s <C-w>s<C-w>j
+nnoremap <C-w>v <C-w>v<C-w>l
 
 let g:ConqueTerm_EscKey = '<C-Esc>'
 let g:ConqueTerm_TERM = 'xterm'
