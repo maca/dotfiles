@@ -140,10 +140,13 @@ nmap ,v "*p
 " history tree
 nnoremap ,h :GundoToggle<CR>
 
-" "
+" Cycle through panes with space
 map <Space> <c-W>w
+" Jump to new pane when created
 nnoremap <C-w>s <C-w>s<C-w>j
 nnoremap <C-w>v <C-w>v<C-w>l
+" Alias window mappings for tmux consistency
+map <C-a> <C-w>
 
 let g:ConqueTerm_EscKey = '<C-Esc>'
 let g:ConqueTerm_TERM = 'xterm'
