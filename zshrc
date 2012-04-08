@@ -1,10 +1,6 @@
-#
-export TERM=screen-256color
-export LANG="en_US.UTF-8"
-
-if [[ -z "$TMUX" ]]; then
-  tmux att || tmux
-fi
+# if [[ -z "$TMUX" ]]; then
+#   tmux att || tmux
+# fi
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -33,13 +29,13 @@ ZSH=$HOME/.oh-my-zsh
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git gem thor bundler heroku rbenv vi-mode nyan extract osx)
+plugins=(git gem thor bundler heroku vi-mode nyan extract)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/Users/vermelho/.rbenv/shims:/Users/vermelho/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbini:/usr/local/sbin:/sbin:/usr/X11/bin:~/bin:/Developer/usr/bin
-export NODE_PATH=/usr/local/lib/node_modules
+# export PATH=/Users/vermelho/.rbenv/shims:/Users/vermelho/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbini:/usr/local/sbin:/sbin:/usr/X11/bin:~/bin:/Developer/usr/bin
+# export NODE_PATH=/usr/local/lib/node_modules
 
 # no need for cd command
 setopt autocd
