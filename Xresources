@@ -1,3 +1,48 @@
+URxvt.urgentOnBell: true
+URxvt.scrollBar: off
+!! URxvt.scrollstyle: plain
+!! URxvt.scrollBar_left: true
 URxvt.depth: 32
 URxvt.background: rgba:0000/0000/0000/dddd
-URxvt.scrollBar: off
+URxvt.foreground: rgba:bbcc/ffff/4477/ffff
+URxvt.font: xft:inconsolata:size=10
+URxvt.geometry: 81x25
+!! URxvt.iconFile: /home/fabian/.icons/fabian/scalable/apps/terminal.svg
+!! URxvt.cursorUnderline: True
+!! URxvt.underlineColor: rgba:0000/ffff/0000/ffff
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+URxvt.scrollTtyOutput: false
+URxvt.saveLines: 100000
+URxvt.perl-ext-common: default,url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.urlLauncher: epiphany
+URxvt.underlineURLs: true
+
+! tangoesque scheme
+! *background: #111111
+! *foreground: #babdb6
+! Black (not tango) + DarkGrey
+! *color0:  #000000
+! *color8:  #555753
+! DarkRed + Red
+! *color1:  #ff6565
+! *color9:  #ff8d8d
+! DarkGreen + Green
+! *color2:  #93d44f
+! *color10: #c8e7a8
+! DarkYellow + Yellow
+! *color3:  #eab93d
+! *color11: #ffc123
+! DarkBlue + Blue
+*color4:  #204a87
+*color12: #3465a4
+! DarkMangenta + Mangenta
+! *color5:  #ce5c00
+! *color13: #f57900
+!DarkCyan + Cyan (both not tango)
+! *color6:  #89b6e2
+! *color14: #46a4ff
+! LightGrey + White
+! *color7:  #cccccc
+! *color15: #ffffff

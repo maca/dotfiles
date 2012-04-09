@@ -3,7 +3,7 @@
 " adds 256 color console support
 " changed WildMenu color to be the same as PMenuSel
 
-set background=dark
+" set background=dark
 hi clear
 
 if exists("syntax_on")
@@ -13,8 +13,8 @@ endif
 let colors_name = "tir_black"
 
 " General colors
-hi Normal guifg=#f6f3e8 guibg=black ctermfg=white ctermbg=0
-hi NonText guifg=#070707 guibg=black ctermfg=232 ctermbg=0
+" hi Normal guifg=#f6f3e8 ctermfg=white ctermbg=0
+" hi NonText guifg=#070707 ctermfg=232 ctermbg=0
 
 hi Cursor guifg=black guibg=white ctermfg=0 ctermbg=15
 hi LineNr guifg=#3D3D3D guibg=black ctermfg=239 ctermbg=0
