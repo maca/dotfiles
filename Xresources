@@ -5,7 +5,7 @@ URxvt.scrollBar: off
 URxvt.depth: 32
 URxvt.background: rgba:0000/0000/0000/dddd
 URxvt.foreground: rgba:bbcc/ffff/4477/ffff
-URxvt.font: xft:inconsolata:size=10
+URxvt.font: xft:inconsolata:size=11
 URxvt.geometry: 81x25
 !! URxvt.iconFile: /home/fabian/.icons/fabian/scalable/apps/terminal.svg
 !! URxvt.cursorUnderline: True

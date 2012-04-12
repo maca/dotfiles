@@ -11,6 +11,7 @@
 module("ror")
 table5={
 	 ["v"]={"gvim","Vim"},  
+	 ["l"]={"luakit","Luakit"},  
 	 ["c"]={"chromium","Chromium"},
    ["n"]={"nautilus","Nautilus"},
    ["t"]={"urxvt -e tmux","URxvt"},

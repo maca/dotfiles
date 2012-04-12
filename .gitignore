@@ -4,4 +4,5 @@ vim/ruby/command-t/match.o
 vim/ruby/command-t/matcher.o
 vim/ruby/command-t/mkmf.log
 vim/ruby/command-t/ext.o
+vim/.netrwhist
 *.swp

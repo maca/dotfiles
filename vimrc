@@ -1,9 +1,6 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-set shell=/bin/zsh\ -i
-
-
 set nocompatible                  " Must come first because it changes other options.
 
 syntax enable                     " Turn on syntax highlighting.

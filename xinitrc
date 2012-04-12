@@ -8,5 +8,9 @@ wpa_gui -t &
 nitrogen --restore &
 xcompmgr -c -C &
 
+# consolidate clipboards
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork
+
 exec ck-launch-session dbus-launch awesome
 # exec awesome
