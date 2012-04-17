@@ -10,10 +10,11 @@
 
 module("ror")
 table5={
-	 ["v"]={"gvim","Vim"},  
-	 ["l"]={"luakit","Luakit"},  
-	 ["c"]={"chromium","Chromium"},
+	 ["g"]={"gimp","Gimp"},  
+	 ["b"]={"luakit","luakit"},  
    ["n"]={"nautilus","Nautilus"},
    ["t"]={"urxvt -e tmux","URxvt"},
    ["r"]={"gmrun","Gmrun"},
+   ["c"]={"chromium","Chromium"},
+   ["w"]={"/usr/lib/virtualbox/VirtualBox --comment Windoze --startvm 9112bdaa-21ef-4092-a5d9-a4c52e18f520 --no-startvm-errormsgbox", "VirtualBox"}
 }
