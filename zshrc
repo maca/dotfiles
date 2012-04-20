@@ -11,10 +11,6 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -30,13 +26,12 @@ ZSH=$HOME/.oh-my-zsh
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git gem thor bundler rbenv heroku vi-mode nyan extract)
+plugins=(git gem thor rbenv heroku vi-mode nyan extract)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-# export PATH=/Users/vermelho/.rbenv/shims:/Users/vermelho/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbini:/usr/local/sbin:/sbin:/usr/X11/bin:~/bin:/Developer/usr/bin
-# export NODE_PATH=/usr/local/lib/node_modules
+# paths
+export PATH="$PATH:~/bin"
 
 # no need for cd command
 setopt autocd
@@ -201,10 +196,15 @@ alias etter="sudo ettercap -C -i en1"
 alias rs=rspec
 alias g=git
 alias offline-site="wget -r -k -p"
-alias compress="tar cvfz" 
+alias comp="tar cvfz"
 alias space="du -sh *"
 alias pacman="sudo pacman"
 alias ll="ls -a"
+alias terminal="urvxt -e tmux"
+alias reboot="sudo reboot"
+alias poweroff="sudo poweroff"
+alias halt="sudo halt"
+alias view="gpicview"
 
 # notes
 export n=~/notes
@@ -216,5 +216,3 @@ vn() {
 nls() {
 	ls -c ~/notes/ | grep "$*"
 }
-
-
