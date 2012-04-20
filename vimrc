@@ -131,8 +131,8 @@ endif
 " solarized options 
 
 " system copy/paste 
-vmap ,c "*y
-nmap ,v "*p
+vmap <leader>y "*y
+nmap <leader>p "*p
 
 " history tree
 nnoremap ,h :GundoToggle<CR>
@@ -147,10 +147,6 @@ map <C-a> <C-w>
 
 let g:ConqueTerm_EscKey = '<C-Esc>'
 let g:ConqueTerm_TERM = 'xterm'
-
-hi normal ctermfg=cyan guifg=cyan
-au InsertEnter * hi normal ctermfg=white guifg=white
-au InsertLeave * hi normal ctermfg=cyan guifg=cyan
 
 " Ought to move out of here
 function! MyGrep(...)

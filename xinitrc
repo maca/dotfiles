@@ -1,16 +1,21 @@
 xrdb -merge $HOME/.Xresources
 
 export GTK_RC_FILES="$HOME/.gtkrc-2.0"
-setxkbmap us -option ctrl:nocaps &
 
-conky &
-wpa_gui -t &
-nitrogen --restore &
+# turn on stickykeys. don't let two keys pressed at the same time disable it.
+# don't turn on "latch lock", ie pressing a modifier key twice "locks" it on.
+xkbset accessx sticky -twokey -latchlock
+
+# don't expire these settings. (run xkbset q exp for details.)
+xkbset exp 1 =accessx =sticky =twokey =latchlock
+
+# remap caps lock to control, compose accents with menu and left alt as alt_gr
+setxkbmap us -option ctrl:nocaps -option compose:menu -option lv3:ralt_switch &
+
+# conky &
+ssh-agent &
 xcompmgr -c -C &
+# nitrogen --restore &
 
-# consolidate clipboards
-autocutsel -fork &
-autocutsel -selection PRIMARY -fork
 
 exec ck-launch-session dbus-launch awesome
-# exec awesome

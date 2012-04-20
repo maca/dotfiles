@@ -16,5 +16,6 @@ table5={
    ["t"]={"urxvt -e tmux","URxvt"},
    ["r"]={"gmrun","Gmrun"},
    ["c"]={"chromium","Chromium"},
-   ["w"]={"/usr/lib/virtualbox/VirtualBox --comment Windoze --startvm 9112bdaa-21ef-4092-a5d9-a4c52e18f520 --no-startvm-errormsgbox", "VirtualBox"}
+   ["w"]={"/usr/lib/virtualbox/VirtualBox --comment Windoze --startvm 9112bdaa-21ef-4092-a5d9-a4c52e18f520 --no-startvm-errormsgbox", "VirtualBox"},
+	 ["v"]={"gpicview","Gpicview"},
 }

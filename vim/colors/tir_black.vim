@@ -3,7 +3,6 @@
 " adds 256 color console support
 " changed WildMenu color to be the same as PMenuSel
 
-" set background=dark
 hi clear
 
 if exists("syntax_on")
@@ -12,16 +11,22 @@ endif
 
 let colors_name = "tir_black"
 
+hi Normal guibg=#000
 " General colors
-" hi Normal guifg=#f6f3e8 ctermfg=white ctermbg=0
-" hi NonText guifg=#070707 ctermfg=232 ctermbg=0
+
+hi normal ctermfg=cyan guifg=cyan
+au InsertEnter * hi normal ctermfg=white guifg=white
+au InsertLeave * hi normal ctermfg=cyan guifg=cyan
+
+hi NonText guifg=#204a87 ctermfg=darkblue
+hi Directory guifg=#204a87 ctermfg=darkblue
 
 hi Cursor guifg=black guibg=white ctermfg=0 ctermbg=15
 hi LineNr guifg=#3D3D3D guibg=black ctermfg=239 ctermbg=0
 
-hi VertSplit guifg=#202020 guibg=#202020 ctermfg=235 ctermbg=235 
 hi StatusLine guifg=#CCCCCC guibg=#202020 gui=italic ctermfg=235 ctermbg=254
 hi StatusLineNC guifg=#CCCCCC guibg=#202020 gui=italic ctermfg=235 ctermbg=254
+hi VertSplit guifg=#202020 guibg=#202020 gui=italic ctermfg=235 ctermbg=236 cterm=standout
 
 hi Folded guifg=#a0a8b0 guibg=#384048 ctermfg=103 ctermbg=60
 hi Title guifg=#f6f3e8 gui=bold ctermfg=187 cterm=bold

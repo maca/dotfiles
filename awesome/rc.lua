@@ -1,3 +1,4 @@
+--
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
@@ -38,7 +39,8 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+-- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("/home/maca/dotfiles/awesome/themes/maca/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -55,10 +57,10 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    -- awful.layout.suit.tile.left,
-    awful.layout.suit.tile.right,
-    awful.layout.suit.tile.bottom,
     awful.layout.suit.max,
+    awful.layout.suit.tile.right,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.floating,
     -- awful.layout.suit.tile,
     -- awful.layout.suit.tile.top,
@@ -74,8 +76,8 @@ layouts =
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-   names = { "main", "gimp", "tres", "cuatro" },
-   layout = { layouts[2], layouts[3], layouts[1] }
+   names = { " ■ main", " ■ gimp", " ■ virtual-box", " ■ cuatro" },
+   layout = { layouts[1], layouts[1], layouts[1] }
 }
 for s = 1, screen.count() do
    -- Each screen has its own tag table.
@@ -169,6 +171,11 @@ for s = 1, screen.count() do
 
     -- Create a tasklist widget
     mytasklist[s] = awful.widget.tasklist(function(c)
+                                            -- Only print client on the same screen as this widget
+                                            -- if c.screen ~= s then return "" end
+                                            -- -- Include sticky client too
+                                            -- if c.sticky then return true end
+                                            -- return c.name
                                               return awful.widget.tasklist.label.currenttags(c, s)
                                           end, mytasklist.buttons)
 
@@ -177,7 +184,7 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
-            mylauncher,
+            -- mylauncher,
             mytaglist[s],
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
@@ -202,7 +209,7 @@ root.buttons(awful.util.table.join(
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     aweror.genkeys(modkey),
-    awful.key({ modkey }, "b",
+    awful.key({ modkey }, "/",
       function ()
           mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible
       end),
@@ -348,25 +355,22 @@ awful.rules.rules = {
     { rule = { },
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
+                     size_hints_honor = false,
                      focus = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
+    -- { rule = { class = "MPlayer" },
+    --   properties = { floating = true } },
+    -- { rule = { class = "pinentry" },
+    --   properties = { floating = true } },
     { rule = { class = "Gimp" },
-      properties = {  floating = true,
-                      tag = tags[2][2] } },
+      properties = { tag = tags[screen.count()][2] } },
     { rule = { class = "Gpicview" },
-      properties = { tag = tags[2][1] } },
+      properties = { tag = tags[screen.count()][1] } },
     { rule = { class = "Chromium" },
-      properties = { tag = tags[2][1] } },
+      properties = { tag = tags[screen.count()][1] } },
     { rule = { class = "VirtualBox" },
-      properties = { tag = tags[2][1] } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
+      properties = { tag = tags[screen.count()][3] } },
 }
 -- }}}
 
@@ -400,3 +404,16 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+client.add_signal("new", function(c) c:add_signal("property::urgent", function() 
+  if c.focus
+    then return 
+  end
+
+  naughty.notify({ preset = naughty.config.presets.critical,
+    title = c.name,
+    -- text  = c.titlebar,
+    timeout = 10
+  })
+  end) 
+end)
