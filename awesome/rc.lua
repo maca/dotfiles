@@ -76,8 +76,8 @@ layouts =
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-   names = { " ■ main", " ■ gimp", " ■ virtual-box", " ■ cuatro" },
-   layout = { layouts[1], layouts[1], layouts[1] }
+   names = { " ■ main", " ■ gimp", " ■ virtual-box", " ■ cuatro", " ■ null" },
+   layout = { layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] }
 }
 for s = 1, screen.count() do
    -- Each screen has its own tag table.
@@ -268,9 +268,16 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
+    -- Multimedia keys
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 2+") end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 2-") end),
+
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("cmus-remote --pause") end),
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("cmus-remote --prev") end),
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("cmus-remote --next") end),
+    awful.key({ }, "XF86AudioStop", function () awful.util.spawn("cmus-remote --playlist") end),
     -- Prompt
     -- awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
-
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
@@ -278,6 +285,7 @@ globalkeys = awful.util.table.join(
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
               end)
+
 )
 
 clientkeys = awful.util.table.join(
@@ -371,6 +379,8 @@ awful.rules.rules = {
       properties = { tag = tags[screen.count()][1] } },
     { rule = { class = "VirtualBox" },
       properties = { tag = tags[screen.count()][3] } },
+    { rule = { class = "Firefox" },
+      properties = { tag = tags[screen.count()][5] } }, -- Null
 }
 -- }}}
 
@@ -405,6 +415,7 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+-- property::urgency_hint
 client.add_signal("new", function(c) c:add_signal("property::urgent", function() 
   if c.focus
     then return 
@@ -412,7 +423,7 @@ client.add_signal("new", function(c) c:add_signal("property::urgent", function()
 
   naughty.notify({ preset = naughty.config.presets.critical,
     title = c.name,
-    -- text  = c.titlebar,
+    text  = "!!",
     timeout = 10
   })
   end) 
