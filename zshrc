@@ -15,13 +15,13 @@ ZSH=$HOME/.oh-my-zsh
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment following line if you want to disable colors in ls
 # DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
@@ -31,7 +31,7 @@ plugins=(git gem thor rbenv heroku vi-mode nyan extract)
 source $ZSH/oh-my-zsh.sh
 
 # paths
-export PATH="$PATH:~/bin"
+export PATH="$PATH:$HOME/bin"
 
 # no need for cd command
 setopt autocd
@@ -103,13 +103,6 @@ ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$RED%}(*) "
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-# Format for git_prompt_status()
-ZSH_THEME_GIT_PROMPT_UNMERGED=" %{$RED%}unmerged"
-ZSH_THEME_GIT_PROMPT_DELETED=" %{$RED%}deleted"
-ZSH_THEME_GIT_PROMPT_RENAMED=" %{$YELLOW%}renamed"
-ZSH_THEME_GIT_PROMPT_MODIFIED=" %{$YELLOW%}modified"
-ZSH_THEME_GIT_PROMPT_ADDED=" %{$GREEN%}added"
-ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$WHITE%}untracked"
 
 # Format for git_prompt_ahead()
 ZSH_THEME_GIT_PROMPT_AHEAD=" %{$RED%}(!) "
@@ -118,10 +111,6 @@ ZSH_THEME_GIT_PROMPT_AHEAD=" %{$RED%}(!) "
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$WHITE%}[%{$YELLOW%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]"
 
-function git_prompt_details() {
-  refs=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo $(vi_prompt_mode_color)\ \|\ %{$GREEN_BOLD%}$(current_branch)$(git_prompt_status)%{$RESET_COLOR%}
-}
 
 function directory_item_count_prompt() {
   echo "$((`ls -Al | wc -l` - 1)) items"
@@ -137,7 +126,7 @@ function vi_prompt_mode_color() {
 
 MODE_INDICATOR="%{$fg_bold[cyan]%}"
 PROMPT='`vi_prompt_mode_color``vi_prompt_mode_color`[%{$fg[green]%}%c`vi_prompt_mode_color`] `git_prompt_info``vi_prompt_mode_color`- %{$reset_color%}'
-RPROMPT='%{$reset_color%}`directory_item_count_prompt``git_prompt_details` `vi_prompt_mode_color`| %{$fg[cyan]%}%*%{$reset_color%}'
+RPROMPT='%{$reset_color%} %{$fg[cyan]%}%*%{$reset_color%}'
 
 function fuzzy_autocomplete() {
   locate `pwd` | sed 's?'`pwd`'??' | grep -i -E `echo "$@" | sed 's|\(.\)(?:$)|\1.*|g'` | grep -v all
@@ -158,16 +147,10 @@ complete-files-locate () {
 setopt menu_complete   # autoselect the first completion entry
 zstyle ':completion:*:ls:*' file-patterns '*(/):directories'
 
-export EDITOR=`which vim`
+export EDITOR=vim
+export BROWSER=chromium
 
-function v() {
-  vim --servername "TERM" --remote-send "<Esc><C-w>p<C-w><C-v><C-w><C-l> :e $@ <CR>"
-}
-
-function h() {
-  vim --servername "TERM" --remote-send "<Esc><C-w>p<C-w><C-s><C-w><C-j> :e $@ <CR>"
-}
-
+# edit with vim
 function e() {
   vim --servername "TERM" --remote-silent $@
 }
@@ -200,11 +183,24 @@ alias comp="tar cvfz"
 alias space="du -sh *"
 alias pacman="sudo pacman"
 alias ll="ls -a"
-alias terminal="urvxt -e tmux"
-alias reboot="sudo reboot"
-alias poweroff="sudo poweroff"
-alias halt="sudo halt"
+alias terminal="urvxtc"
 alias view="gpicview"
+alias vim="vim --servername TERM"
+alias sup="$HOME/.rbenv/versions/1.8.7-p358/bin/sup"
+alias x=extract
+alias offline-site="wget -r -k -p"
+
+# sudo aliases
+alias reboot="sudo reboot"
+alias shutdown="sudo shutdown"
+alias halt="sudo halt"
+alias mount="sudo mount"
+alias umount="sudo umount"
+alias powerdown="sudo powerdown"
+alias suspend="sudo pm-suspend"
+alias hibernate="sudo pm-hibernate"
+alias off="sudo shutdown -hP now"
+alias t="todo.sh"
 
 # notes
 export n=~/notes
@@ -216,3 +212,5 @@ vn() {
 nls() {
 	ls -c ~/notes/ | grep "$*"
 }
+
+t list

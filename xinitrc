@@ -10,10 +10,14 @@ xkbset accessx sticky -twokey -latchlock
 xkbset exp 1 =accessx =sticky =twokey =latchlock
 
 # remap caps lock to control, compose accents with menu and left alt as alt_gr
-setxkbmap us -option ctrl:nocaps -option compose:menu -option lv3:ralt_switch
+setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
 
-ssh-agent &
-conky &
-xcompmgr -c -C &
+# hsetroot -solid "#000066"
+# xcompmgr -f &
+# $HOME/bin/compmgr start
+# unagi &
+xcompmgr &
+# urxvtd -q -f -o &
+sleep 3 && conky &
 
-exec ck-launch-session dbus-launch awesome
+exec ck-launch-session dbus-launch bash -c "udiskie & awesome"

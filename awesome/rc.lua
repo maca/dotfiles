@@ -43,7 +43,7 @@ end
 beautiful.init("/home/maca/dotfiles/awesome/themes/maca/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
+terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -58,10 +58,10 @@ modkey = "Mod4"
 layouts =
 {
     awful.layout.suit.max,
+    awful.layout.suit.floating,
     awful.layout.suit.tile.right,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
-    awful.layout.suit.floating,
     -- awful.layout.suit.tile,
     -- awful.layout.suit.tile.top,
     -- awful.layout.suit.fair,
@@ -209,6 +209,14 @@ root.buttons(awful.util.table.join(
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     aweror.genkeys(modkey),
+    -- window transparency
+    awful.key({ modkey }, "Next", function (c)
+        awful.util.spawn("transset-df --actual --inc 0.1")
+    end),
+    awful.key({ modkey }, "Prior", function (c)
+        awful.util.spawn("transset-df --actual --dec 0.1")
+    end),
+
     awful.key({ modkey }, "/",
       function ()
           mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible
@@ -379,8 +387,18 @@ awful.rules.rules = {
       properties = { tag = tags[screen.count()][1] } },
     { rule = { class = "VirtualBox" },
       properties = { tag = tags[screen.count()][3] } },
+    { rule = { class = "xbmc.bin" },
+      properties = { tag = tags[screen.count()][1],
+                     fullscreen = true } },
     { rule = { class = "Firefox" },
       properties = { tag = tags[screen.count()][5] } }, -- Null
+    { rule = { class = "Gloobus-preview-configuration" },
+      properties = { floating = true } },
+    { rule = { class = "Gloobus-preview" },
+      properties = { floating = true,
+      border_width = 0 } },
+    -- { rule = { class = "Boxee" },
+    --   properties = { tag = tags[screen.count()][1] } },
 }
 -- }}}
 

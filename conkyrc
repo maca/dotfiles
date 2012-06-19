@@ -1,0 +1,76 @@
+own_window yes
+own_window_argb yes
+own_window_hints undecorated,skip_pager,skip_taskbar,below,sticky
+own_window_type override
+own_window_transparent yes
+background yes
+double_buffer yes
+use_xft yes
+update_interval 3.0
+# minimum_size 0 0
+draw_shades yes
+draw_outline no
+draw_borders no
+uppercase no
+border_width 1
+default_color white
+default_shade_color black
+default_outline_color white
+own_window_colour black
+own_window_transparent yes
+alignment middle_right
+gap_x 10
+gap_y 10
+
+override_utf8_locale yes
+xftfont Monaco:size=10
+xftalpha 0.8
+
+TEXT
+${color slate grey}Time: ${color #ddaa00}${time %H:%M}${alignr}${color slate grey}${time %a} ${color}${time %e}/${time %b}/${time %G}
+${color slate grey}Uptime:${color} $uptime ${alignr}${color slate grey}Batt: ${color }${battery_percent}%
+# ${color slate grey}ACPI:${color} ${ibm_temps 0}° ${alignc}${color slate grey}Fan:${color } ${ibm_fan}
+# ${color slate grey}GPU: ${color} ${ibm_temps 3}°
+# ${battery_bar}
+# ${color slate grey}Processes: ${color}$processes
+# ${color slate grey}Running:   ${color}$running_processes
+
+${color slate grey}CPU:${color}$cpu%$alignr${color #ddaa00}${top name 1}${top cpu 1}
+$alignr${color lightgrey} ${top name 2}${top cpu 2}
+$alignr${color lightgrey} ${top name 3}${top cpu 3}
+
+${color slate grey}Core1: ${color}${cpu cpu1 000000 ffffff}% ${freq_g 1}
+${color slate grey}Core2: ${color}${cpu cpu2 000000 ffffff}% ${freq_g 2}
+${color slate grey}Core3: ${color}${cpu cpu3 000000 ffffff}% ${freq_g 3}
+${color slate grey}Core4: ${color}${cpu cpu4 000000 ffffff}% ${freq_g 4}
+
+${color slate grey}RAM:${color}$memperc% $alignr${color #ddaa00}${top_mem name 1}${top_mem mem 1}
+${color}$mem $alignr${color lightgrey} ${top_mem name 2}${top_mem mem 2}
+$alignr${color lightgrey} ${top_mem name 3}${top_mem mem 3}
+$alignr${color lightgrey} ${top_mem name 4}${top_mem mem 4}
+
+${color slate grey}Disk usage:${color}
+${color slate grey}root:   $alignr ${color}${fs_used /}/${fs_size /}
+${fs_bar /}
+${color slate grey}/home:  $alignr ${color}${fs_used /home}/${fs_size /home}
+${fs_bar /home}
+${color slate grey}/secondary:  $alignr ${color}${fs_used /secondary}/${fs_size /secondary}
+${fs_bar /secondary}
+
+${color slate grey}wlan0:
+${color}Up: ${color }${upspeed wlan0} $alignr ${totalup wlan0}
+${upspeedgraph wlan0 000000 ffffff}
+${color}Down: ${color }${downspeed wlan0} $alignr ${totaldown wlan0}
+${downspeedgraph wlan0 000000 ffffff}
+
+# ${color slate grey}wlan1:
+# ${color}Up: ${color }${upspeed wlan1} $alignr ${totalup wlan1}
+# ${upspeedgraph wlan1 000000 ffffff}
+# ${color}Down: ${color }${downspeed wlan1} $alignr ${totaldown wlan1}
+# ${downspeedgraph wlan1 000000 ffffff}
+
+# ${color slate grey}ppp0:
+# ${color}Up: ${color }${upspeed ppp0} $alignr ${totalup ppp0}
+# ${upspeedgraph ppp0 000000 ffffff}
+# ${color}Down: ${color }${downspeed ppp0} $alignr ${totaldown ppp0}
+# ${downspeedgraph ppp0 000000 ffffff}

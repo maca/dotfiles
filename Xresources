@@ -3,7 +3,7 @@ URxvt.scrollBar: off
 !! URxvt.scrollstyle: plain
 !! URxvt.scrollBar_left: true
 URxvt.depth: 32
-URxvt.background: rgba:0000/0000/0000/dddd
+URxvt.background: rgba:0000/0000/0000/cccc
 URxvt.foreground: rgba:bbcc/ffff/4477/ffff
 URxvt.font: xft:inconsolata:size=11
 URxvt.geometry: 81x25
@@ -13,12 +13,18 @@ URxvt.geometry: 81x25
 URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
 URxvt.scrollTtyOutput: false
-URxvt.saveLines: 100000
+URxvt.saveLines: 5000
+
 URxvt.perl-ext-common: default,url-select
 URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.urlLauncher: epiphany
-URxvt.underlineURLs: true
+URxvt.urlLauncher: luakit
+URxvt.underlineURLs: false
 
+!URxvt.perl-ext-common: default,matcher
+!URxvt.urlLauncher: luakit
+!URxvt.underlineURLs: true
+!URxvt.matcher.button: 3
+!URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
 ! tangoesque scheme
 ! *background: #111111
 ! *foreground: #babdb6

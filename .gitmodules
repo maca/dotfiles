@@ -67,3 +67,9 @@
 [submodule "vim/bundle/commentary"]
 	path = vim/bundle/commentary
 	url = git://github.com/tpope/vim-commentary.git
+[submodule "urxvt-perls"]
+	path = urxvt-perls
+	url = https://github.com/muennich/urxvt-perls.git
+[submodule "vim/bundle/slimux"]
+	path = vim/bundle/slimux
+	url = git://github.com/epeli/slimux.git
