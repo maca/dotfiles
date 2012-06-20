@@ -1,0 +1,16 @@
+#!/bin/sh
+
+tmux rename-session main
+tmux select-window -t main:0
+tmux rename-window 'weechat/centerim/cmus'
+tmux send-keys 'weechat-curses' C-m
+tmux split-window -v
+tmux send-keys 'centerim5' C-m
+tmux split-window -h
+tmux send-keys 'cmus' C-m
+tmux new-window -t main:1
+tmux rename-window 'sup/snownews'
+tmux send-keys 'snownews' C-m
+tmux split-window -v
+tmux send-keys 'sup' C-m
+tmux new-window -t main:2

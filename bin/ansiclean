@@ -1,0 +1,11 @@
+#! /bin/bash
+
+ cat $@\
+   | perl -pe "s/\x1B\[162/\n\\$ /"\
+   | perl -pe "s/\x1B\[\d{1,2}m//g"\
+   | perl -pe "s/\x0D//g"\
+   | perl -pe "s/\x1Bk.*\x1B\\\\//"\
+   | perl -pe "s/\x1B\[126C.*//"\
+   | perl -pe "s/.*\x07.*//g"
+   # remove formatting
+   # remove bell character

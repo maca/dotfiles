@@ -1,0 +1,5 @@
+xset -dpms; xset s off
+~/bin/compmgr stop
+xbmc
+~/bin/compmgr start
+xset -dpms; xset s 600 600

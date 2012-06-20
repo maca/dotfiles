@@ -1,0 +1,8 @@
+#! /bin/bash
+
+if [[ -n $(ls /var/run/wpa_supplicant 2>/dev/null) ]]; then
+  echo "Already connected"
+else
+  sudo wpa_supplicant -B -Dwext -c /etc/wpa_supplicant.conf -i wlan0
+  sudo wpa_cli -B -a /home/maca/bin/wpa_cli-action
+fi
