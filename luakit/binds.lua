@@ -360,6 +360,10 @@ add_cmds({
             w:notify("Dumped HTML to: " .. file)
         end
     end),
+
+    cmd("pocket", function (w,a)
+        w:eval_js("(function(){ISRIL_H='48e6';PKT_D='getpocket.com';ISRIL_SCRIPT=document.createElement('SCRIPT');ISRIL_SCRIPT.type='text/javascript';ISRIL_SCRIPT.src='http://'+PKT_D+'/b/r.js';document.getElementsByTagName('head')[0].appendChild(ISRIL_SCRIPT)})();")
+    end)
 })
 
 -- vim: et:sw=4:ts=8:sts=4:tw=80

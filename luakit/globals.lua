@@ -19,9 +19,11 @@ globals = {
 local _, arch = luakit.spawn_sync("uname -sm")
 -- Only use the luakit version if in date format (reduces identifiability)
 local lkv = string.match(luakit.version, "^(%d+.%d+.%d+)")
-globals.useragent = string.format("Mozilla/5.0 (%s) AppleWebKit/%s+ (KHTML, like Gecko) WebKitGTK+/%s luakit%s",
-    string.sub(arch, 1, -2), luakit.webkit_user_agent_version,
-    luakit.webkit_version, (lkv and ("/" .. lkv)) or "")
+-- globals.useragent = string.format("Mozilla/5.0 (%s) AppleWebKit/%s+ (KHTML, like Gecko) WebKitGTK+/%s luakit%s",
+--     string.sub(arch, 1, -2), luakit.webkit_user_agent_version,
+--     luakit.webkit_version, (lkv and ("/" .. lkv)) or "")
+-- globals.useragent = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.1 (KHTML, like Gecko) Chromium/14.0.825.0"
+globals.useragent = string.sub("AppleWebKit/%s (KHTML, like Gecko)", luakit.webkit_user_agent_version)
 
 -- Search common locations for a ca file which is used for ssl connection validation.
 local ca_files = {
@@ -60,6 +62,7 @@ search_engines = {
     sourceforge = "http://sf.net/search/?words=%s",
     gh          = "http://github.com/search?q=%s",
     lh          = "luakit://history/?q=%s",
+    pk          = "http://getpocket.com/a",
 }
 
 -- Set google as fallback search engine
@@ -75,9 +78,9 @@ domain_props = {
         enable_plugins          = true,
         enable_private_browsing = false,
         user_stylesheet_uri     = "",
-        monospace_font_family       = "Monaco",
-        sans_serif_font_family      = "Droid Sans",
-        serif_font_family           = "Droid Serif",
+        monospace_font_family   = "Monaco",
+        sans_serif_font_family  = "Droid Sans",
+        serif_font_family       = "Droid Serif",
     },
     ["youtube.com"] = {
         enable_scripts = true,
