@@ -214,3 +214,6 @@ nls() {
 }
 
 t list
+
+# ssh keychain, manage ssh keys
+eval $(keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa)
