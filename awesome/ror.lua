@@ -1,4 +1,4 @@
--- ror.lua
+-- ROR.LUa
 -- This is the file goes in your ~/.config/awesome/ directory
 -- It contains your table of 'run or raise' key bindings for aweror.lua
 -- Table entry format: ["key"]={"function", "match string", "optional attribute to match"}
@@ -10,10 +10,11 @@
 
 module("ror")
 table5={
-	 ["g"]={"gimp","Gimp"},  
-	 ["b"]={"luakit","luakit"},  
+	 ["g"]={"gimp","Gimp"},
+	 ["b"]={"luakit","luakit"},
    ["n"]={"nautilus","Nautilus"},
-   ["t"]={"urxvt -e tmux","URxvt"},
+   ["t"]={"urxvt -name t1 -e tmux attach","t1", "instance"},
+   ["h"]={"urxvt -name Home -e ssh 192.168.100.144", "Home", "instance"},
    ["r"]={"gmrun","Gmrun"},
    ["c"]={"chromium","Chromium"},
    ["w"]={"/usr/lib/virtualbox/VirtualBox --comment Windoze --startvm 9112bdaa-21ef-4092-a5d9-a4c52e18f520 --no-startvm-errormsgbox", "VirtualBox"},
