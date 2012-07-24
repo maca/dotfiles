@@ -11,13 +11,8 @@ xkbset exp 1 =accessx =sticky =twokey =latchlock
 
 # remap caps lock to control, compose accents with menu and left alt as alt_gr
 setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
-
-# hsetroot -solid "#000066"
-# xcompmgr -f &
-# $HOME/bin/compmgr start
-# unagi &
 xcompmgr &
-# urxvtd -q -f -o &
-sleep 3 && conky &
+conky &
 
-exec ck-launch-session dbus-launch bash -c "udiskie & awesome"
+# exec ck-launch-session dbus-launch bash -c "udiskie & awesome"
+exec ck-launch-session dbus-launch bash -c awesome

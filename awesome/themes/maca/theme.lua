@@ -80,7 +80,8 @@ theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/defau
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- You can use your own command to set your wallpaper
-theme.wallpaper_cmd = { "awsetbg /usr/share/awesome/themes/default/background.png" }
+theme.wallpaper_cmd = { "hsetroot -solid '#112226'" }
+
 -- You can use your own layout icons like this:
 theme.layout_fairh      = "/home/maca/dotfiles/awesome/themes/maca/layouts/fairhw.png"
 theme.layout_fairv      = "/home/maca/dotfiles/awesome/themes/maca/layouts/fairvw.png"

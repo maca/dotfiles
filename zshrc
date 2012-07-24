@@ -32,6 +32,7 @@ source $ZSH/oh-my-zsh.sh
 
 # paths
 export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.gem/ruby/1.9.1/bin"
 
 # no need for cd command
 setopt autocd
@@ -186,7 +187,6 @@ alias ll="ls -a"
 alias terminal="urvxtc"
 alias view="gpicview"
 if [ -f /usr/bin/gvim ]; then; alias vim="vim --servername TERM"; fi
-alias sup="$HOME/.rbenv/versions/1.8.7-p358/bin/sup"
 alias x=extract
 alias offline-site="wget -r -k -p"
 
@@ -212,8 +212,6 @@ vn() {
 nls() {
 	ls -c ~/notes/ | grep "$*"
 }
-
-t list
 
 # ssh keychain, manage ssh keys
 eval $(keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa)

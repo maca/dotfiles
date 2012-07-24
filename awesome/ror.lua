@@ -12,7 +12,7 @@ module("ror")
 table5={
 	 ["g"]={"gimp","Gimp"},
 	 ["b"]={"luakit","luakit"},
-   ["n"]={"nautilus","Nautilus"},
+   ["n"]={"pcmanfm","Pcmanfm"},
    ["t"]={"urxvt -name t1 -e tmux attach","t1", "instance"},
    ["h"]={"urxvt -name House -e /home/maca/bin/connect-to-house", "House", "instance"},
    ["r"]={"gmrun","Gmrun"},
