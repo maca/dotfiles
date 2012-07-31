@@ -1,0 +1,13 @@
+#!/bin/sh
+# in-house -fstype=fuse,allow_other,noatime :sshfs\#root@home\:/backup
+# out-house -fstype=fuse,allow_other,noatime,port=5658 :sshfs\#root@remote-home\:/backup
+
+case $1 in
+  Home)
+    addr=$(/home/maca/bin/house-addr)
+    host=$(echo $addr | cut -d ':' -f1)
+    port=$(echo $addr | cut -d ':' -f2)
+    echo -e -n "-fstype=fuse,allow_other,noatime,port=$port /backup :sshfs\#root@$host\:/backup"
+    ;;
+  *)
+esac

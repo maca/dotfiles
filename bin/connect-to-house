@@ -4,4 +4,4 @@ addr=$($HOME/bin/house-addr)
 host=$(echo $addr | cut -d ':' -f1)
 port=$(echo $addr | cut -d ':' -f2)
 
-ssh -p $port $host
+ssh -p $port $host -t tmux attach

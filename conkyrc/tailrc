@@ -1,0 +1,33 @@
+own_window yes
+
+# own_window_argb yes
+own_window_hints undecorated,skip_pager,skip_taskbar,below,sticky
+own_window_type override
+own_window_transparent yes
+
+background yes
+double_buffer yes
+update_interval 3.0
+# minimum_size 0 0
+draw_shades yes
+draw_outline no
+draw_borders no
+uppercase no
+border_width 1
+default_color 112226
+default_outline_color ffffff
+default_shade_color black
+own_window_colour 112226
+alignment bottom_left
+border_inner_margin 15
+
+gap_x 5
+gap_y 5
+
+override_utf8_locale yes
+use_xft yes
+xftfont Consolas:size=12
+xftalpha 0.4
+
+TEXT
+${color}${exec tail -n60 /var/log/everything.log | fold -s -w 112}

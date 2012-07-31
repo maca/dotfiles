@@ -126,7 +126,7 @@ function vi_prompt_mode_color() {
 }
 
 MODE_INDICATOR="%{$fg_bold[cyan]%}"
-PROMPT='`vi_prompt_mode_color``vi_prompt_mode_color`[%{$fg[green]%}%c`vi_prompt_mode_color`] `git_prompt_info``vi_prompt_mode_color`- %{$reset_color%}'
+PROMPT='`vi_prompt_mode_color``vi_prompt_mode_color`[%{$fg[green]%}%m`vi_prompt_mode_color`][%{$fg[green]%}%c`vi_prompt_mode_color`] `git_prompt_info``vi_prompt_mode_color`- %{$reset_color%}'
 RPROMPT='%{$reset_color%} %{$fg[cyan]%}%*%{$reset_color%}'
 
 function fuzzy_autocomplete() {

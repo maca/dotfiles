@@ -43,7 +43,7 @@ end
 beautiful.init("/home/maca/dotfiles/awesome/themes/maca/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -381,8 +381,6 @@ awful.rules.rules = {
     --   properties = { floating = true } },
     { rule = { class = "Gimp" },
       properties = { tag = tags[screen.count()][2] } },
-    { rule = { class = "Gpicview" },
-      properties = { tag = tags[screen.count()][1] } },
     { rule = { class = "Chromium" },
       properties = { tag = tags[screen.count()][1] } },
     { rule = { class = "VirtualBox" },
@@ -392,11 +390,6 @@ awful.rules.rules = {
                      fullscreen = true } },
     { rule = { class = "Firefox" },
       properties = { tag = tags[screen.count()][5] } }, -- Null
-    { rule = { class = "Gloobus-preview-configuration" },
-      properties = { floating = true } },
-    { rule = { class = "Gloobus-preview" },
-      properties = { floating = true,
-      border_width = 0 } },
     -- { rule = { class = "Boxee" },
     --   properties = { tag = tags[screen.count()][1] } },
 }
