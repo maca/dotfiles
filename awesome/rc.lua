@@ -8,7 +8,7 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
-require("revelation")
+-- require("revelation")
 require("aweror")
 
 
@@ -388,6 +388,10 @@ awful.rules.rules = {
     { rule = { class = "xbmc.bin" },
       properties = { tag = tags[screen.count()][1],
                      fullscreen = true } },
+    { rule = { class = "Pcmanfm" },
+      properties = { 
+                     properties = { opacity = 0.8 },
+                     } },
     { rule = { class = "Firefox" },
       properties = { tag = tags[screen.count()][5] } }, -- Null
     -- { rule = { class = "Boxee" },

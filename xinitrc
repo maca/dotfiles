@@ -12,8 +12,9 @@ xkbset exp 1 =accessx =sticky =twokey =latchlock
 
 # remap caps lock to control, compose accents with menu and left alt as alt_gr
 setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
+
 xcompmgr &
 conky -d -c "$HOME/dotfiles/conkyrc/conkyrc"
-sudo conky -d -c "$HOME/dotfiles/conkyrc/tailrc"
+# sudo conky -d -c "$HOME/dotfiles/conkyrc/tailrc"
 
 exec dbus-launch awesome

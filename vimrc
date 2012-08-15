@@ -83,25 +83,15 @@ map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 
 " Switch between two files
 nnoremap ,, <C-^>
-" Automatic fold settings for specific files. Uncomment to use.
-" autocmd FileType ruby setlocal foldmethod=syntax
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
 
-" For the MakeGreen plugin and Ruby RSpec. Uncomment to use.
-autocmd BufNewFile,BufRead *_spec.rb compiler rspec
+" Manual folding on insert, back to defined on exit insert.
+autocmd FileType ruby setlocal foldmethod=syntax
+autocmd InsertEnter * let w:fdm=&foldmethod | setlocal foldmethod=manual
+autocmd InsertLeave * let &l:foldmethod=w:fdm
 
 " auto reload .vimrc after editing
 autocmd BufWritePost .vimrc source $MYVIMRC
-
-" reload chromium on save certain files
-" function! RefreshBrowser()
-"   if &modified
-"     write
-"     silent !refresh-chromium
-"   endif
-" endfunction
-" 
-" autocmd BufWriteCmd *.html,*.css,*.haml,*.erb,*.sass,*.scss :call RefreshBrowser()
 
 " quick escape
 imap ;; <Esc>
@@ -126,10 +116,6 @@ if has("gui_running")
   endif
 endif
 
-" nmap <F2>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR> 
-" nmap <F3>:let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR> 
-" solarized options 
-
 " system copy/paste 
 vmap <leader>y "*y
 nmap <leader>p "*p
@@ -145,46 +131,11 @@ nnoremap <C-w>v <C-w>v<C-w>l
 " Alias window mappings for tmux consistency
 map <C-a> <C-w>
 
-let g:ConqueTerm_EscKey = '<C-Esc>'
-let g:ConqueTerm_TERM = 'xterm'
-
-" Ought to move out of here
-function! MyGrep(...)
-  if a:0 < 2
-    echo "Usage: MyGrep <options> <pattern> <dir>"
-    echo 'Example: MyGrep -r "cow" ~/Desktop/*'
-    return
-  endif
-  if a:0 == 2
-    let options = '-rsinI'
-    let pattern = a:1
-    let dir = a:2
-  else
-    let options = a:1 . 'snI'
-    let pattern = a:2
-    let dir = a:3
-  endif
-  let exclude = 'grep -v "/.svn"'
-  let cmd = 'grep '.options.' '.pattern.' '.dir. '| '.exclude
-  let cmd_output = system(cmd)
-  if cmd_output == ""
-    echomsg "Pattern " . pattern . " not found"
-    return
-  endif
-
-  let tmpfile = tempname()
-  exe "redir! > " . tmpfile
-  silent echon '[grep search for "'.pattern.'" with options "'.options.'"]'."\n"
-  silent echon cmd_output
-  redir END
-
-  let old_efm = &efm
-  set efm=%f:%\\s%#%l:%m
-
-  execute "silent! cgetfile " . tmpfile
-  let &efm = old_efm
-  botright copen
-
-  call delete(tmpfile)
-endfunction
-command! -nargs=* -complete=file MyGrep call MyGrep(<f-args>)
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:<CR>
+  vmap <Leader>a: :Tabularize /:<CR>
+  nmap <Leader>a> :Tabularize /=>:<CR>
+  vmap <Leader>a> :Tabularize /=>:<CR>
+end

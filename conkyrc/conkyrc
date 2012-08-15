@@ -26,7 +26,7 @@ gap_y 40
 override_utf8_locale yes
 use_xft yes
 xftfont Consolas:size=12
-xftalpha 0.1
+xftalpha 0.4
 
 TEXT
 ${color slate grey}Time: ${color #ddaa00}${time %H:%M}${alignr}${color slate grey}${time %a} ${color}${time %e}/${time %b}/${time %G}
