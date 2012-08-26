@@ -117,8 +117,8 @@ if has("gui_running")
 endif
 
 " system copy/paste 
-vmap <leader>y "*y
-nmap <leader>p "*p
+vmap <leader>y "+y
+nmap <leader>p "+gP
 
 " history tree
 nnoremap ,h :GundoToggle<CR>
