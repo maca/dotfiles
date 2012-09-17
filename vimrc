@@ -94,7 +94,7 @@ autocmd InsertLeave * let &l:foldmethod=w:fdm
 autocmd BufWritePost .vimrc source $MYVIMRC
 
 " quick escape
-imap ;; <Esc>
+" imap ;; <Esc>
 
 colorscheme tir_black 
 
