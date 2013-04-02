@@ -337,10 +337,10 @@ add_binds("normal", {
         function (w, m) w:forward(m.count) end),
 
     -- Tab
-    key({"Control"}, "Page_Up", "Go to previous tab.",
+    key({}, "J", "Go to previous tab.",
         function (w) w:prev_tab() end),
 
-    key({"Control"}, "Page_Down", "Go to next tab.",
+    key({}, "K", "Go to next tab.",
         function (w) w:next_tab() end),
 
     key({"Control"}, "Tab", "Go to next tab.",
@@ -418,12 +418,36 @@ add_binds("normal", {
     key({"Control"}, "z",
         "Enter `passthrough` mode, ignores all luakit keybindings.",
         function (w) w:set_mode("passthrough") end),
+
+
+    -- My bindings
+    -- Window
+    buf("^qs$",                     function (w) w:save_session() w:close_win() end),
+    buf("^qq$",                     function (w) w:close_win() end),
 })
 
 add_binds("insert", {
     key({"Control"}, "z",
         "Enter `passthrough` mode, ignores all luakit keybindings.",
         function (w) w:set_mode("passthrough") end),
+
+    -- key({"Control"}, "e",           function (w)
+    --     local s = w:eval_js("document.activeElement.value")
+    --     local n = "/tmp/luakit-" .. os.time()
+
+    --     luakit.spawn_sync("urxvt -e vim -c \"set spell\" \"" .. n .. "\"")
+
+    --     f = io.open(n, "r")
+    --     s = f:read("*all")
+    --     f:close()
+    --     -- Strip the string
+    --     s = s:gsub("^%s*(.-)%s*$", "%1")
+    --     -- Escape it but remove the quotes
+    --     s = string.format("%q", s):sub(2, -2)
+    --     -- lua escaped newlines (slash+newline) into js newlines (slash+n)
+    --     s = s:gsub("\\\n", "\\n")
+    --     w:eval_js("document.activeElement.value = '" .. s .. "'")
+    -- end),
 })
 
 readline_bindings = {
@@ -583,6 +607,14 @@ add_cmds({
                 w:notify("Dumped HTML to: " .. file)
             end
         end),
+
+    cmd("pocket", "save bookmark in pocket", function (w,a)
+        w.view:eval_js("(function(){ISRIL_H='48e6';PKT_D='getpocket.com';ISRIL_SCRIPT=document.createElement('SCRIPT');ISRIL_SCRIPT.type='text/javascript';ISRIL_SCRIPT.src='http://'+PKT_D+'/b/r.js';document.getElementsByTagName('head')[0].appendChild(ISRIL_SCRIPT)})();")
+    end),
+
+    cmd("pinboard", "save bookmark in pinboard", function (w,a)
+        w.view:eval_js("javascript:if(document.getSelection){s=document.getSelection();}else{s='';};document.location='https://pinboard.in/add?next=same&url='+encodeURIComponent(location.href)+'&description='+encodeURIComponent(s)+'&title='+encodeURIComponent(document.title)")
+    end)
 })
 
 -- vim: et:sw=4:ts=8:sts=4:tw=80

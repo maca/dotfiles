@@ -1,6 +1,4 @@
 #!/bin/sh
-# in-house -fstype=fuse,allow_other,noatime :sshfs\#root@home\:/backup
-# out-house -fstype=fuse,allow_other,noatime,port=5658 :sshfs\#root@remote-home\:/backup
 
 case $1 in
   Home)
@@ -8,6 +6,15 @@ case $1 in
     host=$(echo $addr | cut -d ':' -f1)
     port=$(echo $addr | cut -d ':' -f2)
     echo -e -n "-fstype=fuse,allow_other,noatime,port=$port /backup :sshfs\#root@$host\:/backup"
+    ;;
+  Node)
+    echo -e -n "-fstype=fuse,allow_other,noatime,port=22 / :sshfs\#root@linode\:/home/torrent"
+    ;;
+  Bananas)
+    echo -e -n "-fstype=fuse,allow_other,noatime,port=22 / :sshfs\#maca@bananas.ws\:/home/shared"
+    ;;
+  Vermelho)
+    echo -e -n "-fstype=fuse,allow_other,noatime,port=22 / :sshfs\#vermelho@192.168.100.149\:/Users/vermelho"
     ;;
   *)
 esac

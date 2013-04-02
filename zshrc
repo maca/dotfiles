@@ -150,6 +150,7 @@ zstyle ':completion:*:ls:*' file-patterns '*(/):directories'
 
 export EDITOR=vim
 export BROWSER=chromium
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # edit with vim
 function e() {
@@ -189,6 +190,7 @@ alias view="gpicview"
 if [ -f /usr/bin/gvim ]; then; alias vim="vim --servername TERM"; fi
 alias x=extract
 alias offline-site="wget -r -k -p"
+alias trim-white="find ./ -type f -exec sed -i 's/ *$//' '{}' ';'"
 
 # sudo aliases
 alias reboot="sudo reboot"
@@ -203,6 +205,8 @@ alias suspend="sudo pm-suspend"
 alias hibernate="sudo pm-hibernate"
 alias off="sudo shutdown -hP now"
 alias t="todo.sh"
+alias tail-log-no-assets="tail -f log/development.log | grep -vE \"(^\s*$|asset)\""
+alias vlc="vlc --file-caching=10000"
 
 # notes
 export n=~/notes

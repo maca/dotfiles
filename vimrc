@@ -96,7 +96,7 @@ autocmd BufWritePost .vimrc source $MYVIMRC
 " quick escape
 " imap ;; <Esc>
 
-colorscheme tir_black 
+colorscheme desert-alt
 
 if has("gui_running")
   if has("gui_gtk2")

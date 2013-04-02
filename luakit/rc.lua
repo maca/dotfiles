@@ -110,8 +110,8 @@ require "downloads_chrome"
 require "follow"
 
 -- Use a custom charater set for hint labels
---local s = follow.label_styles
---follow.label_maker = s.sort(s.reverse(s.charset("asdfqwerzxcv")))
+local s = follow.label_styles
+follow.label_maker = s.sort(s.reverse(s.charset("fjdkslcvuina")))
 
 -- Match only hint labels
 --follow.pattern_maker = follow.pattern_styles.match_label
@@ -192,7 +192,7 @@ downloads.add_signal("download-location", function (uri, file)
 
     -- download torrents to corresponding dir
     if string.match(file, ".torrent$") then
-        return downloads.default_dir .. "/torrent/files/" .. file 
+        return "/secondary/Torrents/" .. file 
     elseif string.match(uri, '^https?://aur.archlinux.org/') then
         return '/tmp/' .. file
     end
