@@ -87,8 +87,10 @@ map <Leader>t= :Tabularize /=<CR>
 map <Leader>t: :Tabularize /:<CR>
 map <Leader>t> :Tabularize /=>:<CR>
 
-map <Leader>g <C-]>
-
+" Ctag mappings
+map gt <C-]>
+map gb :pop<CR>
+map <C-W>gt <C-W><C-]>
 
 
 " Switch between two files
@@ -104,7 +106,7 @@ autocmd InsertLeave * let &l:foldmethod=w:fdm
 autocmd BufWritePost .vimrc source $MYVIMRC
 
 " quick escape
-" imap ;; <Esc>
+imap jj <Esc>
 
 colorscheme desert-alt
 
