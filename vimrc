@@ -82,9 +82,14 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
-" Uncomment to use Jamis Buck's file opening plugin
-" map <Leader>f :FuzzyFinderTextMate<Enter>
-map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
+" Tabularize mappings
+map <Leader>t= :Tabularize /=<CR>
+map <Leader>t: :Tabularize /:<CR>
+map <Leader>t> :Tabularize /=>:<CR>
+
+map <Leader>g <C-]>
+
+
 
 " Switch between two files
 nnoremap ,, <C-^>
@@ -136,11 +141,5 @@ nnoremap <C-w>v <C-w>v<C-w>l
 " Alias window mappings for tmux consistency
 map <C-a> <C-w>
 
-if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:<CR>
-  vmap <Leader>a: :Tabularize /:<CR>
-  nmap <Leader>a> :Tabularize /=>:<CR>
-  vmap <Leader>a> :Tabularize /=>:<CR>
-end
+map t <C-]>
+
