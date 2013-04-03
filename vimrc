@@ -48,6 +48,9 @@ set expandtab                    " Use spaces instead of tabs
 set autoread                    " Reload files edited outside vim
 set formatprg=par                " Use par to format paragraphs 
 
+set relativenumber
+
+
 " Controversial...replace colon by semicolon for easier commands
 nmap ; :
 vmap ; :

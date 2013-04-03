@@ -7,9 +7,6 @@
 [submodule "vim/bundle/lusty-juggler"]
 	path = vim/bundle/lusty-juggler
 	url = git://github.com/vim-scripts/LustyJuggler.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
-	url = git://git.wincent.com/command-t.git
 [submodule "vim/bundle/mustache"]
 	path = vim/bundle/mustache
 	url = git://github.com/juvenn/mustache.vim.git
@@ -49,9 +46,9 @@
 [submodule "vim/bundle/surround"]
 	path = vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/zencoding"]
-	path = vim/bundle/zencoding
-	url = git://github.com/mattn/zencoding-vim.git
 [submodule "vim/bundle/zencoding-vim"]
 	path = vim/bundle/zencoding-vim
 	url = git://github.com/mattn/zencoding-vim.git
+[submodule "command-t"]
+	path = vim/bundle/command-t
+	url = git://github.com/wincent/Command-T.git
