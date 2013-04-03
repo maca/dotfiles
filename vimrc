@@ -45,11 +45,13 @@ set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
 set expandtab                    " Use spaces instead of tabs
 
-set autoread                    " Reload files edited outside vim
+set autoread                     " Reload files edited outside vim
 set formatprg=par                " Use par to format paragraphs 
 
-set relativenumber
-
+" setglobal relativenumber
+autocmd BufEnter * :set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
 
 " Controversial...replace colon by semicolon for easier commands
 nmap ; :
