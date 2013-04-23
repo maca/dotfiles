@@ -1,8 +1,0 @@
-#! /bin/bash
-
-case $2 in
-	CONNECTED) 
-		sudo dhcpcd -x >/dev/null
-		sudo dhcpcd >/dev/null
-		;;
-esac
