@@ -38,7 +38,7 @@ hi SpecialKey	    guifg=#9acd32    ctermfg=247    gui=none    cterm=none
 hi String	    guifg=#ffa0a0    ctermfg=64    gui=none    cterm=none 
 hi StorageClass	    guifg=#bdb76b    ctermfg=250    gui=none    cterm=none 
 hi Title	    guifg=#cd5c5c    ctermfg=252    gui=bold    cterm=bold 
-hi Todo	    guifg=#fffefc    ctermfg=226    gui=none    cterm=none 
+hi Todo	       ctermfg=0 ctermbg=1    gui=none    cterm=none 
 hi Type	    guifg=#bdb76b    ctermfg=250    gui=none    cterm=none 
 hi Underlined	    guifg=#80a0ff    ctermfg=89    gui=underline    cterm=underline 
 hi Visual	    guifg=#f0e68c    ctermfg=255    guibg=#6b8e23    ctermbg=242    gui=none    cterm=none 
