@@ -5,6 +5,7 @@ set nocompatible                  " Must come first because it changes other opt
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
+filetype plugin on                " Turn on file type detection.
 
 runtime macros/matchit.vim        " Load the matchit plugin.
 
@@ -46,12 +47,23 @@ set shiftwidth=2                 " And again, related.
 set expandtab                    " Use spaces instead of tabs
 
 set autoread                     " Reload files edited outside vim
-set formatprg=par                " Use par to format paragraphs 
+set formatprg=par                " Use par to format paragraphs
 
 " setglobal relativenumber
-autocmd BufEnter * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+autocmd WinEnter * :setlocal relativenumber
+autocmd WinLeave,FocusLost * :setlocal number
+autocmd InsertEnter * :setlocal number
+autocmd InsertLeave * :setlocal relativenumber
+
+function! g:ToggleNuMode()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+map <C-l> :call g:ToggleNuMode()<CR>
 
 " Controversial...replace colon by semicolon for easier commands
 nmap ; :
@@ -65,7 +77,7 @@ set laststatus=2                  " Show the status line all the time
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
 set term=xterm-256color
-set t_Co=256 
+set t_Co=256
 
 " Map leader to ,
 let mapleader = ","
@@ -89,9 +101,10 @@ map <Leader>t> :Tabularize /=>:<CR>
 
 " Ctag mappings
 map gt <C-]>
+map gs :ptselect
 map gb :pop<CR>
 map <C-W>gt <C-W><C-]>
-
+map <Leader>lt :TlistOpen<CR>
 
 " Switch between two files
 nnoremap ,, <C-^>
@@ -128,7 +141,7 @@ if has("gui_running")
   endif
 endif
 
-" system copy/paste 
+" system copy/paste
 vmap <leader>y "+y
 nmap <leader>p "+gP
 
@@ -143,5 +156,15 @@ nnoremap <C-w>v <C-w>v<C-w>l
 " Alias window mappings for tmux consistency
 map <C-a> <C-w>
 
-map t <C-]>
+match Todo /\s\+$/
 
+" Command-t flush when saved file or when vim gains focus
+augroup CommandTExtension
+  autocmd!
+  autocmd FocusGained * CommandTFlush
+  autocmd BufWritePost * CommandTFlush
+augroup END
+
+" New line on Enter on normal mode
+map <S-Enter> O<Esc>
+map <CR> o<Esc>
