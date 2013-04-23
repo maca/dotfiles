@@ -158,13 +158,6 @@ map <C-a> <C-w>
 
 match Todo /\s\+$/
 
-" Command-t flush when saved file or when vim gains focus
-augroup CommandTExtension
-  autocmd!
-  autocmd FocusGained * CommandTFlush
-  autocmd BufWritePost * CommandTFlush
-augroup END
-
 " New line on Enter on normal mode
 map <S-Enter> O<Esc>
 map <CR> o<Esc>
