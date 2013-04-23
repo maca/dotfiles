@@ -149,28 +149,12 @@ setopt menu_complete   # autoselect the first completion entry
 zstyle ':completion:*:ls:*' file-patterns '*(/):directories'
 
 export EDITOR=vim
-export BROWSER=chromium
+export BROWSER=luakit
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # edit with vim
 function e() {
   vim --servername "TERM" --remote-silent $@
-}
-
-function all-excluding() {
-  local pattern="\"^\./(`echo ${(pj:|:)@} | sed 's:\.:\\.:g'`)\""
-  eval "find . | grep -v -E $pattern"
-}
-
-function rails-replace() {
-  rails-source-files | xargs grep "$1" | cut -d ":" -f 1 | while read file; do
-    mvim --remote $file; 
-  done
-  mvim --remote-send "<Esc> :bufdo %s/$1/$2/gIc | update"
-}
-
-function rails-source-files() {
-  all-excluding tmp log db .git vendor
 }
 
 # teamocil autocomplete
@@ -187,7 +171,7 @@ alias pacman="sudo pacman"
 alias ll="ls -a"
 alias terminal="urvxtc"
 alias view="gpicview"
-if [ -f /usr/bin/gvim ]; then; alias vim="vim --servername TERM"; fi
+if [ -f /usr/bin/gvim ]; then; alias vim="/home/maca/bin/vim-tmux"; fi
 alias x=extract
 alias offline-site="wget -r -k -p"
 alias trim-white="find ./ -type f -exec sed -i 's/ *$//' '{}' ';'"
@@ -203,6 +187,7 @@ alias powerup="sudo powerup"
 alias powernow="sudo powernow"
 alias suspend="sudo pm-suspend"
 alias hibernate="sudo pm-hibernate"
+alias powertop="sudo powertop"
 alias off="sudo shutdown -hP now"
 alias t="todo.sh"
 alias tail-log-no-assets="tail -f log/development.log | grep -vE \"(^\s*$|asset)\""
