@@ -1,0 +1,13 @@
+/* Default color scheme */
+@define-color grey #c9c9c9;
+@define-color grey_light shade(@grey, 0.90);
+@define-color grey_lighter shade(@grey, 0.70);
+@define-color grey_lightest shade(@grey, 0.60);
+@define-color disabled #777777;
+
+@define-color foreground #363636;
+
+@define-color blue_grey #535D6C;
+@define-color blue_girly #0088cc;
+
+@import url("gtk-widgets.css");

@@ -1,0 +1,69 @@
+gtk_color_scheme = "grey:#262729"
+gtk_color_scheme = "grey_light:#2D2E31"
+gtk_color_scheme = "grey_lighter:#3F4147"
+gtk_color_scheme = "grey_lightest:#3D4049"
+gtk_color_scheme = "grey_dark:#00ff00"
+gtk_color_scheme = "white_mild:#f1f1f1"
+gtk_color_scheme = "blue_grey:#535D6C"
+gtk_color_scheme = "blue_girly:#0088cc"
+gtk_color_scheme = "disabled:#777777"
+
+style "default" {
+
+  GtkOptionMenu::indicator_spacing = { 3, 2, 1, 1 }
+  GtkEntry::progress-border = { 1, 1, 1, 1 }
+  GtkRange::slider_width = 11
+  GtkRange::stepper_size = 11
+  GtkScrollbar::min_slider_length = 14
+  GtkCheckButton::indicator_size = 10
+  GtkCheckMenuItem::indicator_size = 10
+  GtkButton::default_border = { 0, 0, 0, 0 }
+
+  xthickness = 6
+  ythickness = 3
+
+  fg[NORMAL]        = @white_mild
+  fg[ACTIVE]        = @white_mild
+  fg[PRELIGHT]      = @white_mild
+  fg[SELECTED]      = @white_mild
+  fg[INSENSITIVE]   = @disabled
+
+  bg[NORMAL]        = @grey
+  bg[ACTIVE]        = @grey_lighter
+  bg[PRELIGHT]      = @grey_lighter
+  bg[SELECTED]      = @grey_lighter
+  bg[INSENSITIVE]   = @grey
+
+  base[NORMAL]      = @grey
+  base[ACTIVE]      = @grey
+  base[PRELIGHT]    = @grey
+  base[SELECTED]    = @grey_lightest
+  base[INSENSITIVE] = @grey
+
+  text[NORMAL]      = @white_mild
+  text[ACTIVE]      = @white_mild
+  text[PRELIGHT]    = @white_mild
+  text[SELECTED]    = @white_mild
+  text[INSENSITIVE] = @white_mild
+
+  engine "mist" {}
+
+}
+
+style "tooltip" {
+  bg[NORMAL] = @blue_girly
+}
+
+style "button" {
+  bg[NORMAL] = @grey_light
+  bg[ACTIVE] = @grey_lightest
+}
+
+style "entry" {
+  bg[SELECTED] = @grey_lighter
+}
+
+class "GtkWidget" style "default"
+class "GtkButton" style "button"
+class "GtkEntry" style "entry"
+widget "gtk-tooltip*" style "tooltip"

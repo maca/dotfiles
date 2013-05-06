@@ -168,7 +168,12 @@ alias offline-site="wget -r -k -p"
 alias comp="tar cvfz"
 alias space="du -sh *"
 alias pacman="sudo pacman"
-alias ll="ls -a"
+
+alias ll="ls -la"
+alias l.="ls -a"
+
+alias ..='cd ..'
+
 alias terminal="urvxtc"
 alias view="gpicview"
 if [ -f /usr/bin/gvim ]; then; alias vim="/home/maca/bin/vim-tmux"; fi
@@ -189,8 +194,8 @@ alias suspend="sudo pm-suspend"
 alias hibernate="sudo pm-hibernate"
 alias powertop="sudo powertop"
 alias off="sudo shutdown -hP now"
-alias t="todo.sh"
-alias tail-log-no-assets="tail -f log/development.log | grep -vE \"(^\s*$|asset)\""
+
+alias rlog="tail -f log/development.log | grep -vE \"(^\s*$|asset)\""
 alias vlc="vlc --file-caching=10000"
 
 # notes

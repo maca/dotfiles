@@ -1,0 +1,7 @@
+include "gtkrc"
+
+style "font" {
+  font_name = "Droid Sans Mono 9"
+}
+
+widget_class "*" style "font"

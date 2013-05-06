@@ -1,0 +1,23 @@
+/* Default color scheme */
+
+@define-color grey #262729;
+@define-color grey_light shade(@grey, 1.20);
+@define-color grey_lighter shade(@grey, 1.70);
+@define-color grey_lightest shade(@grey, 1.90);
+@define-color disabled #777777;
+
+@define-color foreground #fafafa;
+
+@define-color blue_grey #535D6C;
+@define-color blue_girly #0088cc;
+
+@define-color bg_color alpha(@blue_grey, 0.5);
+@define-color fg_color red;
+@define-color base_color red;
+@define-color text_color red;
+@define-color selected_bg_color @blue_girly;
+@define-color selected_fg_color red;
+@define-color tooltip_bg_color red;
+@define-color tooltip_fg_color red;
+
+@import url("gtk-widgets.css");

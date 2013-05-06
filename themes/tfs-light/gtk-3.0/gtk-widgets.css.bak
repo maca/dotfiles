@@ -1,0 +1,334 @@
+/* GENERAL */
+
+* {
+
+  -GtkPaned-handle-size: 1;
+
+  -GtkButton-child-displacement-x: 1px;
+  -GtkButton-child-displacement-y: 1px;
+
+  -GtkRange-slider-width: 14px;
+
+  -GtkScrollbar-has-backward-stepper: 0;
+  -GtkScrollbar-has-forward-stepper: 0;
+
+  -GtkWidget-wide-separators: 1px;
+  -GtkWidget-separator-width: 1px;
+  -GtkWidget-link-color: @blue_girly;
+  -GtkWidget-window-dragging: true;
+  -GtkWidget-focus-line-width: 0;
+
+  -GtkNotebook-initial-gap: 10px;
+
+  padding: 3px 6px 3px 6px;
+  color: @foreground;
+  border-radius: 0;
+  border-width: 0;
+
+}
+
+*:hover {
+
+  background-color: @grey_lighter;
+
+}
+
+*:active:hover {
+
+  background-color: @grey_lightest;
+
+}
+
+*:selected {
+
+  background-color: alpha(@blue_grey, 0.5);
+
+}
+
+*:prelight {}
+
+*:insensitive {
+
+  color: @disabled;
+
+}
+
+.background {
+
+  background-color: @grey;
+
+}
+
+.rubberband {
+
+  background-color: alpha(@blue_grey, 0.2);
+  border-color: @blue_grey;
+
+}
+
+
+/* MENUS */
+
+.menu {
+
+  padding: 0;
+  background-color: @grey_light;
+
+}
+
+.menuitem {
+
+  padding: 4px;
+
+}
+
+.menubar {
+
+  padding: 4px;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: @blue_grey;
+
+}
+
+GTKMenuItem.separator {
+
+  color: @grey_lighter;
+
+}
+
+
+/* SCROLL/PROGRESS BARS */
+
+.scrollbar.slider {
+
+  border-radius: 6px;
+  background-color: @blue_grey;
+  padding: 0;
+
+}
+
+.scrollbar.trough {
+
+  border-width: 0;
+
+}
+
+GtkProgressBar, .progressbar {
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: @blue_grey;
+  background-color: @blue_grey;
+
+}
+
+GtkProgressBar.trough {
+
+  background-color: @grey_light;
+
+}
+
+GtkRange.slider {
+
+  background-color: @blue_grey;
+
+}
+
+GtkRange.trough {
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: @blue_grey;
+  background-color: @grey_light;
+
+}
+
+
+/* BUTTONS AND LITTLE THINGS */
+
+.expander {
+
+  color: @blue_grey;
+
+}
+
+.check, .radio {
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: @blue_grey;
+
+}
+
+.notebook {
+
+  padding: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: @blue_grey;
+
+}
+
+.check, .radio {
+
+  color: @blue_grey;
+
+}
+
+.button {
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: @blue_grey;
+  background-color: @grey_light;
+
+}
+
+.button:hover {
+
+  background-color: @grey_lighter;
+
+}
+
+.button:active, .check:active, .radio:active {
+
+  background-color: @grey_lighter;
+
+}
+
+.entry {
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: @blue_grey;
+  padding: 6px;
+
+}
+
+.frame {
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: @blue_grey;
+  padding: 4px 0 4px 0;
+
+}
+
+.tooltip, .info, .warning, .question, .dim-label {
+
+  background-color: @blue_girly;
+
+}
+
+.highlight {
+
+  background-color: @blue_grey;
+
+}
+
+
+/* NOTEBOOKS AND TABS */
+
+.notebook tab {
+
+  /* inactive tabs, that is */
+  padding: 4px 12px 4px 12px;
+  background-color: @grey_lighter;
+
+}
+
+.notebook tab:active {
+
+  background-color: @grey;
+
+}
+
+.toolbar {
+
+  border-style: solid;
+  border-color: @blue_grey;
+  border-width: 0 0 1px 0;
+
+}
+
+.pane-separator {
+
+  background-color: @blue_grey;
+
+}
+
+GtkSeparatorToolItem {
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: @grey_lighter;
+
+}
+
+GtkTreeView {
+
+  background-color: @grey;
+
+}
+
+GtkTreeView.separator {
+
+  color: @grey_lighter;
+
+}
+
+GtkTreeView row:nth-child(odd) {
+
+  background-color: @grey_light;
+
+}
+
+GtkTreeView row:nth-child(odd):hover, GtkTreeView row:nth-child(even):hover {
+
+  background-color: @grey_lighter
+
+}
+
+.cell {
+
+  background-color: @grey;
+
+}
+
+.cell:selected {
+
+  background-color: @grey_lighter;
+
+}
+
+
+/* TESTING */
+
+.frame {
+
+  border: 0;
+
+}
+
+.notebook {
+
+  border-width: 0 0 0 0;
+
+}
+
+.notebook tab {
+
+  border-width: 0 1px 1px 1px;
+
+}
+
+
+/* SHIT I DON'T KNOW WHAT THEY IS */
+
+.dnd, GtkSwitch, .column-header {
+
+  color: green;
+  background-color: red;
+
+}
