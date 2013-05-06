@@ -1,0 +1,20 @@
+[user]
+	email = mail@makarius.me
+	name = macario
+[alias]
+  h = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --graph --abbrev-commit --date=short
+  ha = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --graph --all --abbrev-commit --date=short
+  gh = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --graph --all --abbrev-commit --date=short
+  ff = merge --ff-only
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 1364x747+0+19
+	file-view-vpane-position = 403
+	main-window-view = HistoryView
+	history-view-vpane-position = 318
+[push]
+	default = matching
