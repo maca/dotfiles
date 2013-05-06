@@ -8,10 +8,7 @@
 -- The "match string"  will match substrings.  So "Firefox" will match "blah Firefox blah"
 -- Use xprop to get this info from a window.  WM_CLASS(STRING) gives you "instance", "class".  WM_NAME(STRING) gives you the name of the selected window (usually something like the web page title for browsers, or the file name for emacs).
 
-module("ror")
 table5={
-	 ["g"]={"gimp","Gimp"},
-	 ["b"]={"luakit","luakit"},
    ["n"]={"spacefm","spacefm", "instance"},
    ["t"]={"urxvt -name t1 -title t1 -e /home/maca/bin/tmux-attach t1","t1", "instance"},
    ["y"]={"urxvt -name t2 -title t2 -e /home/maca/bin/tmux-attach t2","t2", "instance"},
