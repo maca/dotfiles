@@ -83,15 +83,15 @@ end
 -- }}}
 
 -- {{{ Tags
- tags = {
-   settings = {
-     { names  = { "main", "progs", "secondary", 1, 2 },
-       layout = { layouts[1], layouts[4], layouts[1], layouts[1] }
-     }
-  }}
- for s = 1, screen.count() do
-     tags[s] = awful.tag(tags.settings[s].names, s, tags.settings[s].layout)
- end
+tags = {
+  settings =
+    { names  = { "main", "progs", "secondary", 1, 2 },
+      layout = { layouts[1], layouts[4], layouts[1], layouts[1] }
+    }
+ }
+for s = 1, screen.count() do
+    tags[s] = awful.tag(tags.settings.names, s, tags.settings.layout)
+end
  -- }}}
 
 
