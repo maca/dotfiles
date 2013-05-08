@@ -92,7 +92,7 @@ function aweror.genkeys(mod1)
    rorkeys = awful.util.table.join()
   for i,v in pairs(allt1) do
    rorkeys = awful.util.table.join(rorkeys,
-    awful.key({ mod1,}, i, genfun(v))
+    awful.key({ mod1, "Mod1" }, i, genfun(v))
     )
   end
   return rorkeys

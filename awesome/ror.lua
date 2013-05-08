@@ -9,13 +9,19 @@
 -- Use xprop to get this info from a window.  WM_CLASS(STRING) gives you "instance", "class".  WM_NAME(STRING) gives you the name of the selected window (usually something like the web page title for browsers, or the file name for emacs).
 
 table5={
-   ["n"]={"spacefm","spacefm", "instance"},
+   ["n"]={"spacefm", "spacefm", "instance"},
+
    ["t"]={"urxvt -name t1 -title t1 -e /home/maca/bin/tmux-attach t1","t1", "instance"},
    ["y"]={"urxvt -name t2 -title t2 -e /home/maca/bin/tmux-attach t2","t2", "instance"},
    ["u"]={"urxvt -name t3 -title t3","t3", "instance"},
-   ["h"]={"urxvt -name House -e /bin/zsh -i -c /home/maca/bin/connect-to-house", "House", "instance"},
+   ["h"]={"urxvt -name house -e /bin/zsh -i -c /home/maca/bin/connect-to-house", "house", "instance"},
+   ["l"]={"urxvt -name linode -e /bin/zsh -i -c /home/maca/bin/connect-to-linode", "linode", "instance"},
+
+   ["m"]={"urxvt -name cmus -title cmus -e cmus","cmus", "instance"},
+   ["c"]={"urxvt -name centerim -title centerim -e centerim5","centerim", "instance"},
+
    ["r"]={"gmrun","Gmrun"},
-   ["c"]={"chromium","Chromium"},
+   ["b"]={"chromium -name chromium","chromium", "instance"},
    ["w"]={"/usr/lib/virtualbox/VirtualBox --comment Windoze --startvm 9112bdaa-21ef-4092-a5d9-a4c52e18f520 --no-startvm-errormsgbox", "VirtualBox"},
-	 ["v"]={"gpicview","Gpicview"},
+	 ["v"]={"gpicview","gpicview"},
 }

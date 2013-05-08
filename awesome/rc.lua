@@ -45,7 +45,7 @@ end
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -60,17 +60,17 @@ modkey = "Mod4"
 local layouts =
 {
     awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    -- awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.top,
+    awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -83,13 +83,17 @@ end
 -- }}}
 
 -- {{{ Tags
--- Define a tag table which hold all screen tags.
-tags = {}
-for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-end
--- }}}
+ tags = {
+   settings = {
+     { names  = { "main", "progs", "secondary", 1, 2 },
+       layout = { layouts[1], layouts[4], layouts[1], layouts[1] }
+     }
+  }}
+ for s = 1, screen.count() do
+     tags[s] = awful.tag(tags.settings[s].names, s, tags.settings[s].layout)
+ end
+ -- }}}
+
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -237,7 +241,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+    awful.key({ modkey,           }, "Return", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
@@ -247,7 +251,7 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    -- awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -263,7 +267,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    -- awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "x",
               function ()
@@ -273,7 +277,18 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
+    awful.key({}, "XF86Display", function() awful.util.spawn_with_shell("displays") end),
+
+    -- Multimedia keys
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 2+") end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 2-") end),
+
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("cmus-remote --pause") end),
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("cmus-remote --prev") end),
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("cmus-remote --next") end),
+    awful.key({ }, "XF86AudioStop", function () awful.util.spawn("cmus-remote --playlist") end)
 )
 
 clientkeys = awful.util.table.join(
@@ -354,15 +369,26 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
+
+    -- First tag maximized
+    { rule_any = { instance = { "t1", "chromium" } },
+      properties = { tags = { tags[1][1] },
+                     maximized_vertical = true,
+                     maximized_horizontal = true } },
+
+    { rule = { instance = "chromium" },
+      properties = { tags = { tags[2] and tags[2][1] or tags[1][1] } } },
+
+    -- Second tag fair
+    { rule_any = { instance = { "centerim", "cmus" } },
+      properties = { tags = { tags[2] and tags[2][2] or tags[1][2] },
+                     floating = false } },
+
+    -- Third tag maximized
+    { rule_any = { instance = { "t2", "linode" } },
+      properties = { tags = { tags[1][3] },
+                     maximized_vertical = true,
+                     maximized_horizontal = true } },
 }
 -- }}}
 
