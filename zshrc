@@ -149,7 +149,7 @@ setopt menu_complete   # autoselect the first completion entry
 zstyle ':completion:*:ls:*' file-patterns '*(/):directories'
 
 export EDITOR=vim
-export BROWSER=luakit
+export BROWSER=chromium
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # edit with vim
