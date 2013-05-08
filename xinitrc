@@ -14,8 +14,8 @@ xkbset exp 1 =accessx =sticky =twokey =latchlock
 setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
 
 xcompmgr &
+"$HOME/bin/displays" &
 simpleswitcher &
 conky -d -c "$HOME/dotfiles/conkyrc/conkyrc"
-# sudo conky -d -c "$HOME/dotfiles/conkyrc/tailrc"
 
 exec dbus-launch awesome
