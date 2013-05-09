@@ -4,4 +4,4 @@
 opts="-o ConnectTimeout=5 -o BatchMode=yes -o StrictHostKeyChecking=no"
 addr=$(ssh -p 5658 $opts linode 'ip addr' | egrep 'eth0$' | awk '{ print $2 }' | cut -d / -f1)
 
-ping $addr -c1 -w1 &>/dev/null && ssh $addr $opts "whoami" &> /dev/null && echo $addr:22 || echo linode:5658 
+ping $addr -c1 -w1 &>/dev/null && ssh $addr $opts "whoami" &> /dev/null && echo $addr:22 || echo linode:5658
