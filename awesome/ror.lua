@@ -19,9 +19,10 @@ table5={
 
    ["m"]={"urxvt -name cmus -title cmus -e cmus","cmus", "instance"},
    ["c"]={"urxvt -name centerim -title centerim -e centerim5","centerim", "instance"},
+   ["i"]={"urxvt -name weechat -title weechat -e weechat-curses","weechat", "instance"},
 
    ["r"]={"gmrun","Gmrun"},
-   ["b"]={"chromium -name chromium","chromium", "instance"},
+   ["b"]={"chromium","Chromium"},
    ["w"]={"/usr/lib/virtualbox/VirtualBox --comment Windoze --startvm 9112bdaa-21ef-4092-a5d9-a4c52e18f520 --no-startvm-errormsgbox", "VirtualBox"},
 	 ["v"]={"gpicview","gpicview"},
 }

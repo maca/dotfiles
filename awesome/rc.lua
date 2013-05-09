@@ -63,7 +63,7 @@ local layouts =
     awful.layout.suit.max,
     -- awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
@@ -376,13 +376,16 @@ awful.rules.rules = {
                      maximized_vertical = true,
                      maximized_horizontal = true } },
 
-    { rule = { instance = "chromium" },
+    { rule = { instance = "t1" },
       properties = { tags = { tags[2] and tags[2][1] or tags[1][1] } } },
 
     -- Second tag fair
-    { rule_any = { instance = { "centerim", "cmus" } },
+    { rule_any = { instance = { "centerim", "cmus", "weechat" } },
       properties = { tags = { tags[2] and tags[2][2] or tags[1][2] },
                      floating = false } },
+
+    { rule = { instance = "weechat" },
+      properties = { maximized_horizontal = true } },
 
     -- Third tag maximized
     { rule_any = { instance = { "t2", "linode" } },
