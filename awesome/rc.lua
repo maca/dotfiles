@@ -12,7 +12,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 -- Run or Raise
-local ror = require("aweror")
+run_or_raise = require("aweror")
 
 
 -- {{{ Error handling
@@ -86,7 +86,7 @@ end
 tags = {
   settings =
     { names  = { "main", "progs", "secondary", 1, 2 },
-      layout = { layouts[1], layouts[4], layouts[1], layouts[1] }
+      layout = { layouts[2], layouts[4], layouts[2], layouts[1], layouts[1] }
     }
  }
 for s = 1, screen.count() do
@@ -355,7 +355,7 @@ clientbuttons = awful.util.table.join(
 
 
 -- Run or Raise keys
-globalkeys = awful.util.table.join(globalkeys, ror.genkeys(modkey))
+globalkeys = awful.util.table.join(globalkeys, run_or_raise.genkeys(modkey))
 -- Set keys
 root.keys(globalkeys)
 -- }}}
@@ -371,27 +371,22 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
 
     -- First tag maximized
-    { rule_any = { instance = { "t1", "chromium" } },
-      properties = { tags = { tags[1][1] },
-                     maximized_vertical = true,
-                     maximized_horizontal = true } },
+    { rule_any = { instance = { "chromium" } },
+      properties = { tags = { tags[1][1] } } },
 
-    { rule = { instance = "t1" },
+    { rule = { instance = "t1", "vim" },
       properties = { tags = { tags[2] and tags[2][1] or tags[1][1] } } },
 
     -- Second tag fair
     { rule_any = { instance = { "centerim", "cmus", "weechat" } },
-      properties = { tags = { tags[2] and tags[2][2] or tags[1][2] },
-                     floating = false } },
+      properties = { tags = { tags[2] and tags[2][2] or tags[1][2] } } },
 
     { rule = { instance = "weechat" },
       properties = { maximized_horizontal = true } },
 
     -- Third tag maximized
     { rule_any = { instance = { "t2", "linode" } },
-      properties = { tags = { tags[1][3] },
-                     maximized_vertical = true,
-                     maximized_horizontal = true } },
+      properties = { tags = { tags[1][3] } } },
 }
 -- }}}
 

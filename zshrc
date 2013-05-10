@@ -135,13 +135,13 @@ function fuzzy_autocomplete() {
 
 zle -C complete menu-complete complete-files
 bindkey '^T' complete
-complete-files () { 
+complete-files () {
   compadd -U -f -- $(command locate `pwd` | sed 's?'`pwd`/'??' | grep -i -E `echo "$PREFIX" | sed 's|\(.\)|\1.*|g' | head -30`)
 }
 
 zle -C complete-locate menu-complete complete-files-locate
 bindkey '^F' complete-locate
-complete-files-locate () { 
+complete-files-locate () {
   compadd -U -f -- $(command locate "$PREFIX" | sed 's?'`pwd`/'??')
 }
 
@@ -154,7 +154,18 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # edit with vim
 function e() {
-  vim --servername "TERM" --remote-silent $@
+  instances=$(vim --serverlist | grep STANDALONE | wc -l)
+  clients=$(tmux list-clients | wc -l)
+
+  if [ $instances -ge 1  ] && [ $clients = 1 ]; then
+    /usr/bin/vim --servername STANDALONE --remote-tab-silent $@
+  elif [ $instances = 0  ] && [ $clients = 1 ]; then
+    urxvt -name vim -title vim -e /usr/bin/vim --servername STANDALONE $@ &
+  elif [ -f /usr/bin/gvim ]; then
+    vim-tmux $@
+  else
+    /usr/bin/vim $@
+  fi
 }
 
 # teamocil autocomplete
@@ -176,7 +187,7 @@ alias ..='cd ..'
 
 alias terminal="urvxtc"
 alias view="gpicview"
-if [ -f /usr/bin/gvim ]; then; alias vim="/home/maca/bin/vim-tmux"; fi
+# if [ -f /usr/bin/gvim ]; then; alias vim="vim --servername TERM"; fi
 alias x=extract
 alias offline-site="wget -r -k -p"
 alias trim-white="find ./ -type f -exec sed -i 's/ *$//' '{}' ';'"

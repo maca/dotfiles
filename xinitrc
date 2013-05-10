@@ -16,6 +16,7 @@ setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
 xcompmgr &
 "$HOME/bin/displays" &
 simpleswitcher &
+unclutter &
 conky -d -c "$HOME/dotfiles/conkyrc/conkyrc"
 
 exec dbus-launch awesome

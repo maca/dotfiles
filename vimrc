@@ -65,6 +65,17 @@ endfunc
 
 map <C-l> :call g:ToggleNuMode()<CR>
 
+" Bring vim to front when a file is read
+function! g:BringVimToFront()
+  " if len(v:servername) == "STANDALONE"
+    silent !echo "run_or_raise.run_or_raise('/bin/sh', {instance = 'vim'})" | awesome-client &
+    redraw!
+  " endif
+endfunction
+
+autocmd BufRead,TabEnter * :call g:BringVimToFront()
+
+
 " Controversial...replace colon by semicolon for easier commands
 nmap ; :
 vmap ; :
@@ -159,5 +170,5 @@ map <C-a> <C-w>
 match Todo /\s\+$/
 
 " New line on Enter on normal mode
-map <S-Enter> O<Esc>
-map <CR> o<Esc>
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
