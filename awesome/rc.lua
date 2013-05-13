@@ -387,6 +387,11 @@ awful.rules.rules = {
     -- Third tag maximized
     { rule_any = { instance = { "t2", "linode" } },
       properties = { tags = { tags[1][3] } } },
+
+    -- Fourth tag etc
+    -- Set Firefox to always map on tags number 2 of screen 1.
+    { rule = { class = "Firefox" },
+      properties = { tag = tags[2] and tags[2][4] or tags[1][4] } },
 }
 -- }}}
 
