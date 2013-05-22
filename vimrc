@@ -50,7 +50,7 @@ set autoread                     " Reload files edited outside vim
 set formatprg=par                " Use par to format paragraphs
 
 " setglobal relativenumber
-autocmd WinEnter * :setlocal relativenumber
+autocmd BufRead,WinEnter * :setlocal relativenumber
 autocmd WinLeave,FocusLost * :setlocal number
 autocmd InsertEnter * :setlocal number
 autocmd InsertLeave * :setlocal relativenumber
@@ -67,13 +67,13 @@ map <C-l> :call g:ToggleNuMode()<CR>
 
 " Bring vim to front when a file is read
 function! g:BringVimToFront()
-  " if len(v:servername) == "STANDALONE"
+  if v:servername == "STANDALONE"
     silent !echo "run_or_raise.run_or_raise('/bin/sh', {instance = 'vim'})" | awesome-client &
     redraw!
-  " endif
+  endif
 endfunction
 
-autocmd BufRead,TabEnter * :call g:BringVimToFront()
+autocmd BufRead,TabEnter,RemoteReply * :call g:BringVimToFront()
 
 
 " Controversial...replace colon by semicolon for easier commands

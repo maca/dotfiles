@@ -155,16 +155,11 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # edit with vim
 function e() {
   instances=$(vim --serverlist | grep STANDALONE | wc -l)
-  clients=$(tmux list-clients | wc -l)
 
-  if [ $instances -ge 1  ] && [ $clients = 1 ]; then
+  if [ $instances -ge 1  ]; then
     /usr/bin/vim --servername STANDALONE --remote-tab-silent $@
-  elif [ $instances = 0  ] && [ $clients = 1 ]; then
-    urxvt -name vim -title vim -e /usr/bin/vim --servername STANDALONE $@ &
-  elif [ -f /usr/bin/gvim ]; then
-    vim-tmux $@
   else
-    /usr/bin/vim $@
+    urxvt -name vim -title vim -e /usr/bin/vim --servername STANDALONE $@ &
   fi
 }
 
