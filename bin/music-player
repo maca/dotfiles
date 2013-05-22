@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# If am at house opens the home server deadbeef player otherwise my local one
+host=$(/home/maca/bin/house-addr | cut -d ':' -f1)
+# echo $host
+# sleep 20
+
+case $host in
+  192*)
+    ssh 192.168.100.105 -t 'LANG=en_US.UTF-8 exec cmus'
+    ;;
+  *) cmus ;;
+esac

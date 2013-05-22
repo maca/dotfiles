@@ -60,12 +60,12 @@ modkey = "Mod4"
 local layouts =
 {
     awful.layout.suit.floating,
-    awful.layout.suit.max,
     -- awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
     awful.layout.suit.fair,
+    awful.layout.suit.max,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
@@ -86,7 +86,7 @@ end
 tags = {
   settings =
     { names  = { "main", "progs", "secondary", 1, 2 },
-      layout = { layouts[2], layouts[4], layouts[2], layouts[1], layouts[1] }
+      layout = { layouts[1], layouts[3], layouts[3], layouts[1], layouts[1] }
     }
  }
 for s = 1, screen.count() do
@@ -226,12 +226,12 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "j",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "k",
         function ()
-            awful.client.focus.byidx(-1)
+            awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
@@ -371,18 +371,22 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
 
     -- First tag maximized
-    { rule_any = { instance = { "chromium" } },
+    { rule = { instance = "chromium" },
       properties = { tags = { tags[1][1] } } },
 
-    { rule = { instance = "t1", "vim" },
-      properties = { tags = { tags[2] and tags[2][1] or tags[1][1] } } },
+    { rule_any = { instance = { "t1", "vim" } },
+      properties = {
+        maximized_horizontal = true,
+        maximized_vertical   = true,
+        tags = { (tags[2] and tags[2][1]) or tags[1][1] }
+      } },
 
     -- Second tag fair
     { rule_any = { instance = { "centerim", "cmus", "weechat" } },
-      properties = { tags = { tags[2] and tags[2][2] or tags[1][2] } } },
+      properties = { tags = { (tags[2] and tags[2][2]) or tags[1][2] } } },
 
-    { rule = { instance = "weechat" },
-      properties = { maximized_horizontal = true } },
+    -- { rule_any = { instance = {"weechat", "cmus"} },
+    --   properties = { maximized_horizontal = true } },
 
     -- Third tag maximized
     { rule_any = { instance = { "t2", "linode" } },
@@ -391,7 +395,7 @@ awful.rules.rules = {
     -- Fourth tag etc
     -- Set Firefox to always map on tags number 2 of screen 1.
     { rule = { class = "Firefox" },
-      properties = { tag = tags[2] and tags[2][4] or tags[1][4] } },
+      properties = { tag = (tags[2] and tags[2][4]) or tags[1][4] } },
 }
 -- }}}
 

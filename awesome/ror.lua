@@ -18,7 +18,7 @@ table5={
    ["l"]={"urxvt -name linode -title linode -e /bin/zsh -i -c /home/maca/bin/connect-to-linode", "linode", "instance"},
    ["v"]={"urxvt -name vim -title vim -e vim --servername STANDALONE", "vim", "instance"},
 
-   ["m"]={"urxvt -name cmus -title cmus -e cmus","cmus", "instance"},
+   ["m"]={"urxvt -name cmus -e /bin/zsh -i -c /home/maca/bin/music-player", "cmus", "instance"},
    ["c"]={"urxvt -name centerim -title centerim -e centerim5","centerim", "instance"},
    ["i"]={"urxvt -name weechat -title weechat -e weechat-curses","weechat", "instance"},
 
