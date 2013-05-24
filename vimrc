@@ -126,6 +126,9 @@ autocmd FileType ruby setlocal foldmethod=syntax
 autocmd InsertEnter * let w:fdm=&foldmethod | setlocal foldmethod=manual
 autocmd InsertLeave * let &l:foldmethod=w:fdm
 
+" Folding for coffe
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+
 " auto reload .vimrc after editing
 autocmd BufWritePost .vimrc source $MYVIMRC
 
@@ -158,6 +161,7 @@ nmap <leader>p "+gP
 
 " history tree
 nnoremap ,h :GundoToggle<CR>
+nnoremap <C>P :CtrlPBuffer
 
 " Cycle through panes with space
 map <Space> <c-W>w
