@@ -10,7 +10,6 @@ set t_Co=256
 let colors_name = "desert-alt"
 
 
-
 hi LineNr	        ctermfg=240    ctermbg=235 cterm=none
 hi StatusLine	    ctermfg=240    ctermbg=235 cterm=none
 au InsertEnter * hi LineNr ctermfg=cyan
@@ -93,4 +92,9 @@ hi link javaScriptNumber Number
 " Special for CSharp
 hi link csXmlTag Keyword 
 
+" Special for diff
+highlight DiffAdd ctermbg=8 guibg=2
+highlight DiffDelete ctermbg=88 guibg=88
+highlight DiffChange ctermbg=235 guibg=235
+highlight DiffText ctermbg=18 guibg=18
 

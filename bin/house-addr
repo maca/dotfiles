@@ -3,6 +3,6 @@
 # Get the local address of my home server in case same network otherwise global ip.
 forwarded_port=9001
 opts="-o ConnectTimeout=5 -o BatchMode=yes -o StrictHostKeyChecking=no"
-addr=$(ssh -p $forwarded_port $opts linode 'ip addr' | egrep 'enp1s0$' | awk '{ print $2 }' | cut -d / -f1)
+addr=$(ssh -p $forwarded_port $opts kujenga.co 'ip addr' | egrep 'enp1s0$' | awk '{ print $2 }' | cut -d / -f1)
 
-ping $addr -c1 -w1 &>/dev/null && ssh $addr $opts "whoami" &> /dev/null && echo $addr:22 || echo linode:$forwarded_port
+ping $addr -c1 -w1 &>/dev/null && ssh $addr $opts "whoami" &> /dev/null && echo $addr:22 || echo kujenga.co:$forwarded_port

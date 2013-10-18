@@ -18,3 +18,15 @@
 	history-view-vpane-position = 318
 [push]
 	default = matching
+[diff]
+	external = git_diff_wrapper
+[pager]
+  diff=
+[branch]
+  autosetuprebase = always
+[merge]
+	tool = diffconflicts
+[mergetool "diffconflicts"]
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	trustExitCode = true
+	keepBackup = false

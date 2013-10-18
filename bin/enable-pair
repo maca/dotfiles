@@ -1,0 +1,2 @@
+#!/bin/sh
+setfacl -m user:$1:rw- /tmp/tmux-sessions/t1

@@ -29,6 +29,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git gem thor rbenv heroku vi-mode nyan extract)
 
 source $ZSH/oh-my-zsh.sh
+source ~/.nvm/nvm.sh
 
 # paths
 export PATH="$PATH:$HOME/bin"
@@ -149,8 +150,11 @@ setopt menu_complete   # autoselect the first completion entry
 zstyle ':completion:*:ls:*' file-patterns '*(/):directories'
 
 export EDITOR=vim
-export BROWSER=chromium
+export BROWSER=luakit
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+export OF_ROOT="$HOME/Code/open_frameworks_0.8.0"
+export OF_ADDONS="$OF_ROOT/addons"
 
 # edit with vim
 function e() {
@@ -180,7 +184,6 @@ alias l.="ls -a"
 
 alias ..='cd ..'
 
-alias terminal="urvxtc"
 alias view="gpicview"
 # if [ -f /usr/bin/gvim ]; then; alias vim="vim --servername TERM"; fi
 alias x=extract
@@ -203,6 +206,7 @@ alias off="sudo shutdown -hP now"
 
 alias rlog="tail -f log/development.log | grep -vE \"(^\s*$|asset)\""
 alias vlc="vlc --file-caching=10000"
+alias aur="bash <(curl aur.sh) -si"
 
 # notes
 export n=~/notes

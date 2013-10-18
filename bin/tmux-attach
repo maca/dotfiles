@@ -1,3 +1,6 @@
 #!/bin/sh
 
-tmux attach-session -t $1 || tmux new-session -s $1
+sessionsPath=/tmp/tmux-sessions
+socket="$sessionsPath/$1"
+mkdir -p $sessionsPath
+tmux -S $socket attach -t $1 || tmux -S $socket new-session -s $1

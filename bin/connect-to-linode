@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ssh linode -t 'LANG=en_US.UTF-8 exec tmux attach'
+ssh kujenga.co -t 'LANG=en_US.UTF-8 exec tmux attach'

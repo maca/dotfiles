@@ -1,9 +1,13 @@
-#! /usr/bin/bash
+#!/usr/bin/bash -
 
 user=$(echo $1 | cut -d '/' -f 1)
 host=$(echo $1 | cut -d '/' -f 2)
 remote_port=$(echo $1 | cut -d '/' -f 3)
 local_port=$(echo $1 | cut -d '/' -f 4)
+
+eval $(keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa)
+echo $(whoami)
+echo $HOME
 
 /usr/bin/ssh\
    -o ConnectTimeout=1\
@@ -11,4 +15,5 @@ local_port=$(echo $1 | cut -d '/' -f 4)
    -o ServerAliveCountMax=1\
    -o ServerAliveInterval=1\
    -o ExitOnForwardFailure=yes\
-   -N -R $host:$remote_port:127.0.0.1:$local_port $user@$host
+   -i $HOME/.ssh/id_rsa\
+   -vT -N -R $host:$remote_port:127.0.0.1:$local_port $user@$host
