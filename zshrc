@@ -35,6 +35,8 @@ source ~/.nvm/nvm.sh
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.gem/ruby/1.9.1/bin"
 
+export BUILDDIR=/scratch
+
 # no need for cd command
 setopt autocd
 
@@ -176,7 +178,7 @@ alias rs=rspec
 alias g=git
 alias offline-site="wget -r -k -p"
 alias comp="tar cvfz"
-alias space="du -sh *"
+alias space="sudo du -sh *"
 alias pacman="sudo pacman"
 
 alias ll="ls -la"
@@ -220,4 +222,4 @@ nls() {
 }
 
 # ssh keychain, manage ssh keys
-eval $(keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa)
+eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
