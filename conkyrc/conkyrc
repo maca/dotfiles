@@ -13,7 +13,7 @@ draw_outline no
 draw_borders no
 uppercase no
 border_width 1
-default_color 34384C 
+default_color 34384C
 default_outline_color ffffff
 default_shade_color black
 own_window_colour black
@@ -55,17 +55,11 @@ ${top_mem name 3}$alignr${top_mem mem_res 3}${top_mem mem 3}%
 ${top_mem name 4}$alignr${top_mem mem_res 4}${top_mem mem 4}%
 
 ${color slate grey}Disk usage: ${color}
-${color slate grey}root:   $alignr ${color}${fs_used /}/${fs_size /}
+${color slate grey}/   $alignr ${color}${fs_used /}/${fs_size /}
 ${fs_bar /}
-${color slate grey}/home:  $alignr ${color}${fs_used /home}/${fs_size /home}
-${fs_bar /home}
-${color slate grey}/var:   $alignr ${color}${fs_used /var}/${fs_size /var}
-${fs_bar /var}
-${color slate grey}/secondary:  $alignr ${color}${fs_used /secondary}/${fs_size /secondary}
-${fs_bar /secondary}
 
-${color slate grey}wlan0:$alignr$color${addr wlan0}
-${color}Up: ${color }${upspeed wlan0} $alignr ${totalup wlan0}
-${upspeedgraph wlan0 34384C 6e76a1 -t}
-${color}Down: ${color }${downspeed wlan0} $alignr ${totaldown wlan0}
-${downspeedgraph wlan0 34384C 6e76a1 -t}
+${color slate grey}wlp3s0:$alignr$color${addr wlp3s0}
+${color}Up: ${color }${upspeed wlp3s0} $alignr ${totalup wlp3s0}
+${upspeedgraph wlp3s0 34384C 6e76a1 -t}
+${color}Down: ${color }${downspeed wlp3s0} $alignr ${totaldown wlp3s0}
+${downspeedgraph wlp3s0 34384C 6e76a1 -t}
