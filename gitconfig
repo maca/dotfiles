@@ -24,9 +24,3 @@
   diff=
 [branch]
   autosetuprebase = always
-[merge]
-	tool = diffconflicts
-[mergetool "diffconflicts"]
-	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
-	trustExitCode = true
-	keepBackup = false

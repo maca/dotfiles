@@ -192,9 +192,15 @@ downloads.add_signal("download-location", function (uri, file)
 
     -- download torrents to corresponding dir
     if string.match(file, ".torrent$") then
-        return "/secondary/Torrents/" .. file 
+        return "/secondary/Torrents/" .. file
     elseif string.match(uri, '^https?://aur.archlinux.org/') then
         return '/tmp/' .. file
     end
 end)
+
+local close_win = window.methods.close_win
+window.methods.close_win = function (w, ...)
+    session.save{w}
+    close_win(w, ...)
+end
 -- vim: et:sw=4:ts=8:sts=4:tw=80

@@ -24,13 +24,12 @@ xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
 
 
 /usr/lib/systemd/systemd --user &
-/usr/bin/start-pulseaudio-x11 &
+/usr/bin/start-pulseaudio-x11
+pasystray &
 xcompmgr &
 "$HOME/bin/displays" &
 simpleswitcher &
-unclutter &
 udiskie &
-conky -d -c "$HOME/dotfiles/conkyrc/conkyrc"
-
+# conky -d -c "$HOME/dotfiles/conkyrc/conkyrc"
 
 exec dbus-launch awesome
