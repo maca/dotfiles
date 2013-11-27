@@ -1,47 +1,33 @@
 #!/usr/bin/sh
 
-#############################
-# useradd -G users -g wheel -m -s /usr/bin/zsh $user
-# passwd $user
-# su $user
-#############################33
-
 
 # run as root
 basic_setup(){
   ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
-  echo "en_US.UTF-8 UTF-8" > tee /etc/locale.gen
+  echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
   locale-gen
 
-  echo LANG=en_US.UTF-8     >> /etc/locale.conf
-  echo KEYMAP=us            >> /etc/vconsole.conf
+  echo LANG=en_US.UTF-8     > /etc/locale.conf
+  echo KEYMAP=us            > /etc/vconsole.conf
   echo FONT=Lat2-Terminus16 >> /etc/vconsole.conf
   echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
   sudo mkinitcpio -p linux
 
   read -p "¿como se llama esta máquina? " hostname
-  echo $hostname | sudo tee /etc/hostname
+  echo $hostname > /etc/hostname
 }
-
 
 # run as root
 install_basics () {
   pacman -Syu
-  pacman -S arandr autoconf automake awesome bash binutils bison bzip2\
-    chromium cmus coreutils cronie cryptsetup deadbeef device-mapper dhcpcd\
-    dialog diffutils e2fsprogs elinks fakeroot file filesystem findutils\
-    gawk gcc gcc-libs gettext git glibc gmrun grep groff gvim gzip\
-    inetutils iproute2 iputils jfsutils keychain less libtool\
-    licenses linux logrotate luakit lvm2 m4 make man-db man-pages mdadm\
-    netctl openssh pacman patch pavucontrol pciutils pcmciautils perl\
-    pkg-config procps-ng psmisc pulseaudio ranger rsync ruby\
-    rxvt-unicode sed shadow smplayer spacefm sudo supercollider sysfsutils\
-    syslinux systemd-sysvcompat tar terminus-font texinfo tk tmux udiskie\
-    unclutter urxvt-perls usbutils util-linux vi vlc which wpa_supplicant\
-    wpa_supplicant_gui xcompmgr xf86-video-intel xfsprogs xorg-server\
-    xorg-utils xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite\
-    zip unzip dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv\
-    firefox gpicview ack avahi nss-mdns
+  pacman -S arandr awesome chromium cmus deadbeef dialog elinks gawk\
+    git gmrun gvim keychain luakit openssh pavucontrol pulseaudio\
+    ranger rsync ruby rxvt-unicode smplayer spacefm supercollider\
+    terminus-font tk tmux udiskie unclutter urxvt-perls vlc wpa_supplicant\
+    wpa_supplicant_gui xcompmgr xf86-video-intel xorg-server xorg-utils\
+    xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite zip unzip\
+    dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv firefox\
+    gpicview ack avahi nss-mdns ttf-freefont imagemagick
 }
 
 # run as user
@@ -67,24 +53,23 @@ setup_postgresql(){
   su - postgres -c "createuser -s -U postgres --interactive"
 }
 
-# run as user
+# run as root
 setup_network(){
-  read -p "¿Dominio del linode? " vps
-  sudo systemctl enable sshd
-  sudo systemctl enable ntpd.service
+  systemctl enable sshd
+  systemctl enable ntpd.service
 
-  echo "nameserver 192.168.100.1" | sudo tee /etc/resolv.conf
-  echo "nameserver 127.0.0.1"     | sudo tee -a /etc/resolv.conf
-  echo "nameserver 127.0.0.1"     | sudo tee /etc/resolv.conf.head
-  echo address=/.dev/127.0.0.1    | sudo tee -a /etc/dnsmasq.conf
-  echo address=/.doc/127.0.0.1    | sudo tee -a /etc/dnsmasq.conf
+  echo "nameserver 192.168.100.1" >  /etc/resolv.conf
+  echo "nameserver 127.0.0.1"     >> /etc/resolv.conf
+  echo "nameserver 127.0.0.1"     >  /etc/resolv.conf.head
+  echo address=/.dev/127.0.0.1    >> /etc/dnsmasq.conf
+  echo address=/.doc/127.0.0.1    >> /etc/dnsmasq.conf
 
-  sudo systemctl enable dnsmasq
+  systemctl enable dnsmasq
 }
 
 # run as user
 setup_remote_tunnels(){
-  /usr/lib/systemd/systemd --user &
+  # /usr/lib/systemd/systemd --user &
   systemctl --user status ssh-tunnel@maca-kujenga.co-9000-22.service
   systemctl --user status ssh-tunnel@maca-kujenga.co-3000-3000.service
   systemctl --user status ssh-tunnel@maca-kujenga.co-8080-80.service
@@ -97,15 +82,17 @@ setup_ssh_keys(){
 }
 
 # run as root
-setup_aur_installs(){
-  cd /tmp
-  bash <(curl aur.sh) -si centerim5-git
-  bash <(curl aur.sh) -si urxvt-perls
-  bash <(curl aur.sh) -si xkbset
-  bash <(curl aur.sh) -si powerdown-git
-  bash <(curl aur.sh) -si pasysttray-git
-  cd -
-}
+# setup_aur_installs(){
+#   cd /tmp
+#   bash <(curl aur.sh) -si centerim5-git
+#   bash <(curl aur.sh) -si urxvt-perls
+#   bash <(curl aur.sh) -si xkbset
+#   bash <(curl aur.sh) -si powerdown-git
+#   bash <(curl aur.sh) -si pasystray-git
+#   bash <(curl aur.sh) -si pavumeter
+#   bash <(curl aur.sh) -si pulseaudio-ctl
+#   cd -
+# }
 
 # run as user
 setup_dotfiles(){
@@ -132,8 +119,10 @@ setup_dotfiles(){
   mkdir -p ~/.config/fontconfig/
   ln -fs $HOME/dotfiles/awesome ~/.config/awesome
   ln -fs $HOME/dotfiles/gtk-3.0 ~/.config/gtk-3.0
+  ln -sf $HOME/dotfiles/gtkrc-2.0 ~/.gtkrc-2.0
   ln -fs $HOME/dotfiles/luakit ~/.config/luakit
   ln -fs $HOME/dotfiles/fonts.conf ~/.config/fontconfig/fonts.conf
+  ln -fs $HOME/dotfiles/systemd ~/.config/systemd
 }
 
 # run as user
@@ -215,7 +204,7 @@ setup_pair() {
   mkdir -p /opt/bin
   chmod 755 /opt/bin
 
-  "#!/bin/sh" > /opt/bin/attach-t1-readonly
+  echo "#!/bin/sh" > /opt/bin/attach-t1-readonly
   echo "tmux -S /tmp/tmux-sessions/t1 attach -t t1 -r" >> /opt/bin/attach-t1-readonly
   chmod 755 /opt/bin/attach-t1-readonly
 
@@ -223,6 +212,22 @@ setup_pair() {
   echo "tmux -S /tmp/tmux-sessions/t1 attach -t t1" >> /opt/bin/attach-t1
   chmod 755 /opt/bin/attach-t1
 
-  echo /opt/bin/attach-t1 > /etc/shells
-  echo /opt/bin/attach-t1-readonly > /etc/shells
+  echo /opt/bin/attach-t1 >> /etc/shells
+  echo /opt/bin/attach-t1-readonly >> /etc/shells
+}
+
+# run as root
+setup_trackpoint() {
+  cat <<EOT > /etc/X11/xorg.conf.d/20-thinkpad.conf
+Section "InputClass"
+	Identifier	"Trackpoint Wheel Emulation"
+	MatchProduct	"TPPS/2 IBM TrackPoint|DualPoint Stick|Synaptics Inc. Composite TouchPad / TrackPoint|ThinkPad USB Keyboard with TrackPoint|USB Trackpoint pointing device|Composite TouchPad / TrackPoint"
+	MatchDevicePath	"/dev/input/event*"
+	Option		"EmulateWheel"		"true"
+	Option		"EmulateWheelButton"	"2"
+	Option		"Emulate3Buttons"	"false"
+	Option		"XAxisMapping"		"6 7"
+	Option		"YAxisMapping"		"4 5"
+EndSection
+EOT
 }
