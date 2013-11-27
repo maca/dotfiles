@@ -279,11 +279,11 @@ globalkeys = awful.util.table.join(
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end),
 
-    awful.key({}, "XF86Display", function() awful.util.spawn_with_shell("displays") end),
+    awful.key({}, "XF86Display", function() awful.util.spawn_with_shell("/home/maca/bin/displays") end),
 
     -- Multimedia keys
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 2+") end),
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 2-") end),
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("pulseaudio-ctl up") end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("pulseaudio-ctl down") end),
 
     awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("cmus-remote --pause") end),
     awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("cmus-remote --prev") end),
