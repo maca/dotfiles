@@ -11,10 +11,18 @@ basic_setup(){
   echo KEYMAP=us            > /etc/vconsole.conf
   echo FONT=Lat2-Terminus16 >> /etc/vconsole.conf
   echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
-  sudo mkinitcpio -p linux
+  mkinitcpio -p linux
 
   read -p "¿como se llama esta máquina? " hostname
   echo $hostname > /etc/hostname
+
+  echo "tmpfs   /tmp         tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
+
+  # https://wiki.archlinux.org/index.php/Systemd/User
+  sed -i s/system-auth/system-login/g /etc/pam.d/systemd-user
+
+  # disable bitmap fonts
+  ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 }
 
 # run as root
@@ -27,7 +35,7 @@ install_basics () {
     wpa_supplicant_gui xcompmgr xf86-video-intel xorg-server xorg-utils\
     xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite zip unzip\
     dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv firefox\
-    gpicview ack avahi nss-mdns ttf-freefont imagemagick
+    gpicview ack avahi nss-mdns ttf-freefont imagemagick base-devel dtach
 }
 
 # run as user
@@ -65,14 +73,16 @@ setup_network(){
   echo address=/.doc/127.0.0.1    >> /etc/dnsmasq.conf
 
   systemctl enable dnsmasq
+
+  sudo systemctl enable netctl-auto@wlp3s0.service
 }
 
 # run as user
 setup_remote_tunnels(){
   # /usr/lib/systemd/systemd --user &
-  systemctl --user status ssh-tunnel@maca-kujenga.co-9000-22.service
-  systemctl --user status ssh-tunnel@maca-kujenga.co-3000-3000.service
-  systemctl --user status ssh-tunnel@maca-kujenga.co-8080-80.service
+  systemctl --user enable ssh-tunnel@maca-kujenga.co-9000-22.service
+  systemctl --user enable ssh-tunnel@maca-kujenga.co-3000-3000.service
+  systemctl --user enable ssh-tunnel@maca-kujenga.co-8080-80.service
 }
 
 # run as user
@@ -198,8 +208,8 @@ EOT
 
 # run as root
 setup_pair() {
-  useradd -m -s /home/guest/attach-t1-readonly guest
-  useradd -m -s /home/pairticipant/attach-t1 pairticipant
+  useradd -m -s /opt/bin/attach-t1-readonly guest
+  useradd -m -s /opt/bin/attach-t1 pairticipant
 
   mkdir -p /opt/bin
   chmod 755 /opt/bin
