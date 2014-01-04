@@ -1,13 +1,10 @@
 -- Global variables for luakit
 globals = {
     homepage            = "http://pinboard.in/",
- -- homepage            = "http://github.com/mason-larobina/luakit",
     scroll_step         = 40,
     zoom_step           = 0.1,
     max_cmd_history     = 100,
     max_srch_history    = 100,
- -- http_proxy          = "http://example.com:3128",
-    default_window_size = "800x600",
     term = urxvt,
  -- Disables loading of hostnames from /etc/hosts (for large host files)
  -- load_etc_hosts      = false,
@@ -56,13 +53,12 @@ search_engines = {
     s           = "http://startpage.com/do/search?q=%s",
     google      = "http://google.com/search?q=%s",
     go          = "http://duckduckgo.com/?q=%s",
-    wikipedia   = "http://en.wikipedia.org/wiki/Special:Search?search=%s",
-    debbugs     = "http://bugs.debian.org/%s",
+    wk          = "http://en.wikipedia.org/wiki/Special:Search?search=%s",
     imdb        = "http://imdb.com/find?s=all&q=%s",
-    sourceforge = "http://sf.net/search/?words=%s",
     gh          = "http://github.com/search?q=%s",
     lh          = "luakit://history/?q=%s",
-    pk          = "http://getpocket.com/a",
+    pb          = "https://pinboard.in/search/u:macario?query=%s&fulltext=on",
+    maps        = "https://maps.google.com/maps?q=%s&hl=en&t=m&z=10&iwloc=A"
 }
 
 -- Set google as fallback search engine
