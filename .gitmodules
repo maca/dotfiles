@@ -58,3 +58,9 @@
 [submodule "vim-coffeescript"]
 	path = vim/bundle/vim-coffee-script
 	url = git://github.com/CITguy/vim-coffee-script.git
+[submodule "vim/bundle/slim"]
+	path = vim/bundle/slim
+	url = https://github.com/slim-template/vim-slim.git
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git

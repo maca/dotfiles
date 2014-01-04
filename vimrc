@@ -117,6 +117,9 @@ map gb :pop<CR>
 map <C-W>gt <C-W><C-]>
 map <Leader>lt :TlistOpen<CR>
 
+nnoremap <Leader>. :CtrlPTag<CR>
+nnoremap <Leader>.. :TagbarToggle<CR>
+
 " Switch between two files
 nnoremap ,, <C-^>
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
