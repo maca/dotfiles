@@ -17,6 +17,9 @@ basic_setup(){
   echo $hostname > /etc/hostname
 
   echo "tmpfs   /tmp         tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
+  echo "tmpfs   /scratch     tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
+
+  mkdir /scratch
 
   # https://wiki.archlinux.org/index.php/Systemd/User
   sed -i s/system-auth/system-login/g /etc/pam.d/systemd-user
@@ -35,7 +38,8 @@ install_basics () {
     wpa_supplicant_gui xcompmgr xf86-video-intel xorg-server xorg-utils\
     xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite zip unzip\
     dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv firefox\
-    gpicview ack avahi nss-mdns ttf-freefont imagemagick base-devel dtach
+    gpicview ack avahi nss-mdns ttf-freefont imagemagick base-devel dtach\
+    polipo quota-tools tor btrfs-progs
 }
 
 # run as user
@@ -101,6 +105,7 @@ setup_ssh_keys(){
 #   bash <(curl aur.sh) -si pasystray-git
 #   bash <(curl aur.sh) -si pavumeter
 #   bash <(curl aur.sh) -si pulseaudio-ctl
+#   bash <(curl aur.sh) -si create_ap
 #   cd -
 # }
 
@@ -241,3 +246,34 @@ Section "InputClass"
 EndSection
 EOT
 }
+
+# run as root
+setup_polipo() {
+  groupadd -r polipo
+  useradd -d /var/cache/polipo -g polipo -r -s /bin/false polipo
+  touch /var/log/polipo.log
+
+  btrfs subvolume create /var/cache/polipo
+  btrfs quota enable /var/cache/polipo
+  btrfs subvolume list /var/cache/polipo | cut -d' ' -f2 | xargs -I{} -n1 btrfs qgroup create 0/{} /var/cache/polipo
+  btrfs quota rescan /var/cache/polipo
+  btrfs qgroup limit 10g /var/cache/polipo
+
+  chown -R polipo:polipo /var/log/polipo.log /var/cache/polipo
+
+  cat <<EOT > /etc/systemd/system/polipo.service
+.include /usr/lib/systemd/system/polipo.service
+[Service]
+User=polipo
+EOT
+
+  cat <<EOT > /etc/polipo/config
+dnsNameServer = 127.0.0.1
+socksParentProxy = localhost:9050
+socksProxyType = socks5
+EOT
+
+  systemctl enable tor
+  systemctl enable polipo
+}
+
