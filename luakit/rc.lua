@@ -192,9 +192,9 @@ downloads.add_signal("download-location", function (uri, file)
 
     -- download torrents to corresponding dir
     if string.match(file, ".torrent$") then
-        return "/secondary/Torrents/" .. file
+        return "/scratch/" .. file
     elseif string.match(uri, '^https?://aur.archlinux.org/') then
-        return '/tmp/' .. file
+        return '/scratch/' .. file
     end
 end)
 
