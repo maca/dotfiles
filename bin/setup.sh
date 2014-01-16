@@ -39,7 +39,7 @@ install_basics () {
     xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite zip unzip\
     dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv firefox\
     gpicview ack avahi nss-mdns ttf-freefont imagemagick base-devel dtach\
-    polipo quota-tools tor btrfs-progs
+    polipo quota-tools tor btrfs-progs redshift
 }
 
 # run as user
@@ -138,6 +138,7 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/luakit ~/.config/luakit
   ln -fs $HOME/dotfiles/fonts.conf ~/.config/fontconfig/fonts.conf
   ln -fs $HOME/dotfiles/systemd ~/.config/systemd
+  ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 }
 
 # run as user
