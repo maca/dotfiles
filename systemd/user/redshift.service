@@ -1,0 +1,13 @@
+[Unit]
+Description=Redshift lets me sleep
+
+[Service]
+ExecStart=/usr/bin/redshift
+Environment=DISPLAY=:0
+StandardOutput=syslog
+StandardError=syslog
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
