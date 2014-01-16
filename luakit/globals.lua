@@ -51,18 +51,19 @@ soup.accept_policy = cookie_policy.always
 -- See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
 search_engines = {
     s           = "http://startpage.com/do/search?q=%s",
-    google      = "http://google.com/search?q=%s",
-    go          = "http://duckduckgo.com/?q=%s",
-    wk          = "http://en.wikipedia.org/wiki/Special:Search?search=%s",
+    google      = "https://google.com/search?q=%s",
+    go          = "https://duckduckgo.com/?q=%s",
+    wk          = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
     imdb        = "http://imdb.com/find?s=all&q=%s",
-    gh          = "http://github.com/search?q=%s",
+    gh          = "https://github.com/search?q=%s",
     lh          = "luakit://history/?q=%s",
     pb          = "https://pinboard.in/search/u:macario?query=%s&fulltext=on",
-    maps        = "https://maps.google.com/maps?q=%s&hl=en&t=m&z=10&iwloc=A"
+    maps        = "https://maps.google.com/maps?q=%s&hl=en&t=m&z=10&iwloc=A",
+    so          = "https://stackoverflow.com/search?q=%s"
 }
 
 -- Set google as fallback search engine
-search_engines.default = search_engines.google
+search_engines.default = search_engines.s
 -- Use this instead to disable auto-searching
 --search_engines.default = "%s"
 
