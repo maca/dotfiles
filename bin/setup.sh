@@ -1,5 +1,18 @@
 #!/usr/bin/sh
 
+# run as root
+install_basics () {
+  pacman -Syu
+  pacman -S arandr awesome chromium cmus deadbeef dialog elinks gawk\
+    git gmrun gvim keychain luakit openssh pavucontrol pulseaudio\
+    ranger rsync ruby rxvt-unicode smplayer spacefm supercollider\
+    terminus-font tk tmux udiskie unclutter urxvt-perls vlc wpa_supplicant\
+    wpa_supplicant_gui xcompmgr xf86-video-intel xorg-server xorg-utils\
+    xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite zip unzip\
+    dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv firefox\
+    gpicview ack avahi nss-mdns ttf-freefont imagemagick base-devel dtach\
+    polipo quota-tools tor btrfs-progs redshift
+}
 
 # run as root
 basic_setup(){
@@ -26,20 +39,6 @@ basic_setup(){
 
   # disable bitmap fonts
   ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
-}
-
-# run as root
-install_basics () {
-  pacman -Syu
-  pacman -S arandr awesome chromium cmus deadbeef dialog elinks gawk\
-    git gmrun gvim keychain luakit openssh pavucontrol pulseaudio\
-    ranger rsync ruby rxvt-unicode smplayer spacefm supercollider\
-    terminus-font tk tmux udiskie unclutter urxvt-perls vlc wpa_supplicant\
-    wpa_supplicant_gui xcompmgr xf86-video-intel xorg-server xorg-utils\
-    xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite zip unzip\
-    dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv firefox\
-    gpicview ack avahi nss-mdns ttf-freefont imagemagick base-devel dtach\
-    polipo quota-tools tor btrfs-progs redshift
 }
 
 # run as root
