@@ -112,13 +112,13 @@ map <Leader>t> :Tabularize /=>:<CR>
 
 " Ctag mappings
 map gt <C-]>
-map gs :ptselect
+map gs :ptselect<CR>
 map gb :pop<CR>
-map <C-W>gt <C-W><C-]>
-map <Leader>lt :TlistOpen<CR>
+map <Leader>gl :TlistOpen<CR>
 
-nnoremap <Leader>. :CtrlPTag<CR>
-nnoremap <Leader>.. :TagbarToggle<CR>
+nnoremap <Leader>. :CtrlPBuffer<CR>
+nnoremap <Leader>.. :CtrlPTag<CR>
+nnoremap <Leader>... :TagbarToggle<CR>
 
 " Switch between two files
 nnoremap ,, <C-^>

@@ -7,3 +7,4 @@ vim/ruby/command-t/ext.o
 vim/.netrwhist
 *.swo
 *.swp
+systemd/user/default.target.wants
