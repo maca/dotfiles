@@ -3,12 +3,7 @@ out_to_ncurses yes
 update_interval 2.0
 
 TEXT
-
   Uptime: $uptime
-
-  Batt: ${battery_percent}%
-
-  Fan: ${ibm_fan}rpm   Temp: $acpitemp°
 
   CPU: $cpu%
     ${top name 1}${top cpu 1}
@@ -28,8 +23,8 @@ TEXT
     ${top_mem name 4}${top_mem mem 3}
 
   /    : ${alignr} ${fs_free /}/${fs_size /}
-  media: ${alignr} ${fs_free /media/media}/${fs_size /media/media}
 
-  wlp3s0:
-    Up  :  ${upspeed wlp3s0} ${alignr} ${totalup wlp3s0}
-    Down:  ${downspeed wlp3s0} ${alignr} ${totaldown wlp3s0}
+  eth0:
+    Up  :  ${upspeed eth0} ${alignr} ${totalup eth0}
+    Down:  ${downspeed eth0} ${alignr} ${totaldown eth0}
+
