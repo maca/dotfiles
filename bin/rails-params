@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo $(grep -e "Started \(GET\|POST\|PUT\)" log/development.log | tail -1)
+echo $(grep -e "Processing by" log/development.log | tail -1)
+grep -e "Parameters:" log/development.log | tail -1 | sed "s|Parameters:\s||" | ruby -ne 'require "pp"; pp eval($_)'
