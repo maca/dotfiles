@@ -152,7 +152,7 @@ setopt menu_complete   # autoselect the first completion entry
 zstyle ':completion:*:ls:*' file-patterns '*(/):directories'
 
 export EDITOR=vim
-export BROWSER=luakit
+export BROWSER=chromium
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export OF_ROOT="$HOME/Code/open_frameworks_0.8.0"
