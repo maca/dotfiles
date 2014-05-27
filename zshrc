@@ -40,6 +40,9 @@ export BUILDDIR=/scratch
 # no need for cd command
 setopt autocd
 
+# no share history between sessions
+setopt no_share_history
+
 # vi keybindings
 bindkey -v
 
