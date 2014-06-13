@@ -15,9 +15,15 @@ URxvt.scrollTtyKeypress: true
 URxvt.scrollTtyOutput: false
 URxvt.saveLines: 5000
 
-URxvt.perl-ext-common: default,url-select
+URxvt.perl-ext-common: default,url-select,font-size
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: luakit
+
+!! Font resize keybindings
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 *color4:  #204a87
 *color8:  #08360c
