@@ -24,7 +24,7 @@ TEXT
 
   /    : ${alignr} ${fs_free /}/${fs_size /}
 
-  eth0:
-    Up  :  ${upspeed eth0} ${alignr} ${totalup eth0}
-    Down:  ${downspeed eth0} ${alignr} ${totaldown eth0}
+  wlp3s0:
+    Up  :  ${upspeed wlp3s0} ${alignr} ${totalup wlp3s0}
+    Down:  ${downspeed wlp3s0} ${alignr} ${totaldown wlp3s0}
 
