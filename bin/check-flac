@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+shopt -s globstar
+
+for file in ./**/*.flac; do
+  flac -wst "$file" 2>/dev/null || printf '%3d %s\n' "$?" "$file"
+done
