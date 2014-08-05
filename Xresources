@@ -17,7 +17,7 @@ URxvt.saveLines: 5000
 
 URxvt.perl-ext-common: default,url-select,font-size
 URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: luakit
+URxvt.url-select.launcher: chromium
 
 !! Font resize keybindings
 URxvt.keysym.C-Up:     perl:font-size:increase
