@@ -179,3 +179,6 @@ match Todo /\s\+$/
 " New line on Enter on normal mode
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
+
+" Vim rooter
+autocmd rooter BufEnter *.foo :Rooter
