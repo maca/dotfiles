@@ -64,12 +64,12 @@
 [submodule "vim/bundle/emmet"]
 	path = vim/bundle/emmet
 	url = https://github.com/mattn/emmet-vim.git
-[submodule "vim/bundle/vim-rooter"]
-	path = vim/bundle/vim-rooter
-	url = git@github.com:airblade/vim-rooter.git
 [submodule "vim/bundle/gist"]
 	path = vim/bundle/gist
 	url = git@github.com:mattn/gist-vim.git
 [submodule "vim/bundle/elixir"]
 	path = vim/bundle/elixir
 	url = git@github.com:elixir-lang/vim-elixir.git
+[submodule "vim/bundle/vim-rooter"]
+	path = vim/bundle/vim-rooter
+	url = git@github.com:airblade/vim-rooter.git
