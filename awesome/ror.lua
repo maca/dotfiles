@@ -15,6 +15,7 @@ table5={
    ["y"]={"urxvt -name t2 -title t2 -e /home/maca/bin/tmux-attach t2","t2", "instance"},
    ["u"]={"urxvt -name t3 -title t3","t3", "instance"},
    ["h"]={"urxvt -name house -e /bin/zsh -i -c /home/maca/bin/connect-to-house", "house", "instance"},
+   ["o"]={"urxvt -name nano -e /bin/zsh -i -c /home/maca/bin/connect-to-nano", "nano", "instance"},
    ["l"]={"urxvt -name linode -title linode -e /bin/zsh -i -c /home/maca/bin/connect-to-linode", "linode", "instance"},
    ["e"]={"urxvt -name vim -title vim -e vim --servername STANDALONE", "vim", "instance"},
 
