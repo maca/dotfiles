@@ -24,10 +24,12 @@
 [push]
 	default = matching
 [diff]
-	external = git_diff_wrapper
+  external = git_diff_wrapper
 [pager]
   diff=
 [branch]
   autosetuprebase = always
 [core]
 	excludesfile = ~/.gitignore
+[init]
+	templatedir = /home/maca/dotfiles/git-hooks
