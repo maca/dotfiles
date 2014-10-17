@@ -105,6 +105,21 @@ EOT
 }
 
 # run as root
+setup_keyboard() {
+    [[ -d /etc/X11/xorg.conf.d ]] && cat > /etc/X11/xorg.conf.d/01-keyboard_layout.conf <<EOF
+Section "InputClass"
+        Identifier "keyboard-layout"
+        MatchIsKeyboard "yes"
+        Option "XkbLayout" "us"
+        Option "XkbVariant" "altgr-intl"
+        Option "XkbOptions" "ctrl:nocaps"
+        Option "XkbOptions" "lv3:ralt_switch"
+        Driver "evdev"
+EndSection
+EOF
+}
+
+# run as root
 setup_polipo() {
   groupadd -r polipo
   useradd -d /var/cache/polipo -g polipo -r -s /bin/false polipo
