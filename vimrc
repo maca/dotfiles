@@ -1,7 +1,39 @@
 set nocompatible                  " Must come first because it changes other options.
+filetype off
 
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'mileszs/ack.vim'
+Plugin 'Townk/vim-autoclose'
+Plugin 'tpope/vim-commentary'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+Plugin 'sjl/gundo.vim'
+Plugin 'juvenn/mustache.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'slim-template/vim-slim'
+Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-surround'
+Plugin 'godlygeek/tabular.git'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'CITguy/vim-coffee-script'
+Plugin 'mattn/emmet-vim'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'mattn/gist-vim'
+Plugin 'airblade/vim-rooter'
+Plugin 'KabbAmine/zeavim.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
@@ -131,9 +163,6 @@ autocmd InsertLeave * let &l:foldmethod=w:fdm
 
 " Folding for coffe
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-
-" auto reload .vimrc after editing
-autocmd BufWritePost .vimrc source $MYVIMRC
 
 " quick escape
 imap jj <Esc>
