@@ -8,3 +8,4 @@ vim/.netrwhist
 *.swo
 *.swp
 systemd/user/default.target.wants
+vim/bundle

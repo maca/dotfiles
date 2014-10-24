@@ -55,7 +55,6 @@ set wildmode=list:longest         " Complete files like a shell.
 set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
 
-set number                        " Show line numbers.
 set ruler                         " Show cursor position.
 
 set incsearch                     " Highlight matches as you type.
@@ -81,21 +80,9 @@ set expandtab                    " Use spaces instead of tabs
 set autoread                     " Reload files edited outside vim
 set formatprg=par                " Use par to format paragraphs
 
-" setglobal relativenumber
-autocmd BufRead,WinEnter * :setlocal relativenumber
-autocmd WinLeave,FocusLost * :setlocal number
-autocmd InsertEnter * :setlocal number
-autocmd InsertLeave * :setlocal relativenumber
-
-function! g:ToggleNuMode()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-map <C-l> :call g:ToggleNuMode()<CR>
+set relativenumber
+set number                       " Show line numbers.
+set lazyredraw                   " Fixes relativenumber slow scroll
 
 " Bring vim to front when a file is read
 function! g:BringVimToFront()
@@ -112,8 +99,6 @@ autocmd BufRead,TabEnter,RemoteReply * :call g:BringVimToFront()
 nmap ; :
 vmap ; :
 
-" set paragraph formatter program to par
-set formatprg=par
 
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
