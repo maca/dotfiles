@@ -32,12 +32,10 @@ Plugin 'KabbAmine/zeavim.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
 
 
-syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
-filetype plugin on                " Turn on file type detection.
+syntax enable                     " Turn on syntax highlighting.
 
 runtime macros/matchit.vim        " Load the matchit plugin.
 
@@ -133,12 +131,11 @@ map gs :ptselect<CR>
 map gb :pop<CR>
 map <Leader>gl :TlistOpen<CR>
 
-nnoremap <Leader>. :CtrlPBuffer<CR>
-nnoremap <Leader>.. :CtrlPTag<CR>
-nnoremap <Leader>... :TagbarToggle<CR>
+nnoremap <Leader>. :CtrlPTag<CR>
+nnoremap <Leader>.. :TagbarToggle<CR>
 
 " Switch between two files
-nnoremap ,, <C-^>
+nnoremap ,, :CtrlPBuffer<CR>
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
 
 " Manual folding on insert, back to defined on exit insert.
