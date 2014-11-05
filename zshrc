@@ -26,10 +26,9 @@ DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git gem thor rbenv heroku vi-mode nyan extract)
+plugins=(git gem thor heroku vi-mode nyan extract)
 
 source $ZSH/oh-my-zsh.sh
-source ~/.nvm/nvm.sh
 
 # paths
 export PATH="$PATH:$HOME/bin"

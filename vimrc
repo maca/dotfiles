@@ -97,6 +97,9 @@ autocmd BufRead,TabEnter,RemoteReply * :call g:BringVimToFront()
 nmap ; :
 vmap ; :
 
+" move un and down regardless of line
+nmap j gj
+nmap k gk
 
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
@@ -131,11 +134,11 @@ map gs :ptselect<CR>
 map gb :pop<CR>
 map <Leader>gl :TlistOpen<CR>
 
-nnoremap <Leader>. :CtrlPTag<CR>
-nnoremap <Leader>.. :TagbarToggle<CR>
+nnoremap <Leader>. :CtrlPBuffer<CR>
+nnoremap <Leader>.. :CtrlPTag<CR>
+nnoremap <Leader>... :TagbarToggle<CR>
 
 " Switch between two files
-nnoremap ,, :CtrlPBuffer<CR>
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
 
 " Manual folding on insert, back to defined on exit insert.
