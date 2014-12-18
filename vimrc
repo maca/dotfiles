@@ -29,10 +29,10 @@ Plugin 'elixir-lang/vim-elixir'
 Plugin 'mattn/gist-vim'
 Plugin 'airblade/vim-rooter'
 Plugin 'KabbAmine/zeavim.vim'
+Plugin 'KabbAmine/vCoolor.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-
 
 filetype plugin indent on         " Turn on file type detection.
 syntax enable                     " Turn on syntax highlighting.
@@ -138,6 +138,7 @@ nnoremap <Leader>. :CtrlPBuffer<CR>
 nnoremap <Leader>.. :CtrlPTag<CR>
 nnoremap <Leader>... :TagbarToggle<CR>
 
+
 " Switch between two files
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
 
@@ -153,24 +154,6 @@ au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 imap jj <Esc>
 
 colorscheme desert-alt
-
-if has("gui_running")
-  if has("gui_gtk2")
-    set guifont=Monospace\ 9
-  elseif has("gui_photon")
-    set guifont=Monospace:9
-  elseif has("gui_kde")
-    set guifont=Monospace/9/-1/5/50/0/0/0/1/0
-  elseif has("x11")
-    set guifont=-*-monospace-medium-r-normal-*-*-180-*-*-m-*-*
-  else
-    set guifont=Inconsolata:h12
-    set linespace=4
-    set transparency=15
-    set lines=160 columns=340          " Window dimensions.
-    set fu
-  endif
-endif
 
 " system copy/paste
 vmap <leader>y "+y
@@ -194,5 +177,12 @@ match Todo /\s\+$/
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-" Vim rooter
-" autocmd rooter BufEnter *.foo :Rooter
+" VCoolor
+let g:vcoolor_lowercase = 1
+map <C-c> :VCoolor<CR>
+
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
+set list listchars=tab:>-,trail:.,precedes:<,extends:>
+
