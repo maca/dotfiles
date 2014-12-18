@@ -29,6 +29,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git gem thor heroku vi-mode nyan extract)
 
 source $ZSH/oh-my-zsh.sh
+unset GREP_OPTIONS
 
 # paths
 export PATH="$PATH:$HOME/bin"
