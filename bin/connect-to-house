@@ -5,4 +5,4 @@
 # port=$(echo $addr | cut -d ':' -f2)
 # ssh -p $port $host -t 'LANG=en_US.UTF-8 exec tmux attach'
 
-ssh root@192.168.15.2 -t 'TERM=xterm exec tmux attach || tmux new'
+ssh maca@192.168.15.2 -t 'TERM=xterm exec tmux attach || tmux new'

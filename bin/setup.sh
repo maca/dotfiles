@@ -226,9 +226,9 @@ setup_dotfiles(){
 # run as user
 setup_remote_tunnels(){
    /usr/lib/systemd/systemd --user &
-  systemctl --user enable ssh-tunnel@maca-kujenga.co-9000-22.service
+  systemctl --user enable ssh-public-tunnel@maca-kujenga.co-9000-22.service
   systemctl --user enable ssh-tunnel@maca-kujenga.co-3000-3000.service
-  systemctl --user enable ssh-tunnel@maca-kujenga.co-8080-80.service
+  # systemctl --user enable ssh-tunnel@maca-kujenga.co-8080-80.service
 }
 
 # run as user
