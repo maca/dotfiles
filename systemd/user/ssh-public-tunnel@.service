@@ -1,0 +1,13 @@
+[Unit]
+Description=SSH tunnel for %I
+After=network.target
+
+[Service]
+ExecStart=/home/maca/bin/open-public-tunnel %I
+StandardOutput=syslog
+StandardError=syslog
+Restart=on-failure
+RestartSec=300
+
+[Install]
+WantedBy=default.target

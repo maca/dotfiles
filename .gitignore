@@ -9,3 +9,4 @@ vim/.netrwhist
 *.swp
 systemd/user/default.target.wants
 vim/bundle
+systemd/user/default.target.wants/
