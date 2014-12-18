@@ -11,7 +11,9 @@ install_basics () {
     xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite zip unzip\
     dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv firefox\
     gpicview ack avahi nss-mdns ttf-freefont imagemagick base-devel dtach\
-    polipo quota-tools tor btrfs-progs redshift
+    polipo quota-tools tor btrfs-progs redshift\
+    pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware\
+    nodejs phantomjs zenity
 }
 
 # run as root
@@ -120,6 +122,34 @@ EOF
 }
 
 # run as root
+setup_power_keys() {
+  cat <<EOT > /etc/systemd/logind.conf
+[Login]
+#NAutoVTs=6
+#ReserveVT=6
+#KillUserProcesses=no
+#KillOnlyUsers=
+#KillExcludeUsers=root
+#InhibitDelayMaxSec=5
+#HandlePowerKey=poweroff
+HandleSuspendKey=suspend
+HandleHibernateKey=reboot
+HandleLidSwitch=ignore
+#HandleLidSwitchDocked=ignore
+#PowerKeyIgnoreInhibited=no
+#SuspendKeyIgnoreInhibited=no
+#HibernateKeyIgnoreInhibited=no
+#LidSwitchIgnoreInhibited=yes
+#IdleAction=ignore
+#IdleActionSec=30min
+#RuntimeDirectorySize=10%
+#RemoveIPC=yes
+EOT
+
+}
+
+
+# run as root
 setup_polipo() {
   groupadd -r polipo
   useradd -d /var/cache/polipo -g polipo -r -s /bin/false polipo
@@ -218,50 +248,59 @@ setup_ssh_keys(){
 #   bash <(curl aur.sh) -si pavumeter
 #   bash <(curl aur.sh) -si pulseaudio-ctl
 #   bash <(curl aur.sh) -si create_ap
+#   bash <(curl aur.sh) -si nginx-passenger
 #   cd -
 # }
 
-# run as user
 setup_development_environment(){
-  git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-  git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-  rbenv install 2.1.1
-  rbenv install 1.9.3-p448
-  rbenv global 2.0.0-p247
   gem install bundler
   gem install passenger
   gem install yard
-  rbenv rehash
-  sudo passenger-install-nginx-module
-  sudo ln -fs $HOME/dotfiles/nginx.conf /opt/nginx/conf/nginx.conf
-  curl https://toolbelt.heroku.com/install.sh | sh
-
-  sudo sh -c "cat > /etc/systemd/system/nginx.service" <<EOF
-[Unit]
-Description=A high performance web server and a reverse proxy server
-After=syslog.target network.target
-
-[Service]
-Type=forking
-PIDFile=/run/nginx.pid
-ExecStartPre=/opt/nginx/sbin/nginx -t -q -g 'pid /run/nginx.pid; daemon on; master_process on;'
-ExecStart=/opt/nginx/sbin/nginx -g 'pid /run/nginx.pid; daemon on; master_process on;'
-ExecReload=/opt/nginx/sbin/nginx -g 'pid /run/nginx.pid; daemon on; master_process on;' -s reload
-ExecStop=/opt/nginx/sbin/nginx -g 'pid /run/nginx.pid;' -s quit
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
+  
   sudo systemctl enable nginx
-
-  git clone https://github.com/creationix/nvm.git ~/.nvm
-  source ~/.nvm/nvm.sh
-  nvm install 0.10
-  nvm alias default 0.10
 }
+
+# run as user
+# setup_development_environment(){
+#   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+#   git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+#   export PATH="$HOME/.rbenv/bin:$PATH"
+#   eval "$(rbenv init -)"
+#   rbenv install 2.1.1
+#   rbenv install 1.9.3-p448
+#   rbenv global 2.0.0-p247
+#   gem install bundler
+#   gem install passenger
+#   gem install yard
+#   rbenv rehash
+#   sudo passenger-install-nginx-module
+#   sudo ln -fs $HOME/dotfiles/nginx.conf /opt/nginx/conf/nginx.conf
+#   curl https://toolbelt.heroku.com/install.sh | sh
+
+#   sudo sh -c "cat > /etc/systemd/system/nginx.service" <<EOF
+# [Unit]
+# Description=A high performance web server and a reverse proxy server
+# After=syslog.target network.target
+
+# [Service]
+# Type=forking
+# PIDFile=/run/nginx.pid
+# ExecStartPre=/opt/nginx/sbin/nginx -t -q -g 'pid /run/nginx.pid; daemon on; master_process on;'
+# ExecStart=/opt/nginx/sbin/nginx -g 'pid /run/nginx.pid; daemon on; master_process on;'
+# ExecReload=/opt/nginx/sbin/nginx -g 'pid /run/nginx.pid; daemon on; master_process on;' -s reload
+# ExecStop=/opt/nginx/sbin/nginx -g 'pid /run/nginx.pid;' -s quit
+
+# [Install]
+# WantedBy=multi-user.target
+# EOF
+
+#   sudo systemctl enable nginx
+
+#   git clone https://github.com/creationix/nvm.git ~/.nvm
+#   source ~/.nvm/nvm.sh
+#   nvm install 0.10
+#   nvm alias default 0.10
+# }
 
 
 # run as user
