@@ -26,7 +26,7 @@ DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git gem thor heroku vi-mode nyan extract)
+plugins=(git gem thor heroku vi-mode nyan extract autoenv)
 
 source $ZSH/oh-my-zsh.sh
 unset GREP_OPTIONS
@@ -183,6 +183,7 @@ alias offline-site="wget -r -k -p"
 alias comp="tar cvfz"
 alias space="sudo du -sh *"
 alias pacman="sudo pacman"
+alias docker-job="docker run --rm"
 
 alias ll="ls -la"
 alias l.="ls -a"
@@ -213,15 +214,9 @@ alias rlog="tail -f log/development.log | grep -vE \"(^\s*$|asset)\""
 alias vlc="vlc --file-caching=10000"
 alias aur="bash <(curl aur.sh) -si"
 
-# notes
-export n=~/notes
-
-vn() {
-	$EDITOR ~/notes/"$*".markdown
-}
-
-nls() {
-	ls -c ~/notes/ | grep "$*"
+sticky_keys() {
+   xkbset accessx sticky -twokey -latchlock
+   xkbset exp =accessx =sticky =twokey =latchlock
 }
 
 # ssh keychain, manage ssh keys

@@ -1,0 +1,9 @@
+[Unit]
+Description=Periodical backup
+Wants=daily.timer
+
+[Service]
+ExecStart=/home/maca/bin/backup
+
+[Install]
+WantedBy=daily-timer.target

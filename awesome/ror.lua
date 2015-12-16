@@ -18,14 +18,16 @@ table5={
    ["o"]={"urxvt -name nano -e /bin/zsh -i -c /home/maca/bin/connect-to-nano", "nano", "instance"},
    ["l"]={"urxvt -name linode -title linode -e /bin/zsh -i -c /home/maca/bin/connect-to-linode", "linode", "instance"},
    ["e"]={"urxvt -name vim -title vim -e vim --servername STANDALONE", "vim", "instance"},
+   ["a"]={"urxvt -name sup -title sup -e /home/maca/.gem/ruby/2.1.0/bin/sup", "sup", "instance"},
 
    ["m"]={"urxvt -name cmus -e /bin/zsh -i -c /home/maca/bin/music-player", "cmus", "instance"},
    ["c"]={"urxvt -name centerim -title centerim -e centerim5","centerim", "instance"},
    ["i"]={"urxvt -name weechat -title weechat -e weechat-curses","weechat", "instance"},
 
    ["r"]={"gmrun","Gmrun"},
-   ["b"]={"chromium", "Chromium"},
+   ["b"]={"chromium", "chromium"},
    ["w"]={"/usr/lib/virtualbox/VirtualBox --comment Windoze --startvm 9112bdaa-21ef-4092-a5d9-a4c52e18f520 --no-startvm-errormsgbox", "VirtualBox"},
-	 ["v"]={"gpicview","gpicview"},
-	 ["s"]={"spotify","spotify"},
+   ["v"]={"gpicview","Gpicview"},
+   ["s"]={"smplayer","smplayer"},
+   -- ["s"]={"spotify","spotify"},
 }

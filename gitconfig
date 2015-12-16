@@ -1,28 +1,28 @@
 [user]
-	email = mail@makarius.me
-	name = macario
+  email = mail@makarius.me
+  name = Macario
 [alias]
   h = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --graph --abbrev-commit --date=short
   h-no-merges = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --graph --abbrev-commit --date=short --no-merges
   ha = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --graph --all --abbrev-commit --date=short
   ha-no-merges = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --graph --all --abbrev-commit --date=short --no-merges
   ff = merge --ff-only
-	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
+  oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
 [alias]
   ignore = update-index --assume-unchanged
   unignore = update-index --no-assume-unchanged
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+  diff = auto
+  status = auto
+  branch = auto
 [giggle]
-	main-window-maximized = false
-	main-window-geometry = 1364x747+0+19
-	file-view-vpane-position = 403
-	main-window-view = HistoryView
-	history-view-vpane-position = 318
+  main-window-maximized = false
+  main-window-geometry = 1364x747+0+19
+  file-view-vpane-position = 403
+  main-window-view = HistoryView
+  history-view-vpane-position = 318
 [push]
-	default = matching
+  default = matching
 [diff]
   external = git_diff_wrapper
 [pager]
@@ -30,6 +30,13 @@
 [branch]
   autosetuprebase = always
 [core]
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
 [init]
-	templatedir = /home/maca/dotfiles/git-hooks
+  templatedir = /home/maca/dotfiles/git-hooks
+[merge]
+  tool = diffconflicts
+[mergetool "diffconflicts"]
+  cmd = /home/maca/bin/diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+  trustExitCode = true
+[mergetool]
+  keepBackup = false

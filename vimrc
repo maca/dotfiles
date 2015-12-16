@@ -23,13 +23,17 @@ Plugin 'tpope/vim-surround'
 Plugin 'godlygeek/tabular.git'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'CITguy/vim-coffee-script'
+Plugin 'vim-scripts/vim-coffee-script'
 Plugin 'mattn/emmet-vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'mattn/gist-vim'
 Plugin 'airblade/vim-rooter'
 Plugin 'KabbAmine/zeavim.vim'
 Plugin 'KabbAmine/vCoolor.vim'
+Plugin 'hrother/offlineimaprc.vim'
+Plugin 'hail2u/vim-css3-syntax.git'
+Plugin 'wakatime/vim-wakatime'
+Plugin 'ecomba/vim-ruby-refactoring'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -182,7 +186,8 @@ let g:vcoolor_lowercase = 1
 map <C-c> :VCoolor<CR>
 
 highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+call matchadd('ColorColumn', '\%82v', 100)
 
 set list listchars=tab:>-,trail:.,precedes:<,extends:>
 
+let g:ackprg = 'ag --vimgrep'

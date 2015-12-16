@@ -1,45 +1,7 @@
 #!/bin/bash
 
-## my own rsync-based snapshot-style backup procedure
-## (cc) marcio rps AT gmail.com
-lock=/tmp/snapshot-lock
-if [ -f $lock ] ; then
-  echo "snapshot: a lock file seems to exist $lock"
-  exit
-fi
-
-touch $lock
-
-# config vars
-addr=$($HOME/bin/house-addr)
-host=$(echo $addr | cut -d ':' -f1)
-port=$(echo $addr | cut -d ':' -f2)
-
-src="/home/$(whoami)/" #dont forget trailing slash!
-snap="/backup/snapshots/$(whoami)"
-opts="-zia --delete --delay-updates"
-minchanges=200
-
-# run this process with real low priority
-ionice -c 3 -p $$
-renice +12  -p $$
-
-# sync
-ssh -p $port $host "mkdir -p $snap"
-rsync $opts --rsh="ssh -p$port" $src $host:$snap/latest | ssh -p $port $host "cat - >> $snap/rsync.log"
-
-# check if enough has changed and if so
-# make a hardlinked copy named as the date
-datetag=$(date +%y-%m-%d-%h-%m)
-ssh -p $port $host "
-  sleep 20
-  count=\`wc -l $snap/rsync.log | cut -d ' ' -f1\` 
-  if [ \$count -gt $minchanges ] ; then
-     if [ ! -e $snap/$datetag ] ; then
-        cp -al $snap/latest $snap/$datetag
-        mv $snap/rsync.log $snap/$datetag
-     fi
-  fi
-"
-
-rm $lock
+rsync -avP --update --delete /media/media/eBooks/ /media/bone/eBooks
+rsync -avP --update --delete /media/media/Music/ /media/bone/Music
+rsync -avP --update --delete /media/media/Personal/ /media/bone/Personal
+rsync -avP --update --delete /media/media/Podcasts/ /media/bone/Podcasts
+rsync -avP --update --delete /media/media/Screencasts/ /media/bone/Screencasts

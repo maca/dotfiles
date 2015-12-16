@@ -59,13 +59,13 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
+    awful.layout.suit.max,
     awful.layout.suit.floating,
     -- awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
     awful.layout.suit.fair,
-    awful.layout.suit.max,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
@@ -368,34 +368,7 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
-
-    -- First tag maximized
-    { rule = { instance = "chromium" },
-      properties = { tags = { tags[1][1] } } },
-
-    { rule_any = { instance = { "t1", "vim" } },
-      properties = {
-        maximized_horizontal = true,
-        maximized_vertical   = true,
-        tags = { (tags[2] and tags[2][1]) or tags[1][1] }
-      } },
-
-    -- Second tag fair
-    { rule_any = { instance = { "centerim", "cmus", "weechat" } },
-      properties = { tags = { (tags[2] and tags[2][2]) or tags[1][2] } } },
-
-    -- { rule_any = { instance = {"weechat", "cmus"} },
-    --   properties = { maximized_horizontal = true } },
-
-    -- Third tag maximized
-    { rule_any = { instance = { "t2", "linode" } },
-      properties = { tags = { tags[1][3] } } },
-
-    -- Fourth tag etc
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    { rule = { class = "Firefox" },
-      properties = { tag = (tags[2] and tags[2][4]) or tags[1][4] } },
+                     buttons = clientbuttons } }
 }
 -- }}}
 
