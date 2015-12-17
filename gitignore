@@ -1,0 +1,6 @@
+*.swp
+.swm
+.swn
+*.swo
+.env
+.agignore

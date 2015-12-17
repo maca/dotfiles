@@ -211,6 +211,7 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/Xresources ~/.Xresources
   ln -fs $HOME/dotfiles/themes ~/.themes
   ln -fs $HOME/dotfiles/ctags ~/.ctags
+  ln -fs $HOME/dotfiles/gitignore ~/.gitignore
   ln -fs $HOME/dotfiles/bin ~/bin
 
   mkdir -p ~/.config/fontconfig/
