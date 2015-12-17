@@ -67,7 +67,7 @@ setup_network(){
 
   systemctl enable dnsmasq
 
-  sudo systemctl enable netctl-auto@wlp3s0.service
+  echo "manually enable netct-auto 'sudo systemctl enable netctl-auto@wlp3s0.service'"
 }
 
 # run as root
