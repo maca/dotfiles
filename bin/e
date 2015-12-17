@@ -1,0 +1,7 @@
+instances=$(vim --serverlist | grep STANDALONE | wc -l)
+
+if [ $instances -ge 1  ]; then
+  /usr/bin/vim --servername STANDALONE --remote-tab-silent $@
+else
+  urxvt -name vim -title vim -e /usr/bin/vim --servername STANDALONE $@ &
+fi
