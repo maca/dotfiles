@@ -7,6 +7,6 @@ vim/ruby/command-t/ext.o
 vim/.netrwhist
 *.swo
 *.swp
-systemd/user/default.target.wants
 vim/bundle
 systemd/user/default.target.wants/
+systemd/user/sockets.target.wants

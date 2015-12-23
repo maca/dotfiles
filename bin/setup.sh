@@ -38,14 +38,22 @@ basic_setup(){
   mkdir /scratch
 
   # https://wiki.archlinux.org/index.php/Systemd/User
-  sed -i s/system-auth/system-login/g /etc/pam.d/systemd-user
+  # sed -i s/system-auth/system-login/g /etc/pam.d/systemd-user
 
   # disable bitmap fonts
   ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 }
 
+setup_automount(){
+  pacman -S udevil
+  sudo systemctl enable devmon@$(whoami).service
+}
+
 # run as root
 setup_postgresql(){
+  pacman -Sy
+  pacman -S postgresql
+
   systemd-tmpfiles --create postgresql.conf
   mkdir /var/lib/postgres/data
   chown -c -R postgres:postgres /var/lib/postgres
@@ -57,16 +65,18 @@ setup_postgresql(){
 
 # run as root
 setup_network(){
+  pacman -Sy
+  pacman -S openssl ntp dnsmasq
+
   systemctl enable sshd
   systemctl enable ntpd.service
 
-  echo "nameserver 192.168.100.1" >  /etc/resolv.conf
-  echo "nameserver 127.0.0.1"     >> /etc/resolv.conf
   echo "nameserver 127.0.0.1"     >  /etc/resolv.conf.head
   echo address=/.dev/127.0.0.1    >> /etc/dnsmasq.conf
   echo address=/.doc/127.0.0.1    >> /etc/dnsmasq.conf
 
   systemctl enable dnsmasq
+}
 
   echo "manually enable netct-auto 'sudo systemctl enable netctl-auto@wlp3s0.service'"
 }
@@ -207,11 +217,6 @@ EOF
 
 # run as user
 setup_dotfiles(){
-  cd ~/dotfiles
-  git submodule init
-  git submodule update
-  git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
   ln -fs /tmp ~/Downloads
   ln -fs $HOME/dotfiles/zshrc ~/.zshrc
   ln -fs $HOME/dotfiles/zshenv ~/.zshenv
@@ -289,3 +294,36 @@ EOT
   cd ~
 }
 
+# run as root
+setup_nginx_certificate(){
+  echo "Generating an SSL private key to sign your certificate..."
+  openssl genrsa -des3 -out cert.key 1024
+
+  echo "Generating a Certificate Signing Request..."
+  openssl req -new -key cert.key -out cert.csr
+
+  echo "Removing passphrase from key (for nginx)..."
+  cp cert.key cert.key.org
+  openssl rsa -in cert.key.org -out cert.key
+  rm cert.key.org
+
+  echo "Generating certificate..."
+  openssl x509 -req -days 365 -in cert.csr -signkey cert.key -out cert.crt
+
+  mkdir -p  /etc/nginx/ssl
+  echo "Copying certificate (cert.crt) to /etc/nginx/ssl"
+  cp cert.crt /etc/nginx/ssl
+
+  echo "Copying key (cert.key) to /etc/ssl/private/"
+  cp cert.key /etc/nginx/ssl
+
+  cat <<EOT > /etc/nginx/ssl.conf
+server {
+  listen               443;
+  ssl                  on;
+  ssl_certificate      /etc/nginx/ssl/cert.crt;
+  ssl_certificate_key  /etc/nginx/ssl/cert.key;
+  server_name SERVER_NAME.com;
+}
+EOT
+}

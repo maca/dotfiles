@@ -1,0 +1,27 @@
+out_to_x no
+out_to_ncurses yes
+update_interval 2.0
+
+TEXT
+  Uptime: $uptime
+
+  CPU: $cpu%
+    ${top name 1}${top cpu 1}
+    ${top name 2}${top cpu 2}
+    ${top name 3}${top cpu 3}
+    ${top name 4}${top cpu 3}
+
+    Core1: ${cpu cpu1}%        ${freq_g 1}
+    Core2: ${cpu cpu2}%        ${freq_g 2}
+
+  RAM:  $mem  $memperc%
+    ${top_mem name 1}${top_mem mem 1}
+    ${top_mem name 2}${top_mem mem 2}
+    ${top_mem name 3}${top_mem mem 3}
+    ${top_mem name 4}${top_mem mem 3}
+
+  /    : ${alignr} ${fs_free /}/${fs_size /}
+
+  enp2s0:
+    Up  :  ${upspeed enp2s0} ${alignr} ${totalup enp2s0}
+    Down:  ${downspeed enp2s0} ${alignr} ${totaldown enp2s0}
