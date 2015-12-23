@@ -2,8 +2,7 @@ set nocompatible                  " Must come first because it changes other opt
 filetype off
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call vundle#rc()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-scripts/ZoomWin'
@@ -36,7 +35,7 @@ Plugin 'wakatime/vim-wakatime'
 Plugin 'ecomba/vim-ruby-refactoring'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+" call vundle#end()            " required
 
 filetype plugin indent on         " Turn on file type detection.
 syntax enable                     " Turn on syntax highlighting.

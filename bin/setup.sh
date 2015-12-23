@@ -188,7 +188,7 @@ setup_aur_installs(){
   bash <(curl aur.sh) -si urxvt-perls-git chruby fasd heroku-client otf-neris\
     par ruby-install-git silver-searcher-git ttf-aller ttf-amiri\
     ttf-brill ttf-monaco ttf-ms-fonts ttf-vista-fonts urxvt-font-size-git\
-    urxvt-perls-git xkbset
+    urxvt-perls-git xkbset vundle
   cd -
 }
 
@@ -236,6 +236,8 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/fonts.conf ~/.config/fontconfig/fonts.conf
   ln -fs $HOME/dotfiles/systemd ~/.config/systemd
   ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
+
+  vim +PluginInstall +qall
 }
 
 # run as user
