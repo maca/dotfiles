@@ -86,6 +86,8 @@ set relativenumber
 set number                       " Show line numbers.
 set lazyredraw                   " Fixes relativenumber slow scroll
 
+set mouse=n                      " Mouse normal
+
 " Bring vim to front when a file is read
 function! g:BringVimToFront()
   if v:servername == "STANDALONE"
