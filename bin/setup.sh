@@ -3,7 +3,7 @@
 # run as root
 install_basics () {
   pacman -Syu
-  pacman -S arandr awesome chromium cmus deadbeef dialog elinks gawk\
+  pacman -S arandr awesome chromium cmus dialog gawk\
     git gmrun gvim keychain luakit openssh pavucontrol pulseaudio\
     ranger rsync ruby rxvt-unicode smplayer spacefm supercollider\
     terminus-font tk tmux udiskie unclutter urxvt-perls vlc wpa_supplicant\
@@ -11,10 +11,11 @@ install_basics () {
     xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite zip unzip\
     dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv firefox\
     gpicview ack avahi nss-mdns ttf-freefont imagemagick base-devel dtach\
-    polipo quota-tools tor btrfs-progs redshift\
+    tor btrfs-progs redshift\
     pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware\
     nodejs phantomjs zenity
 }
+
 
 # run as root
 basic_setup(){
@@ -107,6 +108,17 @@ EOT
 }
 
 # run as root
+setup_mouse() {
+  cat <<EOT > /etc/X11/xorg.conf.d/10-mouse.conf
+Section "InputClass"
+    Identifier "whatever"
+    MatchIsPointer "on"
+    Option "Emulate3Buttons" "on"
+EndSection
+EOT
+}
+
+# run as root
 setup_keyboard() {
     [[ -d /etc/X11/xorg.conf.d ]] && cat > /etc/X11/xorg.conf.d/01-keyboard_layout.conf <<EOF
 Section "InputClass"
@@ -148,36 +160,38 @@ EOT
 
 }
 
+# run as root
+setup_fonts() {
+  cat <<EOT >> /etc/pacman.conf
+
+[infinality-bundle]
+Server = http://bohoomil.com/repo/\$arch
+
+[infinality-bundle-multilib]
+Server = http://bohoomil.com/repo/multilib/\$arch
+
+[infinality-bundle-fonts]
+Server = http://bohoomil.com/repo/fonts
+EOT
+
+  pacman -Syy
+  pacman -S ttf-aller ttf-amiri ttf-bitstream-vera ttf-brill\
+    ttf-dejavu ttf-freefont ttf-inconsolata ttf-liberation\
+    ttf-linux-libertine ttf-monaco ttf-ms-fonts ttf-oxygen-ibx\
+    ttf-ubuntu-font-family ttf-vista-fonts cairo-infinality-ultimate\
+    fontconfig-infinality-ultimate freetype2-infinality-ultimate
+}
 
 # run as root
-setup_polipo() {
-  groupadd -r polipo
-  useradd -d /var/cache/polipo -g polipo -r -s /bin/false polipo
-  touch /var/log/polipo.log
-
-  btrfs subvolume create /var/cache/polipo
-  btrfs quota enable /var/cache/polipo
-  btrfs subvolume list /var/cache/polipo | cut -d' ' -f2 | xargs -I{} -n1 btrfs qgroup create 0/{} /var/cache/polipo
-  btrfs quota rescan /var/cache/polipo
-  btrfs qgroup limit 10g /var/cache/polipo
-
-  chown -R polipo:polipo /var/log/polipo.log /var/cache/polipo
-
-  cat <<EOT > /etc/systemd/system/polipo.service
-.include /usr/lib/systemd/system/polipo.service
-[Service]
-User=polipo
-EOT
-
-  cat <<EOT > /etc/polipo/config
-dnsNameServer = 127.0.0.1
-socksParentProxy = localhost:9050
-socksProxyType = socks5
-EOT
-
-  systemctl enable tor
-  systemctl enable polipo
+setup_aur_installs(){
+  cd /tmp
+  bash <(curl aur.sh) -si urxvt-perls-git chruby fasd heroku-client otf-neris\
+    par ruby-install-git silver-searcher-git ttf-aller ttf-amiri\
+    ttf-brill ttf-monaco ttf-ms-fonts ttf-vista-fonts urxvt-font-size-git\
+    urxvt-perls-git xkbset
+  cd -
 }
+
 
 # run as user
 setup_auto_login(){
@@ -238,71 +252,12 @@ setup_ssh_keys(){
   ssh-keygen -t rsa -C "$(whoami)@$(cat /etc/hostname)"
 }
 
-# run as root
-# setup_aur_installs(){
-#   cd /tmp
-#   bash <(curl aur.sh) -si centerim5-git
-#   bash <(curl aur.sh) -si urxvt-perls
-#   bash <(curl aur.sh) -si xkbset
-#   bash <(curl aur.sh) -si powerdown-git
-#   bash <(curl aur.sh) -si pasystray-git
-#   bash <(curl aur.sh) -si pavumeter
-#   bash <(curl aur.sh) -si pulseaudio-ctl
-#   bash <(curl aur.sh) -si create_ap
-#   bash <(curl aur.sh) -si nginx-passenger
-#   cd -
-# }
-
 setup_development_environment(){
   gem install bundler
   gem install passenger
   gem install yard
-  
   sudo systemctl enable nginx
 }
-
-# run as user
-# setup_development_environment(){
-#   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-#   git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-#   export PATH="$HOME/.rbenv/bin:$PATH"
-#   eval "$(rbenv init -)"
-#   rbenv install 2.1.1
-#   rbenv install 1.9.3-p448
-#   rbenv global 2.0.0-p247
-#   gem install bundler
-#   gem install passenger
-#   gem install yard
-#   rbenv rehash
-#   sudo passenger-install-nginx-module
-#   sudo ln -fs $HOME/dotfiles/nginx.conf /opt/nginx/conf/nginx.conf
-#   curl https://toolbelt.heroku.com/install.sh | sh
-
-#   sudo sh -c "cat > /etc/systemd/system/nginx.service" <<EOF
-# [Unit]
-# Description=A high performance web server and a reverse proxy server
-# After=syslog.target network.target
-
-# [Service]
-# Type=forking
-# PIDFile=/run/nginx.pid
-# ExecStartPre=/opt/nginx/sbin/nginx -t -q -g 'pid /run/nginx.pid; daemon on; master_process on;'
-# ExecStart=/opt/nginx/sbin/nginx -g 'pid /run/nginx.pid; daemon on; master_process on;'
-# ExecReload=/opt/nginx/sbin/nginx -g 'pid /run/nginx.pid; daemon on; master_process on;' -s reload
-# ExecStop=/opt/nginx/sbin/nginx -g 'pid /run/nginx.pid;' -s quit
-
-# [Install]
-# WantedBy=multi-user.target
-# EOF
-
-#   sudo systemctl enable nginx
-
-#   git clone https://github.com/creationix/nvm.git ~/.nvm
-#   source ~/.nvm/nvm.sh
-#   nvm install 0.10
-#   nvm alias default 0.10
-# }
-
 
 # run as user
 setup_documentation(){
