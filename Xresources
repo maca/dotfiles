@@ -15,7 +15,7 @@ URxvt.scrollTtyKeypress: true
 URxvt.scrollTtyOutput: false
 URxvt.saveLines: 5000
 
-URxvt.perl-ext-common: default,url-select,font-size
+URxvt.perl-ext-common: default,url-select,font-size,clipboard,keyboard-select
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: chromium
 
@@ -24,6 +24,15 @@ URxvt.keysym.C-Up:     perl:font-size:increase
 URxvt.keysym.C-Down:   perl:font-size:decrease
 URxvt.keysym.C-S-Up:   perl:font-size:incglobal
 URxvt.keysym.C-S-Down: perl:font-size:decglobal
+
+!! Copy paste
+URxvt.keysym.M-C-c: perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+
+!! Select
+URxvt.keysym.M-C-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
 
 *color4:  #204a87
 *color8:  #08360c
