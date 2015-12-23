@@ -10,6 +10,8 @@ xkbset accessx sticky -twokey -latchlock
 # don't expire these settings. (run xkbset q exp for details.)
 xkbset exp 1 =accessx =sticky =twokey =latchlock
 
+setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
+
 /usr/lib/systemd/systemd --user &
 /usr/bin/start-pulseaudio-x11
 pasystray &
