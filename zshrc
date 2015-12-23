@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh configuration.
 export TERM=screen-256color
 
-ZSH=$HOME/.oh-my-zsh
+ZSH=/usr/share/oh-my-zsh/
 
 # Comment this out to disable weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"

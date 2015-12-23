@@ -188,7 +188,7 @@ setup_aur_installs(){
   bash <(curl aur.sh) -si urxvt-perls-git chruby fasd heroku-client otf-neris\
     par ruby-install-git silver-searcher-git ttf-aller ttf-amiri\
     ttf-brill ttf-monaco ttf-ms-fonts ttf-vista-fonts urxvt-font-size-git\
-    urxvt-perls-git xkbset vundle
+    urxvt-perls-git xkbset vundle oh-my-zsh-git
   cd -
 }
 
