@@ -8,8 +8,10 @@ install_basics () {
     dnsmasq sshfs weechat python2 wget ntp ack dtach tor btrfs-progs\
     pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware
 
+  cd /tmp
   bash <(curl aur.sh) -si chruby fasd xkbset vundle oh-my-zsh-git par\
     ruby-install-git silver-searcher-git
+  cd -
 }
 
 # run as root
@@ -20,7 +22,9 @@ install_wm(){
     xcompmgr xorg-xinit xorg-xrdb pavucontrol gmrun unclutter urxvt-perls\
     vlc gvim
 
+  cd /tmp
   bash <(curl aur.sh) -si urxvt-font-size-git
+  cd -
 }
 
 # run as root
@@ -28,7 +32,9 @@ install_dev_env(){
   pacman -Syu
   pacman -S ctags nodejs phantomjs imagemagick postgresql sqlite gpicview
 
+  cd /tmp
   bash <(curl aur.sh) -si heroku-client urxvt-font-size-git
+  cd -
 }
 
 # run as root
@@ -75,8 +81,10 @@ EOT
     ttf-ubuntu-font-family ttf-vista-fonts cairo-infinality-ultimate\
     fontconfig-infinality-ultimate freetype2-infinality-ultimate
 
+  cd /tmp
   bash <(curl aur.sh) -si chruby fasd heroku-client otf-neris ttf-brill\
     ttf-monaco ttf-ms-fonts ttf-vista-fonts ttf-aller ttf-amiri otf-neris
+  cd -
 }
 
 # run as root
