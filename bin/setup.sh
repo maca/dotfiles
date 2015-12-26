@@ -6,7 +6,8 @@ install_basics () {
   pacman -S cmus dialog wpa_supplicant gawk git keychain openssh\
     pulseaudio rsync ruby tk tmux udiskie vim acpi conky zip unzip\
     dnsmasq sshfs weechat python2 wget ntp ack dtach tor btrfs-progs\
-    pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware
+    pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware alsa-lib\
+    libpulse faad2 flac libmad libmp4v2 libvorbis wavpack
 
   cd /tmp
   bash <(curl aur.sh) -si chruby fasd xkbset vundle oh-my-zsh-git par\
