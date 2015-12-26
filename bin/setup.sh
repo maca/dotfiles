@@ -3,7 +3,7 @@
 # run as root
 install_basics () {
   pacman -Syu
-  pacman -S arandr cmus dialog wpa_supplicant gawk git keychain openssh\
+  pacman -S cmus dialog wpa_supplicant gawk git keychain openssh\
     pulseaudio rsync ruby tk tmux udiskie vim acpi conky zip unzip\
     dnsmasq sshfs weechat python2 wget ntp ack dtach tor btrfs-progs\
     pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware
@@ -20,7 +20,7 @@ install_wm(){
   pacman -S awesome chromium rxvt-unicode smplayer spacefm terminus-font\
     xf86-video-intel xorg-server xorg-utils redshift zenity apvlv firefox\
     xcompmgr xorg-xinit xorg-xrdb pavucontrol gmrun unclutter urxvt-perls\
-    vlc gvim
+    vlc gvim arandr
 
   cd /tmp
   bash <(curl aur.sh) -si urxvt-font-size-git
