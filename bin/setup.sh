@@ -2,6 +2,12 @@
 
 # run as user
 setup_dotfiles(){
+  cd /tmp
+  bash <(curl aur.sh) -si chruby fasd xkbset oh-my-zsh-git par\
+    ruby-install-git silver-searcher-git vundle
+  cd -
+  vim +PluginInstall +qall
+
   ln -fs /tmp ~/Downloads
   ln -fs $HOME/dotfiles/zshrc ~/.zshrc
   ln -fs $HOME/dotfiles/zshenv ~/.zshenv
@@ -26,12 +32,6 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/fonts.conf ~/.config/fontconfig/fonts.conf
   ln -fs $HOME/dotfiles/systemd ~/.config/systemd
   ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
-
-  cd /tmp
-  bash <(curl aur.sh) -si chruby fasd xkbset oh-my-zsh-git par\
-    ruby-install-git silver-searcher-git vundle
-  cd -
-  vim +PluginInstall +qall
 }
 
 # run as root
