@@ -27,6 +27,9 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/systemd ~/.config/systemd
   ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 
+  cd /tmp
+  bash <(curl aur.sh) -si vundle
+  cd -
   vim +PluginInstall +qall
 }
 
@@ -40,7 +43,7 @@ install_basics () {
     libpulse faad2 flac libmad libmp4v2 libvorbis wavpack
 
   cd /tmp
-  bash <(curl aur.sh) -si chruby fasd xkbset vundle oh-my-zsh-git par\
+  bash <(curl aur.sh) -si chruby fasd xkbset oh-my-zsh-git par\
     ruby-install-git silver-searcher-git
   cd -
 }
