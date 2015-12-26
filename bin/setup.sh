@@ -1,5 +1,35 @@
 #!/usr/bin/sh
 
+# run as user
+setup_dotfiles(){
+  ln -fs /tmp ~/Downloads
+  ln -fs $HOME/dotfiles/zshrc ~/.zshrc
+  ln -fs $HOME/dotfiles/zshenv ~/.zshenv
+  ln -fs $HOME/dotfiles/zprofile ~/.zprofile
+  ln -fs $HOME/dotfiles/vimrc ~/.vimrc
+  ln -fs $HOME/dotfiles/vim ~/.vim
+  ln -fs $HOME/dotfiles/conky ~/.conky
+  ln -fs $HOME/dotfiles/gitconfig ~/.gitconfig
+  ln -fs $HOME/dotfiles/tmux.conf ~/.tmux.conf
+  ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
+  ln -fs $HOME/dotfiles/Xresources ~/.Xresources
+  ln -fs $HOME/dotfiles/themes ~/.themes
+  ln -fs $HOME/dotfiles/ctags ~/.ctags
+  ln -fs $HOME/dotfiles/gitignore ~/.gitignore
+  ln -fs $HOME/dotfiles/bin ~/bin
+
+  mkdir -p ~/.config/fontconfig/
+  ln -fs $HOME/dotfiles/awesome ~/.config/awesome
+  ln -fs $HOME/dotfiles/gtk-3.0 ~/.config/gtk-3.0
+  ln -sf $HOME/dotfiles/gtkrc-2.0 ~/.gtkrc-2.0
+  ln -fs $HOME/dotfiles/luakit ~/.config/luakit
+  ln -fs $HOME/dotfiles/fonts.conf ~/.config/fontconfig/fonts.conf
+  ln -fs $HOME/dotfiles/systemd ~/.config/systemd
+  ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
+
+  vim +PluginInstall +qall
+}
+
 # run as root
 install_basics () {
   pacman -Syu
@@ -212,36 +242,6 @@ EOT
 setup_automount(){
   pacman -S udevil
   sudo systemctl enable devmon@$(whoami).service
-}
-
-# run as user
-setup_dotfiles(){
-  ln -fs /tmp ~/Downloads
-  ln -fs $HOME/dotfiles/zshrc ~/.zshrc
-  ln -fs $HOME/dotfiles/zshenv ~/.zshenv
-  ln -fs $HOME/dotfiles/zprofile ~/.zprofile
-  ln -fs $HOME/dotfiles/vimrc ~/.vimrc
-  ln -fs $HOME/dotfiles/vim ~/.vim
-  ln -fs $HOME/dotfiles/conky ~/.conky
-  ln -fs $HOME/dotfiles/gitconfig ~/.gitconfig
-  ln -fs $HOME/dotfiles/tmux.conf ~/.tmux.conf
-  ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
-  ln -fs $HOME/dotfiles/Xresources ~/.Xresources
-  ln -fs $HOME/dotfiles/themes ~/.themes
-  ln -fs $HOME/dotfiles/ctags ~/.ctags
-  ln -fs $HOME/dotfiles/gitignore ~/.gitignore
-  ln -fs $HOME/dotfiles/bin ~/bin
-
-  mkdir -p ~/.config/fontconfig/
-  ln -fs $HOME/dotfiles/awesome ~/.config/awesome
-  ln -fs $HOME/dotfiles/gtk-3.0 ~/.config/gtk-3.0
-  ln -sf $HOME/dotfiles/gtkrc-2.0 ~/.gtkrc-2.0
-  ln -fs $HOME/dotfiles/luakit ~/.config/luakit
-  ln -fs $HOME/dotfiles/fonts.conf ~/.config/fontconfig/fonts.conf
-  ln -fs $HOME/dotfiles/systemd ~/.config/systemd
-  ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
-
-  vim +PluginInstall +qall
 }
 
 # run as user
