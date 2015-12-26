@@ -3,19 +3,33 @@
 # run as root
 install_basics () {
   pacman -Syu
-  pacman -S arandr awesome chromium cmus dialog gawk\
-    git gmrun gvim keychain luakit openssh pavucontrol pulseaudio\
-    ranger rsync ruby rxvt-unicode smplayer spacefm supercollider\
-    terminus-font tk tmux udiskie unclutter urxvt-perls vlc wpa_supplicant\
-    wpa_supplicant_gui xcompmgr xf86-video-intel xorg-server xorg-utils\
-    xorg-xinit xorg-xrdb zsh ctags acpi conky postgresql sqlite zip unzip\
-    dnsmasq wpa_actiond sshfs weechat python2 wget ntp apvlv firefox\
-    gpicview ack avahi nss-mdns ttf-freefont imagemagick base-devel dtach\
-    tor btrfs-progs redshift\
-    pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware\
-    nodejs phantomjs zenity
+  pacman -S arandr cmus dialog wpa_supplicant gawk git keychain openssh\
+    pulseaudio rsync ruby tk tmux udiskie vim acpi conky zip unzip\
+    dnsmasq sshfs weechat python2 wget ntp ack dtach tor btrfs-progs\
+    pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware
+
+  bash <(curl aur.sh) -si chruby fasd xkbset vundle oh-my-zsh-git par\
+    ruby-install-git silver-searcher-git
 }
 
+# run as root
+install_wm(){
+  pacman -Syu
+  pacman -S awesome chromium rxvt-unicode smplayer spacefm terminus-font\
+    xf86-video-intel xorg-server xorg-utils redshift zenity apvlv firefox\
+    xcompmgr xorg-xinit xorg-xrdb pavucontrol gmrun unclutter urxvt-perls\
+    vlc gvim
+
+  bash <(curl aur.sh) -si urxvt-font-size-git
+}
+
+# run as root
+install_dev_env(){
+  pacman -Syu
+  pacman -S ctags nodejs phantomjs imagemagick postgresql sqlite gpicview
+
+  bash <(curl aur.sh) -si heroku-client urxvt-font-size-git
+}
 
 # run as root
 basic_setup(){
@@ -36,17 +50,33 @@ basic_setup(){
   echo "tmpfs   /scratch     tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
 
   mkdir /scratch
-
-  # https://wiki.archlinux.org/index.php/Systemd/User
-  # sed -i s/system-auth/system-login/g /etc/pam.d/systemd-user
-
-  # disable bitmap fonts
-  ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 }
 
-setup_automount(){
-  pacman -S udevil
-  sudo systemctl enable devmon@$(whoami).service
+# run as root
+setup_fonts() {
+  cat <<EOT >> /etc/pacman.conf
+
+[infinality-bundle]
+Server = http://bohoomil.com/repo/\$arch
+
+[infinality-bundle-multilib]
+Server = http://bohoomil.com/repo/multilib/\$arch
+
+[infinality-bundle-fonts]
+Server = http://bohoomil.com/repo/fonts
+EOT
+
+  ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+
+  pacman -Syy
+  pacman -S ttf-freefont ttf-aller ttf-amiri ttf-bitstream-vera\
+    ttf-brill ttf-dejavu ttf-freefont ttf-inconsolata ttf-liberation\
+    ttf-linux-libertine ttf-monaco ttf-ms-fonts ttf-oxygen-ibx\
+    ttf-ubuntu-font-family ttf-vista-fonts cairo-infinality-ultimate\
+    fontconfig-infinality-ultimate freetype2-infinality-ultimate
+
+  bash <(curl aur.sh) -si chruby fasd heroku-client otf-neris ttf-brill\
+    ttf-monaco ttf-ms-fonts ttf-vista-fonts ttf-aller ttf-amiri otf-neris
 }
 
 # run as root
@@ -76,7 +106,6 @@ setup_network(){
   echo address=/.doc/127.0.0.1    >> /etc/dnsmasq.conf
 
   systemctl enable dnsmasq
-}
 
   echo "manually enable netct-auto 'sudo systemctl enable netctl-auto@wlp3s0.service'"
 }
@@ -170,49 +199,10 @@ EOT
 
 }
 
-# run as root
-setup_fonts() {
-  cat <<EOT >> /etc/pacman.conf
-
-[infinality-bundle]
-Server = http://bohoomil.com/repo/\$arch
-
-[infinality-bundle-multilib]
-Server = http://bohoomil.com/repo/multilib/\$arch
-
-[infinality-bundle-fonts]
-Server = http://bohoomil.com/repo/fonts
-EOT
-
-  pacman -Syy
-  pacman -S ttf-aller ttf-amiri ttf-bitstream-vera ttf-brill\
-    ttf-dejavu ttf-freefont ttf-inconsolata ttf-liberation\
-    ttf-linux-libertine ttf-monaco ttf-ms-fonts ttf-oxygen-ibx\
-    ttf-ubuntu-font-family ttf-vista-fonts cairo-infinality-ultimate\
-    fontconfig-infinality-ultimate freetype2-infinality-ultimate
-}
-
-# run as root
-setup_aur_installs(){
-  cd /tmp
-  bash <(curl aur.sh) -si urxvt-perls-git chruby fasd heroku-client otf-neris\
-    par ruby-install-git silver-searcher-git ttf-aller ttf-amiri\
-    ttf-brill ttf-monaco ttf-ms-fonts ttf-vista-fonts urxvt-font-size-git\
-    urxvt-perls-git xkbset vundle oh-my-zsh-git
-  cd -
-}
-
-
 # run as user
-setup_auto_login(){
-  sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
-  sudo sh -c "cat > /etc/systemd/system/getty@tty1.service.d/autologin.conf" <<EOF
-[Service]
-ExecStart=
-ExecStart=-/usr/bin/agetty --autologin $(whoami) --noclear %I 38400 linux
-Type=simple
-EOF
-
+setup_automount(){
+  pacman -S udevil
+  sudo systemctl enable devmon@$(whoami).service
 }
 
 # run as user
@@ -243,6 +233,18 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 
   vim +PluginInstall +qall
+}
+
+# run as user
+setup_auto_login(){
+  sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
+  sudo sh -c "cat > /etc/systemd/system/getty@tty1.service.d/autologin.conf" <<EOF
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin $(whoami) --noclear %I 38400 linux
+Type=simple
+EOF
+
 }
 
 # run as user
