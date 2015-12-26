@@ -28,7 +28,8 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 
   cd /tmp
-  bash <(curl aur.sh) -si vundle
+  bash <(curl aur.sh) -si chruby fasd xkbset oh-my-zsh-git par\
+    ruby-install-git silver-searcher-git vundle
   cd -
   vim +PluginInstall +qall
 }
@@ -41,11 +42,6 @@ install_basics () {
     dnsmasq sshfs weechat python2 wget ntp ack dtach tor btrfs-progs\
     pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware alsa-lib\
     libpulse faad2 flac libmad libmp4v2 libvorbis wavpack
-
-  cd /tmp
-  bash <(curl aur.sh) -si chruby fasd xkbset oh-my-zsh-git par\
-    ruby-install-git silver-searcher-git
-  cd -
 }
 
 # run as root
