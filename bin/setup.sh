@@ -28,6 +28,9 @@ setup_dotfiles(){
   bash <(curl aur.sh) -si chruby fasd xkbset oh-my-zsh-git par\
     ruby-install-git silver-searcher-git vundle
   cd -
+  ln -fs $HOME/dotfiles/luakit ~/.config/luakit
+  ln -fs $HOME/dotfiles/systemd ~/.config/systemd
+  ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 
   ln -fs /tmp ~/Downloads
   ln -fs $HOME/dotfiles/zshrc ~/.zshrc
@@ -45,12 +48,10 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/gitignore ~/.gitignore
   ln -fs $HOME/dotfiles/bin ~/bin
 
+  mkdir -p ~/.config/fontconfig/
   ln -fs $HOME/dotfiles/awesome ~/.config/awesome
   ln -fs $HOME/dotfiles/gtk-3.0 ~/.config/gtk-3.0
   ln -sf $HOME/dotfiles/gtkrc-2.0 ~/.gtkrc-2.0
-  ln -fs $HOME/dotfiles/luakit ~/.config/luakit
-  ln -fs $HOME/dotfiles/systemd ~/.config/systemd
-  ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 
   vim +PluginInstall +qall
 }
@@ -304,38 +305,4 @@ run YARD::Server::RackAdapter.new libraries
 EOT
 
   cd ~
-}
-
-# run as root
-setup_nginx_certificate(){
-  echo "Generating an SSL private key to sign your certificate..."
-  openssl genrsa -des3 -out cert.key 1024
-
-  echo "Generating a Certificate Signing Request..."
-  openssl req -new -key cert.key -out cert.csr
-
-  echo "Removing passphrase from key (for nginx)..."
-  cp cert.key cert.key.org
-  openssl rsa -in cert.key.org -out cert.key
-  rm cert.key.org
-
-  echo "Generating certificate..."
-  openssl x509 -req -days 365 -in cert.csr -signkey cert.key -out cert.crt
-
-  mkdir -p  /etc/nginx/ssl
-  echo "Copying certificate (cert.crt) to /etc/nginx/ssl"
-  cp cert.crt /etc/nginx/ssl
-
-  echo "Copying key (cert.key) to /etc/ssl/private/"
-  cp cert.key /etc/nginx/ssl
-
-  cat <<EOT > /etc/nginx/ssl.conf
-server {
-  listen               443;
-  ssl                  on;
-  ssl_certificate      /etc/nginx/ssl/cert.crt;
-  ssl_certificate_key  /etc/nginx/ssl/cert.key;
-  server_name SERVER_NAME.com;
-}
-EOT
 }
