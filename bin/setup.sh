@@ -306,3 +306,13 @@ EOT
 
   cd ~
 }
+
+setup_vagga(){
+  cat <<EOT >> /etc/pacman.conf
+
+[linux-user-ns]
+SigLevel = Never
+Server = http://files.zerogw.com/arch-kernel/\$arch
+EOT
+
+}
