@@ -88,9 +88,9 @@ basic_setup(){
   mkdir /scratch
 }
 
-# run as root
+# run as user
 setup_fonts() {
-  cat <<EOT >> /etc/pacman.conf
+  sudo sh -c "cat >> /etc/pacman.conf" <<EOF
 
 [infinality-bundle]
 Server = http://bohoomil.com/repo/\$arch
@@ -100,20 +100,20 @@ Server = http://bohoomil.com/repo/multilib/\$arch
 
 [infinality-bundle-fonts]
 Server = http://bohoomil.com/repo/fonts
-EOT
+EOF
 
-  ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+  sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
-  pacman -Syy
-  pacman -S ttf-freefont ttf-aller ttf-amiri ttf-bitstream-vera\
+  pacman -Sy
+  pacman -S ttf-freefont ttf-bitstream-vera\
     ttf-brill ttf-dejavu ttf-freefont ttf-inconsolata ttf-liberation\
-    ttf-linux-libertine ttf-monaco ttf-ms-fonts ttf-oxygen-ibx\
-    ttf-ubuntu-font-family ttf-vista-fonts cairo-infinality-ultimate\
+    ttf-linux-libertine ttf-ms-fonts ttf-oxygen-ibx\
+    ttf-ubuntu-font-family cairo-infinality-ultimate\
     fontconfig-infinality-ultimate freetype2-infinality-ultimate
 
   cd /tmp
-  bash <(curl aur.sh) -si chruby fasd heroku-client otf-neris ttf-brill\
-    ttf-monaco ttf-ms-fonts ttf-vista-fonts ttf-aller ttf-amiri otf-neris
+  bash <(curl aur.sh) -si otf-neris ttf-brill ttf-monaco ttf-ms-fonts\
+  ttf-vista-fonts ttf-aller ttf-amiri otf-neris ttf-monaco\
   cd -
 }
 
