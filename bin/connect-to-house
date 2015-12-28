@@ -5,5 +5,5 @@
 # port=$(echo $addr | cut -d ':' -f2)
 # ssh -p $port $host -t 'LANG=en_US.UTF-8 exec tmux attach'
 
-ssh maca@maca.noip.me \
+ssh maca@munge.xyz \
   -t 'LANG=en_US.utf8 exec tmux new-session -A -s main'
