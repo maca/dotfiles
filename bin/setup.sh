@@ -75,7 +75,7 @@ install_wm(){
     vlc gvim arandr
 
   cd /tmp
-  bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl
+  bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock
   cd -
 }
 
