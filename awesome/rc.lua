@@ -282,6 +282,8 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86Display", function() awful.util.spawn_with_shell("/home/maca/bin/displays") end),
 
     -- Multimedia keys
+    awful.key({ }, "XF86AudioMute",        function () awful.util.spawn("pulseaudio-ctl mute") end),
+    awful.key({ }, "XF86AudioMicMute",     function () awful.util.spawn("pulseaudio-ctl mute-input") end),
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("pulseaudio-ctl up") end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("pulseaudio-ctl down") end),
 
