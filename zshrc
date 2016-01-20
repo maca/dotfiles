@@ -21,8 +21,9 @@ source $ZSH/oh-my-zsh.sh
 unset GREP_OPTIONS
 
 # paths
+export GOPATH=~/.go
 export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:$HOME/.gem/ruby/1.9.1/bin"
+export PATH="$PATH:$GOPATH/bin"
 
 export BUILDDIR=/scratch
 
