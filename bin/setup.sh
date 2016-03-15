@@ -108,15 +108,16 @@ EOF
   sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
   pacman -Sy
-  pacman -S ttf-freefont ttf-bitstream-vera\
-    ttf-brill ttf-dejavu ttf-freefont ttf-inconsolata ttf-liberation\
-    ttf-linux-libertine ttf-ms-fonts ttf-oxygen-ibx\
+  pacman -S ttf-bitstream-vera\
+    ttf-dejavu ttf-freefont ttf-inconsolata ttf-liberation\
+    ttf-linux-libertine ttf-oxygen-ibx\
     ttf-ubuntu-font-family cairo-infinality-ultimate\
     fontconfig-infinality-ultimate freetype2-infinality-ultimate
 
   cd /tmp
   bash <(curl aur.sh) -si otf-neris ttf-brill ttf-monaco ttf-ms-fonts\
   ttf-vista-fonts ttf-aller ttf-amiri otf-neris ttf-monaco\
+  ttf-brill ttf-freefont ttf-ms-fonts
   cd -
 }
 
