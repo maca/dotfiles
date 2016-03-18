@@ -123,8 +123,8 @@ EOF
 
 # run as root
 setup_postgresql(){
-  pacman -Sy
-  pacman -S postgresql
+  # pacman -Sy
+  # pacman -S postgresql
 
   systemd-tmpfiles --create postgresql.conf
   mkdir /var/lib/postgres/data
