@@ -117,6 +117,9 @@ set t_Co=256
 let mapleader = ","
 let g:mapleader = ","
 
+" Search word under cursor
+noremap <Leader>a :Ack <cword><cr>
+
 " Tab mappings.
 map <leader>tt :tabnew<cr>
 map <leader>te :tabedit
@@ -192,3 +195,7 @@ call matchadd('ColorColumn', '\%82v', 100)
 set list listchars=tab:>-,trail:.,precedes:<,extends:>
 
 let g:ackprg = 'ag --vimgrep'
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|public\|data\|log\|tmp\|node_modules\|vendor$',
+  \ }
