@@ -15,7 +15,7 @@ DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git gem thor heroku vi-mode nyan extract history-substring-search)
+plugins=(git gem thor heroku vi-mode nyan extract history-substring-search vagrant)
 
 source $ZSH/oh-my-zsh.sh
 unset GREP_OPTIONS
@@ -145,3 +145,15 @@ sticky_keys() {
 
 # ssh keychain, manage ssh keys
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+
+
+
+# Launch a playbook.
+# Usage: ap some_playbook.yml
+alias ap="ansible-playbook --vault-password-file ~/pppddd"
+# View a vault file.
+# Usage: avv group_vars/all/vault.yml
+alias avv="ansible-vault view --vault-password-file ~/pppddd"
+# Edit the vault in Sublime (in case you don't use sublime, replace the EDITOR part with your own editor).
+# Usage: ave group_vars/all/vault.yml
+alias ave="ansible-vault edit --vault-password-file ~/pppddd"
