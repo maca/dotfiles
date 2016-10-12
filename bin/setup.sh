@@ -119,6 +119,8 @@ EOF
   ttf-vista-fonts ttf-aller ttf-amiri otf-neris ttf-monaco\
   ttf-brill ttf-freefont ttf-ms-fonts
   cd -
+
+  # adobe pro fonts? 
 }
 
 # run as root
