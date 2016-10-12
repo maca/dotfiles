@@ -13,12 +13,6 @@ xkbset exp 1 =accessx =sticky =twokey =latchlock
 setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
 
 /usr/lib/systemd/systemd --user &
-/usr/bin/start-pulseaudio-x11
-pasystray &
-xcompmgr &
-"$HOME/bin/displays" &
-simpleswitcher &
 udiskie &
-# conky -d -c "$HOME/dotfiles/conkyrc/conkyrc"
 
 exec dbus-launch awesome
