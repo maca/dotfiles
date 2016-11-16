@@ -13,6 +13,7 @@ basic_setup(){
   mkinitcpio -p linux
 
   read -p "¿como se llama esta máquina? " hostname
+
   echo $hostname > /etc/hostname
 
   echo "tmpfs   /tmp         tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
@@ -318,4 +319,34 @@ SigLevel = Never
 Server = http://files.zerogw.com/arch-kernel/\$arch
 EOT
 
+}
+
+setup_webdav_mount(){
+  pacman -S davfs2
+  sudo usermod -a -G network $(whoami)
+
+  read "url?Url: "
+  read "user?User: "
+  read -s "password?Password: "
+  echo
+  read "mount?Mount dir: "
+
+  read "reply?Is the url ($url) correct? "
+  if [[ ! $reply =~ ^[Yy]$ ]]
+  then
+    return 1
+  fi
+
+  # Create mount point
+  mkdir -p $mount
+
+  # Davfs user secrets
+  mkdir -p ~/.davfs2/
+  echo "$url $user $password" >> ~/.davfs2/secrets
+  chmod 0600 ~/.davfs2/secrets
+
+  # Add mount to fstab
+  cat <<EOT | sudo tee -a /etc/fstab
+$url $mount davfs user,noauto,uid=$user,file_mode=600,dir_mode=700 0 1
+EOT
 }
