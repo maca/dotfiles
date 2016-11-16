@@ -25,7 +25,7 @@ table5={
    ["i"]={"urxvt -name weechat -title weechat -e weechat-curses","weechat", "instance"},
 
    ["r"]={"gmrun","Gmrun"},
-   ["b"]={"chromium", "chromium"},
+   ["b"]={"chromium", "Chromium"},
    ["w"]={"/usr/lib/virtualbox/VirtualBox --comment Windoze --startvm 9112bdaa-21ef-4092-a5d9-a4c52e18f520 --no-startvm-errormsgbox", "VirtualBox"},
    ["v"]={"gpicview","Gpicview"},
    ["s"]={"smplayer","smplayer"},
