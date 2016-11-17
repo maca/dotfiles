@@ -51,6 +51,7 @@ setup_dotfiles(){
 
   mkdir -p ~/.config/fontconfig/
   ln -fs $HOME/dotfiles/awesome ~/.config/awesome
+  ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
   ln -fs $HOME/dotfiles/gtk-3.0 ~/.config/gtk-3.0
   ln -sf $HOME/dotfiles/gtkrc-2.0 ~/.gtkrc-2.0
 
@@ -76,7 +77,7 @@ install_wm(){
     vlc gvim arandr
 
   cd /tmp
-  bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock
+  bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock compton
   cd -
 }
 
