@@ -107,6 +107,9 @@ alias space="sudo du -sh *"
 alias pacman="sudo pacman"
 alias docker-job="docker run --rm"
 
+alias dcu="docker-compose up"
+alias dcr="docker-compose run"
+
 alias ll="ls -la"
 alias l.="ls -a"
 
