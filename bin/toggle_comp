@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PIDS=`pidof -o $$ compton`
+
+if [ x$PIDS != x ]
+    then kill -s SIGTERM $PIDS
+    else compton -CGb
+fi
