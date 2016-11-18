@@ -14,6 +14,7 @@ setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
 
 /usr/lib/systemd/systemd --user &
 xbindkeys &
+unclutter &
 udiskie &
 
 exec dbus-launch bubbles
