@@ -6,4 +6,7 @@ GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
 source /usr/share/chruby/chruby.sh
 source /usr/share/chruby/auto.sh
-source /usr/share/nvm/init-nvm.sh
+
+if [[ -f /usr/share/nvm/init-nvm.sh ]]; then
+  source /usr/share/nvm/init-nvm.sh
+fi
