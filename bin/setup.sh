@@ -52,6 +52,7 @@ setup_dotfiles(){
   mkdir -p ~/.config/fontconfig/
   ln -fs $HOME/dotfiles/awesome ~/.config/awesome
   ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
+  ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
   ln -fs $HOME/dotfiles/gtk-3.0 ~/.config/gtk-3.0
   ln -sf $HOME/dotfiles/gtkrc-2.0 ~/.gtkrc-2.0
 
@@ -71,13 +72,13 @@ install_basics () {
 # run as user
 install_wm(){
   pacman -Syu
-  pacman -S awesome chromium rxvt-unicode smplayer spacefm terminus-font\
-    xf86-video-intel xorg-server xorg-utils redshift zenity apvlv firefox\
+  pacman -S chromium rxvt-unicode smplayer spacefm terminus-font\
+    xf86-video-intel xorg-server xorg-utils redshift zenity apvlv\
     xcompmgr xorg-xinit xorg-xrdb pavucontrol gmrun unclutter urxvt-perls\
-    vlc gvim arandr
+    vlc gvim arandr xbindkeys
 
   cd /tmp
-  bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock compton
+  bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock compton bubbleswm
   cd -
 }
 
