@@ -352,3 +352,15 @@ setup_webdav_mount(){
 $url $mount davfs user,noauto,uid=$user,file_mode=600,dir_mode=700 0 1
 EOT
 }
+
+# Run as root
+setup_open_vpn() {
+  pacman -Sy openvpn ufw bind-tools
+
+  read -p "¿Ya copiaste la configuración para Romania? " response
+  bash <(curl aur.sh) -si vpnfailsafe-git
+
+  sudo systemctl start openvpn@Mullvad_ro
+  sudo systemctl enable openvpn@MullVad_ro
+  /home/maca/bin/ufw-kill-switch-setup
+}
