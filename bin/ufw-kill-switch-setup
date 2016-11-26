@@ -1,47 +1,30 @@
 #!/usr/bin/sh
 
-vpns="ro.mullvad.net"
-
 # reset rules
 sudo ufw disable
 sudo ufw --force reset
-
 
 # set default behaviour of and enable ufw
 sudo ufw default deny incoming
 sudo ufw default deny outgoing
 
-
-# allow local traffic
-sudo ufw allow to 192.168.178.0/24
-sudo ufw allow in from 192.168.178.0/24
-
-
 # allow vpn connection to be established
 sudo ufw allow in 1300/udp
 sudo ufw allow out 1300/udp
-
-
-# allow vpn ip address
-ipRegexp='([0-9]*\.){3}[0-9]*'
-addrRegexp="Address: (addr:)?$ipRegexp"
-for vpn in $vpns
-do
-  ips=$(nslookup $vpn | grep -Eo "$addrRegexp" | grep -Eo "$ipRegexp")
-  for ip in $ips
-
-  do
-    echo "Allowing connections from VPN server: $ip"
-    sudo ufw allow in from $ip to any
-    sudo ufw allow out from $ip to any
-  done
-done
-
 
 # allow all traffic over VPN interface
 sudo ufw allow in on tun0 from any to any
 sudo ufw allow out on tun0 from any to any
 
+# allow docker connections
+sudo ufw allow in on docker0 from any to any
+sudo ufw allow out on docker0 from any to any
+
+# allow local traffic
+sudo ufw allow from 192.168.178.0/24
+sudo ufw allow out to 192.168.178.0/24
+sudo ufw allow from 192.168.15.0/24
+sudo ufw allow out to 192.168.15.0/24
 
 # DNS issues?
 # sudo ufw allow 53
