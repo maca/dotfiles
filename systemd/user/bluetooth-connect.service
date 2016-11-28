@@ -1,0 +1,12 @@
+[Unit]
+Description=Connect to bluetooth headsets
+After=bluetooth.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/maca/bin/bluetooth-connect
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
