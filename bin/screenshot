@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# import is provided by imagemagick
+
+SCREENSHOT="/tmp/screenshot-$(date +'%Y-%m-%d--%T').png"
+
+if [[ $1 == "active" ]]; then
+    LINE=$(xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)")
+    ID=${LINE:40}
+
+    import -window "$ID" $SCREENSHOT
+
+else
+    import -window root $SCREENSHOT
+
+fi
+
+chmod 600 $SCREENSHOT
+# xdg-open $SCREENSHOT
