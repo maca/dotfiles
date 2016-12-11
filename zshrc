@@ -121,6 +121,8 @@ alias x=extract
 alias offline-site="wget -r -k -p"
 alias trim-white="find ./ -type f -exec sed -i 's/ *$//' '{}' ';'"
 
+alias mosh="mosh --predict=experimental"
+
 # sudo aliases
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown"

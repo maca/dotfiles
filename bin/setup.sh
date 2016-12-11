@@ -66,7 +66,7 @@ install_basics () {
     pulseaudio rsync ruby tk tmux udiskie vim acpi conky zip unzip\
     dnsmasq sshfs weechat python2 wget ntp ack dtach tor btrfs-progs\
     pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware alsa-lib\
-    libpulse faad2 flac libmad libmp4v2 libvorbis wavpack
+    libpulse faad2 flac libmad libmp4v2 libvorbis wavpack mosh
 }
 
 # run as user
