@@ -1,3 +1,4 @@
 #!/bin/sh
 
-ssh kujenga.co -t 'LANG=en_US.UTF-8 exec tmux attach'
+eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+mosh 96.126.104.103 -- tmux attach
