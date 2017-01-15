@@ -1,4 +1,4 @@
 #!/bin/sh
 
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-mosh 96.126.104.103 -- tmux attach
+mosh --predict=experimental 96.126.104.103 -- tmux attach

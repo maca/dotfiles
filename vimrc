@@ -2,40 +2,41 @@ set nocompatible                  " Must come first because it changes other opt
 filetype off
 
 " set the runtime path to include Vundle and initialize
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'vim-scripts/ZoomWin'
-Plugin 'mileszs/ack.vim'
-Plugin 'Townk/vim-autoclose'
-Plugin 'tpope/vim-commentary'
-Plugin 'kien/ctrlp.vim'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ElmCast/elm-vim'
+Plugin 'KabbAmine/vCoolor.vim'
+Plugin 'KabbAmine/zeavim.vim'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Townk/vim-autoclose'
+Plugin 'airblade/vim-rooter'
+Plugin 'ecomba/vim-ruby-refactoring'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'ervandew/supertab'
+Plugin 'godlygeek/tabular.git'
+Plugin 'hail2u/vim-css3-syntax.git'
+Plugin 'hrother/offlineimaprc.vim'
+Plugin 'juvenn/mustache.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'mattn/emmet-vim'
+Plugin 'mattn/gist-vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'sjl/gundo.vim'
+Plugin 'slim-template/vim-slim'
+Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
-Plugin 'sjl/gundo.vim'
-Plugin 'juvenn/mustache.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'slim-template/vim-slim'
-Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-surround'
-Plugin 'godlygeek/tabular.git'
-Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/ZoomWin'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/vim-coffee-script'
-Plugin 'mattn/emmet-vim'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'mattn/gist-vim'
-Plugin 'airblade/vim-rooter'
-Plugin 'KabbAmine/zeavim.vim'
-Plugin 'KabbAmine/vCoolor.vim'
-Plugin 'hrother/offlineimaprc.vim'
-Plugin 'hail2u/vim-css3-syntax.git'
-Plugin 'wakatime/vim-wakatime'
-Plugin 'ecomba/vim-ruby-refactoring'
 
-" All of your Plugins must be added before the following line
-" call vundle#end()            " required
+call vundle#end()            " required
+
 
 filetype plugin indent on         " Turn on file type detection.
 syntax enable                     " Turn on syntax highlighting.

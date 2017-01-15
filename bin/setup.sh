@@ -62,20 +62,22 @@ setup_dotfiles(){
 # run as user
 install_basics () {
   pacman -Syu
-  pacman -S cmus dialog wpa_supplicant wpa_actiond gawk git keychain openssh\
-    pulseaudio rsync ruby tk tmux udiskie vim acpi conky zip unzip\
-    dnsmasq sshfs weechat python2 wget ntp ack dtach tor btrfs-progs\
-    pulseaudio-alsa bluez bluez-libs bluez-utils bluez-firmware alsa-lib\
-    libpulse faad2 flac libmad libmp4v2 libvorbis wavpack mosh
+  pacman -S\
+    cmus dialog gawk git keychain openssh rsync ruby tk tmux vim\
+    conky zip unzip sshfs python2 wget ntp ack dtach btrfs-progs mosh\
+    inotify-tools
 }
 
 # run as user
 install_wm(){
   pacman -Syu
-  pacman -S chromium rxvt-unicode smplayer spacefm terminus-font\
-    xf86-video-intel xorg-server xorg-utils redshift zenity apvlv\
-    xcompmgr xorg-xinit xorg-xrdb pavucontrol gmrun unclutter urxvt-perls\
-    vlc gvim arandr xbindkeys
+  pacman -S\
+    chromium rxvt-unicode smplayer spacefm terminus-font\
+    xf86-video-intel xorg-server xorg-utils redshift zenity apvlv xcompmgr\
+    xorg-xinit xorg-xrdb pavucontrol gmrun unclutter urxvt-perls vlc\
+    gvim arandr xbindkeys pulseaudio pulseaudio-alsa bluez bluez-libs\
+    bluez-utils bluez-firmware alsa-lib libpulse faad2 flac libmad libmp4v2\
+    libvorbis wavpack wpa_supplicant wpa_actiond udiskie acpi dnsmasq tor
 
   cd /tmp
   bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock compton bubbleswm
