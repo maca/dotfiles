@@ -6,7 +6,7 @@ URxvt.depth: 32
 URxvt.background: rgba:0000/0000/0000/cccc
 URxvt.foreground: rgba:8800/9200/cc00/ffff
 
-URxvt.font: xft:mono:medium:size=12
+URxvt.font: xft:Terminus:size=14:antialiasing=false
 
 URxvt.geometry: 81x25
 !! URxvt.cursorUnderline: True
