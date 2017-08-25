@@ -48,6 +48,7 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/ctags ~/.ctags
   ln -fs $HOME/dotfiles/gitignore ~/.gitignore
   ln -fs $HOME/dotfiles/bin ~/bin
+  ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
   mkdir -p ~/.config/fontconfig/
   ln -fs $HOME/dotfiles/awesome ~/.config/awesome

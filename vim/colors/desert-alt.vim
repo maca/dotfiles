@@ -93,8 +93,8 @@ hi link javaScriptNumber Number
 hi link csXmlTag Keyword 
 
 " Special for diff
-highlight DiffAdd ctermbg=8 guibg=2
-highlight DiffDelete ctermbg=88 guibg=88
-highlight DiffChange ctermbg=235 guibg=235
-highlight DiffText ctermbg=18 guibg=18
+highlight DiffAdd ctermbg=8
+highlight DiffDelete ctermbg=88
+highlight DiffChange ctermbg=235
+highlight DiffText ctermbg=18
 

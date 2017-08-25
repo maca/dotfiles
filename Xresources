@@ -3,10 +3,8 @@ URxvt.scrollBar: off
 !! URxvt.scrollstyle: plain
 !! URxvt.scrollBar_left: true
 URxvt.depth: 32
-URxvt.background: rgba:0000/0000/0000/cccc
-URxvt.foreground: rgba:8800/9200/cc00/ffff
 
-URxvt.font: xft:Terminus:size=14:antialiasing=false
+URxvt.font: xft:Terminus:size=12:antialiasing=false
 
 URxvt.geometry: 81x25
 !! URxvt.cursorUnderline: True
@@ -27,14 +25,45 @@ URxvt.keysym.C-S-Up:   perl:font-size:incglobal
 URxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 !! Copy paste
-URxvt.keysym.M-C-c: perl:clipboard:copy
+URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v:   perl:clipboard:paste
-URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-S-v: perl:clipboard:paste_escaped
 
 !! Select
-URxvt.keysym.M-C-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 
+!! Dark theme
+URxvt.background: rgba:0000/0000/0000/cccc
+URxvt.foreground: rgba:8800/9200/cc00/ffff
 *color4:  #204a87
 *color8:  #08360c
 *color12: #3465a4
+
+!! Light Theme
+!! urxvt*foreground: white
+!! urxvt*background: black
+!!
+!! *color0:  #2E3436
+!! *color1:  #a40000
+!! *color2:  #4E9A06
+!! *color3:  #C4A000
+!! *color4:  #3465A4
+!! *color5:  #75507B
+!! *color6:  #ce5c00
+!! *color7:  #babdb9
+!! *color8:  #555753
+!! *color9:  #EF2929
+!! *color10: #8AE234
+!! *color11: #FCE94F
+!! *color12: #729FCF
+!! *color13: #AD7FA8
+!! *color14: #fcaf3e
+!! *color15: #EEEEEC
+
+urxvt*dynamicColors: on
+
+urxvt*perl-ext-common: urxvt-colors
+urxvt*perl-lib: /home/maca/bin/
+urxvt*keysym.M-d: perl:urxvt-colors
+

@@ -5,7 +5,8 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'VundleVim/Vundle'
 Plugin 'ElmCast/elm-vim'
 Plugin 'KabbAmine/vCoolor.vim'
 Plugin 'KabbAmine/zeavim.vim'
@@ -33,6 +34,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/ZoomWin'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/vim-coffee-script'
+Plugin 'NLKNguyen/papercolor-theme'
 
 call vundle#end()            " required
 

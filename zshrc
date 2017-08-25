@@ -24,6 +24,7 @@ unset GREP_OPTIONS
 export GOPATH=~/.go
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$HOME/.dynamic-colors/bin:$PATH"
 
 export BUILDDIR=/scratch
 
@@ -162,3 +163,5 @@ alias avv="ansible-vault view --vault-password-file ~/pppddd"
 # Edit the vault in Sublime (in case you don't use sublime, replace the EDITOR part with your own editor).
 # Usage: ave group_vars/all/vault.yml
 alias ave="ansible-vault edit --vault-password-file ~/pppddd"
+
+source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
