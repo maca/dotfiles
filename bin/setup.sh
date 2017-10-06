@@ -54,8 +54,6 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/awesome ~/.config/awesome
   ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
   ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
-  ln -fs $HOME/dotfiles/gtk-3.0 ~/.config/gtk-3.0
-  ln -sf $HOME/dotfiles/gtkrc-2.0 ~/.gtkrc-2.0
 
   vim +PluginInstall +qall
 }
@@ -63,25 +61,20 @@ setup_dotfiles(){
 # run as user
 install_basics () {
   pacman -Syu
-  pacman -S\
-    cmus dialog gawk git keychain openssh rsync ruby tk tmux vim\
-    conky zip unzip sshfs python2 wget ntp ack dtach btrfs-progs mosh\
-    inotify-tools
+  pacman -S openssh ruby tmux
 }
 
 # run as user
 install_wm(){
   pacman -Syu
   pacman -S\
-    chromium rxvt-unicode smplayer spacefm terminus-font\
-    xf86-video-intel xorg-server xorg-utils redshift zenity apvlv xcompmgr\
-    xorg-xinit xorg-xrdb pavucontrol gmrun unclutter urxvt-perls vlc\
-    gvim arandr xbindkeys pulseaudio pulseaudio-alsa bluez bluez-libs\
-    bluez-utils bluez-firmware alsa-lib libpulse faad2 flac libmad libmp4v2\
-    libvorbis wavpack wpa_supplicant wpa_actiond udiskie acpi dnsmasq tor
+    gvim urxvt xorg-server xorg-xinit ctags chromium pulseaudio \
+    pulseaudio-alsa urxvt-perls terminus-font gmrun xcompmgr rsync \
+    pavucontrol
 
   cd /tmp
-  bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock compton bubbleswm
+  bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock \
+    bubbleswm-git
   cd -
 }
 
@@ -95,38 +88,21 @@ install_dev_env(){
   cd -
 }
 
-# run as user
+# run as root
 setup_fonts() {
-  sudo sh -c "cat >> /etc/pacman.conf" <<EOF
+  cat <<EOT > /etc/fonts/conf.avail/33-TerminusPCFFont.conf
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+   <alias>
+       <family>Terminus</family>
+       <prefer><family>xos4 Terminus</family></prefer>
+       <default><family>fixed</family></default>
+   </alias>
+</fontconfig>
+EOT
 
-[infinality-bundle]
-Server = http://bohoomil.com/repo/\$arch
-
-[infinality-bundle-multilib]
-Server = http://bohoomil.com/repo/multilib/\$arch
-
-[infinality-bundle-fonts]
-Server = http://bohoomil.com/repo/fonts
-EOF
-
-  sudo pacman-key -r 962DDE58
-  sudo pacman-key -lsign-key 962DDE58
-  sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
-
-  pacman -Sy
-  pacman -S ttf-bitstream-vera\
-    ttf-dejavu ttf-freefont ttf-inconsolata ttf-liberation\
-    ttf-linux-libertine ttf-oxygen-ibx\
-    ttf-ubuntu-font-family cairo-infinality-ultimate\
-    fontconfig-infinality-ultimate freetype2-infinality-ultimate
-
-  cd /tmp
-  bash <(curl aur.sh) -si otf-neris ttf-brill ttf-monaco ttf-ms-fonts\
-  ttf-vista-fonts ttf-aller ttf-amiri otf-neris ttf-monaco\
-  ttf-brill ttf-freefont ttf-ms-fonts
-  cd -
-
-  # adobe pro fonts? 
+ln -s /etc/fonts/conf.avail/33-TerminusPCFFont.conf /etc/fonts/conf.d
 }
 
 # run as root
@@ -152,7 +128,7 @@ setup_network(){
   systemctl enable ntpd.service
 
   echo "nameserver 127.0.0.1"     >  /etc/resolv.conf.head
-  echo address=/.dev/127.0.0.1    >> /etc/dnsmasq.conf
+  echo address=/.local/127.0.0.1    >> /etc/dnsmasq.conf
   echo address=/.doc/127.0.0.1    >> /etc/dnsmasq.conf
 
   systemctl enable dnsmasq
