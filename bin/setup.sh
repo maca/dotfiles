@@ -51,7 +51,6 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
   mkdir -p ~/.config/fontconfig/
-  ln -fs $HOME/dotfiles/awesome ~/.config/awesome
   ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
   ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
 
