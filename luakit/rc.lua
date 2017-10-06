@@ -176,4 +176,22 @@ else
     window.new(uris)
 end
 
+modes.add_cmds({
+    { ":pb", "save bookmark in pinboard", function (w,a)
+        w.view:eval_js("javascript:if(document.getSelection){s=document.getSelection();}else{s='';};document.location='https://pinboard.in/add?next=same&url='+encodeURIComponent(location.href)+'&description='+encodeURIComponent(s)+'&title='+encodeURIComponent(document.title)", { no_return = true })
+    end }
+})
+
+search_engines = {
+    s           = "http://startpage.com/do/search?q=%s",
+    google      = "https://google.com/search?q=%s",
+    go          = "https://duckduckgo.com/?q=%s",
+    wk          = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
+    imdb        = "http://imdb.com/find?s=all&q=%s",
+    gh          = "https://github.com/search?q=%s",
+    lh          = "luakit://history/?q=%s",
+    pb          = "https://pinboard.in/search/u:macario?query=%s&fulltext=on",
+    maps        = "https://maps.google.com/maps?q=%s&hl=en&t=m&z=10&iwloc=A",
+    so          = "https://stackoverflow.com/search?q=%s"
+}
 -- vim: et:sw=4:ts=8:sts=4:tw=80
