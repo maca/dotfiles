@@ -8,7 +8,6 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle'
 Plugin 'ElmCast/elm-vim'
-Plugin 'KabbAmine/vCoolor.vim'
 Plugin 'KabbAmine/zeavim.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Townk/vim-autoclose'
@@ -186,10 +185,6 @@ match Todo /\s\+$/
 " New line on Enter on normal mode
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
-
-" VCoolor
-let g:vcoolor_lowercase = 1
-map <C-c> :VCoolor<CR>
 
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%82v', 100)
