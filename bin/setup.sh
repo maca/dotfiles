@@ -69,7 +69,7 @@ install_wm(){
   pacman -S\
     gvim urxvt xorg-server xorg-xinit ctags chromium pulseaudio \
     pulseaudio-alsa urxvt-perls terminus-font gmrun xcompmgr rsync \
-    pavucontrol
+    pavucontrol xautolock slock
 
   cd /tmp
   bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock \
