@@ -34,6 +34,7 @@ Plugin 'vim-scripts/ZoomWin'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/vim-coffee-script'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'idris-hackers/idris-vim'
 
 call vundle#end()            " required
 
