@@ -60,20 +60,20 @@ setup_dotfiles(){
 # run as user
 install_basics () {
   pacman -Syu
-  pacman -S openssh ruby tmux
+  pacman -S openssh ruby tmux rsync
 }
 
 # run as user
 install_wm(){
   pacman -Syu
   pacman -S\
-    gvim urxvt xorg-server xorg-xinit ctags chromium pulseaudio \
-    pulseaudio-alsa urxvt-perls terminus-font gmrun xcompmgr rsync \
+    gvim rxvt-unicode xorg-server xorg-xinit chromium pulseaudio \
+    pulseaudio-alsa urxvt-perls terminus-font gmrun xcompmgr \
     pavucontrol xautolock slock
 
   cd /tmp
   bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock \
-    bubbleswm-git
+    bubbleswm-git redshift-minimal-git
   cd -
 }
 
@@ -184,7 +184,7 @@ EOT
 
 # run as root
 setup_keyboard() {
-    [[ -d /etc/X11/xorg.conf.d ]] && cat > /etc/X11/xorg.conf.d/01-keyboard_layout.conf <<EOF
+  cat > /etc/X11/xorg.conf.d/01-keyboard_layout.conf <<EOF
 Section "InputClass"
         Identifier "keyboard-layout"
         MatchIsKeyboard "yes"
