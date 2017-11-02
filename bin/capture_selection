@@ -1,0 +1,3 @@
+#!/bin/bash
+
+import /scratch/sel-$(date +%Y-%m-%d--%T).png

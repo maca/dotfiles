@@ -98,51 +98,20 @@ RPROMPT='%{$reset_color%} %{$fg[cyan]%}%*%{$reset_color%}'
 export EDITOR=vim
 export BROWSER=chromium
 
-# alias
-alias etter="sudo ettercap -C -i en1"
-alias rs=rspec
-alias g=git
-alias offline-site="wget -r -k -p"
 alias comp="tar cvfz"
 alias space="sudo du -sh *"
-alias pacman="sudo pacman"
-alias docker-job="docker run --rm"
-
-alias dcu="docker-compose up"
-alias dcr="docker-compose run"
-
-alias ll="ls -la"
-alias l.="ls -a"
-
-alias ..='cd ..'
-
 alias view="gpicview"
-# if [ -f /usr/bin/gvim ]; then; alias vim="vim --servername TERM"; fi
 alias x=extract
-alias offline-site="wget -r -k -p"
-alias trim-white="find ./ -type f -exec sed -i 's/ *$//' '{}' ';'"
-
 alias mosh="mosh --predict=experimental"
-
-# sudo aliases
-alias reboot="sudo reboot"
-alias shutdown="sudo shutdown"
-alias halt="sudo halt"
-alias mount="sudo mount"
-alias umount="sudo umount"
-alias powerdown="sudo powerdown"
-alias powerup="sudo powerup"
-alias powernow="sudo powernow"
-alias suspend="sudo pm-suspend"
-alias hibernate="sudo pm-hibernate"
-alias powertop="sudo powertop"
-alias off="sudo shutdown -hP now"
-
-alias rlog="tail -f log/development.log | grep -vE \"(^\s*$|asset)\""
+alias pc="pass -c"
 alias vlc="vlc --file-caching=10000"
 alias aur="bash <(curl aur.sh) -si"
+alias pacman="sudo pacman"
+alias reboot="sudo reboot"
+alias shutdown="sudo shutdown"
+alias mount="sudo mount"
+alias umount="sudo umount"
 
-alias v='f -t -e e -b viminfo'
 
 sticky_keys() {
    xkbset accessx sticky -twokey -latchlock
@@ -151,17 +120,5 @@ sticky_keys() {
 
 # ssh keychain, manage ssh keys
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-
-
-
-# Launch a playbook.
-# Usage: ap some_playbook.yml
-alias ap="ansible-playbook --vault-password-file ~/pppddd"
-# View a vault file.
-# Usage: avv group_vars/all/vault.yml
-alias avv="ansible-vault view --vault-password-file ~/pppddd"
-# Edit the vault in Sublime (in case you don't use sublime, replace the EDITOR part with your own editor).
-# Usage: ave group_vars/all/vault.yml
-alias ave="ansible-vault edit --vault-password-file ~/pppddd"
 
 source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
