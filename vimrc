@@ -118,6 +118,7 @@ set t_Co=256
 " Map leader to ,
 let mapleader = ","
 let g:mapleader = ","
+let maplocalleader = ",,"
 
 " Search word under cursor
 noremap <Leader>a :Ack <cword><cr>
@@ -197,3 +198,11 @@ let g:ackprg = 'ag --vimgrep'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|public\|data\|log\|tmp\|node_modules\|vendor$',
   \ }
+
+
+" Easymotion
+map <Leader> <Plug>(easymotion-prefix)
+
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
