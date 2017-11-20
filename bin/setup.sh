@@ -106,11 +106,10 @@ ln -s /etc/fonts/conf.avail/33-TerminusPCFFont.conf /etc/fonts/conf.d
 
 # run as root
 setup_postgresql(){
-  # pacman -Sy
-  # pacman -S postgresql
+  pacman -Sy postgresql
 
   systemd-tmpfiles --create postgresql.conf
-  mkdir /var/lib/postgres/data
+  mkdir -p /var/lib/postgres/data
   chown -c -R postgres:postgres /var/lib/postgres
   su - postgres -c "initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'"
   systemctl enable postgresql
