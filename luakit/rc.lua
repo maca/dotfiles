@@ -46,6 +46,10 @@ window.add_signal("build", function (w)
     r.layout:pack(widgets.scroll())
 end)
 
+-- Add adblock
+local adblock = require "adblock"
+local adblock_chrome = require "adblock_chrome"
+
 -- Load luakit binds and modes
 local modes = require "modes"
 local binds = require "binds"
@@ -56,10 +60,6 @@ require "settings_chrome"
 ----------------------------------
 -- Optional user script loading --
 ----------------------------------
-
--- Add adblock
-local adblock = require "adblock"
-local adblock_chrome = require "adblock_chrome"
 
 local webinspector = require "webinspector"
 
@@ -100,6 +100,8 @@ downloads.add_signal("open-file", function (file)
     luakit.spawn(string.format("xdg-open %q", file))
     return true
 end)
+
+downloads.default_dir = "/scratch"
 
 -- Add vimperator-like link hinting & following
 local follow = require "follow"
@@ -161,6 +163,13 @@ local tab_favicons = require "tab_favicons"
 -- Add :view-source command
 local view_source = require "view_source"
 
+local select = require "select"
+
+select.label_maker = function (s)
+    return s.sort(s.reverse(s.charset("fdsajklgh")))
+end
+
+
 -----------------------------
 -- End user script loading --
 -----------------------------
@@ -176,22 +185,33 @@ else
     window.new(uris)
 end
 
+
+local pb_snippet = "javascript:if(document.getSelection){s=document.getSelection();}else{s='';};document.location='https://pinboard.in/add?next=same&showtags=yes&url='+encodeURIComponent(location.href)+'&description='+encodeURIComponent(s)+'&title='+encodeURIComponent(document.title)"
+
+local pb_later_snippet = "javascript:if(document.getSelection){s=document.getSelection();}else{s='';};document.location='https://pinboard.in/add?next=same&later=yes&noui=yes&url='+encodeURIComponent(location.href)+'&description='+encodeURIComponent(s)+'&title='+encodeURIComponent(document.title)"
+
+
 modes.add_cmds({
-    { ":pb", "save bookmark in pinboard", function (w,a)
-        w.view:eval_js("javascript:if(document.getSelection){s=document.getSelection();}else{s='';};document.location='https://pinboard.in/add?next=same&url='+encodeURIComponent(location.href)+'&description='+encodeURIComponent(s)+'&title='+encodeURIComponent(document.title)", { no_return = true })
-    end }
+    { ":pb", "save bookmark in pinboard", function (w, a)
+        w.view:eval_js(pb_snippet, { no_return = true })
+    end },
+    { ":l", "save bookmark in pinboard", function (w, a)
+        w.view:eval_js(pb_later_snippet, { no_return = true })
+    end },
 })
 
-search_engines = {
-    s           = "http://startpage.com/do/search?q=%s",
-    google      = "https://google.com/search?q=%s",
-    go          = "https://duckduckgo.com/?q=%s",
-    wk          = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
-    imdb        = "http://imdb.com/find?s=all&q=%s",
-    gh          = "https://github.com/search?q=%s",
-    lh          = "luakit://history/?q=%s",
-    pb          = "https://pinboard.in/search/u:macario?query=%s&fulltext=on",
-    maps        = "https://maps.google.com/maps?q=%s&hl=en&t=m&z=10&iwloc=A",
-    so          = "https://stackoverflow.com/search?q=%s"
-}
+
+modes.add_binds("normal", {
+    { "K", "Go to next tab.", function (w) w:next_tab() end },
+    { "J", "Go to previous tab.", function (w) w:prev_tab() end },
+})
+
+-- search engine settings
+settings.window.search_engines.duckduckgo = "https://duckduckgo.com/?q=%s"
+settings.window.search_engines.github = "https://github.com/search?q=%s"
+settings.window.search_engines.google = "https://google.com/search?q=%s"
+settings.window.search_engines.imdb = "http://www.imdb.com/find?s=all&q=%s"
+settings.window.search_engines.wikipedia = "https://en.wikipedia.org/wiki/Special:Search?search=%s"
+settings.window.search_engines.default = settings.window.search_engines.duckduckgo
+
 -- vim: et:sw=4:ts=8:sts=4:tw=80
