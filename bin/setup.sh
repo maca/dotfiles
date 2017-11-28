@@ -65,13 +65,17 @@ setup_khal(){
     python-atomicwrites python-click-threading python-click-log vdirsyncer \
     python-tzlocal python-icalendar khal-git \
 
-  mkdir -p .config/khal
+  mkdir -p $HOME/.config/khal
   ln -fs $HOME/dotfiles/khal_config ~/.config/khal/config
 
-  mkdir -p .config/vdirsyncer
+  mkdir -p $HOME/.config/vdirsyncer
   ln -fs $HOME/dotfiles/vdirsyncer_config ~/.config/vdirsyncer/config
 
   systemctl --user enable vdirsyncer.timer
+  systemctl --user start vdirsyncer.timer
+
+  vdirsyncer discover cal
+  vdirsyncer sync
 }
 
 # run as user
