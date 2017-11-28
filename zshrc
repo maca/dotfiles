@@ -122,3 +122,5 @@ sticky_keys() {
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 
 source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
+
+khal list
