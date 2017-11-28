@@ -58,6 +58,23 @@ setup_dotfiles(){
 }
 
 # run as user
+setup_khal(){
+  bash <(curl aur.sh) -si \
+    python-sphinxcontrib-newsfeed python-vobject python-wsgi-intercept \
+    radicale python-pytest-xprocess python-pytest-subtesthack \
+    python-atomicwrites python-click-threading python-click-log vdirsyncer \
+    python-tzlocal python-icalendar khal-git \
+
+  mkdir -p .config/khal
+  ln -fs $HOME/dotfiles/khal_config ~/.config/khal/config
+
+  mkdir -p .config/vdirsyncer
+  ln -fs $HOME/dotfiles/vdirsyncer_config ~/.config/vdirsyncer/config
+
+  systemctl --user enable vdirsyncer.timer
+}
+
+# run as user
 install_basics () {
   pacman -Syu
   pacman -S openssh ruby tmux rsync

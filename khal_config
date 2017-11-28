@@ -1,0 +1,16 @@
+[calendars]
+
+[[cal_local]]
+path = ~/.calendars/*
+type = discover
+color = dark green
+
+[locale]
+timeformat = %H:%M
+dateformat = %m/%d/%Y
+longdateformat = %m/%d/%Y
+datetimeformat = %m/%d/%Y %H:%M
+longdatetimeformat = %m/%d/%Y %H:%M
+
+[default]
+highlight_event_days = True

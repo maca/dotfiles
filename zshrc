@@ -96,7 +96,7 @@ RPROMPT='%{$reset_color%} %{$fg[cyan]%}%*%{$reset_color%}'
 
 
 export EDITOR=vim
-export BROWSER=chromium
+export BROWSER=firefox
 
 alias comp="tar cvfz"
 alias space="sudo du -sh *"
@@ -122,3 +122,5 @@ sticky_keys() {
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 
 source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
+
+khal list
