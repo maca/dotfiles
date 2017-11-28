@@ -123,4 +123,9 @@ eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 
 source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 
+
+# Bash comp init
+autoload -U bashcompinit && bashcompinit
+source ~/dotfiles/todoman/_todo
 khal list
+todo

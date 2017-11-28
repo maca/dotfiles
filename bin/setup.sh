@@ -61,18 +61,22 @@ setup_dotfiles(){
 }
 
 # run as user
-setup_khal(){
+setup_tools(){
   bash <(curl aur.sh) -si \
     python-sphinxcontrib-newsfeed python-vobject python-wsgi-intercept \
     radicale python-pytest-xprocess python-pytest-subtesthack \
     python-atomicwrites python-click-threading python-click-log vdirsyncer \
     python-tzlocal python-icalendar khal-git \
+    python-ansi python-tabulate todoman \
 
   mkdir -p $HOME/.config/khal
   ln -fs $HOME/dotfiles/khal_config ~/.config/khal/config
 
   mkdir -p $HOME/.config/vdirsyncer
   ln -fs $HOME/dotfiles/vdirsyncer_config ~/.config/vdirsyncer/config
+
+  mkdir -p $HOME/.config/todoman/
+  ln -fs $HOME/dotfiles/todoman/todoman.conf ~/.config/todoman/todoman.conf
 
   systemctl --user enable vdirsyncer.timer
   systemctl --user start vdirsyncer.timer
