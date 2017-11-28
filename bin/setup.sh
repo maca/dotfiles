@@ -54,6 +54,9 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
   ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
 
+  mkdir -p .password-store/.git/hooks
+  ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
+
   vim +PluginInstall +qall
 }
 
