@@ -54,6 +54,7 @@ status_path = "~.local/share/vdirsyncer/status/"
 a = "cal_local"
 b = "cal_remote"
 collections = ["from a", "from b"]
+conflict_resolution = "b wins"
 
 # Calendars also have a color property
 metadata = ["displayname", "color"]
