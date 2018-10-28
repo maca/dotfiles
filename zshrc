@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh configuration.
 export TERM=screen-256color
 
+# ssh keychain, manage ssh keys
+eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+
 ZSH=/usr/share/oh-my-zsh/
 
 # Comment this out to disable weekly auto-update checks
@@ -36,18 +39,6 @@ setopt no_share_history
 
 # vi keybindings
 bindkey -v
-
-# Use modern completion system
-# autoload -Uz compinit
-# compinit
-
-# Custom widgets and keybidngs
-# enter insert mode and kill line
-function vi-cmd-mode-kill-whole-line() {
-  zle .kill-whole-line
-  zle .vi-insert
-}
-zle -N vi-cmd-mode-kill-whole-line
 
 # only past commands beginning with the current input will be shown
 bindkey -M viins "^[[A" vi-cmd-mode-and-history-beginning-search-forward
@@ -117,14 +108,5 @@ sticky_keys() {
    xkbset exp 1 '=accessx' '=sticky' '=twokey' '=latchlock'
 }
 
-# ssh keychain, manage ssh keys
-eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 
 source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
-
-
-# Bash comp init
-autoload -U bashcompinit && bashcompinit
-source ~/dotfiles/todoman/_todo
-khal list
-todo
