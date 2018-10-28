@@ -105,7 +105,6 @@ alias x=extract
 alias mosh="mosh --predict=experimental"
 alias pc="pass -c"
 alias vlc="vlc --file-caching=10000"
-alias aur="bash <(curl aur.sh) -si"
 alias pacman="sudo pacman"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown"
