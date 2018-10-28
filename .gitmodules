@@ -1,3 +1,6 @@
 [submodule "urxvt-perls"]
 	path = urxvt-perls
 	url = https://github.com/muennich/urxvt-perls.git
+[submodule "dynamic-colors"]
+	path = dynamic-colors
+	url = git://github.com/sos4nt/dynamic-colors
