@@ -14,7 +14,6 @@ setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
 
 /usr/lib/systemd/systemd --user &
 xbindkeys &
-xautolock -time 15 -locker /usr/bin/slock &
 unclutter &
 udiskie &
 
