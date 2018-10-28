@@ -1,0 +1,3 @@
+#!/bin/bash
+
+systemctl --user $(if [ "`systemctl --user is-active redshift`" == "active" ]; then echo "stop"; else echo "start"; fi) redshift
