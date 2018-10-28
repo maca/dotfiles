@@ -4,4 +4,4 @@
 *.swo
 .env
 .agignore
-tags
+./tags
