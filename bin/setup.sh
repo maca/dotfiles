@@ -26,7 +26,8 @@ basic_setup(){
 # run as user
 setup_dotfiles(){
   cd /tmp
-  bash <(curl aur.sh) -si chruby fasd xkbset oh-my-zsh-git par\
+  pacman -S pass pass-otp
+  aur -si chruby fasd xkbset oh-my-zsh-git par\
     ruby-install-git silver-searcher-git vundle
   cd -
   ln -fs $HOME/dotfiles/luakit ~/.config/luakit
@@ -62,7 +63,7 @@ setup_dotfiles(){
 
 # run as user
 setup_tools(){
-  bash <(curl aur.sh) -si \
+  aur -si \
     python-sphinxcontrib-newsfeed python-vobject python-wsgi-intercept \
     radicale python-pytest-xprocess python-pytest-subtesthack \
     python-atomicwrites python-click-threading python-click-log vdirsyncer \
@@ -100,8 +101,8 @@ install_wm(){
     pavucontrol xautolock slock
 
   cd /tmp
-  bash <(curl aur.sh) -si urxvt-font-size-git pulseaudio-ctl xtrlock \
-    bubbleswm-git redshift-minimal-git
+  aur -si urxvt-font-size-git pulseaudio-ctl xtrlock \
+    bubbles-git redshift-minimal-git
   cd -
 }
 
@@ -111,7 +112,7 @@ install_dev_env(){
   pacman -S ctags nodejs phantomjs imagemagick postgresql sqlite gpicview
 
   cd /tmp
-  bash <(curl aur.sh) -si heroku-client
+  aur -si heroku-client
   cd -
 }
 
@@ -363,7 +364,7 @@ setup_open_vpn() {
   pacman -Sy openvpn ufw bind-tools
 
   read -p "¿Ya copiaste la configuración para Romania? " response
-  bash <(curl aur.sh) -si vpnfailsafe-git
+  aur -si vpnfailsafe-git
 
   cat <<EOT | tee -a /etc/openvpn/MullVad_ro.conf
 script-security 2
