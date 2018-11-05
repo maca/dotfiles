@@ -87,7 +87,7 @@ RPROMPT='%{$reset_color%} %{$fg[cyan]%}%*%{$reset_color%}'
 
 
 export EDITOR=vim
-export BROWSER=firefox
+export BROWSER=chromium
 
 alias comp="tar cvfz"
 alias space="sudo du -sh *"
