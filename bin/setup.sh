@@ -26,7 +26,7 @@ basic_setup(){
 # run as user
 setup_dotfiles(){
   cd /tmp
-  pacman -S pass pass-otp
+  pacman -S pass pass-otp fzf the_silver_searcher
   aur -si chruby fasd xkbset oh-my-zsh-git par\
     ruby-install-git silver-searcher-git vundle
   cd -

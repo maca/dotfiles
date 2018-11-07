@@ -1,39 +1,31 @@
-set nocompatible " Must come first because it changes other options.
-filetype off
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
+Plug 'junegunn/fzf.vim'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'ElmCast/elm-vim'
+Plug 'KabbAmine/zeavim.vim'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'airblade/vim-rooter'
+Plug 'elixir-lang/vim-elixir'
+Plug 'godlygeek/tabular'
+Plug 'majutsushi/tagbar'
+Plug 'mattn/emmet-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'idris-hackers/idris-vim'
+Plug 'ludovicchabant/vim-gutentags'
 
-Plugin 'VundleVim/Vundle'
-Plugin 'lifepillar/vim-mucomplete'
-Plugin 'ElmCast/elm-vim'
-Plugin 'KabbAmine/zeavim.vim'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'airblade/vim-rooter'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'godlygeek/tabular.git'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mattn/emmet-vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'idris-hackers/idris-vim'
-Plugin 'ludovicchabant/vim-gutentags'
-
-call vundle#end()            " required
+call plug#end()
 
 
 filetype plugin indent on         " Turn on file type detection.
 syntax enable                     " Turn on syntax highlighting.
-
-runtime macros/matchit.vim        " Load the matchit plugin.
 
 set encoding=utf-8                " Use UTF-8 everywhere.
 set showcmd                       " Display incomplete commands.
@@ -57,7 +49,7 @@ set hlsearch                      " Highlight matches.
 set nowrap                        " Turn off line wrapping.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
 
-set foldmethod=syntax             " Folding for syntax
+set foldmethod=indent             " Folding for indent (syntax slows down for big files)
 
 set title                         " Set the terminal's title
 
@@ -80,8 +72,6 @@ set lazyredraw                   " Fixes relativenumber slow scroll
 
 set mouse=n                      " Mouse normal
 
-autocmd BufRead,BufNew *.elm :setlocal foldmethod=indent
-
 " Controversial...replace colon by semicolon for easier commands
 map ; :
 
@@ -89,8 +79,8 @@ map ; :
 nmap j gj
 nmap k gk
 
-
 set laststatus=2                  " Show the status line all the time
+
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
@@ -123,9 +113,9 @@ map <leader>tm :tabmove
 
 
 " Tabularize mappings
-map <Leader>t= :Tabularize /=<CR>
-map <Leader>t: :Tabularize /:<CR>
-map <Leader>t> :Tabularize /=>:<CR>
+map <leader>t= :Tabularize /=<CR>
+map <leader>t: :Tabularize /:<CR>
+map <leader>t> :Tabularize /=>:<CR>
 
 
 " Ctag mappings
@@ -139,10 +129,11 @@ imap jj <Esc>
 " system copy/paste
 vmap <leader>y "+y
 nmap <leader>p "+gP
+nmap <space>p :reg<CR>
 
 
 " history tree
-nnoremap ,h :GundoToggle<CR>
+nnoremap <Leader>h :GundoToggle<CR>
 
 
 " New line on Enter on normal mode
@@ -164,10 +155,13 @@ nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " File navigation and search
 let g:ctrlp_switch_buffer = 'vh' " ctrlp will open in buffer
-nmap <Leader>a :Ack <cword><CR>
-nmap <Space>f :CtrlPMixed<CR>
-nmap <Space>b :CtrlPBuffer<CR>
-nmap <Space>t :CtrlPTag<CR>
+nmap <space>f :FZF<cr>
+nmap <space>F :History<cr>
+nmap <space>b :Buffers<cr>
+nmap <space>a :Ag<cr>
+nmap <space>A :Ack <cword><CR>
+nmap <space>t :Tags<cr>
+nmap <space>T :Tags<cr>
 nmap <Space>tt :TagbarToggle<CR>
 
 
@@ -195,19 +189,6 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 
 
-" Ack configuration
-let g:ackprg = 'ag --vimgrep'
-if executable('ag')
-  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-  set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files. Lightning fast, respects .gitignore
-  " and .agignore. Ignores hidden files by default.
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -f -g ""'
-else
-  "ctrl+p ignore files in .gitignore
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-endif
-
 " Autocomplete
 filetype plugin on
 set noinfercase
@@ -215,6 +196,7 @@ set completeopt+=menuone,noselect,preview
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 set omnifunc=syntaxcomplete#Complete
+set tags=./tags
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#minimum_prefix_length = 1
 

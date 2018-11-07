@@ -7,7 +7,7 @@ vim/ruby/command-t/ext.o
 vim/.netrwhist
 *.swo
 *.swp
-vim/bundle
+vim/plugged
 systemd/user/default.target.wants/
 systemd/user/sockets.target.wants
 bin/python
