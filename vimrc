@@ -12,7 +12,6 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
-Plug 'scrooloose/nerdtree'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -57,7 +56,10 @@ set visualbell                    " No beeping.
 
 set nobackup                      " Don't make a backup before overwriting a file.
 set nowritebackup                 " And again.
-set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
+
+set directory=~/.vim/swap,/tmp    " Keep swap files in one location
+set backupdir=~/.vim/backup,/tmp
+set undodir=~/.vim/undo,/tmp
 
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
@@ -165,8 +167,6 @@ nmap <space>T :Tags<cr>
 nmap <Space>tt :TagbarToggle<CR>
 
 
-" Window commands with space
-map <Space> <c-W>
 " Jump to new pane when created
 nnoremap <C-w>s <C-w>s<C-w>j
 nnoremap <C-w>v <C-w>v<C-w>l
