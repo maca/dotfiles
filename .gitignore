@@ -13,3 +13,4 @@ systemd/user/sockets.target.wants
 bin/python
 bin/python-config
 bin/firefox
+tags

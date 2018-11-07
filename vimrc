@@ -7,32 +7,25 @@ call vundle#begin()
 
 
 Plugin 'VundleVim/Vundle'
+Plugin 'lifepillar/vim-mucomplete'
 Plugin 'ElmCast/elm-vim'
 Plugin 'KabbAmine/zeavim.vim'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Townk/vim-autoclose'
 Plugin 'airblade/vim-rooter'
 Plugin 'elixir-lang/vim-elixir'
-Plugin 'ervandew/supertab'
 Plugin 'godlygeek/tabular.git'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
-Plugin 'mattn/gist-vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sjl/gundo.vim'
-Plugin 'slim-template/vim-slim'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/ZoomWin'
-Plugin 'vim-scripts/taglist.vim'
 Plugin 'idris-hackers/idris-vim'
 Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'lifepillar/vim-mucomplete'
-
 
 call vundle#end()            " required
 
@@ -88,20 +81,28 @@ set lazyredraw                   " Fixes relativenumber slow scroll
 set mouse=n                      " Mouse normal
 
 autocmd BufRead,BufNew *.elm :setlocal foldmethod=indent
+
 " Controversial...replace colon by semicolon for easier commands
-nmap ; :
-vmap ; :
+map ; :
 
 " move un and down regardless of line
 nmap j gj
 nmap k gk
 
+
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
+
+" Color and highlighting
 set term=xterm-256color
 set t_Co=256
+colorscheme desert-alt
+set colorcolumn=64,80
+highlight ColorColumn ctermbg=100
+match Todo /\s\+$/
+
 
 " Map leader to ,
 let mapleader = ","
@@ -120,63 +121,82 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
+
 " Tabularize mappings
 map <Leader>t= :Tabularize /=<CR>
 map <Leader>t: :Tabularize /:<CR>
 map <Leader>t> :Tabularize /=>:<CR>
 
+
 " Ctag mappings
 map gt <C-]>
-map gs :ptselect<CR>
-map gb :pop<CR>
-map <Leader>gl :TlistOpen<CR>
-
 
 
 " quick escape
 imap jj <Esc>
 
-colorscheme desert-alt
 
 " system copy/paste
 vmap <leader>y "+y
 nmap <leader>p "+gP
 
+
 " history tree
 nnoremap ,h :GundoToggle<CR>
 
-" Cycle through panes with space
-map <Space> <c-W>w
-" Jump to new pane when created
-nnoremap <C-w>s <C-w>s<C-w>j
-nnoremap <C-w>v <C-w>v<C-w>l
-" Alias window mappings for tmux consistency
-map <C-a> <C-w>
-
-match Todo /\s\+$/
 
 " New line on Enter on normal mode
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-set colorcolumn=64,80
-highlight ColorColumn ctermbg=100
-
-
 
 set list listchars=tab:>-,trail:.,precedes:<,extends:>
 
 
-" File search
-" Search word under cursor
-noremap <Leader>a :Ack <cword><cr>
-nnoremap <C>P :CtrlPBuffer
-nnoremap <Leader>. :CtrlPBuffer<CR>
-nnoremap <Leader>.. :CtrlPTag<CR>
+" Easymotion
+map <Leader> <Plug>(easymotion-prefix)
 
+
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+
+" File navigation and search
+let g:ctrlp_switch_buffer = 'vh' " ctrlp will open in buffer
+nmap <Leader>a :Ack <cword><CR>
+nmap <Space>f :CtrlPMixed<CR>
+nmap <Space>b :CtrlPBuffer<CR>
+nmap <Space>t :CtrlPTag<CR>
+nmap <Space>tt :TagbarToggle<CR>
+
+
+" Window commands with space
+map <Space> <c-W>
+" Jump to new pane when created
+nnoremap <C-w>s <C-w>s<C-w>j
+nnoremap <C-w>v <C-w>v<C-w>l
+map <C-a> <C-w>
+map <Space>z :ZoomToggle<CR>
+
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+
+
+" Ack configuration
 let g:ackprg = 'ag --vimgrep'
-
-
 if executable('ag')
   " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
   set grepprg=ag\ --nogroup\ --nocolor
@@ -188,14 +208,13 @@ else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
 
-
-" Easymotion
-map <Leader> <Plug>(easymotion-prefix)
-
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-
-nmap tt :TagbarToggle<CR>
-
+" Autocomplete
+filetype plugin on
+set noinfercase
+set completeopt+=menuone,noselect,preview
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+set omnifunc=syntaxcomplete#Complete
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#minimum_prefix_length = 1
 
