@@ -61,6 +61,7 @@ set nowritebackup                 " And again.
 set directory=~/.vim/swap,/tmp    " Keep swap files in one location
 set backupdir=~/.vim/backup,/tmp
 set undodir=~/.vim/undo,/tmp
+set undofile                     " Persist undo across sessions
 
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
@@ -153,8 +154,11 @@ nmap <space>a :call fzf#vim#ag(expand('<cword>'))<cr>
 nmap <space>A :Ag<cr>
 nmap <space>t :call fzf#vim#tags(expand('<cword>'))<cr>
 nmap <space>T :Tags<cr>
-nmap <Space>tt :TagbarToggle<CR>
+nmap <Space>pt :TagbarOpen<CR>
 nmap <space>pp :reg<CR>
+
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
 
 
 " system copy/paste
