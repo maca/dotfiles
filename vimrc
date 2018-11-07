@@ -199,4 +199,9 @@ set omnifunc=syntaxcomplete#Complete
 set tags=./tags
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#minimum_prefix_length = 1
+let g:mucomplete#chains.default  = ['path', 'incl', 'tags', 'omni']
+imap <expr> <right> mucomplete#extend_fwd("\<right>")
+
+
+
 
