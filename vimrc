@@ -129,50 +129,44 @@ map gt <C-]>
 imap jj <Esc>
 
 
-" system copy/paste
-vmap <leader>y "+y
-nmap <leader>p "+gP
-nmap <space>p :reg<CR>
-
-
 " history tree
 nnoremap <Leader>h :GundoToggle<CR>
-
-
-" New line on Enter on normal mode
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
 
 
 set list listchars=tab:>-,trail:.,precedes:<,extends:>
 
 
 " Easymotion
-map <Leader> <Plug>(easymotion-prefix)
+map <leader> <plug>(easymotion-prefix)
 
 
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+" <leader>f{char} to move to {char}
+map  <leader>f <plug>(easymotion-bd-f)
+nmap <leader>f <plug>(easymotion-overwin-f)
 
 
 " File navigation and search
-let g:ctrlp_switch_buffer = 'vh' " ctrlp will open in buffer
 nmap <space>f :FZF<cr>
 nmap <space>F :History<cr>
 nmap <space>b :Buffers<cr>
-nmap <space>a :Ag<cr>
-nmap <space>A :Ack <cword><CR>
-nmap <space>t :Tags<cr>
+nmap <space>a :call fzf#vim#ag(expand('<cword>'))<cr>
+nmap <space>A :Ag<cr>
+nmap <space>t :call fzf#vim#tags(expand('<cword>'))<cr>
 nmap <space>T :Tags<cr>
 nmap <Space>tt :TagbarToggle<CR>
+nmap <space>pp :reg<CR>
+
+
+" system copy/paste
+vmap <leader>y "+y
+nmap <leader>p "+gP
 
 
 " Jump to new pane when created
-nnoremap <C-w>s <C-w>s<C-w>j
-nnoremap <C-w>v <C-w>v<C-w>l
-map <C-a> <C-w>
-map <Space>z :ZoomToggle<CR>
+nnoremap <c-w>s <c-w>s<c-w>j
+nnoremap <c-w>v <c-w>v<c-w>l
+map <c-a> <c-w>
+map <space>z :ZoomToggle<cr>
 
 
 " Zoom / Restore window.
