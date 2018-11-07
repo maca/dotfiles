@@ -27,7 +27,6 @@ unset GREP_OPTIONS
 export GOPATH=~/.go
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$GOPATH/bin"
-export PATH="$HOME/.dynamic-colors/bin:$PATH"
 
 export BUILDDIR=/scratch
 
@@ -107,6 +106,3 @@ sticky_keys() {
    xkbset accessx sticky -twokey -latchlock
    xkbset exp 1 '=accessx' '=sticky' '=twokey' '=latchlock'
 }
-
-
-source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
