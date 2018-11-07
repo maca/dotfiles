@@ -1,4 +1,4 @@
-set nocompatible                  " Must come first because it changes other options.
+set nocompatible " Must come first because it changes other options.
 filetype off
 
 " set the runtime path to include Vundle and initialize
@@ -12,12 +12,9 @@ Plugin 'KabbAmine/zeavim.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Townk/vim-autoclose'
 Plugin 'airblade/vim-rooter'
-Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'ervandew/supertab'
 Plugin 'godlygeek/tabular.git'
-Plugin 'hail2u/vim-css3-syntax.git'
-Plugin 'juvenn/mustache.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
@@ -32,9 +29,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/ZoomWin'
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-scripts/vim-coffee-script'
-Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'idris-hackers/idris-vim'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'lifepillar/vim-mucomplete'
+
 
 call vundle#end()            " required
 
@@ -63,7 +61,7 @@ set ruler                         " Show cursor position.
 set incsearch                     " Highlight matches as you type.
 set hlsearch                      " Highlight matches.
 
-set wrap                          " Turn on line wrapping.
+set nowrap                        " Turn off line wrapping.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
 
 set foldmethod=syntax             " Folding for syntax
@@ -89,17 +87,7 @@ set lazyredraw                   " Fixes relativenumber slow scroll
 
 set mouse=n                      " Mouse normal
 
-" Bring vim to front when a file is read
-function! g:BringVimToFront()
-  if v:servername == "STANDALONE"
-    silent !echo "run_or_raise.run_or_raise('/bin/sh', {instance = 'vim'})" | awesome-client &
-    redraw!
-  endif
-endfunction
-
-autocmd BufRead,TabEnter,RemoteReply * :call g:BringVimToFront()
-
-
+autocmd BufRead,BufNew *.elm :setlocal foldmethod=indent
 " Controversial...replace colon by semicolon for easier commands
 nmap ; :
 vmap ; :
@@ -120,8 +108,6 @@ let mapleader = ","
 let g:mapleader = ","
 let maplocalleader = ",,"
 
-" Search word under cursor
-noremap <Leader>a :Ack <cword><cr>
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
@@ -145,21 +131,7 @@ map gs :ptselect<CR>
 map gb :pop<CR>
 map <Leader>gl :TlistOpen<CR>
 
-nnoremap <Leader>. :CtrlPBuffer<CR>
-nnoremap <Leader>.. :CtrlPTag<CR>
-nnoremap <Leader>... :TagbarToggle<CR>
 
-
-" Switch between two files
-" autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
-
-" Manual folding on insert, back to defined on exit insert.
-autocmd FileType ruby setlocal foldmethod=syntax
-autocmd InsertEnter * let w:fdm=&foldmethod | setlocal foldmethod=manual
-autocmd InsertLeave * let &l:foldmethod=w:fdm
-
-" Folding for coffe
-au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 
 " quick escape
 imap jj <Esc>
@@ -172,7 +144,6 @@ nmap <leader>p "+gP
 
 " history tree
 nnoremap ,h :GundoToggle<CR>
-nnoremap <C>P :CtrlPBuffer
 
 " Cycle through panes with space
 map <Space> <c-W>w
@@ -188,16 +159,34 @@ match Todo /\s\+$/
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%82v', 100)
+set colorcolumn=64,80
+highlight ColorColumn ctermbg=100
+
+
 
 set list listchars=tab:>-,trail:.,precedes:<,extends:>
 
+
+" File search
+" Search word under cursor
+noremap <Leader>a :Ack <cword><cr>
+nnoremap <C>P :CtrlPBuffer
+nnoremap <Leader>. :CtrlPBuffer<CR>
+nnoremap <Leader>.. :CtrlPTag<CR>
+
 let g:ackprg = 'ag --vimgrep'
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|public\|data\|log\|tmp\|node_modules\|vendor$',
-  \ }
+
+if executable('ag')
+  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast, respects .gitignore
+  " and .agignore. Ignores hidden files by default.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -f -g ""'
+else
+  "ctrl+p ignore files in .gitignore
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+endif
 
 
 " Easymotion
@@ -206,3 +195,7 @@ map <Leader> <Plug>(easymotion-prefix)
 " <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+nmap tt :TagbarToggle<CR>
+
+
