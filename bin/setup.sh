@@ -46,7 +46,7 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
   ln -fs $HOME/dotfiles/Xresources ~/.Xresources
   ln -fs $HOME/dotfiles/themes ~/.themes
-  ln -fs $HOME/dotfiles/ctags ~/.ctags
+  ln -fs $HOME/dotfiles/ctags.d ~/.ctags.d
   ln -fs $HOME/dotfiles/gitignore ~/.gitignore
   ln -fs $HOME/dotfiles/bin ~/bin
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
@@ -109,7 +109,8 @@ install_wm(){
 # run as user
 install_dev_env(){
   pacman -Syu
-  pacman -S ctags nodejs phantomjs imagemagick postgresql sqlite gpicview
+  pacman -S nodejs phantomjs imagemagick postgresql sqlite gpicview
+  aur -si universa-ctags-git
 
   cd /tmp
   aur -si heroku-client

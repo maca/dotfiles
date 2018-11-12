@@ -2,24 +2,24 @@
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf.vim'
-Plug 'lifepillar/vim-mucomplete'
 Plug 'ElmCast/elm-vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'airblade/vim-rooter'
 Plug 'elixir-lang/vim-elixir'
 Plug 'godlygeek/tabular'
-Plug 'majutsushi/tagbar'
+Plug 'idris-hackers/idris-vim'
+Plug 'junegunn/fzf.vim'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim'
 Plug 'sjl/gundo.vim'
+Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'idris-hackers/idris-vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'lifepillar/vim-mucomplete'
 
 call plug#end()
 
@@ -50,6 +50,7 @@ set nowrap                        " Turn off line wrapping.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
 
 set foldmethod=indent             " Folding for indent (syntax slows down for big files)
+set nofoldenable                  " Do not fold automatically
 
 set title                         " Set the terminal's title
 
@@ -147,18 +148,18 @@ nmap <leader>f <plug>(easymotion-overwin-f)
 
 
 " File navigation and search
-nmap <space>f :FZF<cr>
-nmap <space>F :History<cr>
+nmap <space>f :History<cr>
+nmap <space>F :FZF<cr>
 nmap <space>b :Buffers<cr>
 nmap <space>a :call fzf#vim#ag(expand('<cword>'))<cr>
 nmap <space>A :Ag<cr>
 nmap <space>t :call fzf#vim#tags(expand('<cword>'))<cr>
 nmap <space>T :Tags<cr>
-nmap <Space>pt :TagbarOpen<CR>
-nmap <space>pp :reg<CR>
-
-let g:tagbar_autofocus = 1
-let g:tagbar_autoclose = 1
+nmap <Space>j :BTags<CR>
+nmap <Space>z :TagbarOpen<CR>
+nmap <space>p :reg<CR>
+nmap <space>o zo
+nmap <space>c zc
 
 
 " system copy/paste
@@ -170,7 +171,7 @@ nmap <leader>p "+gP
 nnoremap <c-w>s <c-w>s<c-w>j
 nnoremap <c-w>v <c-w>v<c-w>l
 map <c-a> <c-w>
-map <space>z :ZoomToggle<cr>
+map <c-w>z :ZoomToggle<cr>
 
 
 " Zoom / Restore window.
@@ -203,3 +204,48 @@ let g:mucomplete#chains.default  = ['path', 'incl', 'tags', 'omni']
 imap <expr> <right> mucomplete#extend_fwd("\<right>")
 
 
+
+let g:tagbar_autofocus = 1
+let g:tagbar_type_elm = {
+      \ 'ctagstype' : 'elm',
+      \ 'kinds'     : [
+      \ 'm:module:1:0',
+      \ 'i:import:1:0',
+      \ 't:type:1:0',
+      \ 'a:type alias:1:0',
+      \ 'c:type constructor:1:0',
+      \ 'p:port:1:0',
+      \ 'f:function:1:0',
+      \ 'S:test suite:1:0',
+      \ 'T:test:1:0',
+      \ 'D:test description:1:0',
+      \ ],
+      \ 'sro'      : ':',
+      \ 'kind2scope' : {
+      \ 'f' : 'function',
+      \ 'm' : 'module',
+      \ 't' : 'type',
+      \ 'S' : 'test suite',
+      \ 'T' : 'test',
+      \ 'D' : 'test description'
+      \ },
+      \ }
+
+
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 'functions:functions',
+        \ 'c:callbacks',
+        \ 'd:delegates',
+        \ 'e:exceptions',
+        \ 'i:implementations',
+        \ 'a:macros',
+        \ 'o:operators',
+        \ 'm:modules',
+        \ 'p:protocols',
+        \ 'r:records',
+        \ 't:tests'
+    \ ]
+\ }
