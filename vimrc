@@ -11,11 +11,12 @@ Plug 'godlygeek/tabular'
 Plug 'idris-hackers/idris-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'lifepillar/vim-mucomplete'
-Plug 'lifepillar/vim-mucomplete'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'mattn/emmet-vim'
-Plug 'sjl/gundo.vim'
 Plug 'majutsushi/tagbar'
+Plug 'mattn/emmet-vim'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -151,8 +152,8 @@ nmap <leader>f <plug>(easymotion-overwin-f)
 nmap <space>f :History<cr>
 nmap <space>F :FZF<cr>
 nmap <space>b :Buffers<cr>
-nmap <space>a :call fzf#vim#ag(expand('<cword>'))<cr>
-nmap <space>A :Ag<cr>
+nmap <space>A :Ack<CR>
+nmap <space>a :Ack <cword><CR>
 nmap <space>t :call fzf#vim#tags(expand('<cword>'))<cr>
 nmap <space>T :Tags<cr>
 nmap <Space>j :BTags<CR>
