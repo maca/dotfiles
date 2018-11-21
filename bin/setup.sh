@@ -33,7 +33,6 @@ setup_dotfiles(){
 
   ln -fs /tmp ~/Downloads
   ln -fs $HOME/dotfiles/zshrc ~/.zshrc
-  ln -fs $HOME/dotfiles/zshenv ~/.zshenv
   ln -fs $HOME/dotfiles/zprofile ~/.zprofile
   ln -fs $HOME/dotfiles/vimrc ~/.vimrc
   ln -fs $HOME/dotfiles/vim ~/.vim
@@ -48,8 +47,11 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/bin ~/bin
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
-  pacman -S pass pass-otp fzf the_silver_searcher binutils patch make fakeroot
-  aur -si chruby xkbset oh-my-zsh-git par ruby-install-git vim-plug
+  pacman -S pass pass-otp fzf the_silver_searcher binutils \
+    patch make fakeroot open openssh ruby tmux rsync keychain
+
+  aur -si chruby xkbset oh-my-zsh-git par ruby-install-git \
+    vim-plug
 
   cd -
 
@@ -63,35 +65,10 @@ setup_dotfiles(){
   vim +PlugInstall +qall
 }
 
-# run as user
-setup_tools(){
-  aur -si \
-    python-sphinxcontrib-newsfeed python-vobject python-wsgi-intercept \
-    radicale python-pytest-xprocess python-pytest-subtesthack \
-    python-atomicwrites python-click-threading python-click-log vdirsyncer \
-    python-tzlocal python-icalendar khal-git \
-    python-ansi python-tabulate todoman \
-
-  mkdir -p $HOME/.config/khal
-  ln -fs $HOME/dotfiles/khal_config ~/.config/khal/config
-
-  mkdir -p $HOME/.config/vdirsyncer
-  ln -fs $HOME/dotfiles/vdirsyncer_config ~/.config/vdirsyncer/config
-
-  mkdir -p $HOME/.config/todoman/
-  ln -fs $HOME/dotfiles/todoman/todoman.conf ~/.config/todoman/todoman.conf
-
-  systemctl --user enable vdirsyncer.timer
-  systemctl --user start vdirsyncer.timer
-
-  vdirsyncer discover cal
-  vdirsyncer sync
-}
 
 # run as user
 install_basics () {
   pacman -Syu
-  pacman -S openssh ruby tmux rsync
 }
 
 # run as user
@@ -103,8 +80,10 @@ install_wm(){
     pavucontrol xautolock slock
 
   cd /tmp
+
   aur -si urxvt-font-size-git pulseaudio-ctl xtrlock \
     bubbles-git redshift-minimal-git
+
   cd -
 }
 

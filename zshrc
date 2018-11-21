@@ -18,7 +18,7 @@ DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git gem thor heroku vi-mode nyan extract history-substring-search vagrant)
+plugins=(git gem thor heroku vi-mode extract history-substring-search vagrant)
 
 source $ZSH/oh-my-zsh.sh
 unset GREP_OPTIONS
