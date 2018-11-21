@@ -83,9 +83,7 @@ install_wm(){
 
   cd /tmp
 
-  aur -si urxvt-font-size-git pulseaudio-ctl xtrlock \
-    bubbles-git redshift-minimal-git
-
+  aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git redshift-minimal-git
   cd -
 
   # Autologin
