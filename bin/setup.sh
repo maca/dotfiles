@@ -47,7 +47,7 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
   pacman -S pass pass-otp fzf the_silver_searcher binutils \
-    patch make fakeroot open openssh ruby tmux rsync keychain
+    patch make fakeroot openssh ruby tmux rsync keychain
 
   aur -si chruby xkbset oh-my-zsh-git par ruby-install-git \
     vim-plug
