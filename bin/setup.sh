@@ -41,9 +41,9 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
   ln -fs $HOME/dotfiles/Xresources ~/.Xresources
   ln -fs $HOME/dotfiles/themes ~/.themes
-  ln -fs $HOME/dotfiles/ctags.d ~/.ctags.d
+  ln -fs $HOME/dotfiles/ctags.d/ ~/.ctags.d
   ln -fs $HOME/dotfiles/gitignore ~/.gitignore
-  ln -fs $HOME/dotfiles/bin ~/bin
+  ln -fs $HOME/dotfiles/bin/ ~/bin
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
   pacman -S pass pass-otp fzf the_silver_searcher binutils \
