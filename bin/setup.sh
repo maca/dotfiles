@@ -27,7 +27,6 @@ basic_setup(){
 setup_dotfiles(){
   cd /tmp
 
-  ln -fs $HOME/dotfiles/luakit ~/.config/luakit
   ln -fs $HOME/dotfiles/systemd ~/.config/systemd
   ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 
@@ -63,6 +62,9 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
 
   vim +PlugInstall +qall
+
+  echo "SSH Key setup"
+  ssh-keygen -t rsa -C "$(whoami)@$(cat /etc/hostname)"
 }
 
 
@@ -85,6 +87,19 @@ install_wm(){
     bubbles-git redshift-minimal-git
 
   cd -
+
+  # Autologin
+  sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
+  sudo sh -c "cat > /etc/systemd/system/getty@tty1.service.d/autologin.conf" <<EOF
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin $(whoami) --noclear %I 38400 linux
+Type=simple
+EOF
+
+  # Automount
+  pacman -S udevil
+  sudo systemctl enable devmon@$(whoami).service
 }
 
 # run as user
@@ -234,23 +249,6 @@ EOT
 
 }
 
-# run as user
-setup_automount(){
-  pacman -S udevil
-  sudo systemctl enable devmon@$(whoami).service
-}
-
-# run as user
-setup_auto_login(){
-  sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
-  sudo sh -c "cat > /etc/systemd/system/getty@tty1.service.d/autologin.conf" <<EOF
-[Service]
-ExecStart=
-ExecStart=-/usr/bin/agetty --autologin $(whoami) --noclear %I 38400 linux
-Type=simple
-EOF
-
-}
 
 # run as user
 setup_remote_tunnels(){
@@ -260,11 +258,6 @@ setup_remote_tunnels(){
   # systemctl --user enable ssh-tunnel@maca-kujenga.co-8080-80.service
 }
 
-# run as user
-setup_ssh_keys(){
-  echo "SSH Key setup"
-  ssh-keygen -t rsa -C "$(whoami)@$(cat /etc/hostname)"
-}
 
 setup_development_environment(){
   gem install bundler
@@ -273,88 +266,5 @@ setup_development_environment(){
   sudo systemctl enable nginx
 }
 
-# run as user
-setup_documentation(){
-  mkdir -p ~/Documentation
 
-  mkdir -p ~/Documentation/jquery
-  cd ~/Documentation/jquery
-  curl -O http://jqapi.com/jqapi.zip
-  unzip jqapi.zip
-  rm jqapi.zip
 
-  mkdir -p ~/Documentation/yard
-  mkdir -p ~/Documentation/yard/public
-  cat <<EOT > ~/Documentation/yard/config.ru
-require 'rubygems'
-require 'yard'
-
-libraries = {}
-gems = Gem.source_index.find_name('').each do |spec|
-  libraries[spec.name] ||= []
-  libraries[spec.name] << YARD::Server::LibraryVersion.new(spec.name, spec.version.to_s, nil, :gem)
-end
-
-run YARD::Server::RackAdapter.new libraries
-EOT
-
-  cd ~
-}
-
-setup_vagga(){
-  cat <<EOT >> /etc/pacman.conf
-
-[linux-user-ns]
-SigLevel = Never
-Server = http://files.zerogw.com/arch-kernel/\$arch
-EOT
-
-}
-
-setup_webdav_mount(){
-  pacman -S davfs2
-  sudo usermod -a -G network $(whoami)
-
-  read "url?Url: "
-  read "user?User: "
-  read -s "password?Password: "
-  echo
-  read "mount?Mount dir: "
-
-  read "reply?Is the url ($url) correct? "
-  if [[ ! $reply =~ ^[Yy]$ ]]
-  then
-    return 1
-  fi
-
-  # Create mount point
-  mkdir -p $mount
-
-  # Davfs user secrets
-  mkdir -p ~/.davfs2/
-  echo "$url $user $password" >> ~/.davfs2/secrets
-  chmod 0600 ~/.davfs2/secrets
-
-  # Add mount to fstab
-  cat <<EOT | sudo tee -a /etc/fstab
-$url $mount davfs user,noauto,uid=$user,file_mode=600,dir_mode=700 0 1
-EOT
-}
-
-# Run as root
-setup_open_vpn() {
-  pacman -Sy openvpn ufw bind-tools
-
-  read -p "¿Ya copiaste la configuración para Romania? " response
-  aur -si vpnfailsafe-git
-
-  cat <<EOT | tee -a /etc/openvpn/MullVad_ro.conf
-script-security 2
-up /etc/openvpn/vpnfailsafe.sh
-down /etc/openvpn/vpnfailsafe.sh
-EOT
-
-  sudo systemctl start openvpn@Mullvad_ro
-  sudo systemctl enable openvpn@MullVad_ro
-  /home/maca/bin/ufw-kill-switch-setup
-}
