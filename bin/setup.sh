@@ -26,10 +26,7 @@ basic_setup(){
 # run as user
 setup_dotfiles(){
   cd /tmp
-  pacman -S pass pass-otp fzf the_silver_searcher
-  aur -si chruby xkbset oh-my-zsh-git par\
-    ruby-install-git silver-searcher-git vundle
-  cd -
+
   ln -fs $HOME/dotfiles/luakit ~/.config/luakit
   ln -fs $HOME/dotfiles/systemd ~/.config/systemd
   ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
@@ -51,6 +48,11 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/bin ~/bin
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
+  pacman -S pass pass-otp fzf the_silver_searcher
+  aur -si chruby xkbset oh-my-zsh-git par ruby-install-git vim-plug
+
+  cd -
+
   mkdir -p ~/.config/fontconfig/
   ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
   ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
@@ -58,7 +60,7 @@ setup_dotfiles(){
   mkdir -p .password-store/.git/hooks
   ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
 
-  vim +PluginInstall +qall
+  vim +PlugInstall +qall
 }
 
 # run as user
