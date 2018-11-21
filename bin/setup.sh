@@ -21,6 +21,12 @@ basic_setup(){
 
   mkdir /scratch
   mount -a
+
+  pacman -S sudo zsh
+
+  read -p "¿como te llamas? " user
+  useradd -m -g $user -G wheel -s /bin/zsh maca
+  passwd maca
 }
 
 # run as user
@@ -67,18 +73,12 @@ setup_dotfiles(){
   ssh-keygen -t rsa -C "$(whoami)@$(cat /etc/hostname)"
 }
 
-
-# run as user
-install_basics () {
-  pacman -Syu
-}
-
 # run as user
 install_wm(){
   pacman -Syu
   pacman -S\
     gvim rxvt-unicode xorg-server xorg-xinit chromium pulseaudio \
-    pulseaudio-alsa urxvt-perls terminus-font gmrun xcompmgr \
+    pulseaudio-alsa urxvt-perls ttf-liberation terminus-font gmrun xcompmgr \
     pavucontrol xautolock slock
 
   cd /tmp
@@ -98,22 +98,9 @@ EOF
   # Automount
   pacman -S udevil
   sudo systemctl enable devmon@$(whoami).service
-}
 
-# run as user
-install_dev_env(){
-  pacman -Syu
-  pacman -S nodejs phantomjs imagemagick postgresql sqlite gpicview
-  aur -si universa-ctags-git
-
-  cd /tmp
-  aur -si heroku-client
-  cd -
-}
-
-# run as root
-setup_fonts() {
-  cat <<EOT > /etc/fonts/conf.avail/33-TerminusPCFFont.conf
+  # Fonts
+  sudo sh -c "cat > /etc/fonts/conf.avail/33-TerminusPCFFont.conf" <<EOF
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
@@ -123,9 +110,9 @@ setup_fonts() {
        <default><family>fixed</family></default>
    </alias>
 </fontconfig>
-EOT
+EOF
 
-ln -s /etc/fonts/conf.avail/33-TerminusPCFFont.conf /etc/fonts/conf.d
+  sudo ln -s /etc/fonts/conf.avail/33-TerminusPCFFont.conf /etc/fonts/conf.d
 }
 
 # run as root
@@ -255,14 +242,3 @@ setup_remote_tunnels(){
   systemctl --user enable ssh-tunnel@maca-kujenga.co-3000-3000.service
   # systemctl --user enable ssh-tunnel@maca-kujenga.co-8080-80.service
 }
-
-
-setup_development_environment(){
-  gem install bundler
-  gem install passenger
-  gem install yard
-  sudo systemctl enable nginx
-}
-
-
-
