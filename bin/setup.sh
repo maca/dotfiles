@@ -48,7 +48,7 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/bin ~/bin
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
-  pacman -S pass pass-otp fzf the_silver_searcher
+  pacman -S pass pass-otp fzf the_silver_searcher binutils
   aur -si chruby xkbset oh-my-zsh-git par ruby-install-git vim-plug
 
   cd -
