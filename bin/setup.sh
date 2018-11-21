@@ -27,7 +27,7 @@ basic_setup(){
 setup_dotfiles(){
   cd /tmp
   pacman -S pass pass-otp fzf the_silver_searcher
-  aur -si chruby fasd xkbset oh-my-zsh-git par\
+  aur -si chruby xkbset oh-my-zsh-git par\
     ruby-install-git silver-searcher-git vundle
   cd -
   ln -fs $HOME/dotfiles/luakit ~/.config/luakit
