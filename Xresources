@@ -34,7 +34,7 @@ URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 
 !! Dark theme
-URxvt.background: rgba:0000/0000/0000/ffff
+URxvt.background: rgba:0000/0000/0000/cccc
 URxvt.foreground: rgba:ffff/ffff/ffff/ffff
 *color4:  #204a87
 *color8:  #08360c
