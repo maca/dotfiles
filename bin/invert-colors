@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/home/maca/bin/toggle-redshift
+xrandr-invert-colors
+/home/maca/bin/toggle-redshift
