@@ -10,6 +10,9 @@ basic_setup(){
   echo KEYMAP=us            > /etc/vconsole.conf
   echo FONT=Lat2-Terminus16 >> /etc/vconsole.conf
   echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
+
+  pacman -S sudo zsh f2fs-tools
+
   mkinitcpio -p linux
 
   read -p "¿como se llama esta máquina? " hostname
@@ -22,16 +25,19 @@ basic_setup(){
   mkdir /scratch
   mount -a
 
-  pacman -S sudo zsh
 
   read -p "¿como te llamas? " user
-  useradd -m -g $user -G wheel -s /bin/zsh maca
+  useradd -m -g users -G wheel -s /bin/zsh $user
   passwd maca
+
+  visudo
 }
 
 # run as user
 setup_dotfiles(){
   cd /tmp
+
+  mkdir -p ~/.config
 
   ln -fs $HOME/dotfiles/systemd ~/.config/systemd
   ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
@@ -53,10 +59,11 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
   pacman -S pass pass-otp fzf the_silver_searcher binutils \
-    patch make fakeroot openssh ruby tmux rsync keychain
+    patch make automake pkgconf fakeroot openssh ruby tmux \
+    rsync keychain xbindkeys
 
   aur -si chruby xkbset oh-my-zsh-git par ruby-install-git \
-    vim-plug
+    vim-plug universal-ctags-git
 
   cd -
 
@@ -77,13 +84,15 @@ setup_dotfiles(){
 install_wm(){
   pacman -Syu
   pacman -S\
-    gvim rxvt-unicode xorg-server xorg-xinit chromium pulseaudio \
-    pulseaudio-alsa urxvt-perls ttf-liberation terminus-font gmrun xcompmgr \
-    pavucontrol xautolock slock
+    gvim rxvt-unicode xorg-server xorg-xinit chromium \
+    pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
+    terminus-font gmrun xcompmgr pavucontrol xautolock slock \
+    redshift
 
   cd /tmp
 
-  aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git redshift-minimal-git
+  aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git \
+    browserpass xrandr-invert-colors
   cd -
 
   # Autologin
@@ -209,7 +218,7 @@ EOF
 
 # run as root
 setup_power_keys() {
-  cat <<EOT > /etc/systemd/logind.conf
+  sudo sh -c "cat > /etc/systemd/logind.conf" <<EOF
 [Login]
 #NAutoVTs=6
 #ReserveVT=6
@@ -217,7 +226,7 @@ setup_power_keys() {
 #KillOnlyUsers=
 #KillExcludeUsers=root
 #InhibitDelayMaxSec=5
-#HandlePowerKey=poweroff
+HandlePowerKey=poweroff
 HandleSuspendKey=suspend
 HandleHibernateKey=reboot
 HandleLidSwitch=ignore
@@ -230,7 +239,7 @@ HandleLidSwitch=ignore
 #IdleActionSec=30min
 #RuntimeDirectorySize=10%
 #RemoveIPC=yes
-EOT
+EOF
 
 }
 
