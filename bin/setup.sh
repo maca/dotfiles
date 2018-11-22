@@ -87,7 +87,7 @@ install_wm(){
     gvim rxvt-unicode xorg-server xorg-xinit chromium \
     pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
     terminus-font gmrun xcompmgr pavucontrol xautolock slock \
-    redshift
+    redshift acpi
 
   cd /tmp
 
