@@ -60,7 +60,7 @@ setup_dotfiles(){
 
   pacman -S pass pass-otp fzf the_silver_searcher binutils \
     patch make automake pkgconf fakeroot openssh ruby tmux \
-    rsync keychain xbindkeys
+    rsync keychain xbindkeys linux-headers
 
   aur -si chruby xkbset oh-my-zsh-git par ruby-install-git \
     vim-plug universal-ctags-git
