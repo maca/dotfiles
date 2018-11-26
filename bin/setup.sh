@@ -53,17 +53,18 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
   ln -fs $HOME/dotfiles/Xresources ~/.Xresources
   ln -fs $HOME/dotfiles/themes ~/.themes
-  ln -fs $HOME/dotfiles/ctags.d/ ~/.ctags.d
+  ln -fs $HOME/dotfiles/ctags.d ~/.ctags.d
   ln -fs $HOME/dotfiles/gitignore ~/.gitignore
-  ln -fs $HOME/dotfiles/bin/ ~/bin
+  ln -fs $HOME/dotfiles/bin ~/bin/
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
   pacman -S pass pass-otp fzf the_silver_searcher binutils \
     patch make automake pkgconf fakeroot openssh ruby tmux \
-    rsync keychain xbindkeys linux-headers
+    rsync keychain xbindkeys linux-headers xf86-input-libinput \
+    xorg-xinput
 
   aur -si chruby xkbset oh-my-zsh-git par ruby-install-git \
-    vim-plug universal-ctags-git
+    vim-plug universal-ctags-git heroku-client sedutil
 
   cd -
 
@@ -86,13 +87,14 @@ install_wm(){
   pacman -S\
     gvim rxvt-unicode xorg-server xorg-xinit chromium \
     pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
-    terminus-font gmrun xcompmgr pavucontrol xautolock slock \
-    redshift acpi
+    ttf-dejavu terminus-font gmrun xcompmgr pavucontrol \
+    xautolock slock redshift acpi
 
   cd /tmp
 
   aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git \
-    browserpass xrandr-invert-colors
+    browserpass xrandr-invert-colors gpicview
+
   cd -
 
   # Autologin
