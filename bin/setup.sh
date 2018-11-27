@@ -25,7 +25,6 @@ basic_setup(){
   mkdir /scratch
   mount -a
 
-
   read -p "¿como te llamas? " user
   useradd -m -g users -G wheel -s /bin/zsh $user
   passwd maca
@@ -176,9 +175,9 @@ setup_pair() {
   echo /opt/bin/attach-t1-readonly >> /etc/shells
 }
 
-# run as root
+# run as user
 setup_trackpoint() {
-  cat <<EOT > /etc/X11/xorg.conf.d/20-thinkpad.conf
+  sudo sh -c "cat > /etc/X11/xorg.conf.d/20-thinkpad.conf" <<EOF
 Section "InputClass"
 	Identifier	"Trackpoint Wheel Emulation"
 	MatchProduct	"TPPS/2 IBM TrackPoint|DualPoint Stick|Synaptics Inc. Composite TouchPad / TrackPoint|ThinkPad USB Keyboard with TrackPoint|USB Trackpoint pointing device|Composite TouchPad / TrackPoint"
@@ -189,23 +188,23 @@ Section "InputClass"
 	Option		"XAxisMapping"		"6 7"
 	Option		"YAxisMapping"		"4 5"
 EndSection
-EOT
+EOF
 }
 
-# run as root
+# run as user
 setup_mouse() {
-  cat <<EOT > /etc/X11/xorg.conf.d/10-mouse.conf
+  sudo sh -c "cat > /etc/X11/xorg.conf.d/10-mouse.conf" <<EOF
 Section "InputClass"
     Identifier "whatever"
     MatchIsPointer "on"
     Option "Emulate3Buttons" "on"
 EndSection
-EOT
+EOF
 }
 
-# run as root
+# run as user
 setup_keyboard() {
-  cat > /etc/X11/xorg.conf.d/01-keyboard_layout.conf <<EOF
+  sudo sh -c "cat > /etc/X11/xorg.conf.d/01-keyboard_layout.conf" <<EOF
 Section "InputClass"
         Identifier "keyboard-layout"
         MatchIsKeyboard "yes"
@@ -218,7 +217,7 @@ EndSection
 EOF
 }
 
-# run as root
+# run as user
 setup_power_keys() {
   sudo sh -c "cat > /etc/systemd/logind.conf" <<EOF
 [Login]
@@ -253,3 +252,13 @@ setup_remote_tunnels(){
   systemctl --user enable ssh-tunnel@maca-kujenga.co-3000-3000.service
   # systemctl --user enable ssh-tunnel@maca-kujenga.co-8080-80.service
 }
+
+# run as user
+setup_docker() {
+  pacman -Sy docker docker-compose
+  sudo systemctl start docker
+  sudo systemctl enable docker
+  sudo usermod -a -G docker $(whoami)
+}
+
+
