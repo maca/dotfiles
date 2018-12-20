@@ -5,6 +5,7 @@ URxvt.scrollBar: off
 URxvt.depth: 32
 
 URxvt.font: xft:Terminus:size=14:antialiasing=false
+URxvt.lineSpace: 4
 
 URxvt.geometry: 81x25
 !! URxvt.cursorUnderline: True
