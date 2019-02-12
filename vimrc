@@ -162,6 +162,10 @@ nmap <space>p :reg<CR>
 nmap <space>o zo
 nmap <space>c zc
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 
 " system copy/paste
 vmap <leader>y "+y
