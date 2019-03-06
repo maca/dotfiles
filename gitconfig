@@ -1,5 +1,5 @@
 [user]
-  email = mail@makarius.me
+  email = maca@aelita.io
   name = Macario
 [alias]
   h = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --graph --abbrev-commit --date=short
