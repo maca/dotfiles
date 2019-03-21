@@ -11,7 +11,7 @@ basic_setup(){
   echo FONT=Lat2-Terminus16 >> /etc/vconsole.conf
   echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
 
-  pacman -S sudo zsh f2fs-tools
+  pacman -S sudo zsh
 
   mkinitcpio -p linux
 
@@ -60,16 +60,12 @@ setup_dotfiles(){
   pacman -S pass pass-otp fzf the_silver_searcher binutils \
     patch make automake pkgconf fakeroot openssh ruby tmux \
     rsync keychain xbindkeys linux-headers xf86-input-libinput \
-    xorg-xinput
+    xorg-xinput base-devel patch binutils
 
-  aur -si chruby xkbset oh-my-zsh-git par ruby-install-git \
+  aur -si chruby oh-my-zsh-git par ruby-install-git \
     vim-plug universal-ctags-git heroku-client sedutil
 
   cd -
-
-  mkdir -p ~/.config/fontconfig/
-  ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
-  ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
 
   mkdir -p .password-store/.git/hooks
   ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
@@ -92,9 +88,15 @@ install_wm(){
   cd /tmp
 
   aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git \
-    browserpass xrandr-invert-colors gpicview
+    browserpass xrandr-invert-colors gpicview xkbset
 
   cd -
+
+  mkdir -p ~/.config/fontconfig/
+
+  ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
+  ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
+
 
   # Autologin
   sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
