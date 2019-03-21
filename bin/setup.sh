@@ -54,16 +54,15 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/themes ~/.themes
   ln -fs $HOME/dotfiles/ctags.d ~/.ctags.d
   ln -fs $HOME/dotfiles/gitignore ~/.gitignore
-  ln -fs $HOME/dotfiles/bin ~/bin/
+  ln -fs $HOME/dotfiles/bin ~/bin
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
   pacman -S pass pass-otp fzf the_silver_searcher binutils \
     patch make automake pkgconf fakeroot openssh ruby tmux \
-    rsync keychain xbindkeys linux-headers xf86-input-libinput \
-    xorg-xinput base-devel patch binutils
+    rsync keychain linux-headers base-devel patch binutils
 
   aur -si chruby oh-my-zsh-git par ruby-install-git \
-    vim-plug universal-ctags-git heroku-client sedutil
+    vim-plug universal-ctags-git heroku-client
 
   cd -
 
@@ -83,7 +82,8 @@ install_wm(){
     gvim rxvt-unicode xorg-server xorg-xinit chromium \
     pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
     ttf-dejavu terminus-font gmrun xcompmgr pavucontrol \
-    xautolock slock redshift acpi
+    xautolock slock redshift acpi sedutil xbindkeys \
+    xf86-input-libinput xorg-xinput
 
   cd /tmp
 
