@@ -2,6 +2,8 @@
 
 # run as root
 basic_setup(){
+  pacman -S dialog wpa_supplicant git vim
+
   ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
   echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
   locale-gen
@@ -28,6 +30,9 @@ basic_setup(){
   read -p "¿como te llamas? " user
   useradd -m -g users -G wheel -s /bin/zsh $user
   passwd maca
+
+  echo "SSH Key setup"
+  ssh-keygen -t rsa -C "$user@$(cat /etc/hostname)"
 
   visudo
 }
@@ -57,6 +62,8 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/bin ~/bin
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
+  source $HOME/.zshrc
+
   pacman -S pass pass-otp fzf the_silver_searcher binutils \
     patch make automake pkgconf fakeroot openssh ruby tmux \
     rsync keychain linux-headers base-devel patch binutils
@@ -70,9 +77,6 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
 
   vim +PlugInstall +qall
-
-  echo "SSH Key setup"
-  ssh-keygen -t rsa -C "$(whoami)@$(cat /etc/hostname)"
 }
 
 # run as user
@@ -82,13 +86,13 @@ install_wm(){
     gvim rxvt-unicode xorg-server xorg-xinit chromium \
     pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
     ttf-dejavu terminus-font gmrun xcompmgr pavucontrol \
-    xautolock slock redshift acpi sedutil xbindkeys \
+    xautolock slock redshift acpi xbindkeys \
     xf86-input-libinput xorg-xinput
 
   cd /tmp
 
   aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git \
-    browserpass xrandr-invert-colors gpicview xkbset
+    browserpass xrandr-invert-colors gpicview xkbset sedutil
 
   cd -
 
@@ -178,48 +182,6 @@ setup_pair() {
 }
 
 # run as user
-setup_trackpoint() {
-  sudo sh -c "cat > /etc/X11/xorg.conf.d/20-thinkpad.conf" <<EOF
-Section "InputClass"
-	Identifier	"Trackpoint Wheel Emulation"
-	MatchProduct	"TPPS/2 IBM TrackPoint|DualPoint Stick|Synaptics Inc. Composite TouchPad / TrackPoint|ThinkPad USB Keyboard with TrackPoint|USB Trackpoint pointing device|Composite TouchPad / TrackPoint"
-	MatchDevicePath	"/dev/input/event*"
-	Option		"EmulateWheel"		"true"
-	Option		"EmulateWheelButton"	"2"
-	Option		"Emulate3Buttons"	"false"
-	Option		"XAxisMapping"		"6 7"
-	Option		"YAxisMapping"		"4 5"
-EndSection
-EOF
-}
-
-# run as user
-setup_mouse() {
-  sudo sh -c "cat > /etc/X11/xorg.conf.d/10-mouse.conf" <<EOF
-Section "InputClass"
-    Identifier "whatever"
-    MatchIsPointer "on"
-    Option "Emulate3Buttons" "on"
-EndSection
-EOF
-}
-
-# run as user
-setup_keyboard() {
-  sudo sh -c "cat > /etc/X11/xorg.conf.d/01-keyboard_layout.conf" <<EOF
-Section "InputClass"
-        Identifier "keyboard-layout"
-        MatchIsKeyboard "yes"
-        Option "XkbLayout" "us"
-        Option "XkbVariant" "altgr-intl"
-        Option "XkbOptions" "ctrl:nocaps"
-        Option "XkbOptions" "lv3:ralt_switch"
-        Driver "evdev"
-EndSection
-EOF
-}
-
-# run as user
 setup_power_keys() {
   sudo sh -c "cat > /etc/systemd/logind.conf" <<EOF
 [Login]
@@ -243,7 +205,6 @@ HandleLidSwitch=ignore
 #RuntimeDirectorySize=10%
 #RemoveIPC=yes
 EOF
-
 }
 
 
