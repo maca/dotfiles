@@ -91,8 +91,10 @@ install_wm(){
 
   cd /tmp
 
+  sudo pacman-key --recv-keys 011FDC52DA839335
+
   aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git \
-    browserpass xrandr-invert-colors gpicview xkbset sedutil
+    browserpass xrandr-invert-colors gpicview xkbset
 
   cd -
 

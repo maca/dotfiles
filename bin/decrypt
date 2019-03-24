@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+openssl enc -d -md sha512 -pbkdf2 -iter 1000 -salt -aes256 -base64 -in $1 > $2
