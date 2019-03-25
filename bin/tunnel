@@ -1,5 +1,5 @@
 #!/usr/bin/bash -
 
-ssh -vT -N -i /home/maca/.ssh/tunnel_rsa \
+ssh -vT -N -i ~/.ssh/tunnel_rsa \
   -o ExitOnForwardFailure=yes\
   -R /home/tunnel/sockets/$2/$4:0.0.0.0:$3 tunnel@$1
