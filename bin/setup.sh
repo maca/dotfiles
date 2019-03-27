@@ -2,7 +2,6 @@
 
 # run as root
 basic_setup(){
-  pacman -S dialog wpa_supplicant git vim
 
   ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
   echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
@@ -13,7 +12,10 @@ basic_setup(){
   echo FONT=Lat2-Terminus16 >> /etc/vconsole.conf
   echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
 
-  pacman -S sudo zsh
+  pacman -S dialog wpa_supplicant git vim \
+    sudo zsh pass pass-otp the_silver_searcher binutils \
+    patch make automake pkgconf fakeroot openssh ruby tmux \
+    rsync keychain linux-headers base-devel patch
 
   mkinitcpio -p linux
 
@@ -63,10 +65,6 @@ setup_dotfiles(){
   ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
   source $HOME/.zshrc
-
-  pacman -S pass pass-otp fzf the_silver_searcher binutils \
-    patch make automake pkgconf fakeroot openssh ruby tmux \
-    rsync keychain linux-headers base-devel patch binutils
 
   aur -si chruby oh-my-zsh-git par ruby-install-git \
     vim-plug universal-ctags-git heroku-client
