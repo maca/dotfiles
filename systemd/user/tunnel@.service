@@ -3,7 +3,8 @@ Description=SSH tunnel for %I
 After=network.target
 
 [Service]
-ExecStart=/home/maca/bin/open-tunnel %I
+Environment="ARGS=%I"
+ExecStart=/home/maca/bin/tunnel $ARGS
 StandardOutput=syslog
 StandardError=syslog
 Restart=on-failure
