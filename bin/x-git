@@ -1,0 +1,5 @@
+#!/usr/bin/bash -
+
+IDENTITY=$1
+shift
+GIT_SSH_COMMAND="ssh -i ~/.ssh/$IDENTITY" git $@
