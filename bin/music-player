@@ -1,3 +1,4 @@
 #!/bin/sh
 
+eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 ssh -o ConnectTimeout=1 192.168.90.1 -t 'TERM=xterm-256color LANG=en_US.UTF-8 exec cmus --listen 3001' || cmus
