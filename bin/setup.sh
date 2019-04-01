@@ -1,82 +1,5 @@
 #!/usr/bin/sh
 
-# run as root
-basic_setup(){
-
-  ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
-  echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-  locale-gen
-
-  echo LANG=en_US.UTF-8     > /etc/locale.conf
-  echo KEYMAP=us            > /etc/vconsole.conf
-  echo FONT=Lat2-Terminus16 >> /etc/vconsole.conf
-  echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
-
-  pacman -S dialog wpa_supplicant git vim \
-    sudo zsh pass pass-otp the_silver_searcher binutils \
-    patch make automake pkgconf fakeroot openssh ruby tmux \
-    rsync keychain linux-headers base-devel patch
-
-  mkinitcpio -p linux
-
-  read -p "¿como se llama esta máquina? " hostname
-
-  echo $hostname > /etc/hostname
-
-  echo "tmpfs   /tmp         tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
-  echo "tmpfs   /scratch     tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
-
-  mkdir /scratch
-  mount -a
-
-  read -p "¿como te llamas? " user
-  useradd -m -g users -G wheel -s /bin/zsh $user
-  passwd maca
-
-  echo "SSH Key setup"
-  ssh-keygen -t rsa -C "$user@$(cat /etc/hostname)"
-
-  visudo
-}
-
-# run as user
-setup_dotfiles(){
-  cd /tmp
-
-  mkdir -p ~/.config
-
-  ln -fs $HOME/dotfiles/systemd ~/.config/systemd
-  ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
-
-  ln -fs /tmp ~/Downloads
-  ln -fs $HOME/dotfiles/zshrc ~/.zshrc
-  ln -fs $HOME/dotfiles/zprofile ~/.zprofile
-  ln -fs $HOME/dotfiles/vimrc ~/.vimrc
-  ln -fs $HOME/dotfiles/vim ~/.vim
-  ln -fs $HOME/dotfiles/conky ~/.conky
-  ln -fs $HOME/dotfiles/gitconfig ~/.gitconfig
-  ln -fs $HOME/dotfiles/tmux.conf ~/.tmux.conf
-  ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
-  ln -fs $HOME/dotfiles/Xresources ~/.Xresources
-  ln -fs $HOME/dotfiles/themes ~/.themes
-  ln -fs $HOME/dotfiles/ctags.d ~/.ctags.d
-  ln -fs $HOME/dotfiles/gitignore ~/.gitignore
-  ln -fs $HOME/dotfiles/bin ~/bin
-  ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
-
-  source $HOME/.zshrc
-
-  aur -si chruby oh-my-zsh-git par ruby-install-git \
-    vim-plug universal-ctags-git heroku-client
-
-  cd -
-
-  mkdir -p .password-store/.git/hooks
-  ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
-
-  vim +PlugInstall +qall
-}
-
 # run as user
 install_wm(){
   pacman -Syu
@@ -223,5 +146,4 @@ setup_docker() {
   sudo systemctl enable docker
   sudo usermod -a -G docker $(whoami)
 }
-
 
