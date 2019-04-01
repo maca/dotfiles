@@ -1,4 +1,6 @@
 #!/bin/sh
 
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-mosh --predict=experimental 96.126.104.103 -- tmux attach
+CMD='LANG=en_US.utf8 TERM=xterm-256color exec tmux new-session -A -s main'
+
+ssh home -t $CMD
