@@ -31,6 +31,6 @@ useradd -m -g users -G wheel -s /bin/zsh $user
 passwd maca
 
 echo "SSH Key setup"
-ssh-keygen -t rsa -C "$user@$(cat /etc/hostname)"
+su - maca -c "ssh-keygen -t rsa -C '$user@$(cat /etc/hostname)'"
 
 visudo
