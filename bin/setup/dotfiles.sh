@@ -25,7 +25,7 @@ ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
 source $HOME/.zshrc
 
-aur -si chruby oh-my-zsh-git par ruby-install-git \
+$HOME/bin/aur -si chruby oh-my-zsh-git par ruby-install-git \
   vim-plug universal-ctags-git heroku-client
 
 cd -
