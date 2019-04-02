@@ -17,7 +17,7 @@ Address=192.168.90.1/24
 EOF
 
 
-sudo sh -c "cat > /etc/hostapd.conf" <<EOF
+sudo sh -c "cat > /etc/hostapd/hostapd.conf" <<EOF
 interface=$interface
 driver=nl80211
 
@@ -65,8 +65,8 @@ ctrl_interface_group=0
 logger_syslog=0
 logger_syslog_level=0
 EOF
-sudo systemd start hostapd
-sudo systemd enable hostapd
+sudo systemctl start hostapd
+sudo systemctl enable hostapd
 
 
 sudo sh -c "cat > /etc/dnsmasq.conf" <<EOF
@@ -149,7 +149,7 @@ curl -LO https://mullvad.net/media/files/mullvad-wg.sh && chmod +x ./mullvad-wg.
 read -r -d '' rules <<-EOF
 PostUp = iptables -t nat -A POSTROUTING -o %i -j MASQUERADE; iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT; iptables -A FORWARD -i wlan0 -o %i -j ACCEPT;\\nPostDown = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT; iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 EOF
-for file in $(sudo ls /etc/wireguard); do sudo sed "/^DNS =.*/a ${rules}" $file; done
+for file in $(sudo ls /etc/wireguard); do sudo sed "/^DNS =.*/a ${rules}" /etc/wireguard/$file; done
 sudo systemctl start wg-quick@mullvad-ro1
 sudo systemctl enable wg-quick@mullvad-ro1
 
