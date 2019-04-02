@@ -1,11 +1,11 @@
 #!/usr/bin/sh
 
-read -p "what is the wifi inteface?" interface
-read -p "what is the access point password" password
+read -p "what is the wifi inteface? " interface
+read -p "what is the access point password " password
 
 
-aur -si rtl88xxau-aircrack-dkms-git nginx-mod-dav-ext
-sudo pacman -Sy cmus dnsmasq hostapd wireguard-dkms wireguard-tools apache-tools
+aur -si rtl88xxau-aircrack-dkms-git nginx-mod-dav-ext apache-tools
+sudo pacman -Sy cmus dnsmasq hostapd wireguard-dkms wireguard-tools jq
 
 
 sudo sh -c "cat > /etc/systemd/network/$interface.network" <<EOF
@@ -152,5 +152,4 @@ EOF
 for file in $(sudo ls /etc/wireguard); do sudo sed "/^DNS =.*/a ${rules}" $file; done
 sudo systemctl start wg-quick@mullvad-ro1
 sudo systemctl enable wg-quick@mullvad-ro1
-
 
