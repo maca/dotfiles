@@ -4,7 +4,7 @@ read -p "what is the wifi inteface? " interface
 read -p "what is the access point password " password
 
 
-aur -si rtl88xxau-aircrack-dkms-git nginx-mod-dav-ext apache-tools
+aur -si rtl88xxau-aircrack-dkms-git nginx-mod-dav-ext apache-tools crda
 sudo pacman -Sy cmus dnsmasq hostapd wireguard-dkms wireguard-tools jq
 
 
@@ -67,6 +67,10 @@ logger_syslog_level=0
 EOF
 sudo systemctl start hostapd
 sudo systemctl enable hostapd
+
+
+sudo systemctl stop systemd-resolved.service
+sudo systemctl disable systemd-resolved.service
 
 
 sudo sh -c "cat > /etc/dnsmasq.conf" <<EOF
@@ -145,11 +149,19 @@ sudo systemctl start nginx
 sudo systemctl enable nginx
 
 
+echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+echo net.ipv4.ip_forward = 1 | sudo tee -a /etc/sysctl.d/10-ip_forward.conf
+
+
 curl -LO https://mullvad.net/media/files/mullvad-wg.sh && chmod +x ./mullvad-wg.sh && ./mullvad-wg.sh
 read -r -d '' rules <<-EOF
 PostUp = iptables -t nat -A POSTROUTING -o %i -j MASQUERADE; iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT; iptables -A FORWARD -i wlan0 -o %i -j ACCEPT;\\nPostDown = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT; iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 EOF
-for file in $(sudo ls /etc/wireguard); do sudo sed "/^DNS =.*/a ${rules}" /etc/wireguard/$file; done
+for file in $(sudo ls /etc/wireguard); do
+  echo "Writting $file..."
+  sudo sed -i "/^DNS =.*/a ${rules}" /etc/wireguard/$file
+done
+rm mullvad-wg.sh
 sudo systemctl start wg-quick@mullvad-ro1
 sudo systemctl enable wg-quick@mullvad-ro1
 
