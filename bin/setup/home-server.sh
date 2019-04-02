@@ -1,3 +1,4 @@
+#!/usr/bin/sh
 
 read -p "what is the wifi inteface?" interface
 read -p "what is the access point password" password
