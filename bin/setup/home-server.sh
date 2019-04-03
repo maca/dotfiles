@@ -4,7 +4,7 @@ read -p "what is the wifi inteface? " interface
 read -p "what is the access point password " password
 
 
-aur -si rtl88xxau-aircrack-dkms-git nginx-mod-dav-ext apache-tools crda
+aur -si --ignorearch rtl88xxau-aircrack-dkms-git nginx-mod-dav-ext apache-tools crda
 sudo pacman -Sy cmus dnsmasq hostapd wireguard-dkms wireguard-tools jq
 
 
