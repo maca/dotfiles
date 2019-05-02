@@ -12,7 +12,7 @@ echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
 pacman -S dialog wpa_supplicant git vim \
   sudo zsh pass pass-otp the_silver_searcher binutils \
   patch make automake pkgconf fakeroot openssh ruby tmux \
-  rsync keychain linux-headers base-devel patch
+  rsync keychain linux-headers base-devel patch unzip ntp
 
 mkinitcpio -p linux
 
@@ -32,5 +32,8 @@ passwd maca
 
 echo "SSH Key setup"
 su - maca -c "ssh-keygen -t rsa -C '$user@$(cat /etc/hostname)'"
+
+systemctl start ntpd
+systemctl enable ntpd
 
 visudo
