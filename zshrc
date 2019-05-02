@@ -107,3 +107,5 @@ sticky_keys() {
    xkbset accessx sticky -twokey -latchlock
    xkbset exp 1 '=accessx' '=sticky' '=twokey' '=latchlock'
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
