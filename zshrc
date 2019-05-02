@@ -101,6 +101,7 @@ alias shutdown="sudo shutdown"
 alias mount="sudo mount"
 alias umount="sudo umount"
 alias passcopy="pass show -c1"
+alias mpv="mpv --sub-scale=0.6"
 
 
 sticky_keys() {
