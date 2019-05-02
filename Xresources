@@ -41,30 +41,6 @@ URxvt.foreground: rgba:ffff/ffff/ffff/ffff
 *color8:  #08360c
 *color12: #3465a4
 
-!! Light Theme
-!! urxvt*foreground: white
-!! urxvt*background: black
-!!
-!! *color0:  #2E3436
-!! *color1:  #a40000
-!! *color2:  #4E9A06
-!! *color3:  #C4A000
-!! *color4:  #3465A4
-!! *color5:  #75507B
-!! *color6:  #ce5c00
-!! *color7:  #babdb9
-!! *color8:  #555753
-!! *color9:  #EF2929
-!! *color10: #8AE234
-!! *color11: #FCE94F
-!! *color12: #729FCF
-!! *color13: #AD7FA8
-!! *color14: #fcaf3e
-!! *color15: #EEEEEC
-
-urxvt*dynamicColors: on
-
-urxvt*perl-ext-common: urxvt-colors
-urxvt*perl-lib: /home/maca/bin/
-urxvt*keysym.M-d: perl:urxvt-colors
+URxvt.keysym.Mod4-F2: command:\033]11;rgba:0000/0000/0000/cccc\007\033]10;#ffffff\007
+URxvt.keysym.Mod4-F3: command:\033]11;rgba:ffff/ffff/ffff/cccc\007\033]10;#000000\007
 
