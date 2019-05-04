@@ -40,11 +40,10 @@ setopt no_share_history
 bindkey -v
 
 # only past commands beginning with the current input will be shown
-bindkey -M viins "^[[A" vi-cmd-mode-and-history-beginning-search-forward
-bindkey -M viins "^[[B" vi-cmd-mode-and-history-beginning-search-backward
-bindkey -M vicmd "^[[A" history-beginning-search-backward
-bindkey -M vicmd "^[[B" history-beginning-search-forward
-bindkey -M vicmd "^[" vi-cmd-mode-kill-whole-line
+# bindkey -M viins "^[[A" vi-cmd-mode-and-history-beginning-search-forward
+# bindkey -M viins "^[[B" vi-cmd-mode-and-history-beginning-search-backward
+# bindkey -M vicmd "^[[A" history-beginning-search-backward
+# bindkey -M vicmd "^[[B" history-beginning-search-forward
 
 
 # Color shortcuts
@@ -76,12 +75,11 @@ ZSH_THEME_GIT_PROMPT_AHEAD=" %{$RED%}(!) "
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$WHITE%}[%{$YELLOW%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]"
 
-function vi_prompt_mode_color() {
-  echo "%{$fg[yellow]%}`vi_mode_prompt_info`"
+function prompt_color() {
+  echo "%{$reset_color%}%{$fg[yellow]%}"
 }
 
-MODE_INDICATOR="%{$fg_bold[cyan]%}"
-PROMPT='`vi_prompt_mode_color``vi_prompt_mode_color`[%{$fg[green]%}%m`vi_prompt_mode_color`][%{$fg[green]%}%c`vi_prompt_mode_color`] `git_prompt_info``vi_prompt_mode_color`- %{$reset_color%}'
+PROMPT='`prompt_color`[%{$fg_bold[red]%}%m`prompt_color`][%{$fg[green]%}%c`prompt_color`] `git_prompt_info``prompt_color`- %{$reset_color%}'
 RPROMPT='%{$reset_color%} %{$fg[cyan]%}%*%{$reset_color%}'
 
 
