@@ -1,3 +1,5 @@
+(xss-lock slock) &
+
 xrdb -merge $HOME/.Xresources
 
 export GTK_RC_FILES="$HOME/.gtkrc-2.0"
@@ -18,6 +20,6 @@ xinput --set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Profile Enabled" 1 0
 /usr/lib/systemd/systemd --user &
 xbindkeys &
 unclutter &
-udiskie &
+udiskie
 
 exec dbus-launch bubbles
