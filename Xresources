@@ -34,13 +34,35 @@ URxvt.keysym.M-S-v: perl:clipboard:paste_escaped
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 
-!! Dark theme
-URxvt.background: rgba:0000/0000/0000/cccc
-URxvt.foreground: rgba:ffff/ffff/ffff/ffff
-*color4:  #204a87
-*color8:  #08360c
-*color12: #3465a4
 
-URxvt.keysym.Mod4-F2: command:\033]11;rgba:0000/0000/0000/cccc\007\033]10;#ffffff\007
-URxvt.keysym.Mod4-F3: command:\033]11;rgba:ffff/ffff/ffff/cccc\007\033]10;#000000\007
+! Dark theme
+*.background:   rgba:1c00/2400/2d00/cccc
+*.foreground:   #ffffff
+*.cursorColor:  #263342
+! black
+*.color0:       #282a2e
+*.color8:       #373b41
+! red
+*.color1:       #a54242
+*.color9:       #cc6666
+! green
+*.color2:       #8c9440
+*.color10:      #b5bd68
+! yellow
+*.color3:       #de935f
+*.color11:      #f0c674
+! blue
+*.color4:       #5f819d
+*.color12:      #81a2be
+! magenta
+*.color5:       #85678f
+*.color13:      #b294bb
+! cyan
+*.color6:       #5e8d87
+*.color14:      #8abeb7
+! white
+*.color7:       #707880
+*.color15:      #c5c8c6
 
+URxvt.keysym.Mod4-F2: command:\033]11;rgba:1c00/2400/2d00/cccc\007\033]10;#ffffff\007
+URxvt.keysym.Mod4-F3: command:\033]11;#ffffff\007\033]10;#000000\007
