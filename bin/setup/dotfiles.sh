@@ -1,4 +1,9 @@
 #!/usr/bin/sh
+#
+# Usage
+# bash <(curl -s https://raw.githubusercontent.com/maca/dotfiles/master/bin/setup/dotfiles.sh)
+
+cd $HOME
 
 git clone git@github.com:maca/dotfiles.git
 
@@ -9,7 +14,7 @@ mkdir -p ~/.config
 ln -fs $HOME/dotfiles/systemd ~/.config/systemd
 ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 
-ln -fs /tmp ~/Downloads
+ln -fs /scratch ~/Downloads
 ln -fs $HOME/dotfiles/zshrc ~/.zshrc
 ln -fs $HOME/dotfiles/zprofile ~/.zprofile
 ln -fs $HOME/dotfiles/vimrc ~/.vimrc
