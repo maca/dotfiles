@@ -28,12 +28,15 @@ mount -a
 
 read -p "¿como te llamas? " user
 useradd -m -g users -G wheel -s /bin/zsh $user
-passwd maca
+passwd $user
 
 echo "SSH Key setup"
-su - maca -c "ssh-keygen -t rsa -C '$user@$(cat /etc/hostname)'"
+su - $user -c "ssh-keygen -t rsa -C '$user@$(cat /etc/hostname)'"
 
 systemctl start ntpd
 systemctl enable ntpd
 
 visudo
+
+cat "Public ssh key:"
+cat /home/$user/.ssh/id_rsa.pub
