@@ -30,11 +30,10 @@ ln -fs $HOME/dotfiles/gitignore ~/.gitignore
 ln -fs $HOME/dotfiles/bin ~/bin
 ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 
-source $HOME/.zshrc
-
-
-$HOME/bin/aur -si chruby oh-my-zsh-git par ruby-install-git \
+$HOME/dotfiles/bin/aur -si chruby oh-my-zsh-git par ruby-install-git \
   vim-plug universal-ctags-git heroku-client
+
+source $HOME/.zshrc
 
 cd $HOME
 
