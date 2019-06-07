@@ -9,6 +9,7 @@ Plug 'airblade/vim-rooter'
 Plug 'elixir-lang/vim-elixir'
 Plug 'godlygeek/tabular'
 Plug 'idris-hackers/idris-vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'lifepillar/vim-mucomplete'
