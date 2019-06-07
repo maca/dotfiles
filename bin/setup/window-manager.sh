@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 
-pacman -Syu
-pacman -S\
+sudo pacman -Syu
+sudo pacman -S\
   gvim rxvt-unicode xorg-server xorg-xinit chromium \
   pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
   ttf-dejavu terminus-font gmrun xcompmgr pavucontrol \
@@ -33,7 +33,7 @@ Type=simple
 EOF
 
 # Automount
-pacman -S udevil
+sudo pacman -S udevil
 sudo systemctl enable devmon@$(whoami).service
 
 # Fonts
