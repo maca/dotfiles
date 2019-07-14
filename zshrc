@@ -25,8 +25,9 @@ unset GREP_OPTIONS
 
 # paths
 export GOPATH=~/.go
-export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:.ghcup/bin" # haskell ghcup
 
 export BUILDDIR=/scratch
 
