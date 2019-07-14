@@ -1,6 +1,6 @@
 #!/bin/bash
 
-aur ghcup-git
+aur -si ghcup-git
 ghcup install-cabal
 ghcup install latest
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
