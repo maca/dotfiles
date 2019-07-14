@@ -1,8 +1,6 @@
 # Path to your oh-my-zsh configuration.
 export TERM=screen-256color
 
-# ssh keychain, manage ssh keys
-eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 
 ZSH=/usr/share/oh-my-zsh/
 

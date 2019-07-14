@@ -46,3 +46,5 @@ vim +PlugInstall +qall
 
 systemctl --user enable ssh-agent
 systemctl --user start ssh-agent
+
+echo "AddKeysToAgent yes" >> ~/.ssh/config
