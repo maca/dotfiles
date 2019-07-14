@@ -36,9 +36,9 @@ URxvt.keysym.M-s: perl:keyboard-select:search
 
 
 ! Dark theme
-*.background:   rgba:1c00/2400/2d00/cd00
+*.background:   #283646
 *.foreground:   #ffffff
-*.cursorColor:  #263342
+*.cursorColor:  #909090
 ! black
 *.color0:       #282a2e
 *.color8:       #373b41
