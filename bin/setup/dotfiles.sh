@@ -29,6 +29,7 @@ ln -fs $HOME/dotfiles/ctags.d ~/.ctags.d
 ln -fs $HOME/dotfiles/gitignore ~/.gitignore
 ln -fs $HOME/dotfiles/bin ~/bin
 ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
+ln -fs $HOME/dotfiles/pam_environment ~/.pam_environment
 
 $HOME/dotfiles/bin/aur -si chruby oh-my-zsh-git par ruby-install-git \
   vim-plug universal-ctags-git heroku-client
@@ -42,3 +43,6 @@ mkdir -p .password-store/.git/hooks
 ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
 
 vim +PlugInstall +qall
+
+systemctl --user enable ssh-agent
+systemctl --user start ssh-agent
