@@ -18,7 +18,19 @@
 (use-package evil
   :ensure t ;; install the evil package if not installed
   :config ;; tweak evil after loading it
-  (evil-mode))
+  (evil-mode 1)
+
+  (use-package evil-leader
+  :ensure t
+  :config
+  (global-evil-leader-mode))
+
+  (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode))
+
+  (use-package evil-indent-textobject :ensure t))
 
 
 ;; load helm
