@@ -5,7 +5,6 @@
 
 
 ;; line numbers
-(setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 
@@ -14,10 +13,14 @@
 ;; load package manager, add registries
 (require 'package)
 (package-initialize)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives
+	     '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives
+	     '("elpa" . "http://tromey.com/elpa/"))
+(add-to-list 'package-archives
+	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 
 ;; bootstrap use-package
@@ -25,6 +28,18 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+
+
+;; load theme
+(use-package solarized-theme
+  :ensure t
+  :config
+  (load-theme 'solarized-dark t))
+
+
+;;disable splash screen and startup message
+(setq inhibit-startup-message t) 
+(setq initial-scratch-message nil)
 
 
 ;; server
@@ -36,7 +51,6 @@
 (use-package evil
   :ensure t ;; install the evil package if not installed
   :config ;; tweak evil after loading itglobal-display-line-numbers-mode
-
   (evil-mode 1)
 
   (use-package evil-leader
@@ -58,6 +72,12 @@
   :ensure t
   :config
   (helm-mode))
+
+
+(use-package evil-commentary
+  :ensure t
+  :config
+  (evil-commentary-mode))
 
 
 ;; load projectile
@@ -90,25 +110,28 @@
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (add-hook 'neotree-mode-hook
     (lambda ()
-	(define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-	(define-key evil-normal-state-local-map (kbd "I") 'neotree-hidden-file-toggle)
-	(define-key evil-normal-state-local-map (kbd "z") 'neotree-stretch-toggle)
-	(define-key evil-normal-state-local-map (kbd "R") 'neotree-refresh)
-	(define-key evil-normal-state-local-map (kbd "m") 'neotree-rename-node)
-	(define-key evil-normal-state-local-map (kbd "c") 'neotree-create-node)
-	(define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
+      (define-key evil-normal-state-local-map (kbd "q")
+	'neotree-hide)
+      (define-key evil-normal-state-local-map (kbd "I")
+	'neotree-hidden-file-toggle)
+      (define-key evil-normal-state-local-map (kbd "z")
+	'neotree-stretch-toggle)
+      (define-key evil-normal-state-local-map (kbd "R")
+	'neotree-refresh)
+      (define-key evil-normal-state-local-map (kbd "m")
+	'neotree-rename-node)
+      (define-key evil-normal-state-local-map (kbd "c")
+	'neotree-create-node)
+      (define-key evil-normal-state-local-map (kbd "d")
+	'neotree-delete-node)
 
-	(define-key evil-normal-state-local-map (kbd "s") 'neotree-enter-vertical-split)
-	(define-key evil-normal-state-local-map (kbd "S") 'neotree-enter-horizontal-split)
+      (define-key evil-normal-state-local-map (kbd "s")
+	'neotree-enter-vertical-split)
+      (define-key evil-normal-state-local-map (kbd "S")
+	'neotree-enter-horizontal-split)
 
-	(define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter))))
-
-
-;; load theme
-(use-package solarized-theme
-  :ensure t
-  :config
-  (load-theme 'solarized-dark t))
+      (define-key evil-normal-state-local-map (kbd "RET")
+	'neotree-enter))))
 
 
 ;; load elm-mode
@@ -116,17 +139,16 @@
   :ensure t)
 
 
+;; generated configuration
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
+   '("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
-   (quote
-    (elm-mode solarized-theme helm-ag helm-projectile neotree use-package projectile helm evil-surround evil-leader evil-indent-textobject))))
+   '(elm-mode solarized-theme helm-ag helm-projectile neotree use-package projectile helm evil-surround evil-leader evil-indent-textobject)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
