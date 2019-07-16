@@ -8,9 +8,13 @@
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 ;; column number
+(setq whitespace-line-column 73)
 (setq column-number-mode t)
 
 
+(require 'whitespace)
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+(global-whitespace-mode t)
 
 
 ;; load package manager, add registries
@@ -92,8 +96,8 @@
 
   (use-package helm-projectile
     :bind (("C-S-P" . helm-projectile-switch-project)
-	   :map evil-normal-state-map
-	   ("C-p" . helm-projectile))
+           :map evil-normal-state-map
+           ("C-p" . helm-projectile))
     :ensure t
     :config
     (evil-leader/set-key
@@ -113,27 +117,27 @@
   (add-hook 'neotree-mode-hook
     (lambda ()
       (define-key evil-normal-state-local-map (kbd "q")
-	'neotree-hide)
+        'neotree-hide)
       (define-key evil-normal-state-local-map (kbd "I")
-	'neotree-hidden-file-toggle)
+        'neotree-hidden-file-toggle)
       (define-key evil-normal-state-local-map (kbd "z")
-	'neotree-stretch-toggle)
+        'neotree-stretch-toggle)
       (define-key evil-normal-state-local-map (kbd "R")
-	'neotree-refresh)
+        'neotree-refresh)
       (define-key evil-normal-state-local-map (kbd "m")
-	'neotree-rename-node)
+        'neotree-rename-node)
       (define-key evil-normal-state-local-map (kbd "c")
-	'neotree-create-node)
+        'neotree-create-node)
       (define-key evil-normal-state-local-map (kbd "d")
-	'neotree-delete-node)
+        'neotree-delete-node)
 
       (define-key evil-normal-state-local-map (kbd "s")
-	'neotree-enter-vertical-split)
+        'neotree-enter-vertical-split)
       (define-key evil-normal-state-local-map (kbd "S")
-	'neotree-enter-horizontal-split)
+        'neotree-enter-horizontal-split)
 
       (define-key evil-normal-state-local-map (kbd "RET")
-	'neotree-enter))))
+        'neotree-enter))))
 
 
 ;; load elm-mode
@@ -153,10 +157,13 @@
  '(custom-safe-themes
    '("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
-   '(elm-mode solarized-theme helm-ag helm-projectile neotree use-package projectile helm evil-surround evil-leader evil-indent-textobject)))
+   '(elm-mode solarized-theme helm-ag helm-projectile neotree
+              use-package projectile helm evil-surround evil-leader
+              evil-indent-textobject)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "xos4 Terminus" :foundry "xos4" :slant normal :weight normal :height 180 :width normal)))))
+ '(default ((t (:family "xos4 Terminus" :foundry "xos4" :slant
+                        normal :weight normal :height 180 :width normal)))))
