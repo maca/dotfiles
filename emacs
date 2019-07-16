@@ -1,23 +1,30 @@
-;; disable graphical elements
+;; Disable graphical elements
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
 
-;; line numbers
+;; Display relative lines
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
-;; column number
-(setq whitespace-line-column 73)
+
+
+;; Display rows and columns at info bar
 (setq column-number-mode t)
 
 
+;; Highlight matching parenthesis
+(show-paren-mode 1)
+
+
+;; Highlight text over 73 cols, trailing whitespace and tabs
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (global-whitespace-mode t)
+(setq whitespace-line-column 73)
 
 
-;; load package manager, add registries
+;; Load package manager, add registries
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives
@@ -30,7 +37,7 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 
-;; bootstrap use-package
+;; Bootstrap use-package, install if required
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -44,20 +51,23 @@
   (load-theme 'solarized-dark t))
 
 
-;;disable splash screen and startup message
+;; Disable splash screen and startup message
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 
 
-;; server
+;; Run server
 (load "server")
 (unless (server-running-p) (server-start))
 
 
-;; load evil
+;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
+;; Packages
+;;
+;; Load evil!
 (use-package evil
-  :ensure t ;; install the evil package if not installed
-  :config ;; tweak evil after loading itglobal-display-line-numbers-mode
+  :ensure t
+  :config
   (evil-mode 1)
 
   (use-package evil-leader
@@ -77,16 +87,9 @@
     (evil-commentary-mode))
 
   (use-package evil-indent-textobject :ensure t))
-
-
-;; load helm
-(use-package helm
-  :ensure t
-  :config
-  (helm-mode))
-
-
-;; load projectile
+;;
+;; Load project package
+;;
 (use-package projectile
   :ensure t
   :config
@@ -99,8 +102,16 @@
     (evil-leader/set-key
       "ps" 'helm-projectile-ag
       "pa" 'helm-projectile-find-file-in-known-projects)))
-
-
+;;
+;; Load file autocomplete package
+;;
+(use-package helm
+  :ensure t
+  :config
+  (helm-mode))
+;;
+;; Load tree view package
+;;
 (use-package neotree
   :ensure t
   :config
@@ -134,17 +145,18 @@
 
       (define-key evil-normal-state-local-map (kbd "RET")
         'neotree-enter))))
-
-
-;; load elm-mode
+;;
+;; Syntax and language modes
+;;
 (use-package elm-mode
   :ensure t)
+;;
+;; Packages
+;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
 
-;; maching parenthesis
-(show-paren-mode 1)
 
-
-;; generated configuration
+;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
+;; Generated junk
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
