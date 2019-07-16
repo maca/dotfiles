@@ -1,9 +1,1 @@
-instances=$(vim --serverlist | grep STANDALONE | wc -l)
-
-if [ ! -f /usr/bin/urxvt ]; then
-  /usr/bin/vim $@
-elif [ $instances -ge 1  ]; then
-  /usr/bin/vim --servername STANDALONE --remote-tab-silent $@
-else
-  urxvt -name vim -title vim -e /usr/bin/vim --servername STANDALONE $@ &
-fi
+emacsclient -n -a emacs $@ &
