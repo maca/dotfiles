@@ -1,12 +1,15 @@
 ;; disable graphical elements
-(menu-bar-mode -1) 
+(menu-bar-mode -1)
 (scroll-bar-mode -1)
-(tool-bar-mode -1) 
+(tool-bar-mode -1)
 
 
 ;; line numbers
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
+;; column number
+(setq column-number-mode t)
+
 
 
 
@@ -14,13 +17,13 @@
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives
-	     '("gnu" . "http://elpa.gnu.org/packages/"))
+             '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives
-	     '("elpa" . "http://tromey.com/elpa/"))
+             '("elpa" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 
 ;; bootstrap use-package
@@ -38,7 +41,7 @@
 
 
 ;;disable splash screen and startup message
-(setq inhibit-startup-message t) 
+(setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 
 
@@ -54,15 +57,20 @@
   (evil-mode 1)
 
   (use-package evil-leader
-  :ensure t
-  :config
-  (evil-leader/set-leader "<SPC>")
-  (global-evil-leader-mode))
+    :ensure t
+    :config
+    (evil-leader/set-leader "<SPC>")
+    (global-evil-leader-mode))
 
   (use-package evil-surround
     :ensure t
     :config
     (global-evil-surround-mode))
+
+  (use-package evil-commentary
+    :ensure t
+    :config
+    (evil-commentary-mode))
 
   (use-package evil-indent-textobject :ensure t))
 
@@ -72,12 +80,6 @@
   :ensure t
   :config
   (helm-mode))
-
-
-(use-package evil-commentary
-  :ensure t
-  :config
-  (evil-commentary-mode))
 
 
 ;; load projectile
@@ -104,8 +106,8 @@
   :config
 
   (evil-leader/set-key
-    "m"  'neotree-toggle
-    "n"  'neotree-project-dir)
+    "m" 'neotree-toggle
+    "n" 'neotree-project-dir)
 
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (add-hook 'neotree-mode-hook
@@ -137,6 +139,9 @@
 ;; load elm-mode
 (use-package elm-mode
   :ensure t)
+
+;; maching parenthesis
+(show-paren-mode 1)
 
 
 ;; generated configuration
