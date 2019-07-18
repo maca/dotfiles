@@ -94,21 +94,30 @@
   :ensure t
   :config
   (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
-  (use-package helm-projectile
-    :ensure t
-    :config
-    (evil-leader/set-key
-      "ps" 'helm-projectile-ag
-      "pa" 'helm-projectile-find-file-in-known-projects)))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 ;;
 ;; Load file autocomplete package
 ;;
-(use-package helm
+(use-package ivy
   :ensure t
   :config
-  (helm-mode))
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
+
+  (evil-leader/set-key
+    "ff" 'counsel-fzf
+    "fg" 'counsel-git
+    "fg" 'counsel-git-grep
+    "fl" 'counsel-locate
+    "fs" 'counsel-ag
+    "hl" 'counsel-find-library
+    "hs" 'counsel-info-lookup-symbol
+    "hu" 'counsel-unicode-char
+    "hv" 'counsel-describe-variable))
 ;;
 ;; Load tree view package
 ;;
