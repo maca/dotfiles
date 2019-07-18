@@ -86,6 +86,13 @@
     :config
     (evil-commentary-mode))
 
+  (use-package evil-magit
+    :ensure t
+    :config
+
+    (evil-leader/set-key
+      "gs" 'magit-status))
+
   (use-package evil-indent-textobject :ensure t))
 ;;
 ;; Load project package
