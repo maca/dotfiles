@@ -91,6 +91,7 @@
     :config
 
     (evil-leader/set-key
+      "gb" 'magit-blame
       "gs" 'magit-status))
 
   (use-package evil-indent-textobject :ensure t))
