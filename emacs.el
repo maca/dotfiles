@@ -20,8 +20,8 @@
 ;; Highlight text over 73 cols, trailing whitespace and tabs
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
+(setq whitespace-line-column 72)
 (global-whitespace-mode t)
-(setq whitespace-line-column 73)
 
 
 ;; Load package manager, add registries
@@ -29,8 +29,8 @@
 (package-initialize)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives
-             '("gnu" . "http://elpa.gnu.org/packages/"))
+;; (add-to-list 'package-archives
+;;              '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives
              '("elpa" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives
@@ -94,16 +94,18 @@
   :ensure t
   :config
   (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+  (define-key projectile-mode-map (kbd "C-c p")
+    'projectile-command-map))
 ;;
-;; Load file autocomplete package
+;; File navigation
 ;;
 (use-package ivy
   :ensure t
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
+
   (setq enable-recursive-minibuffers t)
+  (setq ivy-use-virtual-buffers t)
+
   (global-set-key "\C-s" 'swiper)
   (global-set-key (kbd "C-c C-r") 'ivy-resume)
   (global-set-key (kbd "<f6>") 'ivy-resume)
@@ -111,13 +113,45 @@
   (evil-leader/set-key
     "ff" 'counsel-fzf
     "fg" 'counsel-git
+    "fb" 'ivy-switch-buffer
     "fg" 'counsel-git-grep
     "fl" 'counsel-locate
     "fs" 'counsel-ag
     "hl" 'counsel-find-library
     "hs" 'counsel-info-lookup-symbol
+    "hf" 'counsel-describe-function
     "hu" 'counsel-unicode-char
-    "hv" 'counsel-describe-variable))
+    "hv" 'counsel-describe-variable)
+
+  (use-package counsel-etags
+    :ensure t
+    :config
+
+    (define-key evil-normal-state-map (kbd "gt")
+      'counsel-etags-find-tag-at-point)
+
+    ;; Don't ask before rereading the TAGS files if they have changed
+    (setq tags-revert-without-query t)
+
+    ;; Don't warn when TAGS files are large
+    (setq large-file-warning-threshold nil)
+
+    ;; Setup auto update now
+    (add-hook 'prog-mode-hook
+      (lambda ()
+        (add-hook 'after-save-hook
+                  'counsel-etags-virtual-update-tags 'append 'local)))))
+;;
+;; Autocomplete
+;;
+(use-package company
+  :ensure t
+  :config
+
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+
+  (add-hook 'after-init-hook 'global-company-mode))
 ;;
 ;; Load tree view package
 ;;
@@ -165,7 +199,6 @@
 
 
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
-;; Generated junk
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -174,13 +207,10 @@
  '(custom-safe-themes
    '("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
-   '(elm-mode solarized-theme helm-ag helm-projectile neotree
-              use-package projectile helm evil-surround evil-leader
-              evil-indent-textobject)))
+   '(elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "xos4 Terminus" :foundry "xos4" :slant
-                        normal :weight normal :height 180 :width normal)))))
+ '(default ((t (:family "xos4 Terminus" :foundry "xos4" :slant normal :weight normal :height 180 :width normal)))))
