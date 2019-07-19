@@ -148,7 +148,9 @@
     (add-hook 'prog-mode-hook
       (lambda ()
         (add-hook 'after-save-hook
-                  'counsel-etags-virtual-update-tags 'append 'local)))))
+                  'counsel-etags-virtual-update-tags 'append 'local))))
+
+  (use-package counsel :ensure t))
 ;;
 ;; Autocomplete
 ;;
