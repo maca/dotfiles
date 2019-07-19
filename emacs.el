@@ -200,9 +200,23 @@
       (define-key evil-normal-state-local-map (kbd "RET")
         'neotree-enter))))
 ;;
+;; Parenthesis auto close
+;;
+(use-package smartparens
+  :ensure t
+  :config
+  (smartparens-global-mode 1)
+  (require 'smartparens-config))
+;;
 ;; Syntax and language modes
 ;;
 (use-package elm-mode
+  :ensure t)
+
+(use-package elixir-mode
+  :ensure t)
+
+(use-package yaml-mode
   :ensure t)
 ;;
 ;; Packages
@@ -218,7 +232,7 @@
  '(custom-safe-themes
    '("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
-   '(elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
+   '(elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
