@@ -218,6 +218,9 @@
 
 (use-package yaml-mode
   :ensure t)
+
+(use-package dockerfile-mode
+  :ensure t)
 ;;
 ;; Packages
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
