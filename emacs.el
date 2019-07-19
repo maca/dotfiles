@@ -24,6 +24,22 @@
 (global-whitespace-mode t)
 
 
+;; Autosave directory
+(setq auto-save-file-name-transforms
+  `((".*" "~/.emacs.d/tmp/auto-save" t)))
+
+
+;; Save history
+(savehist-mode 1)
+(setq savehist-file "~/.emacs.d/tmp/history")
+
+
+;; Save undo
+(global-undo-tree-mode)
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/tmp/undo")))
+
+
 ;; Load package manager, add registries
 (require 'package)
 (package-initialize)
