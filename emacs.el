@@ -248,6 +248,28 @@
 ;;
 ;; Syntax and language modes
 ;;
+(use-package web-mode
+  :ensure t
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (add-to-list 'auto-mode-alist '("\\.html" . web-mode)
+  (add-to-list 'auto-mode-alist '("\\.eex" . web-mode))
+
+  (use-package company-web
+    :ensure t
+    :config
+    (require 'company-web-html)))
+
+(use-package emmet-mode
+  :ensure t
+  :config
+  (add-hook 'sgml-mode-hook 'emmet-mode))
+
+(use-package ruby-mode
+  :ensure t)
+
 (use-package elm-mode
   :ensure t)
 
