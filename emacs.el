@@ -24,6 +24,14 @@
 (global-whitespace-mode t)
 
 
+;; No tabs
+(setq-default indent-tabs-mode nil)
+
+
+;; No backup files
+(setq make-backup-files nil)
+
+
 ;; Autosave directory
 (setq auto-save-file-name-transforms
   `((".*" "~/.emacs.d/tmp/auto-save" t)))
@@ -34,10 +42,11 @@
 (setq savehist-file "~/.emacs.d/tmp/history")
 
 
-;; Save undo
+;; Save undo across sessions
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history t)
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/tmp/undo")))
+(setq undo-tree-history-directory-alist
+      '(("." . "~/.emacs.d/tmp/undo")))
 
 
 ;; Load package manager, add registries
