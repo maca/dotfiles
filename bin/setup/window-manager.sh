@@ -6,7 +6,8 @@ sudo pacman -S\
   pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
   ttf-dejavu terminus-font gmrun xcompmgr pavucontrol \
   xautolock slock redshift acpi acpilight xbindkeys \
-  xf86-input-libinput xorg-xinput gpicview
+  xf86-input-libinput xorg-xinput gpicview \
+  libpng poppler-glib imagemagick
 
 cd /tmp
 
@@ -16,7 +17,6 @@ aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git \
   browserpass xrandr-invert-colors xkbset
 
 cd -
-
 mkdir -p ~/.config/fontconfig/
 
 ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
