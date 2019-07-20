@@ -43,7 +43,6 @@
 
 
 ;; Save undo across sessions
-(global-undo-tree-mode)
 (setq undo-tree-auto-save-history t)
 (setq undo-tree-history-directory-alist
       '(("." . "~/.emacs.d/tmp/undo")))
@@ -54,10 +53,10 @@
 (package-initialize)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/"))
-;; (add-to-list 'package-archives
-;;              '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives
              '("elpa" . "http://tromey.com/elpa/"))
+(add-to-list 'package-archives
+             '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
@@ -144,36 +143,48 @@
   (global-set-key (kbd "<f6>") 'ivy-resume)
 
   (evil-leader/set-key
+    "fb" 'ivy-switch-buffer
     "ff" 'counsel-fzf
     "fg" 'counsel-git
-    "fb" 'ivy-switch-buffer
     "fg" 'counsel-git-grep
     "fl" 'counsel-locate
     "fs" 'counsel-ag
+    "hf" 'counsel-describe-function
+    "fy" 'counsel-yank-pop
     "hl" 'counsel-find-library
     "hs" 'counsel-info-lookup-symbol
     "hf" 'counsel-describe-function
     "hu" 'counsel-unicode-char
     "hv" 'counsel-describe-variable)
 
-  (use-package counsel-etags
-    :ensure t
-    :config
+(use-package counsel-etags
+  :ensure t
 
-    (define-key evil-normal-state-map (kbd "gt")
-      'counsel-etags-find-tag-at-point)
+  :hook
+  (prog-mode .
+    (lambda ()
+      (add-hook 'after-save-hook
+                'counsel-etags-virtual-update-tags 'append 'local)))
 
-    ;; Don't ask before rereading the TAGS files if they have changed
-    (setq tags-revert-without-query t)
+  :bind (("M-." . counsel-etags-find-tag-at-point)
+         ("M-t" . counsel-etags-grep-symbol-at-point)
+         ("M-s" . counsel-etags-find-tag))
 
-    ;; Don't warn when TAGS files are large
-    (setq large-file-warning-threshold nil)
+  :config
 
-    ;; Setup auto update now
-    (add-hook 'prog-mode-hook
-      (lambda ()
-        (add-hook 'after-save-hook
-                  'counsel-etags-virtual-update-tags 'append 'local))))
+  ;; Don't ask before rereading the TAGS files if they have changed
+  (setq tags-revert-without-query t)
+
+  ;; Don't warn when TAGS files are large
+  (setq large-file-warning-threshold nil)
+
+  ;; How many seconds to wait before rerunning tags for auto-update
+  (setq counsel-etags-update-interval 10)
+
+  ;; Ignore build directories for tagging
+  (add-to-list 'counsel-etags-ignore-directories "build")
+  (add-to-list 'counsel-etags-ignore-filenames ".clang-format"))
+
 
   (use-package counsel :ensure t))
 ;;
@@ -186,7 +197,9 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
 
-  (define-key company-active-map [tab] 'company-complete-common-or-cycle)
+  (define-key company-active-map [tab]
+    'company-complete-common-or-cycle)
+
   (add-hook 'after-init-hook 'global-company-mode))
 ;;
 ;; Load tree view package
@@ -246,6 +259,15 @@
 
 (use-package dockerfile-mode
   :ensure t)
+
+(use-package pdf-tools
+  :ensure t
+  :config)
+
+;; (use-package org-mode
+;;   :ensure t
+;;   :config)
+;;
 ;;
 ;; Packages
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
@@ -260,7 +282,7 @@
  '(custom-safe-themes
    '("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
-   '(elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
+   '(org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
