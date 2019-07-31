@@ -93,6 +93,8 @@
   :ensure t
   :config
   (evil-mode 1)
+  (evil-leader/set-key
+    "uv" 'undo-tree-visualize)
 
   (use-package evil-leader
     :ensure t
@@ -166,27 +168,24 @@
       (add-hook 'after-save-hook
                 'counsel-etags-virtual-update-tags 'append 'local)))
 
-  :bind (("M-." . counsel-etags-find-tag-at-point)
-         ("M-t" . counsel-etags-grep-symbol-at-point)
-         ("M-s" . counsel-etags-find-tag))
-
   :config
-
   ;; Don't ask before rereading the TAGS files if they have changed
   (setq tags-revert-without-query t)
-
   ;; Don't warn when TAGS files are large
   (setq large-file-warning-threshold nil)
-
   ;; How many seconds to wait before rerunning tags for auto-update
   (setq counsel-etags-update-interval 10)
-
   ;; Ignore build directories for tagging
   (add-to-list 'counsel-etags-ignore-directories "build")
-  (add-to-list 'counsel-etags-ignore-filenames ".clang-format"))
+  (add-to-list 'counsel-etags-ignore-filenames ".clang-format")
 
+  (define-key evil-normal-state-map
+    "gt" 'counsel-etags-find-tag-at-point)
 
-  (use-package counsel :ensure t))
+  (define-key evil-normal-state-map
+    "gf" 'counsel-etags-find-tag))
+
+(use-package counsel :ensure t))
 ;;
 ;; Autocomplete
 ;;
