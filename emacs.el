@@ -253,7 +253,7 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
-  (add-to-list 'auto-mode-alist '("\\.html" . web-mode)
+  (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.eex" . web-mode))
 
   (use-package company-web
@@ -272,7 +272,24 @@
 (use-package elm-mode
   :ensure t)
 
+(use-package haskell-mode
+  :ensure t
+  :config
+  (setenv "PATH"
+          (concat
+           (getenv "HOME") "/.ghcup/bin" ":"
+           (getenv "HOME") "/.cabal/bin" ":"
+           (getenv "PATH"))))
+
+(use-package tidal
+  :ensure t
+  :config
+  (setq tidal-interpreter "/home/maca/.ghcup/bin/ghci"))
+
 (use-package elixir-mode
+  :ensure t)
+
+(use-package csv-mode
   :ensure t)
 
 (use-package yaml-mode
@@ -282,8 +299,7 @@
   :ensure t)
 
 (use-package pdf-tools
-  :ensure t
-  :config)
+  :ensure t)
 
 ;; (use-package org-mode
 ;;   :ensure t
@@ -303,7 +319,7 @@
  '(custom-safe-themes
    '("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
-   '(org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
+   '(tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
