@@ -21,11 +21,10 @@
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (setq whitespace-line-column 72)
+(setq indent-tabs-mode nil)
+(setq tab-width 2)
+(setq evil-shift-width 2)
 (global-whitespace-mode t)
-
-
-;; No tabs
-(setq-default indent-tabs-mode nil)
 
 
 ;; No backup files
@@ -95,6 +94,7 @@
   (evil-mode 1)
   (evil-leader/set-key
     "uv" 'undo-tree-visualize)
+  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
 
   (use-package evil-leader
     :ensure t
@@ -128,8 +128,9 @@
   :ensure t
   :config
   (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p")
-    'projectile-command-map))
+
+  (evil-leader/set-key
+    "p" 'projectile-command-map))
 ;;
 ;; File navigation
 ;;
@@ -151,11 +152,11 @@
     "fg" 'counsel-git-grep
     "fl" 'counsel-locate
     "fs" 'counsel-ag
-    "hf" 'counsel-describe-function
     "fy" 'counsel-yank-pop
+    "hf" 'counsel-describe-function
+    "hf" 'counsel-describe-function
     "hl" 'counsel-find-library
     "hs" 'counsel-info-lookup-symbol
-    "hf" 'counsel-describe-function
     "hu" 'counsel-unicode-char
     "hv" 'counsel-describe-variable)
 
@@ -267,7 +268,9 @@
   (add-hook 'sgml-mode-hook 'emmet-mode))
 
 (use-package ruby-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq ruby-insert-encoding-magic-comment nil))
 
 (use-package elm-mode
   :ensure t)
