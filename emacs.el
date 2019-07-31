@@ -126,8 +126,9 @@
   :ensure t
   :config
   (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p")
-    'projectile-command-map))
+
+  (evil-leader/set-key
+    "p" 'projectile-command-map))
 ;;
 ;; File navigation
 ;;
@@ -149,11 +150,11 @@
     "fg" 'counsel-git-grep
     "fl" 'counsel-locate
     "fs" 'counsel-ag
-    "hf" 'counsel-describe-function
     "fy" 'counsel-yank-pop
+    "hf" 'counsel-describe-function
+    "hf" 'counsel-describe-function
     "hl" 'counsel-find-library
     "hs" 'counsel-info-lookup-symbol
-    "hf" 'counsel-describe-function
     "hu" 'counsel-unicode-char
     "hv" 'counsel-describe-variable)
 
