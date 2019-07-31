@@ -21,11 +21,10 @@
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (setq whitespace-line-column 72)
+(setq indent-tabs-mode nil)
+(setq tab-width 2)
+(setq evil-shift-width 2)
 (global-whitespace-mode t)
-
-
-;; No tabs
-(setq-default indent-tabs-mode nil)
 
 
 ;; No backup files
@@ -93,6 +92,7 @@
   :ensure t
   :config
   (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
 
   (use-package evil-leader
     :ensure t
@@ -268,7 +268,9 @@
   (add-hook 'sgml-mode-hook 'emmet-mode))
 
 (use-package ruby-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq ruby-insert-encoding-magic-comment nil))
 
 (use-package elm-mode
   :ensure t)
