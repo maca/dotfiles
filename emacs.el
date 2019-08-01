@@ -23,6 +23,7 @@
 (setq whitespace-line-column 72)
 (setq indent-tabs-mode nil)
 (setq tab-width 2)
+(setq tab-stop-list (number-sequence 2 120 2))
 (setq evil-shift-width 2)
 (global-whitespace-mode t)
 
