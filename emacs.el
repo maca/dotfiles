@@ -34,7 +34,7 @@
 
 ;; Autosave directory
 (setq auto-save-file-name-transforms
-  `((".*" "~/.emacs.d/tmp/auto-save" t)))
+      `((".*" "~/.emacs.d/tmp/auto-save" t)))
 
 
 ;; Save history
@@ -125,7 +125,7 @@
   ;; Save undo across sessions
   (setq undo-tree-auto-save-history t)
   (setq undo-tree-history-directory-alist
-    '(("." . "~/.emacs.d/tmp/undo")))
+        '(("." . "~/.emacs.d/tmp/undo")))
 
   (evil-leader/set-key
     "uv" 'undo-tree-visualize))
@@ -169,33 +169,33 @@
     "hu" 'counsel-unicode-char
     "hv" 'counsel-describe-variable)
 
-(use-package counsel-etags
-  :ensure t
+  (use-package counsel-etags
+    :ensure t
 
-  :hook
-  (prog-mode .
-    (lambda ()
-      (add-hook 'after-save-hook
-                'counsel-etags-virtual-update-tags 'append 'local)))
+    :hook
+    (prog-mode .
+     (lambda ()
+       (add-hook 'after-save-hook
+                 'counsel-etags-virtual-update-tags 'append 'local)))
 
-  :config
-  ;; Don't ask before rereading the TAGS files if they have changed
-  (setq tags-revert-without-query t)
-  ;; Don't warn when TAGS files are large
-  (setq large-file-warning-threshold nil)
-  ;; How many seconds to wait before rerunning tags for auto-update
-  (setq counsel-etags-update-interval 10)
-  ;; Ignore build directories for tagging
-  (add-to-list 'counsel-etags-ignore-directories "build")
-  (add-to-list 'counsel-etags-ignore-filenames ".clang-format")
+    :config
+    ;; Don't ask before rereading the TAGS files if they have changed
+    (setq tags-revert-without-query t)
+    ;; Don't warn when TAGS files are large
+    (setq large-file-warning-threshold nil)
+    ;; How many seconds to wait before rerunning tags for auto-update
+    (setq counsel-etags-update-interval 10)
+    ;; Ignore build directories for tagging
+    (add-to-list 'counsel-etags-ignore-directories "build")
+    (add-to-list 'counsel-etags-ignore-filenames ".clang-format")
 
-  (define-key evil-normal-state-map
-    "gt" 'counsel-etags-find-tag-at-point)
+    (define-key evil-normal-state-map
+      "gt" 'counsel-etags-find-tag-at-point)
 
-  (define-key evil-normal-state-map
-    "gf" 'counsel-etags-find-tag))
+    (define-key evil-normal-state-map
+      "gf" 'counsel-etags-find-tag))
 
-(use-package counsel :ensure t))
+  (use-package counsel :ensure t))
 ;;
 ;; Autocomplete
 ;;
@@ -223,29 +223,29 @@
 
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (add-hook 'neotree-mode-hook
-    (lambda ()
-      (define-key evil-normal-state-local-map (kbd "q")
-        'neotree-hide)
-      (define-key evil-normal-state-local-map (kbd "I")
-        'neotree-hidden-file-toggle)
-      (define-key evil-normal-state-local-map (kbd "z")
-        'neotree-stretch-toggle)
-      (define-key evil-normal-state-local-map (kbd "R")
-        'neotree-refresh)
-      (define-key evil-normal-state-local-map (kbd "m")
-        'neotree-rename-node)
-      (define-key evil-normal-state-local-map (kbd "c")
-        'neotree-create-node)
-      (define-key evil-normal-state-local-map (kbd "d")
-        'neotree-delete-node)
+            (lambda ()
+              (define-key evil-normal-state-local-map (kbd "q")
+                'neotree-hide)
+              (define-key evil-normal-state-local-map (kbd "I")
+                'neotree-hidden-file-toggle)
+              (define-key evil-normal-state-local-map (kbd "z")
+                'neotree-stretch-toggle)
+              (define-key evil-normal-state-local-map (kbd "R")
+                'neotree-refresh)
+              (define-key evil-normal-state-local-map (kbd "m")
+                'neotree-rename-node)
+              (define-key evil-normal-state-local-map (kbd "c")
+                'neotree-create-node)
+              (define-key evil-normal-state-local-map (kbd "d")
+                'neotree-delete-node)
 
-      (define-key evil-normal-state-local-map (kbd "s")
-        'neotree-enter-vertical-split)
-      (define-key evil-normal-state-local-map (kbd "S")
-        'neotree-enter-horizontal-split)
+              (define-key evil-normal-state-local-map (kbd "s")
+                'neotree-enter-vertical-split)
+              (define-key evil-normal-state-local-map (kbd "S")
+                'neotree-enter-horizontal-split)
 
-      (define-key evil-normal-state-local-map (kbd "RET")
-        'neotree-enter))))
+              (define-key evil-normal-state-local-map (kbd "RET")
+                'neotree-enter))))
 ;;
 ;; Parenthesis auto close
 ;;
