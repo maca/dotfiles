@@ -41,12 +41,6 @@
 (setq savehist-file "~/.emacs.d/tmp/history")
 
 
-;; Save undo across sessions
-(setq undo-tree-auto-save-history t)
-(setq undo-tree-history-directory-alist
-      '(("." . "~/.emacs.d/tmp/undo")))
-
-
 ;; Load package manager, add registries
 (require 'package)
 (package-initialize)
@@ -92,8 +86,6 @@
   :ensure t
   :config
   (evil-mode 1)
-  (evil-leader/set-key
-    "uv" 'undo-tree-visualize)
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
 
   (use-package evil-leader
@@ -121,6 +113,21 @@
       "gs" 'magit-status))
 
   (use-package evil-indent-textobject :ensure t))
+;;
+;; Undo tree
+;;
+(use-package undo-tree
+  :ensure t
+  :config
+
+  (global-undo-tree-mode)
+  ;; Save undo across sessions
+  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-history-directory-alist
+    '(("." . "~/.emacs.d/tmp/undo")))
+
+  (evil-leader/set-key
+    "uv" 'undo-tree-visualize))
 ;;
 ;; Load project package
 ;;
@@ -150,6 +157,7 @@
     "ff" 'counsel-fzf
     "fg" 'counsel-git
     "fg" 'counsel-git-grep
+    "fh" 'counsel-recentf
     "fl" 'counsel-locate
     "fs" 'counsel-ag
     "fy" 'counsel-yank-pop
