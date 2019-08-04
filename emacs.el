@@ -166,6 +166,7 @@
     "fh" 'counsel-recentf
     "fl" 'counsel-locate
     "fs" 'counsel-ag
+    "ft" 'counsel-etags-list-tag
     "fy" 'counsel-yank-pop
     "hf" 'counsel-describe-function
     "hf" 'counsel-describe-function
@@ -195,10 +196,7 @@
     (add-to-list 'counsel-etags-ignore-filenames ".clang-format")
 
     (define-key evil-normal-state-map
-      "gt" 'counsel-etags-find-tag-at-point)
-
-    (define-key evil-normal-state-map
-      "gf" 'counsel-etags-find-tag))
+      "gt" 'counsel-etags-find-tag-at-point))
 
   (use-package counsel :ensure t))
 ;;
