@@ -163,6 +163,7 @@
     "ff" 'counsel-fzf
     "fg" 'counsel-git
     "fg" 'counsel-git-grep
+    "fd" 'counsel-grep
     "fh" 'counsel-recentf
     "fl" 'counsel-locate
     "fs" 'counsel-ag
