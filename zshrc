@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh configuration.
 export TERM=screen-256color
 
+# ssh-agent socket path
+export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
+
 
 ZSH=/usr/share/oh-my-zsh/
 
@@ -84,6 +87,7 @@ RPROMPT='%{$reset_color%} %{$fg[cyan]%}%*%{$reset_color%}'
 
 export EDITOR=vim
 export BROWSER=chromium
+
 
 alias comp="tar cvfz"
 alias space="sudo du -sh *"
