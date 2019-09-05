@@ -9,3 +9,12 @@
 
 "pulseaudio-ctl mute-input"
   XF86AudioMicMute
+
+"xbacklight -inc 5"
+   XF86MonBrightnessUp
+
+"xbacklight -dec 5"
+   XF86MonBrightnessDown
+
+"xbacklight -set 0"
+  XF86Display

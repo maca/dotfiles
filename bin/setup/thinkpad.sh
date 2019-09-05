@@ -15,6 +15,14 @@ Section "Device"
 EndSection
 EOF
 
+
+# Backlight allowed for members of video group
+sudo sh -c "cat > /etc/udev/rules.d/backlight.rules" <<EOF
+ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
+ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+EOF
+
+
 sudo sh -c "cat > /etc/systemd/logind.conf" <<EOF
 [Login]
 #NAutoVTs=6
