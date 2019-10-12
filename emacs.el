@@ -290,7 +290,7 @@
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode))
 
-(use-package ruby-mode
+(use-package enh-ruby-mode
   :ensure t
   :config
   (setq ruby-insert-encoding-magic-comment nil))
@@ -324,14 +324,39 @@
 (use-package dockerfile-mode
   :ensure t)
 
-(use-package pdf-tools
-  :ensure t)
+(use-package git-time-metric
+  :ensure t
+  :config
+  (add-hook 'after-save-hook 'git-time-metric-record))
 
+
+(use-package pdf-tools
+ :pin manual ;; manually update
+
+ :config
+ ;; initialise
+ (pdf-tools-install)
+ ;; open pdfs scaled to fit page
+ (setq-default pdf-view-display-size 'fit-page)
+ ;; automatically annotate highlights
+ (setq pdf-annot-activate-created-annotations t)
+ ;; use normal isearch
+ (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+ ;; turn off cua so copy works
+ (add-hook 'pdf-view-mode-hook (lambda () (cua-mode 0)))
+ ;; more fine-grained zooming
+ (setq pdf-view-resize-factor 1.1)
+ ;; keyboard shortcuts
+ (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
+ (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
+ (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete))
+;;
+;; Folding
+;;
 (use-package origami
   :ensure t
   :config
   (global-origami-mode 1))
-
 ;; (use-package org-mode
 ;;   :ensure t
 ;;   :config)
@@ -350,7 +375,7 @@
  '(custom-safe-themes
    '("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
-   '(yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
+   '(enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
