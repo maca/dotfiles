@@ -22,6 +22,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git gem chruby thor heroku vi-mode extract history-substring-search vagrant)
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/bin/gtm.sh
 unset GREP_OPTIONS
 
 # paths
@@ -81,7 +82,11 @@ function prompt_color() {
   echo "%{$reset_color%}%{$fg[yellow]%}"
 }
 
-PROMPT='`prompt_color`[%{$fg_bold[red]%}%m`prompt_color`][%{$fg[green]%}%c`prompt_color`] `git_prompt_info``prompt_color`- %{$reset_color%}'
+function gtm_status() {
+  [ -z "$GTM_STATUS" ] || echo "$GTM_STATUS "
+}
+
+PROMPT='`prompt_color`[%{$fg_bold[red]%}%m`prompt_color`][%{$fg[green]%}%c`prompt_color`] `git_prompt_info``gtm_status``prompt_color`- %{$reset_color%}'
 RPROMPT='%{$reset_color%} %{$fg[cyan]%}%*%{$reset_color%}'
 
 
@@ -108,6 +113,7 @@ alias mpv="mpv --sub-scale=0.6"
 sticky_keys() {
    xkbset accessx sticky -twokey -latchlock
    xkbset exp 1 '=accessx' '=sticky' '=twokey' '=latchlock'
+   setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
