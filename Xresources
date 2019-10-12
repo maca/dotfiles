@@ -4,7 +4,7 @@ URxvt.scrollBar: off
 !! URxvt.scrollBar_left: true
 URxvt.depth: 32
 
-URxvt.font: xft:Terminus:size=18:antialiasing=false
+URxvt.font: xft:Terminus:size=18:antialiasing=false,xft:Noto Emoji
 URxvt.lineSpace: 4
 
 URxvt.geometry: 81x25
