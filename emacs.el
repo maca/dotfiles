@@ -279,6 +279,7 @@
   (setq web-mode-code-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.eex" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
   (use-package company-web
     :ensure t
@@ -294,6 +295,9 @@
   :ensure t
   :config
   (setq ruby-insert-encoding-magic-comment nil))
+
+(use-package haml-mode
+  :ensure t)
 
 (use-package elm-mode
   :ensure t)
