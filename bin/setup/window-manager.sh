@@ -19,7 +19,7 @@ aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git \
 cd -
 mkdir -p ~/.config/fontconfig/
 
-ln -fs $HOME/dotfiles/bubbles.cfg ~/.config/bubbles.cfg
+ln -fs $HOME/dotfiles/bubbles.conf ~/.config/bubbles.conf
 ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
 
 
