@@ -7,7 +7,7 @@ sudo pacman -S\
   ttf-dejavu terminus-font gmrun xcompmgr pavucontrol \
   xautolock slock redshift acpi acpilight xbindkeys \
   xf86-input-libinput xorg-xinput gpicview \
-  libpng poppler-glib imagemagick unclutter
+  libpng poppler-glib imagemagick
 
 cd /tmp
 
