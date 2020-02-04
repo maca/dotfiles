@@ -19,7 +19,6 @@ xinput --set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Profile Enabled" 1 0
 
 /usr/lib/systemd/systemd --user &
 xbindkeys &
-unclutter &
 udiskie
 
 exec dbus-launch bubbles
