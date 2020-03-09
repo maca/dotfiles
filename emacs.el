@@ -300,8 +300,13 @@
   :config
   (setq ruby-insert-encoding-magic-comment nil))
 
-(use-package haml-mode
+(use-package go-mode
   :ensure t)
+
+(use-package haml-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.haml" . haml-mode)))
 
 (use-package elm-mode
   :ensure t)
