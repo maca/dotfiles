@@ -11,7 +11,7 @@ xkbset exp 1 =accessx =sticky =twokey =latchlock
 
 setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
 
-xinput --set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" 0.3
+xinput --set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" 1.0
 xinput --set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Profile Enabled" 1 0
 
 /usr/lib/systemd/systemd --user &

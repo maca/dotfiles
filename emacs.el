@@ -22,10 +22,19 @@
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (setq whitespace-line-column 72)
 (setq indent-tabs-mode nil)
-(setq tab-width 2)
+(setq tab-width 1)
 (setq tab-stop-list (number-sequence 2 120 2))
+(setq js-indent-level 2)
 (setq evil-shift-width 2)
 (global-whitespace-mode t)
+
+(add-hook 'js-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)))
+
+(add-hook 'web-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)))
 
 
 ;; No backup files
@@ -174,7 +183,6 @@
     "ft" 'counsel-etags-list-tag
     "fy" 'counsel-yank-pop
     "hf" 'counsel-describe-function
-    "hf" 'counsel-describe-function
     "hl" 'counsel-find-library
     "hs" 'counsel-info-lookup-symbol
     "hu" 'counsel-unicode-char
@@ -300,8 +308,13 @@
   :config
   (setq ruby-insert-encoding-magic-comment nil))
 
-(use-package haml-mode
+(use-package go-mode
   :ensure t)
+
+(use-package haml-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.haml" . haml-mode)))
 
 (use-package elm-mode
   :ensure t)
