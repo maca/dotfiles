@@ -320,6 +320,11 @@
   :config
   (setq tidal-interpreter "/home/maca/.ghcup/bin/ghci"))
 
+(require 'sclang)
+
+(use-package sclang-extensions
+  :ensure t)
+
 (use-package elixir-mode
   :ensure t)
 
@@ -372,7 +377,9 @@
 ;;
 ;; Packages
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
-
+(custom-set-faces
+  '(whitespace-tab ((t (:foreground "#003542" :background "white"))))
+  )
 
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
 (custom-set-variables
@@ -383,7 +390,7 @@
  '(custom-safe-themes
    '("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
-   '(enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
+   '(## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
