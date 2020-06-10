@@ -23,9 +23,6 @@
   history-view-vpane-position = 318
 [push]
   default = matching
-[diff]
-  external = git_diff_wrapper
-  tool = vimdiff
 [pager]
   diff=
 [branch]
