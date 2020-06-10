@@ -53,15 +53,25 @@
 
 ;; Load package manager, add registries
 (require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (when no-ssl (warn "no ssl support"))
+
+  (add-to-list 'package-archives
+               (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+
+  (add-to-list 'package-archives
+               (cons "melpa-stable"
+                     (concat proto "://stable.melpa.org/packages/")) t))
 (package-initialize)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives
-             '("elpa" . "http://tromey.com/elpa/"))
-(add-to-list 'package-archives
-             '("org" . "https://orgmode.org/elpa/") t)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+;; (add-to-list 'package-archives
+;;              '("elpa" . "http://tromey.com/elpa/"))
+;; (add-to-list 'package-archives
+;;              '("org" . "https://orgmode.org/elpa/") t)
+;; (add-to-list 'package-archives
+;;              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 
 ;; Bootstrap use-package, install if required
@@ -244,8 +254,7 @@
   :config
 
   (evil-leader/set-key
-    "m" 'neotree-toggle
-    "n" 'neotree-project-dir)
+    "m" 'neotree-toggle)
 
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (add-hook 'neotree-mode-hook
@@ -317,7 +326,9 @@
   (add-to-list 'auto-mode-alist '("\\.haml" . haml-mode)))
 
 (use-package elm-mode
-  :ensure t)
+  :ensure t
+  :config
+  (elm-format-on-save-mode t))
 
 (use-package haskell-mode
   :ensure t
@@ -390,9 +401,18 @@
 ;;
 ;; Packages
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
+
+
+
+
+
 (custom-set-faces
-  '(whitespace-tab ((t (:foreground "#003542" :background "white"))))
-  )
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "xos4 Terminus" :foundry "xos4" :slant normal :weight normal :height 180 :width normal))))
+ '(whitespace-tab ((t (:foreground "#003542" :background "white")))))
 
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
 (custom-set-variables
@@ -404,9 +424,5 @@
    '("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
    '(## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "xos4 Terminus" :foundry "xos4" :slant normal :weight normal :height 180 :width normal)))))
+
+(put 'narrow-to-region 'disabled nil)
