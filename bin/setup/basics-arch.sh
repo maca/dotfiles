@@ -3,7 +3,7 @@
 # Usage
 # bash <(curl -s https://raw.githubusercontent.com/maca/dotfiles/master/bin/setup/basics.sh)
 
-ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
+# ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
 hwclock --systohc
 
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
@@ -14,8 +14,7 @@ echo KEYMAP=us            > /etc/vconsole.conf
 echo FONT=Lat2-Terminus16 >> /etc/vconsole.conf
 echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
 
-pacman -S dialog wpa_supplicant git vim \
-  sudo zsh pass pass-otp the_silver_searcher binutils \
+pacman -S git vim zsh pass pass-otp the_silver_searcher binutils \
   patch make automake pkgconf fakeroot openssh ruby tmux \
   rsync keychain linux-headers base-devel patch unzip ntp
 

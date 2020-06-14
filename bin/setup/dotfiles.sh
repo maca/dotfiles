@@ -32,8 +32,6 @@ ln -fs $HOME/dotfiles/bin ~/bin
 ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 ln -fs $HOME/dotfiles/pam_environment ~/.pam_environment
 
-$HOME/dotfiles/bin/aur -si chruby oh-my-zsh-git par ruby-install-git \
-  vim-plug universal-ctags-git heroku-client
 
 source $HOME/.zshrc
 
@@ -43,9 +41,13 @@ git clone git@gitlab.com:aelita/pass.git $HOME/.password-store
 mkdir -p .password-store/.git/hooks
 ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
 
-vim +PlugInstall +qall
 
-systemctl --user enable ssh-agent
-systemctl --user start ssh-agent
+# vim +PlugInstall +qall
+
+# $HOME/dotfiles/bin/aur -si chruby oh-my-zsh-git par ruby-install-git \
+#   vim-plug universal-ctags-git heroku-client
+
+# systemctl --user enable ssh-agent
+# systemctl --user start ssh-agent
 
 echo "AddKeysToAgent yes" >> ~/.ssh/config
