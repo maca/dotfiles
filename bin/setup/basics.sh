@@ -4,6 +4,8 @@
 # bash <(curl -s https://raw.githubusercontent.com/maca/dotfiles/master/bin/setup/basics.sh)
 
 ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
+hwclock --systohc
+
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
 
