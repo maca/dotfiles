@@ -44,7 +44,7 @@ ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
 
 # vim +PlugInstall +qall
 
-# $HOME/dotfiles/bin/aur -si chruby oh-my-zsh-git par ruby-install-git \
+# $HOME/dotfiles/bin/aur -si chruby par ruby-install-git \
 #   vim-plug universal-ctags-git heroku-client
 
 # systemctl --user enable ssh-agent
