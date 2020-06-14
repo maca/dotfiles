@@ -2,7 +2,7 @@
 
 # import is provided by imagemagick
 
-SCREENSHOT="/tmp/screenshot-$(date +'%Y-%m-%d--%T').png"
+SCREENSHOT="/scratch/screenshot-$(date +'%Y-%m-%d--%T').png"
 
 if [[ $1 == "active" ]]; then
     LINE=$(xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)")
