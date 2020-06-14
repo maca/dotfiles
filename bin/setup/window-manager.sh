@@ -2,7 +2,7 @@
 
 sudo pacman -Syu
 sudo pacman -S\
-  gvim rxvt-unicode xorg-server xorg-xinit chromium \
+  rxvt-unicode xorg-server xorg-xinit chromium \
   pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
   ttf-dejavu terminus-font gmrun xcompmgr pavucontrol \
   xautolock slock redshift acpi acpilight xbindkeys \
@@ -50,4 +50,3 @@ sudo sh -c "cat > /etc/fonts/conf.avail/33-TerminusPCFFont.conf" <<EOF
 EOF
 
 sudo ln -s /etc/fonts/conf.avail/33-TerminusPCFFont.conf /etc/fonts/conf.d
-
