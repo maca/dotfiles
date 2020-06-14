@@ -2,7 +2,7 @@
 
 sudo pacman -Syu
 sudo pacman -S\
-  gvim rxvt-unicode xorg-server xorg-xinit chromium \
+  rxvt-unicode xorg-server xorg-xinit chromium \
   pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
   ttf-dejavu terminus-font gmrun xcompmgr pavucontrol \
   xautolock slock redshift acpi acpilight xbindkeys \
