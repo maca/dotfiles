@@ -26,6 +26,7 @@ ln -fs $HOME/dotfiles/gitconfig ~/.gitconfig
 ln -fs $HOME/dotfiles/tmux.conf ~/.tmux.conf
 ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
 ln -fs $HOME/dotfiles/Xresources ~/.Xresources
+ln -fs $HOME/dotfiles/urxvt/ ~/.urxvt
 ln -fs $HOME/dotfiles/themes ~/.themes
 ln -fs $HOME/dotfiles/ctags.d ~/.ctags.d
 ln -fs $HOME/dotfiles/gitignore ~/.gitignore

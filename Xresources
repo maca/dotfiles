@@ -15,7 +15,7 @@ URxvt.scrollTtyKeypress: true
 URxvt.scrollTtyOutput: false
 URxvt.saveLines: 5000
 
-URxvt.perl-ext-common: default,url-select,font-size,clipboard,keyboard-select
+URxvt.perl-ext-common: default,url-select,font-size,clipboard,keyboard-select,theme
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: chromium
 
@@ -64,5 +64,32 @@ URxvt.keysym.M-s: perl:keyboard-select:search
 *.color7:       #707880
 *.color15:      #c5c8c6
 
-URxvt.keysym.Mod4-F2: command:\033]11;rgba:1c00/2400/2d00/cccc\007\033]10;#ffffff\007
-URxvt.keysym.Mod4-F3: command:\033]11;#ffffff\007\033]10;#000000\007
+
+! Light theme! special
+URxvt.theme.light.foreground:   #34302d
+URxvt.theme.light.background:   #f5e7de
+URxvt.theme.light.cursorColor:  #34302d
+! black
+URxvt.theme.light.color0:       #666661
+URxvt.theme.light.color8:       #7f7f7a
+! red
+URxvt.theme.light.color1:       #992e2e
+URxvt.theme.light.color9:       #b23636
+! green
+URxvt.theme.light.color2:       #4c3226
+URxvt.theme.light.color10:      #664233
+! yellow
+URxvt.theme.light.color3:       #a67c53
+URxvt.theme.light.color11:      #bf8f60
+! blue
+URxvt.theme.light.color4:       #4c7399
+URxvt.theme.light.color12:      #5986b2
+! magenta
+URxvt.theme.light.color5:       #bf9986
+URxvt.theme.light.color13:      #d9ae98
+! cyan
+URxvt.theme.light.color6:       #d97742
+URxvt.theme.light.color14:      #f2854a
+! white
+URxvt.theme.light.color7:       #34302d
+URxvt.theme.light.color15:      #4c4742
