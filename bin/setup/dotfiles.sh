@@ -10,6 +10,7 @@ git clone git@github.com:maca/dotfiles.git
 cd /tmp
 
 mkdir -p ~/.config
+mkdir -p ~/.config/pulseaudio-ctl/
 
 ln -fs $HOME/dotfiles/systemd ~/.config/systemd
 ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
@@ -31,6 +32,7 @@ ln -fs $HOME/dotfiles/gitignore ~/.gitignore
 ln -fs $HOME/dotfiles/bin ~/bin
 ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 ln -fs $HOME/dotfiles/pam_environment ~/.pam_environment
+ln -fs $HOME/dotfiles/pulseaudio-ctl.config ~/.config/pulseaudio-ctl/config
 
 
 source $HOME/.zshrc
