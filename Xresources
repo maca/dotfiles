@@ -67,7 +67,7 @@ URxvt.keysym.M-s: perl:keyboard-select:search
 
 ! Light theme! special
 URxvt.theme.light.foreground:   #34302d
-URxvt.theme.light.background:   #f5e7de
+URxvt.theme.light.background:   #ffffff
 URxvt.theme.light.cursorColor:  #34302d
 ! black
 URxvt.theme.light.color0:       #666661
