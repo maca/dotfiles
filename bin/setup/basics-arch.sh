@@ -16,7 +16,7 @@ echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
 
 pacman -S git vim zsh pass pass-otp the_silver_searcher binutils \
   patch make automake pkgconf fakeroot openssh ruby tmux \
-  rsync keychain linux-headers base-devel patch unzip ntp
+  rsync keychain linux-headers base-devel patch unzip ntp fzf emacs
 
 mkinitcpio -p linux
 
