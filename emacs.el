@@ -124,6 +124,11 @@
     :config
     (evil-commentary-mode))
 
+  (use-package atomic-chrome
+    :config
+    (atomic-chrome-start-server)
+    (setq atomic-chrome-buffer-open-style 'frame))
+
   (use-package evil-magit
     :ensure t
     :config
@@ -367,26 +372,26 @@
   (add-hook 'after-save-hook 'git-time-metric-record))
 
 
-(use-package pdf-tools
- :pin manual ;; manually update
+;; (use-package pdf-tools
+;;  :pin manual ;; manually update
+;;  :config
+;;  ;; initialise
+;;  (pdf-tools-install)
+;;  ;; open pdfs scaled to fit page
+;;  (setq-default pdf-view-display-size 'fit-page)
+;;  ;; automatically annotate highlights
+;;  (setq pdf-annot-activate-created-annotations t)
+;;  ;; use normal isearch
+;;  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+;;  ;; turn off cua so copy works
+;;  (add-hook 'pdf-view-mode-hook (lambda () (cua-mode 0)))
+;;  ;; more fine-grained zooming
+;;  (setq pdf-view-resize-factor 1.1)
+;;  ;; keyboard shortcuts
+;;  (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
+;;  (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
+;;  (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete))
 
- :config
- ;; initialise
- (pdf-tools-install)
- ;; open pdfs scaled to fit page
- (setq-default pdf-view-display-size 'fit-page)
- ;; automatically annotate highlights
- (setq pdf-annot-activate-created-annotations t)
- ;; use normal isearch
- (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
- ;; turn off cua so copy works
- (add-hook 'pdf-view-mode-hook (lambda () (cua-mode 0)))
- ;; more fine-grained zooming
- (setq pdf-view-resize-factor 1.1)
- ;; keyboard shortcuts
- (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
- (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
- (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete))
 ;;
 ;; Folding
 ;;
@@ -401,8 +406,6 @@
 ;;
 ;; Packages
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
-
-
 
 
 
@@ -421,8 +424,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
+   (quote
+    ("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
  '(package-selected-packages
-   '(## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
+   (quote
+    (atomic-chrome ## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject))))
 
 (put 'narrow-to-region 'disabled nil)
