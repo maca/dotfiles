@@ -30,7 +30,9 @@ LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:c
 export LS_COLORS
 
 
-# Autocomplete
+
+###############
+#### Autocomplete
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -38,6 +40,17 @@ zstyle ':completion:*' verbose yes
 zstyle ':completion:*:corrections' format '%B%d(errors: %e)%b'
 zstyle ':completion:*:descriptions' format "%{$fg[red]%}%B%d%b"
 zstyle ':completion:*' group-name ''
+# 0 -- vanilla completion (abc => abc)
+# 1 -- smart case completion (abc => Abc)
+# 2 -- word flex completion (abc => A-big-Car)
+# 3 -- full flex completion (abc => ABraCadabra)
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-}={A-Z\_}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
+#### Autocomplete
+###############
+
 
 
 ###############
