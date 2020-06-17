@@ -9,7 +9,7 @@ if [ $? = 2 ]; then
 fi
 
 
-source $HOME/bin/gtm.sh
+which gtm >/dev/null && source $HOME/bin/gtm.sh
 
 
 # paths
@@ -176,4 +176,5 @@ sticky_keys() {
 }
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
