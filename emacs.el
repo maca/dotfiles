@@ -327,7 +327,8 @@
 (use-package emmet-mode
   :ensure t
   :config
-  (add-hook 'sgml-mode-hook 'emmet-mode))
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'web-mode-hook 'emmet-mode))
 
 (use-package enh-ruby-mode
   :ensure t
