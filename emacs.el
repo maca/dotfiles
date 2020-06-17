@@ -328,7 +328,20 @@
   :ensure t
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'emmet-mode))
+  (add-hook 'web-mode-hook 'emmet-mode)
+  (unbind-key "C-j" emmet-mode-keymap)
+  (add-hook 'emmet-mode-hook
+            (lambda ()
+              (define-key evil-insert-state-local-map (kbd "<C-return>")
+                'emmet-expand-line)
+              (define-key evil-normal-state-local-map (kbd "C-k")
+                'emmet-prev-edit-point)
+              (define-key evil-insert-state-local-map (kbd "C-k")
+                'emmet-prev-edit-point)
+              (define-key evil-normal-state-local-map (kbd "C-j")
+                'emmet-next-edit-point)
+              (define-key evil-insert-state-local-map (kbd "C-j")
+                'emmet-next-edit-point))))
 
 (use-package enh-ruby-mode
   :ensure t
