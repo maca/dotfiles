@@ -17,6 +17,7 @@
 (show-paren-mode 1)
 
 
+
 ;; Highlight text over 73 cols, trailing whitespace and tabs
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
@@ -66,12 +67,9 @@
                      (concat proto "://stable.melpa.org/packages/")) t))
 (package-initialize)
 
-;; (add-to-list 'package-archives
-;;              '("elpa" . "http://tromey.com/elpa/"))
-;; (add-to-list 'package-archives
-;;              '("org" . "https://orgmode.org/elpa/") t)
-;; (add-to-list 'package-archives
-;;              '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; bind key
+(require 'bind-key)
+
 
 
 ;; Bootstrap use-package, install if required
@@ -259,10 +257,23 @@
 (use-package yasnippet
   :ensure t
   :config
-
   (yas-global-mode 1)
-  (use-package yasnippet-snippets
-    :ensure t))
+  (yas-reload-all)
+  (unbind-key "TAB" yas-minor-mode-map)
+  (unbind-key "<tab>" yas-minor-mode-map)
+
+  (use-package yasnippet-snippets :ensure t)
+  (use-package hippie-exp
+    :ensure nil
+    :defer t
+    :bind ("<C-return>" . hippie-expand)
+    :config
+    (setq-default
+     hippie-expand-try-functions-list
+     '(yas-hippie-try-expand (lambda (arg)
+                               (if (boundp 'is-emmet-mode)
+                                   emmet-expand-line arg))))))
+
 ;;
 ;; Load tree view package
 ;;
@@ -315,6 +326,8 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
+  (setq web-mode-style-padding 2)
+  (setq web-mode-script-padding 2)
   (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.eex" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
@@ -332,8 +345,7 @@
   (unbind-key "C-j" emmet-mode-keymap)
   (add-hook 'emmet-mode-hook
             (lambda ()
-              (define-key evil-insert-state-local-map (kbd "<C-return>")
-                'emmet-expand-line)
+              (setq-local is-emmet-mode t)
               (define-key evil-normal-state-local-map (kbd "C-k")
                 'emmet-prev-edit-point)
               (define-key evil-insert-state-local-map (kbd "C-k")
