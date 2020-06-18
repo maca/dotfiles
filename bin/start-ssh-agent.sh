@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
+export SSH_AUTH_SOCK=/run/user/$UID/ssh-agent.socket
 ssh-add -l >/dev/null 2>&1
 
 if [ $? -ne 0 ]; then
