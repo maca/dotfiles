@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: <% if ... %>
+# group : control structure
+# key: if
+# --
+<% if ${1:condition} %>
+  $2
+<% end %>$0

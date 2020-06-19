@@ -254,11 +254,21 @@
 ;;
 ;; Snippets
 ;;
+(defun emmet-hippie-try-expand-line (args)
+  (interactive "P")
+  (when emmet-mode
+    (emmet-expand-line args)))
+
 (use-package yasnippet
   :ensure t
   :config
+
+  (setq yas-snippet-dirs
+        (append yas-snippet-dirs
+                '("~/dotfiles/yasnippets")))
   (yas-global-mode 1)
   (yas-reload-all)
+
   (unbind-key "TAB" yas-minor-mode-map)
   (unbind-key "<tab>" yas-minor-mode-map)
 
@@ -270,9 +280,7 @@
     :config
     (setq-default
      hippie-expand-try-functions-list
-     '(yas-hippie-try-expand (lambda (arg)
-                               (if (boundp 'is-emmet-mode)
-                                   emmet-expand-line arg))))))
+     '(yas-hippie-try-expand emmet-hippie-try-expand-line))))
 
 ;;
 ;; Load tree view package
@@ -342,6 +350,11 @@
 ;;
 ;; Syntax and language modes
 ;;
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (string= (file-name-extension buffer-file-name) "erb")
+              (yas-activate-extra-mode 'erb-mode))))
+
 (use-package web-mode
   :ensure t
   :config
@@ -365,9 +378,9 @@
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
   (unbind-key "C-j" emmet-mode-keymap)
+  (unbind-key "<C-return>" emmet-mode-keymap)
   (add-hook 'emmet-mode-hook
             (lambda ()
-              (setq-local is-emmet-mode t)
               (define-key evil-normal-state-local-map (kbd "C-k")
                 'emmet-prev-edit-point)
               (define-key evil-insert-state-local-map (kbd "C-k")
