@@ -70,9 +70,6 @@
                      (concat proto "://stable.melpa.org/packages/")) t))
 (package-initialize)
 
-;; bind key
-(require 'bind-key)
-
 
 
 ;; Bootstrap use-package, install if required
@@ -80,6 +77,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+
+;; bind key
+(use-package bind-key)
 
 
 ;; load theme
@@ -428,7 +428,7 @@
   :config
   (setq tidal-interpreter "/home/maca/.ghcup/bin/ghci"))
 
-(require 'sclang)
+(use-package sclang)
 
 (use-package sclang-extensions
   :ensure t)
