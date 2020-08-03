@@ -49,3 +49,22 @@ HandleLidSwitch=lock
 #InhibitorsMax=8192
 #SessionsMax=8192
 EOF
+
+
+# Display link
+aur -si evdi-git displaylink
+sudo nano /usr/shar/X11/xorg.conf.d/20-displaylink.conf
+
+# Section "Device"
+#    Identifer "DisplayLink"
+#   Driver "modesetting"
+#   Option "Pagelip" "false"
+# EndSection
+
+# sudo nano /usr/X11/xorg.conf.d/20-evdidevice.conf
+# Section "OutputClass"
+#   Identifier "DisplayLink"
+#   MatchDriver "evdi"
+#   Driver "modesetting"
+#   Option "AccelMethod" "none"
+# EndSection
