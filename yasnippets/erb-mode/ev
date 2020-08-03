@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: <% ... %>
+# group : erb
+# key: %
+# --
+<% $1 %>$0

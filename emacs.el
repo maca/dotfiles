@@ -21,7 +21,7 @@
 ;; Highlight text over 73 cols, trailing whitespace and tabs
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
-(setq whitespace-line-column 72)
+(setq whitespace-line-column 74)
 (setq indent-tabs-mode nil)
 (setq tab-width 1)
 (setq tab-stop-list (number-sequence 2 120 2))
@@ -38,8 +38,11 @@
             (setq indent-tabs-mode nil)))
 
 
-;; No backup files
+;; No backup files or autosave
 (setq make-backup-files nil)
+(setq backup-inhibited t)
+(setq create-lockfiles nil)
+(setq auto-save-default nil)
 
 
 ;; Autosave directory
@@ -374,11 +377,14 @@
 
 (use-package emmet-mode
   :ensure t
+
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
+
   (unbind-key "C-j" emmet-mode-keymap)
   (unbind-key "<C-return>" emmet-mode-keymap)
+
   (add-hook 'emmet-mode-hook
             (lambda ()
               (define-key evil-normal-state-local-map (kbd "C-k")
@@ -496,6 +502,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(create-lockfiles nil)
  '(custom-safe-themes
    (quote
     ("00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
