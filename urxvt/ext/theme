@@ -90,4 +90,22 @@ sub OSC {
 	return "\033]$Ps;$Pt\007";
 }
 
+# sub on_user_command {
+#     my ($self, $cmd) = @_;
+#     my %themes = get_themes();
+
+#     %themes{"default"} = $self->{default_theme}
+
+#     $_ = $cmd;
+#     if (/:switch/) {
+# 	unless ($self->{current_theme}) {
+# 	    $self->{current_theme} .= "default"
+# 	}
+#         # foreach my $t (sort keys %themes) {
+#         #     $popup->add_button ($t, sub{ $self->cmd_parse ($themes{$t}) });
+#         # }
+#     }
+#     ()
+# }
+
 # vim:ft=perl:fenc=utf-8

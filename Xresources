@@ -93,3 +93,5 @@ URxvt.theme.light.color14:      #f2854a
 ! white
 URxvt.theme.light.color7:       #34302d
 URxvt.theme.light.color15:      #4c4742
+
+! URxvt.keysym.F5: perl:theme:switch
