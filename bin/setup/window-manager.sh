@@ -2,19 +2,20 @@
 
 sudo pacman -Syu
 sudo pacman -S\
-  gvim rxvt-unicode xorg-server xorg-xinit chromium \
+  rxvt-unicode xorg-server xorg-xinit chromium \
   pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
   ttf-dejavu terminus-font noto-fonts-emoji noto-fonts-cjk \
   gmrun xcompmgr pavucontrol xautolock slock redshift acpi \
   acpilight xf86-input-libinput xorg-xinput gpicview \
-  libpng poppler-glib imagemagick unclutter
+  libpng poppler-glib imagemagick unclutter browserpass \
+  browserpass-chromium
 
 cd /tmp
 
 sudo pacman-key --recv-keys 011FDC52DA839335
 
 aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git \
-  browserpass xrandr-invert-colors xkbset xbindkeys
+  xrandr-invert-colors xkbset xbindkeys
 
 cd -
 mkdir -p ~/.config/fontconfig/
