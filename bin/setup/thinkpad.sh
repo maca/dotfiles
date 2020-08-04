@@ -53,18 +53,21 @@ EOF
 
 # Display link
 aur -si evdi-git displaylink
-sudo nano /usr/shar/X11/xorg.conf.d/20-displaylink.conf
 
-# Section "Device"
-#    Identifer "DisplayLink"
-#   Driver "modesetting"
-#   Option "Pagelip" "false"
-# EndSection
+sudo sh -c "cat > /etc/X11/xorg.conf.d/20-displaylink.conf" <<EOF
+Section "Device"
+  Identifier "DisplayLink"
+  Driver "modesetting"
+  Option "PageFlip" "false"
+EndSection
+EOF
 
-# sudo nano /usr/X11/xorg.conf.d/20-evdidevice.conf
-# Section "OutputClass"
-#   Identifier "DisplayLink"
-#   MatchDriver "evdi"
-#   Driver "modesetting"
-#   Option "AccelMethod" "none"
-# EndSection
+
+sudo sh -c "cat > /etc/X11/xorg.conf.d/20-evdidevice.conf" <<EOF
+Section "OutputClass"
+  Identifier "DisplayLink"
+  MatchDriver "evdi"
+  Driver "modesetting"
+  Option "AccelMethod" "none"
+EndSection
+EOF
