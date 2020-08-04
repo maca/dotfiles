@@ -44,12 +44,5 @@ mkdir -p .password-store/.git/hooks
 ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
 
 
-# vim +PlugInstall +qall
-
-# $HOME/dotfiles/bin/aur -si chruby par ruby-install-git \
-#   vim-plug universal-ctags-git heroku-client
-
-# systemctl --user enable ssh-agent
-# systemctl --user start ssh-agent
-
+mkdir .ssh
 echo "AddKeysToAgent yes" >> ~/.ssh/config
