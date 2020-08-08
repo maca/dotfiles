@@ -1,0 +1,14 @@
+[Unit]
+Description=Switch monitor layout
+
+
+[Service]
+Environment=DISPLAY=:0
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/home/maca/bin/monitors
+StandardOutput=journal
+
+
+[Install]
+WantedBy=multi-user.target

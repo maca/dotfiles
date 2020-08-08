@@ -65,3 +65,9 @@ SUBSYSTEM=="input", ATTRS{idVendor}=="0853", ATTRS{idProduct}=="0100", SYMLINK+=
 EOF
 
 systemctl --user enable sticky_keys
+
+
+### Monitor hot plug
+sudo sh -c "cat > /etc/udev/rules.d/monitor.rules" <<EOF
+ACTION=="change", SUBSYSTEM=="drm", ENV{HOTPLUG}=="1", ENV{SYSTEMD_USER_WANTS}+="monitor-hotplug@$env{SEQNUM}.service", TAG+="systemd"
+EOF

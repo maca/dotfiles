@@ -1,33 +1,8 @@
-#!/usr/bin/ruby
+#!/bin/sh
 
-all = %x[xrandr | /usr/bin/grep "connected" | awk '{ print $1 }' | awk -vORS=" " 1].split(" ")
-conn = %x[xrandr | /usr/bin/grep " connected" | awk '{ print $1 }' | awk -vORS=" " 1].split(" ")
-other = all - conn
-
-def off(array)
-  s = ""
-  array.each{ |m| s << "--output #{ m } --off " }
-  return s
-end
-
-# I assume that the displays get registered in this order LVDS VGA HDMI/DP
-
-case conn.size
-when 1
-  system "xrandr --output #{ conn[0] } --auto #{ off(other) }"
-
-when 2
-  # external monitor (primary) left of laptop
-  system "xrandr --output #{ conn[0] } --auto --output #{ conn[1] } --primary --auto --left-of #{ conn[0] } #{ off(other) }"
-
-  # use this for a single output
-  # system "xrandr --output #{ conn[0] } --off --output #{ conn[1] } --auto"
-
-when 3
-  # Customise this at will (normally laptop graphics cards don't output to more than 2 displays)
-  system "xrandr --output #{ conn[1] } --auto --output #{ conn[2] } --auto --left-of #{ conn[1] } #{ off(other) } #{ off([conn[0]]) }"
-
-else
-  puts "No comprende:\n #{ conn }"
-
-end
+/usr/bin/xrandr \
+  --output eDP-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal \
+  --output DVI-I-1-1 --mode 1920x1080 --pos 0x344 --rotate left \
+  --output DP-1 --off \
+  --output HDMI-1 --off \
+  --output DP-2 --off
