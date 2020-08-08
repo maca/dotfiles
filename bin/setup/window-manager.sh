@@ -57,3 +57,11 @@ sudo sh -c "cat > /etc/udev/rules.d/backlight.rules" <<EOF
 ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
 ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
 EOF
+
+
+### Change layout when happy hacking keyboard is connected
+sudo sh -c "cat > /etc/udev/rules.d/keyboard.rules" <<EOF
+SUBSYSTEM=="input", ATTRS{idVendor}=="0853", ATTRS{idProduct}=="0100", SYMLINK+="keyboard", TAG+="systemd"
+EOF
+
+systemctl --user enable sticky_keys

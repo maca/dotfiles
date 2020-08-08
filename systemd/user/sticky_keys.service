@@ -1,0 +1,15 @@
+[Unit]
+Description=Sticky keys and keyboard layout
+After=dev-keyboard.device
+BindsTo=dev-keyboard.device
+Requisite=dev-keyboard.device
+
+[Service]
+Environment=DISPLAY=:0
+ExecStart=/home/maca/bin/sticky_keys
+StandardOutput=journal
+RemainAfterExit=yes
+Type=forking
+
+[Install]
+WantedBy=dev-keyboard.device

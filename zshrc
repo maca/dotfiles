@@ -162,12 +162,5 @@ alias mpv="mpv --sub-scale=0.6"
 alias ls='ls --color=auto'
 
 
-sticky_keys() {
-   xkbset accessx sticky -twokey -latchlock
-   xkbset exp 1 '=accessx' '=sticky' '=twokey' '=latchlock'
-   setxkbmap us altgr-intl -option ctrl:nocaps -option lv3:ralt_switch
-}
-
-
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
