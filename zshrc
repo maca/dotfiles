@@ -160,6 +160,7 @@ alias mount="sudo mount"
 alias umount="sudo umount"
 alias mpv="mpv --sub-scale=0.6"
 alias ls='ls --color=auto'
+alias spotify='LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify'
 
 
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
