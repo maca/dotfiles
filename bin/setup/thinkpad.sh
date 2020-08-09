@@ -5,13 +5,10 @@ sudo pacman -S xss-lock
 sudo systemctl start tp-battery-mode
 sudo systemctl enable tp-battery-mode
 
-sudo pacman -Sy xf86-video-intel
-
 sudo sh -c "cat > /etc/X11/xorg.conf.d/20-intel.conf" <<EOF
 Section "Device"
-  Identifier  "Intel Graphics"
-  Driver      "intel"
-  Option      "TearFree" "true"
+  Identifier "Intel Graphics"
+  Driver "modesetting"
 EndSection
 EOF
 
@@ -51,23 +48,30 @@ HandleLidSwitch=lock
 EOF
 
 
-# Display link
-aur -si evdi-git displaylink
+### Fix opal sleep issues
+aur -si sedutil-sleep-git
 
-sudo sh -c "cat > /etc/X11/xorg.conf.d/20-displaylink.conf" <<EOF
-Section "Device"
-  Identifier "DisplayLink"
-  Driver "modesetting"
-  Option "PageFlip" "false"
-EndSection
+read -p "enter OPAL password: " password
+HASH=$(sudo sedutil-sleep --printPasswordHash $password /dev/nvme0n1)
+
+
+sudo sh -c "cat > /etc/systemd/system/sedutil-sleep.service" <<EOF
+[Unit]
+Description=sedutil-sleep
+
+[Service]
+Type=oneshot
+ExecStart=-+/usr/bin/sedutil-sleep -n -x --prepareForS3Sleep 0 $HASH /dev/nvme0n1
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
 EOF
 
+sudo systemctl enable sedutil-sleep.service
 
-sudo sh -c "cat > /etc/X11/xorg.conf.d/20-evdidevice.conf" <<EOF
-Section "OutputClass"
-  Identifier "DisplayLink"
-  MatchDriver "evdi"
-  Driver "modesetting"
-  Option "AccelMethod" "none"
-EndSection
+
+# https://wiki.archlinux.org/index.php/laptop#Hibernate_on_low_battery_level
+sudo sh -c "cat > /etc/udev/rules.d/lowbat.rules" <<EOF
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-5]", RUN+="/usr/bin/systemctl suspend"
 EOF

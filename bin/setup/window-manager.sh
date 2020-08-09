@@ -53,10 +53,29 @@ EOF
 sudo ln -s /etc/fonts/conf.avail/33-TerminusPCFFont.conf /etc/fonts/conf.d
 
 
-sudo sh -c "cat > /etc/udev/rules.d/backlight.rules" <<EOF
-ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
-ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+
+
+# Display link
+aur -si evdi-git displaylink
+
+sudo sh -c "cat > /etc/X11/xorg.conf.d/20-displaylink.conf" <<EOF
+Section "Device"
+  Identifier "DisplayLink"
+  Driver "modesetting"
+  Option "PageFlip" "false"
+EndSection
 EOF
+
+
+sudo sh -c "cat > /etc/X11/xorg.conf.d/20-evdidevice.conf" <<EOF
+Section "OutputClass"
+  Identifier "DisplayLink"
+  MatchDriver "evdi"
+  Driver "modesetting"
+  Option "AccelMethod" "none"
+EndSection
+EOF
+
 
 
 ### Change layout when happy hacking keyboard is connected
