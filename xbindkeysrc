@@ -10,11 +10,11 @@
 "pulseaudio-ctl mute-input"
   XF86AudioMicMute
 
-"xbacklight -inc 5"
-   XF86MonBrightnessUp
-
 "xbacklight -dec 5"
    XF86MonBrightnessDown
+
+"xbacklight -inc 5"
+   XF86MonBrightnessUp
 
 "/home/maca/bin/monitors"
   XF86Display
