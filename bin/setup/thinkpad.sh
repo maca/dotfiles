@@ -79,7 +79,7 @@ EOF
 
 
 # Rfkill unblock on resume
-sudo sh -c "cat > /etc/systemd/system/resume.service" <<EOF
+sudo sh -c "cat > /etc/systemd/system/resume-root.service" <<EOF
 [Unit]
 Description=Resume actions
 After=suspend.target
@@ -91,3 +91,4 @@ ExecStart=/usr/bin/rfkill unblock all
 [Install]
 WantedBy=suspend.target
 EOF
+sudo systemctl enable resume-root
