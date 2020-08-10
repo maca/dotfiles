@@ -75,3 +75,19 @@ sudo systemctl enable sedutil-sleep.service
 sudo sh -c "cat > /etc/udev/rules.d/lowbat.rules" <<EOF
 SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-5]", RUN+="/usr/bin/systemctl suspend"
 EOF
+
+
+
+# Rfkill unblock on resume
+sudo sh -c "cat > /etc/systemd/system/resume.service" <<EOF
+[Unit]
+Description=Resume actions
+After=suspend.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rfkill unblock all
+
+[Install]
+WantedBy=suspend.target
+EOF

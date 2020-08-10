@@ -18,3 +18,6 @@
 
 "/home/maca/bin/monitors"
   XF86Display
+
+"/usr/bin/systemctl suspend"
+  XF86WLAN
