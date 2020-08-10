@@ -4,6 +4,7 @@ Description=Switch monitor layout
 
 [Service]
 Environment=DISPLAY=:0
+Environment=MONITOR_HOTPLUGGED=1
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/home/maca/bin/monitors

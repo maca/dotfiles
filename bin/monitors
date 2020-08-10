@@ -1,16 +1,28 @@
 #!/bin/sh
 
-RAND=`/usr/bin/xrandr -q`
 
-/usr/bin/xrandr \
-  --output eDP-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal \
-  --output DVI-I-1-1 $(
-    if echo $RAND | grep -q 'DVI-I-1-1 connected'; then
-        echo '--mode 1920x1080 --pos 0x344 --rotate left'
-    else
-        echo '--off'
-    fi
-  ) \
-  --output DP-1 --off \
-  --output HDMI-1 --off \
-  --output DP-2 --off
+RAND=`/usr/bin/xrandr -q`
+ACTIVE=`xrandr --listactivemonitors | wc -l | awk '{print $1-1}'`
+
+
+if [ -n "$MONITOR_HOTPLUGGED" ] || [ $ACTIVE -eq 1 ]; then
+    /usr/bin/xrandr \
+      --output eDP-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal \
+      --output DVI-I-1-1 $(
+        if echo $RAND | grep -q 'DVI-I-1-1 connected'; then
+            echo '--mode 1920x1080 --pos 0x344 --rotate left'
+        else
+            echo '--off'
+        fi
+      ) \
+      --output DP-1 --off \
+      --output HDMI-1 --off \
+      --output DP-2 --off
+else
+    /usr/bin/xrandr \
+      --output eDP-1 --primary --mode 1920x1080 --rotate normal \
+      --output DVI-I-1-1 --off \
+      --output DP-1 --off \
+      --output HDMI-1 --off \
+      --output DP-2 --off
+fi

@@ -16,5 +16,5 @@
 "xbacklight -dec 5"
    XF86MonBrightnessDown
 
-"xbacklight -set 0"
+"/home/maca/bin/monitors"
   XF86Display
