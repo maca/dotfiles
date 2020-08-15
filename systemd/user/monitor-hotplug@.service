@@ -6,7 +6,7 @@ Description=Switch monitor layout
 Environment=DISPLAY=:0
 Environment=MONITOR_HOTPLUGGED=1
 Type=oneshot
-RemainAfterExit=yes
+RemainAfterExit=no
 ExecStart=/home/maca/bin/monitors
 StandardOutput=journal
 
