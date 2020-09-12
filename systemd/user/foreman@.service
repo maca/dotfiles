@@ -1,0 +1,18 @@
+[Unit]
+Description=Foreman run for /home/maca/%I
+After=network.target
+
+[Service]
+WorkingDirectory=/home/maca/%I
+ExecStart=/usr/bin/bash -c '\
+  source /usr/share/chruby/chruby.sh; \
+  source /usr/share/chruby/auto.sh; \
+  chruby_auto; \
+  /home/maca/.gem/ruby/2.7.0/bin/foreman start'
+StandardOutput=syslog
+StandardError=syslog
+Restart=on-failure
+RestartSec=300
+
+[Install]
+WantedBy=default.target
