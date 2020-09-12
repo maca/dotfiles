@@ -165,3 +165,9 @@ alias spotify='LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify'
 
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
+
+if [ -f /opt/asdf-vm/asdf.sh ]; then
+  source /opt/asdf-vm/asdf.sh
+  export PATH="/opt/asdf-vm/bin:/opt/asdf-vm/shims:$PATH"
+fi
