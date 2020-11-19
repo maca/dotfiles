@@ -1,9 +1,10 @@
 #!/usr/bin/sh
 #
 # Usage
-# bash <(curl -s https://raw.githubusercontent.com/maca/dotfiles/master/bin/setup/basics.sh)
+# bash <(curl -s https://raw.githubusercontent.com/maca/dotfiles/master/bin/setup/basics-arch.sh)
 
-# ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
+
+ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 hwclock --systohc
 
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
