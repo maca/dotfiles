@@ -504,10 +504,8 @@
  ;; If there is more than one, they won't work right.
  '(create-lockfiles nil)
  '(custom-safe-themes
-   (quote
-    ("00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
+   '("00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(package-selected-packages
-   (quote
-    (atomic-chrome ## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject))))
+   '(atomic-chrome ## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
 
 (put 'narrow-to-region 'disabled nil)
