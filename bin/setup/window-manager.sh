@@ -23,6 +23,8 @@ mkdir -p ~/.config/fontconfig/
 ln -fs $HOME/dotfiles/bubbles.conf ~/.config/bubbles.conf
 ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
 
+# Brightness control
+sudo usermod -aG video $(whoami)
 
 # Autologin
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
