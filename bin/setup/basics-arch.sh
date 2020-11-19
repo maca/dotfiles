@@ -19,6 +19,8 @@ pacman -S git vim zsh pass pass-otp the_silver_searcher binutils \
   patch make automake pkgconf fakeroot openssh ruby tmux \
   rsync keychain linux-headers base-devel patch unzip ntp fzf emacs
 
+export EDITOR=vim
+
 mkinitcpio -p linux
 
 read -p "¿como se llama esta máquina? " hostname
@@ -27,6 +29,8 @@ echo $hostname > /etc/hostname
 
 echo "tmpfs   /tmp         tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
 echo "tmpfs   /scratch     tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
+
+sudo chmod 777 /scratch
 
 mkdir /scratch
 mount -a
