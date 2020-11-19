@@ -5,8 +5,6 @@
 
 cd $HOME
 
-git clone git@github.com:maca/dotfiles.git
-
 cd /tmp
 
 mkdir -p ~/.config
