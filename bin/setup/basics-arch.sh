@@ -19,6 +19,11 @@ pacman -S git vim zsh pass pass-otp the_silver_searcher binutils \
   patch make automake pkgconf fakeroot openssh ruby tmux \
   rsync keychain linux-headers base-devel patch unzip ntp fzf emacs
 
+
+systemctl start ntpd
+systemctl enable ntpd
+
+
 export EDITOR=vim
 
 mkinitcpio -p linux
@@ -30,22 +35,22 @@ echo $hostname > /etc/hostname
 echo "tmpfs   /tmp         tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
 echo "tmpfs   /scratch     tmpfs   nodev,nosuid                  0  0" >> /etc/fstab
 
-sudo chmod 777 /scratch
 
 mkdir /scratch
 mount -a
 
+sudo chmod 777 /scratch
+
 read -p "¿como te llamas? " user
 useradd -m -g users -G wheel -s /bin/zsh $user
 passwd $user
+visudo
+
 
 echo "SSH Key setup"
-su - $user -c "ssh-keygen -t rsa -C '$user@$(cat /etc/hostname)'"
+su - $user -c "ssh-keygen -t ed25519 -C '$user@$(cat /etc/hostname)'"
 
-systemctl start ntpd
-systemctl enable ntpd
 
-visudo
 
 cat "Public ssh key:"
 cat /home/$user/.ssh/id_rsa.pub
