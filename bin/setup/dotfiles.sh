@@ -1,7 +1,5 @@
 #!/usr/bin/sh
 #
-# Usage
-# bash <(curl -s https://raw.githubusercontent.com/maca/dotfiles/master/bin/setup/dotfiles.sh)
 
 cd $HOME
 
