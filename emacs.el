@@ -493,7 +493,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "xos4 Terminus" :foundry "xos4" :slant normal :weight normal :height 180 :width normal))))
+ '(default ((t (:family "Terminus" :foundry "PfEd" :slant normal :weight normal :height 180 :width normal))))
  '(whitespace-tab ((t (:foreground "#003542" :background "white")))))
 
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
@@ -502,10 +502,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
  '(create-lockfiles nil)
  '(custom-safe-themes
    '("00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
+ '(display-line-numbers-type 'relative)
+ '(global-display-line-numbers-mode t)
  '(package-selected-packages
-   '(atomic-chrome ## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject)))
+   '(atomic-chrome ## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 
 (put 'narrow-to-region 'disabled nil)
