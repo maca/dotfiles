@@ -71,7 +71,6 @@
 (package-initialize)
 
 
-
 ;; Bootstrap use-package, install if required
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -117,6 +116,9 @@
 ;; Load evil!
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-tree)
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
@@ -142,13 +144,18 @@
     (atomic-chrome-start-server)
     (setq atomic-chrome-buffer-open-style 'frame))
 
-  (use-package evil-magit
+  (use-package magit
     :ensure t
     :config
-
     (evil-leader/set-key
       "gb" 'magit-blame
       "gs" 'magit-status))
+
+  (use-package evil-collection
+    :ensure t
+    :after evil magit
+    :config
+    (evil-collection-init))
 
   (use-package evil-indent-textobject :ensure t))
 ;;
@@ -209,7 +216,7 @@
     "fl" 'counsel-locate
     "fs" 'counsel-ag
     "ft" 'counsel-etags-list-tag
-    "fy" 'counsel-yank-pop
+    "fp" 'counsel-yank-pop
     "hf" 'counsel-describe-function
     "hl" 'counsel-find-library
     "hs" 'counsel-info-lookup-symbol
@@ -262,6 +269,31 @@
   (when emmet-mode
     (emmet-expand-line args)))
 
+
+(defun elm-emmet-hippie-try-expand-line (args)
+  (interactive)
+  (when (eq major-mode 'elm-mode)
+    (emmet-expand-line args)
+    (mark-paragraph)
+    (html-to-elm (mark) (point))))
+
+
+(defun html-to-elm (&optional b e)
+  (interactive "r")
+  (shell-command-on-region b e "xargs -0 html-elm" (current-buffer) t))
+
+
+(use-package hippie-exp
+    :ensure nil
+    :defer t
+    :bind ("<C-return>" . hippie-expand)
+    :config
+    (setq-default hippie-expand-try-functions-list
+                  '(yas-hippie-try-expand
+                    emmet-hippie-try-expand-line
+                    elm-emmet-hippie-try-expand-line)))
+
+
 (use-package yasnippet
   :ensure t
   :config
@@ -275,15 +307,7 @@
   (unbind-key "TAB" yas-minor-mode-map)
   (unbind-key "<tab>" yas-minor-mode-map)
 
-  (use-package yasnippet-snippets :ensure t)
-  (use-package hippie-exp
-    :ensure nil
-    :defer t
-    :bind ("<C-return>" . hippie-expand)
-    :config
-    (setq-default
-     hippie-expand-try-functions-list
-     '(yas-hippie-try-expand emmet-hippie-try-expand-line))))
+  (use-package yasnippet-snippets :ensure t))
 
 ;;
 ;; Load tree view package
@@ -312,7 +336,6 @@
                 'neotree-create-node)
               (define-key evil-normal-state-local-map (kbd "d")
                 'neotree-delete-node)
-
               (define-key evil-normal-state-local-map (kbd "s")
                 'neotree-enter-vertical-split)
               (define-key evil-normal-state-local-map (kbd "S")
@@ -387,13 +410,13 @@
 
   (add-hook 'emmet-mode-hook
             (lambda ()
-              (define-key evil-normal-state-local-map (kbd "C-k")
+              (define-key evil-normal-state-local-map (kbd "C-p")
                 'emmet-prev-edit-point)
-              (define-key evil-insert-state-local-map (kbd "C-k")
+              (define-key evil-insert-state-local-map (kbd "C-p")
                 'emmet-prev-edit-point)
-              (define-key evil-normal-state-local-map (kbd "C-j")
+              (define-key evil-normal-state-local-map (kbd "C-n")
                 'emmet-next-edit-point)
-              (define-key evil-insert-state-local-map (kbd "C-j")
+              (define-key evil-insert-state-local-map (kbd "C-n")
                 'emmet-next-edit-point))))
 
 (use-package enh-ruby-mode
@@ -412,7 +435,7 @@
 (use-package elm-mode
   :ensure t
   :config
-  (elm-format-on-save-mode t))
+  (add-hook 'elm-mode-hook 'elm-format-on-save-mode))
 
 (use-package haskell-mode
   :ensure t
@@ -485,7 +508,6 @@
 ;;
 ;; Packages
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
-
 
 
 (custom-set-faces
