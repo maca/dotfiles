@@ -273,12 +273,27 @@
     (emmet-expand-line args)))
 
 
-(defun elm-emmet-hippie-try-expand-line (args)
+(defun elm-emmet-expand-line (args)
   (interactive)
   (when (eq major-mode 'elm-mode)
-    (emmet-expand-line args)
-    (mark-paragraph)
-    (html-to-elm (mark) (point))))
+    (let* ((beg (emmet-find-left-bound))
+           (beg-line (save-excursion (beginning-of-line) (point)))
+           (indentation-level
+            (save-excursion
+              (goto-char beg)
+              (re-search-backward "[^[:space:]]" beg-line t)
+              (current-column))))
+
+      (setq-local emmet-move-cursor-after-expanding nil)
+      (emmet-expand-line args)
+      (html-to-elm beg (point))
+
+      (save-excursion
+        (exchange-dot-and-mark)
+        (forward-line 1)
+        (indent-rigidly (region-beginning)
+                        (region-end)
+                        indentation-level)))))
 
 
 (defun html-to-elm (&optional b e)
@@ -294,7 +309,7 @@
     (setq-default hippie-expand-try-functions-list
                   '(yas-hippie-try-expand
                     emmet-hippie-try-expand-line
-                    elm-emmet-hippie-try-expand-line)))
+                    elm-emmet-expand-line)))
 
 
 (use-package yasnippet
