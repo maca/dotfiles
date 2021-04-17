@@ -17,7 +17,6 @@
 (show-paren-mode 1)
 
 
-
 ;; Highlight text over 73 cols, trailing whitespace and tabs
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
@@ -34,6 +33,10 @@
             (setq indent-tabs-mode nil)))
 
 (add-hook 'web-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)))
+
+(add-hook 'elm-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)))
 
