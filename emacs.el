@@ -179,7 +179,7 @@
         '(("." . "~/.emacs.d/tmp/undo")))
 
   (evil-leader/set-key
-    "uv" 'undo-tree-visualize))
+    "uu" 'undo-tree-visualize))
 ;;
 ;; Load project package
 ;;
