@@ -273,7 +273,7 @@
 
 
 (defun elm-emmet-expand-line (args)
-  (interactive)
+  (interactive "P")
   (when (eq major-mode 'elm-mode)
     (let* ((beg (emmet-find-left-bound))
            (beg-line (save-excursion (beginning-of-line) (point)))
