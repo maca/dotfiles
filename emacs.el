@@ -258,6 +258,7 @@
 
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
+  (setq company-show-numbers t)
 
   (define-key company-active-map [tab]
     'company-complete-common-or-cycle)
