@@ -158,7 +158,7 @@
     :ensure t
     :after evil magit
     :config
-    (evil-collection-init))
+    (evil-collection-init 'magit))
 
   (use-package evil-indent-textobject :ensure t))
 ;;
@@ -226,6 +226,7 @@
     "hu" 'counsel-unicode-char
     "hv" 'counsel-describe-variable)
 
+  (use-package counsel :ensure t)
   (use-package counsel-etags
     :ensure t
 
@@ -247,9 +248,7 @@
     (add-to-list 'counsel-etags-ignore-filenames ".clang-format")
 
     (define-key evil-normal-state-map
-      "gt" 'counsel-etags-find-tag-at-point))
-
-  (use-package counsel :ensure t))
+      "gt" 'counsel-etags-find-tag-at-point)))
 ;;
 ;; Autocomplete
 ;;
@@ -311,22 +310,33 @@
                     emmet-hippie-try-expand-line
                     elm-emmet-expand-line)))
 
+;; Add yasnippet support for all company backends
+(defvar company-mode/enable-yas t "Enable yasnippet for all backends.")
+
+(defun company-mode/backend-with-yas (backend)
+  (if (or (not company-mode/enable-yas)
+          (and (listp backend) (member 'company-yasnippet backend)))
+      backend
+    (append (if (consp backend) backend (list backend))
+            '(:with company-yasnippet))))
 
 (use-package yasnippet
   :ensure t
   :config
 
   (setq yas-snippet-dirs
-        (append yas-snippet-dirs
-                '("~/dotfiles/yasnippets")))
+        (append yas-snippet-dirs '("~/dotfiles/yasnippets")))
   (yas-global-mode 1)
   (yas-reload-all)
+
+  (setq company-backends
+        (mapcar #'company-mode/backend-with-yas company-backends))
 
   (unbind-key "TAB" yas-minor-mode-map)
   (unbind-key "<tab>" yas-minor-mode-map)
 
-  (use-package yasnippet-snippets :ensure t))
-
+  (use-package yasnippet-snippets :ensure t)
+  (use-package elm-yasnippets :ensure t))
 ;;
 ;; Load tree view package
 ;;
