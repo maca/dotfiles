@@ -3,7 +3,7 @@
 sudo pacman -Syu
 sudo pacman -S\
   rxvt-unicode xorg-server xorg-xinit chromium \
-  pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation \
+  pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation ttf-jetbrains-mono \
   ttf-dejavu terminus-font noto-fonts-emoji noto-fonts-cjk \
   gmrun xcompmgr pavucontrol xautolock slock redshift acpi \
   acpilight xf86-input-libinput xorg-xinput gpicview \

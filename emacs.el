@@ -519,6 +519,46 @@
   :ensure t
   :config
   (global-origami-mode 1))
+;;
+;; Ligatures
+;;
+(use-package ligature
+  :load-path "~/.emacs.d/ligature.el"
+  :config
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all Cascadia Code ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode '("-|" "-~" "---" "-<<" "-<" "--"
+                                      "->" "->>" "-->" "///" "/="
+                                      "/==" "/>" "//" "/*" "*>" "***"
+                                      "*/" "<-" "<<-" "<=>" "<=" "<|"
+                                      "<||" "<|||" "<|>" "<:" "<>"
+                                      "<-<" "<<<" "<==" "<<=" "<=<"
+                                      "<==>" "<-|" "<<" "<~>" "<=|"
+                                      "<~~" "<~" "<$>" "<$" "<+>" "<+"
+                                      "</>" "</" "<*" "<*>" "<->"
+                                      "<!--" ":>" ":<" ":::" "::" ":?"
+                                      ":?>" ":=" "::=" "=>>" "==>"
+                                      "=/=" "=!=" "=>" "===" "=:="
+                                      "==" "!==" "!!" "!=" ">]" ">:"
+                                      ">>-" ">>=" ">=>" ">>>" ">-"
+                                      ">=" "&&&" "&&" "|||>" "||>"
+                                      "|>" "|]" "|}" "|=>" "|->" "|="
+                                      "||-" "|-" "||=" "||" ".." ".?"
+                                      ".=" ".-" "..<" "..." "+++" "+>"
+                                      "++" "[||]" "[<" "[|" "{|" "??"
+                                      "?." "?=" "?:" "##" "###" "####"
+                                      "#[" "#{" "#=" "#!" "#:" "#_("
+                                      "#_" "#?" "#(" ";;" "_|_" "__"
+                                      "~~" "~~>" "~>" "~-" "~@" "$>"
+                                      "^=" "]#"))
+  (global-ligature-mode t))
+;;
+;; Org mode
+;;
 ;; (use-package org-mode
 ;;   :ensure t
 ;;   :config)
@@ -533,7 +573,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Terminus" :foundry "PfEd" :slant normal :weight normal :height 180 :width normal))))
+ '(default ((t (:family "JetBrains Mono" :foundry "JB" :slant normal :weight normal :height 143 :width normal))))
  '(whitespace-tab ((t (:foreground "#003542" :background "white")))))
 
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
