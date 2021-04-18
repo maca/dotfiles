@@ -269,8 +269,7 @@
 ;;
 (defun emmet-hippie-try-expand-line (args)
   (interactive "P")
-  (when emmet-mode
-    (emmet-expand-line args)))
+  (when emmet-mode (emmet-expand-line args)))
 
 
 (defun elm-emmet-expand-line (args)
@@ -502,7 +501,6 @@
   :config
   (add-hook 'after-save-hook 'git-time-metric-record))
 
-
 ;; (use-package pdf-tools
 ;;  :pin manual ;; manually update
 ;;  :config
@@ -523,13 +521,6 @@
 ;;  (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
 ;;  (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete))
 
-;;
-;; Folding
-;;
-(use-package origami
-  :ensure t
-  :config
-  (global-origami-mode 1))
 ;;
 ;; Ligatures
 ;;
