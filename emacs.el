@@ -40,6 +40,10 @@
           (lambda ()
             (setq indent-tabs-mode nil)))
 
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)))
+
 
 ;; No backup files or autosave
 (setq make-backup-files nil)
