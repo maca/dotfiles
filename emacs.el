@@ -128,7 +128,6 @@
   (setq evil-undo-system 'undo-tree)
   :config
   (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
 
   (use-package evil-leader
     :ensure t
