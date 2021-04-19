@@ -17,13 +17,13 @@
 (show-paren-mode 1)
 
 
-;; Highlight text over 73 cols, trailing whitespace and tabs
+;; Highlight text over 80 cols, trailing whitespace and tabs
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
-(setq whitespace-line-column 74)
+(setq whitespace-line-column 80)
+(setq-default fill-column 80)
 (setq indent-tabs-mode nil)
 (setq tab-width 1)
-(setq tab-stop-list (number-sequence 2 120 2))
 (setq js-indent-level 2)
 (setq evil-shift-width 2)
 (global-whitespace-mode t)
