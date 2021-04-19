@@ -153,6 +153,8 @@
   (use-package magit
     :ensure t
     :config
+    (add-hook 'after-save-hook 'magit-after-save-refresh-status t)
+
     (evil-leader/set-key
       "gb" 'magit-blame
       "gs" 'magit-status))
