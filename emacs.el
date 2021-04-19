@@ -265,8 +265,8 @@
   (setq company-minimum-prefix-length 2)
   (setq company-show-numbers t)
 
-  (define-key company-active-map [tab]
-    'company-complete-common-or-cycle)
+  (add-to-list 'company-backends 'company-etags)
+  (define-key company-active-map [tab] 'company-complete-common-or-cycle)
 
   (add-hook 'after-init-hook 'global-company-mode))
 ;;
