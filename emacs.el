@@ -28,21 +28,11 @@
 (setq evil-shift-width 2)
 (global-whitespace-mode t)
 
-(add-hook 'js-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)))
-
-(add-hook 'web-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)))
-
-(add-hook 'elm-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)))
-
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)))
+(defun disable-indent-tabs-mode () (setq indent-tabs-mode nil))
+(add-hook 'js-mode-hook #'disable-indent-tabs-mode)
+(add-hook 'web-mode-hook #'disable-indent-tabs-mode)
+(add-hook 'elm-mode-hook #'disable-indent-tabs-mode)
+(add-hook 'emacs-lisp-mode-hook #'disable-indent-tabs-mode)
 
 
 ;; No backup files or autosave
