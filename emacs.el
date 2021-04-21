@@ -119,6 +119,12 @@
   :config
   (evil-mode 1)
 
+  (evil-leader/set-key
+    "tt" 'toggle-truncate-lines
+    "tu" 'string-inflection-underscore
+    "tc" 'string-inflection-camelcase
+    "tk" 'string-inflection-kebab-case)
+
   (use-package evil-leader
     :ensure t
     :config
