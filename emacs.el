@@ -367,6 +367,14 @@
               (define-key evil-normal-state-local-map (kbd "RET")
                 'neotree-enter))))
 ;;
+;; Color matching parens
+;;
+(use-package rainbow-delimiters
+  :ensure t
+  :init
+  (progn
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
+;;
 ;; Parenthesis auto close
 ;;
 (use-package smartparens
