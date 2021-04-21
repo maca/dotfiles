@@ -156,6 +156,15 @@
       "gb" 'magit-blame
       "gs" 'magit-status))
 
+  (use-package vimish-fold
+    :ensure
+    :after evil)
+
+  (use-package evil-vimish-fold
+    :ensure
+    :after vimish-fold
+    :hook ((prog-mode conf-mode text-mode) . evil-vimish-fold-mode))
+
   (use-package evil-collection
     :ensure t
     :after evil magit
