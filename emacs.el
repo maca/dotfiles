@@ -4,6 +4,16 @@
 (tool-bar-mode -1)
 
 
+;; Disable splash screen and startup message
+(setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
+
+
+;; Run server
+(load "server")
+(unless (server-running-p) (server-start))
+
+
 ;; Display relative lines
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
@@ -85,16 +95,6 @@
   (load-theme 'solarized-dark t))
 
 
-;; Disable splash screen and startup message
-(setq inhibit-startup-message t)
-(setq initial-scratch-message nil)
-
-
-;; Run server
-(load "server")
-(unless (server-running-p) (server-start))
-
-
 (defun toggle-theme ()
   (interactive)
   (if (eq (car custom-enabled-themes) 'leuven)
@@ -106,6 +106,7 @@
       (enable-theme 'leuven))))
 (load-theme 'leuven t 'f)
 (global-set-key [f5] 'toggle-theme)
+
 
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
 ;; Packages
