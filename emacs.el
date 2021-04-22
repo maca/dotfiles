@@ -589,6 +589,88 @@
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
 
 
+(make-variable-buffer-local
+ (defvar elm-live-compile-output "build/elm-dev.js" "Elm compile output"))
+
+(make-variable-buffer-local
+ (defvar elm-live-serve-directory "build" "Serve directory path"))
+
+(make-variable-buffer-local
+ (defvar elm-live-serve-index "index.html" "Server index html file path"))
+
+(make-variable-buffer-local
+ (defvar elm-live-compile-debug nil "Elm compile debug option"))
+
+
+(defun elm-live-mode-toggle-debug ()
+  (interactive)
+  (setq elm-live-compile-debug (not elm-live-compile-debug))
+  (message
+   (concat "Elm compile debug "
+           (if elm-live-compile-debug "enabled" "disabled")))
+  (elm-live-mode-compile))
+
+
+(defun elm-live-mode-compile ()
+  (interactive)
+  (setq-local elm-compile-arguments
+              (if elm-live-compile-debug '("--debug") '()))
+  (elm-compile-main elm-live-compile-output))
+
+
+(defun elm-live-mode--save-hook ()
+  (when (and elm-live-mode (eq major-mode 'elm-mode))
+    (elm-live-mode-compile)))
+
+
+(defun elm-live-mode--compilation-finish (buffer outstr)
+  (unless (string-match "finished" outstr)
+    (switch-to-buffer-other-window buffer)))
+
+
+(define-minor-mode elm-live-mode
+  nil
+  :lighter " eml-live-mode"
+  (if elm-live-mode
+      (progn
+        (add-hook 'after-save-hook #'elm-live-mode--save-hook t)
+        (setq compilation-finish-functions #'elm-live-mode--compilation-finish)
+        (elm-live-server-start)
+        (elm-live-mode-compile))
+    (elm-live-server-stop)))
+
+
+(defadvice compilation-start
+    (around inhibit-display
+            (command &optional mode name-function highlight-regexp))
+  (if (and elm-live-mode (not (string-match "^\\(find\\|grep\\)" command)))
+      (cl-letf ((display-buffer   #'ignore)
+                (set-window-point #'ignoreco)
+                (goto-char        #'ignore))
+        (save-window-excursion ad-do-it))
+    ad-do-it))
+
+(ad-activate 'compilation-start)
+
+
+(defun elm-live-server-start ()
+  "Run elm server on the background"
+  (interactive)
+  (let ((cmd (concat "browser-sync start -s"
+                     " --ignore \"*.elm\" --files \".\""
+                     " --no-open"
+                     " --ss " elm-live-serve-directory
+                     " --no-ui  --reload-debounce 500"))
+        (default-directory (expand-file-name (elm--find-dependency-file-path))))
+    (start-process-shell-command "elm-server" "*Elm Server*" cmd)))
+
+
+(defun elm-live-server-stop ()
+  "Stop running elm server"
+  (interactive)
+  (delete-process (get-process "elm-server")))
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
