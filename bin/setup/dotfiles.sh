@@ -6,10 +6,8 @@ cd $HOME
 cd /tmp
 
 mkdir -p ~/.config
-mkdir -p ~/.config/pulseaudio-ctl/
 
 ln -fs $HOME/dotfiles/systemd ~/.config/systemd
-ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 
 ln -fs /scratch ~/Downloads
 ln -fs $HOME/dotfiles/zshrc ~/.zshrc
@@ -20,15 +18,10 @@ ln -fs $HOME/dotfiles/emacs.el ~/.emacs
 ln -fs $HOME/dotfiles/conky ~/.conky
 ln -fs $HOME/dotfiles/gitconfig ~/.gitconfig
 ln -fs $HOME/dotfiles/tmux.conf ~/.tmux.conf
-ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
-ln -fs $HOME/dotfiles/Xresources ~/.Xresources
-ln -fs $HOME/dotfiles/urxvt/ ~/.urxvt
 ln -fs $HOME/dotfiles/themes ~/.themes
 ln -fs $HOME/dotfiles/gitignore ~/.gitignore
 ln -fs $HOME/dotfiles/bin ~/bin
-ln -fs $HOME/dotfiles/dynamic-colors ~/.dynamic-colors
 ln -fs $HOME/dotfiles/pam_environment ~/.pam_environment
-ln -fs $HOME/dotfiles/pulseaudio-ctl.config ~/.config/pulseaudio-ctl/config
 
 
 source $HOME/.zshrc

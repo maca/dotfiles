@@ -19,10 +19,15 @@ aur -si pulseaudio-ctl bubbles-git \
 
 cd -
 mkdir -p ~/.config/fontconfig/
+mkdir -p ~/.config/pulseaudio-ctl/
 
 ln -fs $HOME/dotfiles/bubbles.conf ~/.config/bubbles.conf
 ln -fs $HOME/dotfiles/termite ~/.config/termite
 ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
+ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
+ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
+ln -fs $HOME/dotfiles/Xresources ~/.Xresources
+ln -fs $HOME/dotfiles/pulseaudio-ctl.config ~/.config/pulseaudio-ctl/config
 
 # Brightness control
 sudo usermod -aG video $(whoami)
