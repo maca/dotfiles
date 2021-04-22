@@ -2,8 +2,8 @@
 
 sudo pacman -Syu
 sudo pacman -S\
-  rxvt-unicode xorg-server xorg-xinit chromium \
-  pulseaudio pulseaudio-alsa urxvt-perls ttf-liberation ttf-jetbrains-mono \
+  termite xorg-server xorg-xinit chromium \
+  pulseaudio pulseaudio-alsa ttf-liberation ttf-jetbrains-mono \
   ttf-dejavu terminus-font noto-fonts-emoji noto-fonts-cjk \
   gmrun xcompmgr pavucontrol xautolock slock redshift acpi \
   acpilight xf86-input-libinput xorg-xinput gpicview \
@@ -14,13 +14,14 @@ cd /tmp
 
 sudo pacman-key --recv-keys 011FDC52DA839335
 
-aur -si urxvt-font-size-git pulseaudio-ctl bubbles-git \
+aur -si pulseaudio-ctl bubbles-git \
   xrandr-invert-colors xkbset xbindkeys
 
 cd -
 mkdir -p ~/.config/fontconfig/
 
 ln -fs $HOME/dotfiles/bubbles.conf ~/.config/bubbles.conf
+ln -fs $HOME/dotfiles/termite ~/.config/termite
 ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
 
 # Brightness control
