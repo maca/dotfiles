@@ -270,8 +270,8 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
   (setq company-show-numbers t)
+  (push '(company-etags company-keywords) company-backends)
 
-  (add-to-list 'company-backends 'company-etags)
   (define-key company-active-map [tab] 'company-complete-common-or-cycle)
 
   (add-hook 'after-init-hook 'global-company-mode))
