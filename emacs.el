@@ -321,6 +321,7 @@
                     emmet-hippie-try-expand-line
                     elm-emmet-expand-line)))
 
+
 ;; Add yasnippet support for all company backends
 (defvar company-mode/enable-yas t "Enable yasnippet for all backends.")
 
@@ -596,15 +597,19 @@
  (defvar elm-live-serve-directory "build" "Serve directory path"))
 
 (make-variable-buffer-local
- (defvar elm-live-serve-index "index.html" "Server index html file path"))
+ (defvar elm-live-index "index.html" "Server index html file path"))
 
 (make-variable-buffer-local
  (defvar elm-live-compile-debug nil "Elm compile debug option"))
 
+(make-variable-buffer-local (defvar elm-live--server-url nil))
+
+(make-variable-buffer-local (defvar elm-live--server-process nil))
+
 
 (defun elm-live-mode-toggle-debug ()
   (interactive)
-  (setq elm-live-compile-debug (not elm-live-compile-debug))
+  (setq-local elm-live-compile-debug (not elm-live-compile-debug))
   (message
    (concat "Elm compile debug "
            (if elm-live-compile-debug "enabled" "disabled")))
@@ -630,7 +635,7 @@
 
 (define-minor-mode elm-live-mode
   nil
-  :lighter " eml-live-mode"
+  :lighter " eml-live"
   (if elm-live-mode
       (progn
         (add-hook 'after-save-hook #'elm-live-mode--save-hook t)
@@ -653,22 +658,46 @@
 (ad-activate 'compilation-start)
 
 
+(defun elm-live-server-filter (proc string)
+  (save-match-data
+    (when (string-match "Local: \\(.*\\)" string)
+      (setq-local elm-live--server-url (match-string 1 string))))
+
+  (when (buffer-live-p (process-buffer proc))
+    (with-current-buffer (process-buffer proc)
+      (goto-char (process-mark proc))
+      (insert string)
+      (set-marker (process-mark proc) (point)))))
+
+
 (defun elm-live-server-start ()
   "Run elm server on the background"
   (interactive)
-  (let ((cmd (concat "browser-sync start -s"
-                     " --ignore \"*.elm\" --files \".\""
-                     " --no-open"
-                     " --ss " elm-live-serve-directory
-                     " --no-ui  --reload-debounce 500"))
+  (let ((cmd `("browser-sync" "start" "-s"
+               "--ignore" "*.elm" "--files" "."
+               "--no-open"
+               "--ss" ,elm-live-serve-directory
+               "--no-ui" "--reload-debounce" "500"))
         (default-directory (expand-file-name (elm--find-dependency-file-path))))
-    (start-process-shell-command "elm-server" "*Elm Server*" cmd)))
+
+    (setq-local elm-live--server-process
+                (make-process :name "elm-server"
+                              :buffer "*elm-server*"
+                              :command cmd
+                              :filter #'elm-live-server-filter))))
 
 
 (defun elm-live-server-stop ()
   "Stop running elm server"
   (interactive)
-  (delete-process (get-process "elm-server")))
+  (delete-process elm-live--server-process))
+
+
+(defun elm-live-open-in-browser ()
+  "Open server url in browser"
+  (interactive)
+  (when (process-live-p elm-live--server-process)
+    (browse-url elm-live--server-url)))
 
 
 (custom-set-faces
