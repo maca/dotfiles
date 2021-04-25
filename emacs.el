@@ -700,6 +700,10 @@
     (browse-url elm-live--server-url)))
 
 
+(when (member "Noto Color Emoji" (font-family-list))
+  (set-fontset-font
+   t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
