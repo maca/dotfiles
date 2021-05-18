@@ -2,7 +2,7 @@
 
 sudo pacman -Syu
 sudo pacman -S\
-  termite xorg-server xorg-xinit chromium \
+  alacritty xorg-server xorg-xinit chromium \
   pulseaudio pulseaudio-alsa ttf-liberation ttf-jetbrains-mono \
   ttf-dejavu terminus-font noto-fonts-emoji noto-fonts-cjk \
   gmrun xcompmgr pavucontrol xautolock slock redshift acpi \
@@ -14,8 +14,7 @@ cd /tmp
 
 sudo pacman-key --recv-keys 011FDC52DA839335
 
-aur -si pulseaudio-ctl bubbles-git \
-  xrandr-invert-colors xkbset xbindkeys
+aur -si pulseaudio-ctl bubbles-git xkbset xbindkeys
 
 cd -
 mkdir -p ~/.config/fontconfig/
