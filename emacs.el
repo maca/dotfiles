@@ -132,7 +132,6 @@
 (setq js-indent-level 2)
 (setq evil-shift-width 2)
 (global-whitespace-mode t)
-(diminish 'global-whitespace-mode)
 
 
 (defun disable-indent-tabs-mode () (setq indent-tabs-mode nil))
@@ -184,7 +183,6 @@
 
 ;; Hide mode lighters
 (use-package diminish :ensure t)
-
 
 ;; load theme
 (use-package solarized-theme
@@ -937,3 +935,4 @@
 
 (diminish 'auto-revert-mode)
 (diminish 'eldoc-mode)
+(diminish 'global-whitespace-mode)
