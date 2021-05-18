@@ -8,7 +8,7 @@ sudo pacman -S\
   gmrun xcompmgr pavucontrol xautolock slock redshift acpi \
   acpilight xf86-input-libinput xorg-xinput gpicview \
   libpng poppler-glib imagemagick unclutter browserpass \
-  browserpass-chromium nautilus
+  browserpass-chromium nautilus dmenu
 
 cd /tmp
 
