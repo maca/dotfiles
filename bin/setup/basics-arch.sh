@@ -4,6 +4,11 @@
 # bash <(curl -s https://raw.githubusercontent.com/maca/dotfiles/master/bin/setup/basics-arch.sh)
 
 
+pacman -S git vim zsh pass pass-otp the_silver_searcher binutils \
+  patch make automake pkgconf fakeroot openssh ruby tmux \
+  rsync keychain linux-headers base-devel patch unzip ntp fzf emacs qrencode
+
+
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 hwclock --systohc
 
@@ -14,10 +19,6 @@ echo LANG=en_US.UTF-8     > /etc/locale.conf
 echo KEYMAP=us            > /etc/vconsole.conf
 echo FONT=Lat2-Terminus16 >> /etc/vconsole.conf
 echo "blacklist pcspkr"   > /etc/modprobe.d/pcspkr.conf
-
-pacman -S git vim zsh pass pass-otp the_silver_searcher binutils \
-  patch make automake pkgconf fakeroot openssh ruby tmux \
-  rsync keychain linux-headers base-devel patch unzip ntp fzf emacs
 
 
 systemctl start ntpd
@@ -51,6 +52,5 @@ echo "SSH Key setup"
 su - $user -c "ssh-keygen -t ed25519 -C '$user@$(cat /etc/hostname)'"
 
 
-
 cat "Public ssh key:"
-cat /home/$user/.ssh/id_rsa.pub
+qrencode -t ansiutf8 < /home/$user/.ssh/id_rsa.pub
