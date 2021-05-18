@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Elm debug todo
+# group : elm
+# key: todo
+# --
+Debug.todo "${1:crash}"

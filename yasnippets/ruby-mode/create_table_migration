@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Sequel create table migration
+# key: create_table
+# group: ruby
+# --
+
+Sequel.migration do
+  up do
+    create_table(:$1) do
+      primary_key :id
+      $2
+    end
+  end
+
+  down do
+    drop_table(:$1)
+  end
+end

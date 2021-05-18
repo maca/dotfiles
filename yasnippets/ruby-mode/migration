@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Sequel migration
+# key: migration
+# group: ruby
+# --
+
+Sequel.migration do
+  up do
+     $1
+  end
+
+  down do
+     $2
+  end
+end
