@@ -4,6 +4,101 @@
 (tool-bar-mode -1)
 
 
+(when (member "Noto Color Emoji" (font-family-list))
+  (set-fontset-font
+   t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "JetBrains Mono" :foundry "JB" :slant normal :weight normal :height 143 :width normal))))
+ '(whitespace-tab ((t (:foreground "#003542" :background "white")))))
+
+;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#f4eedb" "#cc1f24" "#778c00" "#a67c00" "#007ec4" "#c42475" "#11948b" "#88999b"])
+ '(column-number-mode t)
+ '(compilation-message-face 'default)
+ '(create-lockfiles nil)
+ '(cua-global-mark-cursor-color "#11948b")
+ '(cua-normal-cursor-color "#596e76")
+ '(cua-overwrite-cursor-color "#a67c00")
+ '(cua-read-only-cursor-color "#778c00")
+ '(custom-safe-themes
+   '("76b4632612953d1a8976d983c4fdf5c3af92d216e2f87ce2b0726a1f37606158" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "0fffa9669425ff140ff2ae8568c7719705ef33b7a927a0ba7c5e2ffcfac09b75" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
+ '(display-line-numbers-type 'relative)
+ '(fci-rule-color "#f4eedb")
+ '(global-display-line-numbers-mode t)
+ '(highlight-changes-colors '("#c42475" "#5e65b6"))
+ '(highlight-symbol-colors
+   '("#ed7ddb24b29e" "#cd82e29fd17d" "#fc9acae0b444" "#d974d4beddd6" "#df08dfc6b349" "#f76ccd6eaf2a" "#d132db92e15a"))
+ '(highlight-symbol-foreground-color "#5d737a")
+ '(highlight-tail-colors
+   '(("#f4eedb" . 0)
+     ("#a8b84b" . 20)
+     ("#66c1b3" . 30)
+     ("#6fa5e7" . 50)
+     ("#d6a549" . 60)
+     ("#ed6e3e" . 70)
+     ("#f46495" . 85)
+     ("#f4eedb" . 100)))
+ '(hl-bg-colors
+   '("#d6a549" "#ed6e3e" "#ff6243" "#f46495" "#837bdf" "#6fa5e7" "#66c1b3" "#a8b84b"))
+ '(hl-fg-colors
+   '("#fffce9" "#fffce9" "#fffce9" "#fffce9" "#fffce9" "#fffce9" "#fffce9" "#fffce9"))
+ '(hl-paren-colors '("#11948b" "#a67c00" "#007ec4" "#5e65b6" "#778c00"))
+ '(lsp-ui-doc-border "#5d737a")
+ '(nrepl-message-colors
+   '("#cc1f24" "#bb3e06" "#a67c00" "#4f6600" "#a8b84b" "#005797" "#11948b" "#c42475" "#5e65b6"))
+ '(package-selected-packages
+   '(restclient diminish rainbow-mode twilight-bright-theme atomic-chrome ## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject))
+ '(pos-tip-background-color "#f4eedb")
+ '(pos-tip-foreground-color "#5d737a")
+ '(safe-local-variable-values '((hello . test)))
+ '(show-paren-mode t)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#778c00" "#f4eedb" 0.2))
+ '(term-default-bg-color "#fffce9")
+ '(term-default-fg-color "#596e76")
+ '(tool-bar-mode nil)
+ '(vc-annotate-background nil)
+ '(vc-annotate-background-mode nil)
+ '(vc-annotate-color-map
+   '((20 . "#cc1f24")
+     (40 . "#bbbc5a0718b8")
+     (60 . "#b1cf6c680f6e")
+     (80 . "#a67c00")
+     (100 . "#980682770000")
+     (120 . "#906085330000")
+     (140 . "#887187c90000")
+     (160 . "#802a8a3b0000")
+     (180 . "#778c00")
+     (200 . "#69798ef83f8d")
+     (220 . "#5f60904453a3")
+     (240 . "#51b991a1669e")
+     (260 . "#3d7993107928")
+     (280 . "#11948b")
+     (300 . "#1b098bdaa289")
+     (320 . "#1963876fadf4")
+     (340 . "#129982fcb95b")
+     (360 . "#007ec4")))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   '(unspecified "#fffce9" "#f4eedb" "#990001" "#cc1f24" "#4f6600" "#778c00" "#785700" "#a67c00" "#005797" "#007ec4" "#93004d" "#c42475" "#006d68" "#11948b" "#596e76" "#88999b"))
+ '(xterm-color-names
+   ["#f4eedb" "#cc1f24" "#778c00" "#a67c00" "#007ec4" "#c42475" "#11948b" "#002b37"])
+ '(xterm-color-names-bright
+   ["#fffce9" "#bb3e06" "#98a6a6" "#88999b" "#596e76" "#5e65b6" "#5d737a" "#00212b"]))
+
+
+(put 'narrow-to-region 'disabled nil)
+
 ;; Disable splash screen and startup message
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
@@ -37,6 +132,8 @@
 (setq js-indent-level 2)
 (setq evil-shift-width 2)
 (global-whitespace-mode t)
+(diminish 'global-whitespace-mode)
+
 
 (defun disable-indent-tabs-mode () (setq indent-tabs-mode nil))
 (add-hook 'js-mode-hook #'disable-indent-tabs-mode)
@@ -84,8 +181,9 @@
   (package-install 'use-package))
 (require 'use-package)
 
-;; bind key
-(use-package bind-key)
+
+;; Hide mode lighters
+(use-package diminish :ensure t)
 
 
 ;; load theme
@@ -95,18 +193,33 @@
   (load-theme 'solarized-dark t))
 
 
+(use-package twilight-bright-theme :ensure t)
+
+
+;; bind key
+(use-package bind-key)
+
+
 (defun toggle-theme ()
   (interactive)
-  (if (eq (car custom-enabled-themes) 'leuven)
+  (if (eq (car custom-enabled-themes) 'twilight-bright)
     (progn
-      (disable-theme 'leuven)
+      (disable-theme 'twilight-bright)
       (enable-theme 'solarized-dark))
     (progn
       (disable-theme 'solarized-dark)
-      (enable-theme 'leuven))))
+      (enable-theme 'twilight-bright))))
 (load-theme 'leuven t 'f)
 (global-set-key [f5] 'toggle-theme)
 
+
+(defun set-bigger-font-size (size)
+  (interactive)
+  (set-face-attribute 'default (selected-frame) :height 170))
+
+
+
+;; (set-frame-font "Inconsolata 12" nil t)
 
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
 ;; Packages
@@ -140,7 +253,8 @@
   (use-package evil-commentary
     :ensure t
     :config
-    (evil-commentary-mode))
+    (evil-commentary-mode)
+    (diminish 'evil-commentary-mode))
 
   (use-package atomic-chrome
     :config
@@ -156,6 +270,31 @@
       "gb" 'magit-blame
       "gs" 'magit-status))
 
+  (use-package git-timemachine
+    :ensure t
+    :config
+
+    (evil-define-minor-mode-key 'normal 'git-timemachine-mode
+      "\C-k" 'git-timemachine-show-previous-revision
+      "\C-j" 'git-timemachine-show-next-revision
+      "q" 'git-timemachine-quit
+      "gs" 'git-timemachine-show-nth-revision
+      "gf" 'git-timemachine-show-revision-fuzzy
+      "gy" 'git-timemachine-kill-abbreviated-revision
+      "gY" 'git-timemachine-kill-revision
+      "gb" 'git-timemachine-blame
+      "gc" 'git-timemachine-show-commit)
+
+    (evil-leader/set-key "gr" 'git-timemachine-toggle)
+
+    (diminish 'git-timemachine-mode
+              '(:propertize " GTM" face '(:foreground "red"))))
+
+  (use-package git-time-metric
+    :ensure t
+    :config
+    (add-hook 'after-save-hook 'git-time-metric-record))
+
   (use-package vimish-fold
     :ensure
     :after evil)
@@ -163,13 +302,15 @@
   (use-package evil-vimish-fold
     :ensure
     :after vimish-fold
-    :hook ((prog-mode conf-mode text-mode) . evil-vimish-fold-mode))
+    :hook ((prog-mode conf-mode text-mode) . evil-vimish-fold-mode)
+    :config (diminish 'evil-vimish-fold-mode))
 
   (use-package evil-collection
     :ensure t
     :after evil magit
     :config
-    (evil-collection-init 'magit))
+    (evil-collection-init 'magit)
+    (evil-collection-init 'elisp-mode))
 
   (use-package evil-indent-textobject :ensure t))
 ;;
@@ -190,7 +331,9 @@
         '(("." . "~/.emacs.d/tmp/undo")))
 
   (evil-leader/set-key
-    "uu" 'undo-tree-visualize))
+    "uu" 'undo-tree-visualize)
+
+  (diminish 'undo-tree-mode))
 ;;
 ;; Load project package
 ;;
@@ -270,11 +413,13 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
   (setq company-show-numbers t)
-  (push '(company-etags company-keywords) company-backends)
+  ;; (push '(company-etags company-keywords) company-backends)
 
   (define-key company-active-map [tab] 'company-complete-common-or-cycle)
 
-  (add-hook 'after-init-hook 'global-company-mode))
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  (diminish 'company-mode))
 ;;
 ;; Snippets
 ;;
@@ -384,6 +529,16 @@
               (define-key evil-normal-state-local-map (kbd "RET")
                 'neotree-enter))))
 ;;
+;; Parenthesis auto close
+;;
+(use-package smartparens
+  :ensure t
+  :config
+  (smartparens-global-mode 1)
+  (require 'smartparens-config)
+
+  (diminish 'smartparens-mode))
+;;
 ;; Color matching parens
 ;;
 (use-package rainbow-delimiters
@@ -392,16 +547,17 @@
   (progn
     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
 ;;
-;; Parenthesis auto close
+;; Show colors
 ;;
-(use-package smartparens
+(use-package rainbow-mode
   :ensure t
   :config
-  (smartparens-global-mode 1)
-  (require 'smartparens-config))
+  (add-hook 'prog-mode-hook #'rainbow-mode)
+  (diminish 'rainbow-mode))
 
 ;; fix parens for snippets
 (defvar smartparens-mode-original-value)
+
 
 (defun disable-sp-hippie-advice (&rest _)
   (setq smartparens-mode-original-value smartparens-mode)
@@ -516,11 +672,6 @@
 (use-package dockerfile-mode
   :ensure t)
 
-(use-package git-time-metric
-  :ensure t
-  :config
-  (add-hook 'after-save-hook 'git-time-metric-record))
-
 ;; (use-package pdf-tools
 ;;  :pin manual ;; manually update
 ;;  :config
@@ -540,6 +691,8 @@
 ;;  (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
 ;;  (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
 ;;  (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete))
+
+(use-package restclient :ensure t)
 
 ;;
 ;; Ligatures
@@ -590,47 +743,8 @@
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
 
 
-(make-variable-buffer-local
- (defvar elm-live-compile-output "build/elm-dev.js" "Elm compile output"))
-
-(make-variable-buffer-local
- (defvar elm-live-serve-directory "build" "Serve directory path"))
-
-(make-variable-buffer-local
- (defvar elm-live-index "index.html" "Server index html file path"))
-
-(make-variable-buffer-local
- (defvar elm-live-compile-debug nil "Elm compile debug option"))
-
-(make-variable-buffer-local (defvar elm-live--server-url nil))
-
-(make-variable-buffer-local (defvar elm-live--server-process nil))
-
-
-(defun elm-live-mode-toggle-debug ()
-  (interactive)
-  (setq-local elm-live-compile-debug (not elm-live-compile-debug))
-  (message
-   (concat "Elm compile debug "
-           (if elm-live-compile-debug "enabled" "disabled")))
-  (elm-live-mode-compile))
-
-
-(defun elm-live-mode-compile ()
-  (interactive)
-  (setq-local elm-compile-arguments
-              (if elm-live-compile-debug '("--debug") '()))
-  (elm-compile-main elm-live-compile-output))
-
-
-(defun elm-live-mode--save-hook ()
-  (when (and elm-live-mode (eq major-mode 'elm-mode))
-    (elm-live-mode-compile)))
-
-
-(defun elm-live-mode--compilation-finish (buffer outstr)
-  (unless (string-match "finished" outstr)
-    (switch-to-buffer-other-window buffer)))
+(defvar elm-live-mode-vars nil)
+(setq elm-live-mode-vars nil)
 
 
 (define-minor-mode elm-live-mode
@@ -638,11 +752,114 @@
   :lighter " eml-live"
   (if elm-live-mode
       (progn
-        (add-hook 'after-save-hook #'elm-live-mode--save-hook t)
+        (unless (elm-live--get-project-var 'elm-live-mode)
+          (elm-live--set-defaults))
+
+        (add-hook 'after-save-hook (lambda () (elm-live-mode-compile)) t t)
         (setq compilation-finish-functions #'elm-live-mode--compilation-finish)
+
         (elm-live-server-start)
         (elm-live-mode-compile))
-    (elm-live-server-stop)))
+    (elm-live-server-stop)
+    (elm-live--set-project-var 'elm-live-mode nil)
+    (remove-hook 'elm-mode-hook #'elm-live-elm-mode-hook)))
+
+
+(defun elm-live-elm-mode-hook ()
+  (when (elm-live--get-project-var 'elm-live-mode) (elm-live-mode)))
+
+
+(defun elm-live--set-defaults ()
+  (let* ((build-dir (file-name-as-directory
+                     (concat (temporary-file-directory)
+                             (md5 (elm-live-project-root)))))
+         (index (concat build-dir "index.html")))
+
+    (elm-live-set-build-directory build-dir)
+    (elm-live--set-project-var 'elm-live-mode 1)
+    (elm-live-set-compile-module "src/Main.elm")
+    (elm-live-set-output index)
+    (elm-live-set-index index)
+    (add-hook 'elm-mode-hook #'elm-live-elm-mode-hook)))
+
+
+(defun elm-live-mode-toggle-debug ()
+  (interactive)
+  (let ((debug (not (elm-live--get-project-var 'debug))))
+    (elm-live--set-project-var 'debug debug)
+    (elm-live-mode-compile)
+    (message (concat "Elm compile debug " (if debug "enabled" "disabled")))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; File and Directory utils
+(defun elm-live-mode--set-path-var (var path)
+  (let ((default-directory (elm-live-project-root)))
+    (elm-live--set-project-var var (expand-file-name path))
+    (elm-live-server-stop)
+    (elm-live-server-start)))
+
+
+(defun elm-live-set-compile-module (&optional path)
+  "Set Elm module PATH to be compiled."
+  (interactive
+   (unless current-prefix-arg
+     (list (read-file-name "Elm module to compile: "))))
+  (elm-live-mode--set-path-var 'elm-compile-module path))
+
+
+(defun elm-live-set-index (&optional path)
+  "Set server index PATH."
+  (interactive
+   (unless current-prefix-arg
+     (list (read-file-name "Server index: " (elm-live-project-root)))))
+  (elm-live-mode--set-path-var 'index path))
+
+
+(defun elm-live-set-output (&optional path)
+  "Set server output PATH."
+  (interactive
+   (unless current-prefix-arg
+     (list
+      (read-file-name "Elm compile output: "
+                      (elm-live--get-project-var 'build-directory)))))
+  (let ((output (elm-live--get-project-var 'elm-compile-output)))
+    (when output (delete-file output)))
+  (elm-live-mode--set-path-var 'elm-compile-output path))
+
+
+(defun elm-live-set-build-directory (&optional path)
+  "Set server build directory PATH."
+  (interactive
+   (unless current-prefix-arg
+     (list (read-directory-name "Server build directory: "))))
+  (elm-live-mode--set-path-var 'build-directory path))
+
+
+(defun elm-live-project-root ()
+  (expand-file-name (elm--find-dependency-file-path)))
+
+
+(defun elm-live--serve-directories ()
+  `(,(elm-live--get-project-var 'build-directory)
+    ,(elm-live-project-root)))
+;; File and Directory utils
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defun elm-live-mode--compilation-finish (buffer outstr)
+  (unless (string-match "finished" outstr)
+    (switch-to-buffer-other-window buffer)))
+
+
+(defun elm-live-mode-compile ()
+  (interactive)
+  (setq-local elm-compile-arguments
+              (if (elm-live--get-project-var 'debug) '("--debug") '()))
+
+  (elm-compile--file
+   (elm-live--get-project-var 'elm-compile-module)
+   (elm-live--get-project-var 'elm-compile-output)))
 
 
 (defadvice compilation-start
@@ -654,14 +871,13 @@
                 (goto-char        #'ignore))
         (save-window-excursion ad-do-it))
     ad-do-it))
-
 (ad-activate 'compilation-start)
 
 
-(defun elm-live-server-filter (proc string)
+(defun elm-live--server-process-filter (proc string)
   (save-match-data
     (when (string-match "Local: \\(.*\\)" string)
-      (setq-local elm-live--server-url (match-string 1 string))))
+      (elm-live--set-project-var 'url (match-string 1 string))))
 
   (when (buffer-live-p (process-buffer proc))
     (with-current-buffer (process-buffer proc)
@@ -673,60 +889,51 @@
 (defun elm-live-server-start ()
   "Run elm server on the background"
   (interactive)
-  (let ((cmd `("browser-sync" "start" "-s"
-               "--ignore" "*.elm" "--files" "."
-               "--no-open"
-               "--ss" ,elm-live-serve-directory
-               "--no-ui" "--reload-debounce" "500"))
-        (default-directory (expand-file-name (elm--find-dependency-file-path))))
 
-    (setq-local elm-live--server-process
-                (make-process :name "elm-server"
-                              :buffer "*elm-server*"
-                              :command cmd
-                              :filter #'elm-live-server-filter))))
+  (unless (process-live-p (elm-live--get-project-var 'process))
+    (let ((cmd
+           (flatten-list
+            `("browser-sync" "start" "-s"
+              "--no-open"
+              "--single"
+              "--files" ,(elm-live--serve-directories)
+              "--ss" ,(elm-live--serve-directories)
+              "--no-ui" "--reload-debounce" "500"))))
+
+      (elm-live--set-project-var
+       'process
+       (make-process :name "elm-server"
+                     :buffer "*elm-server*"
+                     :command cmd
+                     :filter #'elm-live--server-process-filter)))))
 
 
 (defun elm-live-server-stop ()
   "Stop running elm server"
   (interactive)
-  (delete-process elm-live--server-process))
+
+  (when (process-live-p (elm-live--get-project-var 'process))
+    (delete-process (elm-live--get-project-var 'process))))
 
 
 (defun elm-live-open-in-browser ()
   "Open server url in browser"
   (interactive)
-  (when (process-live-p elm-live--server-process)
-    (browse-url elm-live--server-url)))
+  (when (process-live-p (elm-live--get-project-var 'process))
+    (browse-url (elm-live--get-project-var 'url))))
 
 
-(when (member "Noto Color Emoji" (font-family-list))
-  (set-fontset-font
-   t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
+(defun elm-live--set-project-var (name value)
+  (setf
+   (alist-get
+    `(,(elm-live-project-root) ,name) elm-live-mode-vars nil 'remove #'equal)
+   value))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "JetBrains Mono" :foundry "JB" :slant normal :weight normal :height 143 :width normal))))
- '(whitespace-tab ((t (:foreground "#003542" :background "white")))))
 
-;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(create-lockfiles nil)
- '(custom-safe-themes
-   '("00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
- '(display-line-numbers-type 'relative)
- '(global-display-line-numbers-mode t)
- '(package-selected-packages
-   '(atomic-chrome ## enh-ruby-mode yasnippet origami counsel-projectile tidal org-plus-contrib pdf-tools org-mode org-link-minor-mode elixir-mode counsel ivy-explorer yaml-mode elm-mode solarized-theme neotree use-package projectile evil-surround evil-leader evil-indent-textobject))
- '(show-paren-mode t)
- '(tool-bar-mode nil))
+(defun elm-live--get-project-var (name)
+  (alist-get
+   `(,(elm-live-project-root) ,name) elm-live-mode-vars nil nil #'equal))
 
-(put 'narrow-to-region 'disabled nil)
+
+(diminish 'auto-revert-mode)
+(diminish 'eldoc-mode)
