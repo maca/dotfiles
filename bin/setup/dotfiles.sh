@@ -14,7 +14,6 @@ ln -fs $HOME/dotfiles/zshrc ~/.zshrc
 ln -fs $HOME/dotfiles/zprofile ~/.zprofile
 ln -fs $HOME/dotfiles/vimrc ~/.vimrc
 ln -fs $HOME/dotfiles/vim ~/.vim
-ln -fs $HOME/dotfiles/emacs.el ~/.emacs
 ln -fs $HOME/dotfiles/conky ~/.conky
 ln -fs $HOME/dotfiles/gitconfig ~/.gitconfig
 ln -fs $HOME/dotfiles/tmux.conf ~/.tmux.conf
