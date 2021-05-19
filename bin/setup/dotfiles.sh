@@ -29,7 +29,7 @@ cd $HOME
 
 git clone git@gitlab.com:aelita/pass.git $HOME/.password-store
 mkdir -p .password-store/.git/hooks
-ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/hooks/
+ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/
 
 
 mkdir .ssh
