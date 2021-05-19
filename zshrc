@@ -171,3 +171,8 @@ if [ -f /opt/asdf-vm/asdf.sh ]; then
   source /opt/asdf-vm/asdf.sh
   export PATH="/opt/asdf-vm/bin:/opt/asdf-vm/shims:$PATH"
 fi
+
+
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
+   source /usr/share/nvm/init-nvm.sh
+fi
