@@ -1,6 +1,11 @@
 (xss-lock slock) &
 
-xrdb -merge $HOME/.Xresources
+
+xrdb -merge /home/maca/dotfiles/Xresources
+
+if [ -f /home/maca/.Xresources ]; then
+    xrdb -merge /home/maca/.Xresources
+fi
 
 /home/maca/bin/sticky_keys
 
