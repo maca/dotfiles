@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Environment="ARGS=%I"
-ExecStart=/home/maca/bin/tunnel $ARGS
+ExecStart=/usr/bin/sh -c "echo $ARGS | tr -s '/' ' ' | xargs /home/maca/bin/tunnel"
 StandardOutput=syslog
 StandardError=syslog
 Restart=on-failure

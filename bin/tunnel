@@ -1,8 +1,11 @@
 #!/usr/bin/bash -
 
-ssh -vT -N -i ~/.ssh/tunnel_rsa\
+/home/maca/bin/start-ssh-agent.sh
+
+
+ssh -vT -N \
   -o BatchMode=yes\
   -o ExitOnForwardFailure=yes\
   -o ServerAliveCountMax=10\
   -o ServerAliveInterval=6\
-  -R /home/tunnel/sockets/$2/$4:0.0.0.0:$3 tunnel@$1
+  -R 0.0.0.0:$2:0.0.0.0:$3 $1
