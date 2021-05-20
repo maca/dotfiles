@@ -508,6 +508,34 @@
     :config
     (require 'company-web-html)))
 
+
+(use-package typescript-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.tsx" . typescript-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts" . typescript-mode))
+  (add-hook 'typescript-mode-hook 'tide-setup))
+
+
+(use-package tide
+  :ensure t
+
+  :config
+  (setq tide-format-options
+        '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions t
+          :indentSize 2
+          :placeOpenBraceOnNewLineForFunctions nil))
+
+  (add-hook 'tide-mode-hook 'flycheck-mode)
+  (add-hook 'tide-mode-hook 'tide-hl-identifier-mode)
+
+  :after
+  (typescript-mode company flycheck)
+
+  :hook
+  ((before-save . tide-format-before-save)))
+
+
 (use-package emmet-mode
   :ensure t
 
