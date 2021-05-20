@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sudo su - pair -c "mkdir -p /home/pair/.ssh"
+curl https://github.com/$1.keys | sudo tee -a /home/pair/.ssh/authorized_keys
