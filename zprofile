@@ -3,4 +3,5 @@
 
 source /usr/share/chruby/chruby.sh
 source /usr/share/chruby/auto.sh
-PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+
+PATH="$(ruby -e 'print Gem.user_dir')/bin:/usr/lib/ruby/gems/3.0.0/bin:$PATH"
