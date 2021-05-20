@@ -191,7 +191,7 @@
       "gb" 'git-timemachine-blame
       "gc" 'git-timemachine-show-commit)
 
-    (evil-leader/set-key "gr" 'git-timemachine-toggle)
+    (evil-leader/set-key "gh" 'git-timemachine-toggle)
 
     (diminish 'git-timemachine-mode
               '(:propertize " GTM" face '(:foreground "red"))))
