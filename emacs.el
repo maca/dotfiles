@@ -505,19 +505,18 @@
   (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.eex" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx" . web-mode))
+
+  (add-hook
+   'web-mode-hook
+   (lambda ()
+     (when (string-equal "tsx" (file-name-extension buffer-file-name))
+       (tide-setup))))
 
   (use-package company-web
     :ensure t
     :config
     (require 'company-web-html)))
-
-
-(use-package typescript-mode
-  :ensure t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.tsx" . typescript-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts" . typescript-mode))
-  (add-hook 'typescript-mode-hook 'tide-setup))
 
 
 (use-package tide
@@ -531,12 +530,19 @@
 
   (add-hook 'tide-mode-hook 'flycheck-mode)
   (add-hook 'tide-mode-hook 'tide-hl-identifier-mode)
+  (add-hook 'tide-mode-hook 'eldoc-mode)
 
   :after
   (typescript-mode company flycheck)
 
   :hook
   ((before-save . tide-format-before-save)))
+
+
+(use-package typescript-mode
+  :ensure t
+  :config
+  (add-hook 'typescript-mode-hook 'tide-setup))
 
 
 (use-package emmet-mode
