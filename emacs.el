@@ -269,6 +269,9 @@
   (global-set-key (kbd "C-c C-r") 'ivy-resume)
   (global-set-key (kbd "<f6>") 'ivy-resume)
 
+  (setenv "FZF_DEFAULT_COMMAND"
+          "fd --type f --hidden --follow --exclude .git")
+
   (evil-leader/set-key
     "fb" 'ivy-switch-buffer
     "ff" 'counsel-fzf
