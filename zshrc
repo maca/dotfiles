@@ -30,6 +30,7 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' verbose yes
+zstyle ':completion:*' rehash true
 zstyle ':completion:*:corrections' format '%B%d(errors: %e)%b'
 zstyle ':completion:*:descriptions' format "%{$fg[red]%}%B%d%b"
 zstyle ':completion:*' group-name ''
