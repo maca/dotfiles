@@ -4,7 +4,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/maca/dotfiles/master/bin/setup/basics-arch.sh)
 
 
-pacman -S git vim zsh pass pass-otp the_silver_searcher binutils \
+pacman -S git vim zsh pass pass-otp the_silver_searcher fd binutils \
   patch make automake pkgconf fakeroot openssh ruby tmux \
   rsync keychain linux-headers base-devel patch unzip ntp fzf emacs qrencode
 
