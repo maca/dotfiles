@@ -117,13 +117,17 @@
 (global-set-key [f5] 'toggle-theme)
 
 
-(defun set-bigger-font-size (size)
+(defun set-font-size (size)
   (interactive)
-  (set-face-attribute 'default (selected-frame) :height 170))
+  (set-face-attribute 'default nil :height size))
 
+(defun increase-font ()
+  (interactive)
+  (set-font-size (+ (face-attribute 'default :height) 15)))
 
-
-;; (set-frame-font "Inconsolata 12" nil t)
+(defun decrease-font ()
+  (interactive)
+  (set-font-size (- (face-attribute 'default :height) 15)))
 
 ;; ;; ;; ;; ;; ;; ;; ;; ;; ;; ;;
 ;; Packages
@@ -131,7 +135,6 @@
 ;; Load evil!
 (setq evil-want-keybinding nil)
 (setq evil-undo-system 'undo-tree)
-
 
 (use-package evil-leader
   :ensure t
@@ -149,7 +152,9 @@
     "tt" 'toggle-truncate-lines
     "tu" 'string-inflection-underscore
     "tc" 'string-inflection-camelcase
-    "tk" 'string-inflection-kebab-case)
+    "tk" 'string-inflection-kebab-case
+    "k" 'increase-font
+    "j" 'decrease-font)
 
   (use-package evil-surround
     :ensure t
@@ -493,6 +498,7 @@
           (lambda ()
             (when (string= (file-name-extension buffer-file-name) "erb")
               (yas-activate-extra-mode 'erb-mode))))
+
 
 (use-package web-mode
   :ensure t
