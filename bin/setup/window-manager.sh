@@ -8,7 +8,8 @@ sudo pacman -S\
   gmrun xcompmgr pavucontrol xautolock slock redshift acpi \
   acpilight xf86-input-libinput xorg-xinput gpicview \
   libpng poppler-glib imagemagick unclutter browserpass \
-  browserpass-chromium nautilus dmenu
+  browserpass-chromium nautilus dmenu dhcpcd
+
 
 cd /tmp
 
@@ -43,6 +44,10 @@ EOF
 # Automount
 sudo pacman -S udevil
 sudo systemctl enable devmon@$(whoami).service
+
+# Dhcp
+sudo systemctl status dhcpcd.service
+
 
 # Fonts
 sudo sh -c "cat > /etc/fonts/conf.avail/33-TerminusPCFFont.conf" <<EOF
