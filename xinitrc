@@ -11,8 +11,7 @@ fi
 
 /usr/lib/systemd/systemd --user &
 xbindkeys &
-/usr/bin/systemctl --user start redshift &
-udiskie
+/usr/bin/systemctl --user start redshift
 
 (sleep 1 && /usr/bin/systemctl --user restart redshift) &
 
