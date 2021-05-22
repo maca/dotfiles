@@ -1,5 +1,8 @@
 [[ ! -f /tmp/wm.lock && -z $DISPLAY && $XDG_VTNR -eq 1 ]] && touch /tmp/wm.lock && exec startx
 { sleep 3 && if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then startx; fi & disown; } 2>/dev/null
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+   sleep 1 && startx
+fi
 
 source /usr/share/chruby/chruby.sh
 source /usr/share/chruby/auto.sh
