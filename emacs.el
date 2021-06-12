@@ -91,6 +91,10 @@
 (use-package diminish :ensure t)
 
 ;; load theme
+(use-package jazz-theme :ensure t)
+
+(use-package moe-theme :ensure t)
+
 (use-package solarized-theme
   :ensure t
   :config
@@ -153,8 +157,8 @@
     "tu" 'string-inflection-underscore
     "tc" 'string-inflection-camelcase
     "tk" 'string-inflection-kebab-case
-    "k" 'increase-font
-    "j" 'decrease-font)
+    "wk" 'increase-font
+    "wj" 'decrease-font)
 
   (use-package evil-surround
     :ensure t
@@ -221,6 +225,8 @@
     :after evil magit
     :config
     (evil-collection-init 'magit)
+    (evil-collection-init 'term)
+    (evil-collection-init 'vterm)
     (evil-collection-init 'elisp-mode))
 
   (use-package evil-indent-textobject :ensure t))
@@ -280,6 +286,7 @@
   (evil-leader/set-key
     "fb" 'ivy-switch-buffer
     "ff" 'counsel-fzf
+    "fm" 'counsel-evil-marks
     "fg" 'counsel-git
     "fg" 'counsel-git-grep
     "fd" 'counsel-grep
@@ -289,6 +296,7 @@
     "ft" 'counsel-etags-list-tag
     "fp" 'counsel-yank-pop
     "hf" 'counsel-describe-function
+    "hk" 'describe-key
     "hl" 'counsel-find-library
     "hs" 'counsel-info-lookup-symbol
     "hu" 'counsel-unicode-char
@@ -883,6 +891,87 @@
   (alist-get
    `(,(elm-live-project-root) ,name) elm-live-mode-vars nil nil #'equal))
 
+
+
+
+(define-minor-mode maca/folding-indent
+  "Fold additions."
+  :keymap (make-sparse-keymap))
+
+(evil-define-key '(normal) 'maca/folding-indent
+  "zn" 'jump-to-same-indent
+  "zm" (lambda () (interactive) (jump-to-same-indent -1))
+  "za" 'fold-all-of-same-indentation
+  "zi" 'fold-under-indentation
+  "zO" 'vimish-fold-unfold-all
+  "zC" 'vimish-fold-refold-all
+  "zD" 'evil-vimish-fold/delete-all)
+
+
+;; Folding and jumping
+(defun jump-to-same-indent (direction)
+  "Jump back or forth to the next line with the same indentation level"
+  (interactive "P")
+  (let ((start-indent (current-indentation)))
+    (while
+        (and (zerop (forward-line (or direction 1)))
+             (or (zerop (- (line-end-position) (line-beginning-position)))
+                 (> (current-indentation) start-indent)))))
+  (back-to-indentation))
+
+
+(defun fold-under-indentation (args)
+  "Fold all under indentation"
+  (interactive "P")
+  (when vimish-fold-mode
+    (let* ((beg (point))
+           (end (save-excursion
+                  (jump-to-same-indent 1)
+                  (forward-line -1)
+                  (while
+                      (and (not (eobp))
+                           (not (bobp))
+                           (= (current-indentation)
+                              (- (line-end-position) (line-beginning-position))))
+                    (forward-line -1))
+                  (point)))
+           (fold (find-if 'vimish-fold--vimish-overlay-p (overlays-in beg end))))
+      (cond (fold
+             (progn
+               (dolist (overlay (overlays-in beg end))
+                 (when (vimish-fold--vimish-overlay-p overlay)
+                   (save-excursion
+                     (goto-char (overlay-start overlay))
+                     (if (eq (overlay-get fold 'type) 'vimish-fold--folded)
+                         (vimish-fold-unfold)
+                       (vimish-fold-refold)))))))
+            ((zerop (count-lines beg end))
+             (progn
+               (forward-line 1)
+               (fold-under-indentation 1)
+               t))
+            (t (progn
+                 (vimish-fold beg end)
+                 (jump-to-same-indent 1)
+                 t))))))
+
+
+(defun fold-all-of-same-indentation (args)
+  "Fold all with same indentation"
+  (interactive "P")
+  (let ((beg (point)) (start-indent (current-indentation)))
+    (save-excursion
+      (while (and (not (eobp))
+                  (eq (current-indentation) start-indent)
+                  (fold-under-indentation 1))))
+    (unless (eq (point) beg)
+      (evil-first-non-blank))))
+
+
+(add-hook 'prog-mode-hook 'maca/folding-indent)
+
+
+(setq debug-on-quit t)
 
 ;; Disable graphical elements
 (menu-bar-mode -1)
