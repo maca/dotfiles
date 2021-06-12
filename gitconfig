@@ -31,6 +31,7 @@
   excludesfile = ~/.gitignore
 [init]
   templatedir = /home/maca/dotfiles/git-hooks
+	defaultBranch = main
 [merge]
   tool = diffconflicts
 [mergetool "diffconflicts"]
