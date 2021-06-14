@@ -912,8 +912,12 @@
 (defun jump-to-same-indent (direction)
   "Jump back or forth to the next line with the same indentation level"
   (interactive "P")
+  (back-to-indentation)
   (unless (jump-to-same-indent-step (or direction 1))
-    (while (jump-to-same-indent-step (* -1 (or direction 1)))))
+    (while
+        (and (not (bobp))
+             (jump-to-same-indent-step (* -1 (or direction 1)))))
+    (message "EOBP %s" (eobp)))
   (back-to-indentation))
 
 
@@ -922,14 +926,14 @@
     (back-to-indentation)
     (while
         (and (zerop (forward-line direction))
+             (not (bobp))
              (or (zerop (- (line-end-position) (line-beginning-position)))
                  (> (current-indentation) start-indent))))
     (point)
     (if (and (eq (current-indentation) start-indent)
-             (not (bobp))
              (not (zerop (- (line-end-position) (line-beginning-position)))))
         t
-      (goto-char beg) nil)))
+      nil)))
 
 
 (defun fold-under-indentation (args)
@@ -938,12 +942,13 @@
   (when vimish-fold-mode
     (let* ((beg (point))
            (end (save-excursion
-                  (jump-to-same-indent 1)
-                  (forward-line -1)
-                  (while
-                      (= (current-indentation)
-                         (- (line-end-position) (line-beginning-position)))
-                    (forward-line -1))
+                  (jump-to-same-indent-step 1)
+                  (unless (eolp)
+                    (forward-line -1)
+                    (while
+                        (= (current-indentation)
+                           (- (line-end-position) (line-beginning-position)))
+                      (forward-line -1)))
                   (point)))
            (fold (find-if 'vimish-fold--vimish-overlay-p (overlays-in beg end))))
       (cond (fold
@@ -958,7 +963,9 @@
                (overlay-start fold)))
             ((zerop (count-lines beg end))
              (progn (forward-line 1) (fold-under-indentation 1) t))
-            (t (progn (vimish-fold beg end) (jump-to-same-indent 1) t))))))
+            (t (progn (vimish-fold beg end)
+                      (jump-to-same-indent 1)
+                      t))))))
 
 
 (defun fold-all-of-same-indentation (args)
@@ -966,8 +973,8 @@
   (interactive "P")
   (let ((beg (point)) (start-indent (current-indentation)))
     (save-excursion
-      (while (and (not (eobp))
-                  (eq (current-indentation) start-indent)
+      (while (jump-to-same-indent-step -1))
+      (while (and (eq (current-indentation) start-indent)
                   (fold-under-indentation 1))))
     (unless (eq (point) beg)
       (evil-first-non-blank))))
