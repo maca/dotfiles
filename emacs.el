@@ -916,16 +916,22 @@
 (defun jump-to-same-indent (direction)
   "Jump back or forth to the next line with the same indentation level"
   (interactive "P")
-  (unless (jump-to-same-indent-step (or direction 1))
-    (while (and (not (bobp))
-                (jump-to-same-indent-step (* -1 (or direction 1))))))
+  (unless (and (not (save-excursion (beginning-of-line 1) (bobp)))
+               (not (save-excursion (end-of-line 1) (eobp)))
+               (jump-to-same-indent-step (or direction 1)))
+    (while (and (jump-to-same-indent-step (* -1 (or direction 1)))
+                (not (bobp))
+                (not (eobp)))))
   (back-to-indentation))
 
 
 (defun jump-to-same-indent-step (direction)
+  (interactive "P")
   (let ((beg (point)) (start-indent (current-indentation)))
     (while
         (and (zerop (forward-line direction))
+             (not (save-excursion (beginning-of-line 1) (bobp)))
+             (not (save-excursion (end-of-line 1) (eobp)))
              (or (zerop (- (line-end-position) (line-beginning-position)))
                  (> (current-indentation) start-indent)))
       (back-to-indentation))
