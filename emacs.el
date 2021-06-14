@@ -913,13 +913,14 @@
 
 
 ;; Folding and jumping
-(defun jump-to-same-indent (direction)
+(defun jump-to-same-indent (&optional direction)
   "Jump back or forth to the next line with the same indentation level"
   (interactive "P")
+  (unless direction (setq direction 1))
   (unless (and (not (save-excursion (beginning-of-line 1) (bobp)))
                (not (save-excursion (end-of-line 1) (eobp)))
-               (jump-to-same-indent-step (or direction 1)))
-    (while (and (jump-to-same-indent-step (* -1 (or direction 1)))
+               (jump-to-same-indent-step direction))
+    (while (and (jump-to-same-indent-step (* -1 direction))
                 (not (bobp))
                 (not (eobp)))))
   (back-to-indentation))
@@ -928,17 +929,21 @@
 (defun jump-to-same-indent-step (direction)
   (interactive "P")
   (let ((beg (point)) (start-indent (current-indentation)))
+    (jump-to-same-indentation-loop  direction start-indent)
+    (if (and (eq (current-indentation) start-indent)
+             (not (zerop (- (line-end-position) (line-beginning-position)))))
+        (point)
+      (goto-char beg) nil)))
+
+
+(defun jump-to-same-indentation-loop (direction start-indent)
     (while
         (and (zerop (forward-line direction))
              (not (save-excursion (beginning-of-line 1) (bobp)))
              (not (save-excursion (end-of-line 1) (eobp)))
              (or (zerop (- (line-end-position) (line-beginning-position)))
                  (> (current-indentation) start-indent)))
-      (back-to-indentation))
-    (if (and (eq (current-indentation) start-indent)
-             (not (zerop (- (line-end-position) (line-beginning-position)))))
-        (point)
-      (goto-char beg) nil)))
+      (back-to-indentation)))
 
 
 (defun fold-under-indentation (args)
