@@ -893,7 +893,6 @@
 
 
 
-
 (define-minor-mode maca/folding-indent
   "Fold additions."
   :keymap (make-sparse-keymap))
@@ -902,8 +901,8 @@
 (evil-define-key '(normal) 'maca/folding-indent
   "j"  'evil-next-visual-line
   "k"  'evil-previous-visual-line
-  "gj" 'indent-jump
-  "gk" (lambda () (interactive) (indent-jump -1))
+  "gj" 'indent-jump-forward
+  "gk" 'indent-jump-backward
   "gh" 'indent-jump-level-up
   "gl" 'indent-jump-level-down
   "za" 'indent-fold-all
@@ -911,7 +910,6 @@
   "zO" 'vimish-fold-unfold-all
   "zC" 'vimish-fold-refold-all
   "zD" 'evil-vimish-fold/delete-all)
-
 
 
 ;; Folding and jumping
@@ -927,9 +925,54 @@
   (zerop (- (line-end-position) (line-beginning-position))))
 
 
+(evil-define-motion indent-jump-forward (count)
+  "Jump forward to next line with same indentation COUNT times."
+  :type inclusive
+  (indent-jump--motion count (lambda () (indent-jump 1))))
+
+
+(evil-define-motion indent-jump-backward (count)
+  "Jump forward to previous line with same indentation COUNT times."
+  :type inclusive
+  (indent-jump--motion count (lambda () (indent-jump -1))))
+
+
+(evil-define-motion indent-jump-level-up (count)
+  "Jump indentation level up COUNT times."
+  :type inclusive
+  (indent-jump--motion
+   count
+   (lambda ()
+     (let ((start-indent (current-indentation)) (beg (point)))
+       (indent-jump--step
+        -1
+        (lambda (start-indent) (>= (current-indentation) start-indent)))
+       (unless (< (current-indentation) start-indent)
+         (goto-char beg))))))
+
+
+(evil-define-motion indent-jump-level-down (count)
+  "Jump indentation level down COUNT times."
+  :type inclusive
+  (indent-jump--motion
+   count
+   (lambda ()
+     (let ((start-indent (current-indentation)) (beg (point)))
+       (indent-jump--step
+        1
+        (lambda (start-indent) (< (current-indentation) start-indent)))
+       (unless (> (current-indentation) start-indent)
+         (goto-char beg))))))
+
+
+(defun indent-jump--motion (count func)
+  (setq count (or count 1))
+  (while (> count 0)
+    (funcall func)
+    (setq count (- count 1))))
+
+
 (defun indent-jump (&optional direction)
-  "Jump back or forth to the next line with the same indentation level"
-  (interactive "P")
   (unless direction (setq direction 1))
   (unless (and (not (and (< direction 1) (is-first-line)))
                (not (and (> direction 0) (is-last-line)))
@@ -941,7 +984,6 @@
 
 
 (defun indent-jump--jump (direction)
-  (interactive "P")
   (let ((beg (point)) (start-indent (current-indentation)))
     (indent-jump--loop direction)
     (if (and (eq (current-indentation) start-indent)
@@ -956,26 +998,6 @@
    (lambda (start-indent) (> (current-indentation) start-indent))))
 
 
-(defun indent-jump-level-up (args)
-  (interactive "P")
-  (let ((start-indent (current-indentation)) (beg (point)))
-    (indent-jump--step
-     -1
-     (lambda (start-indent) (>= (current-indentation) start-indent)))
-    (unless (< (current-indentation) start-indent)
-      (goto-char beg))))
-
-
-(defun indent-jump-level-down (args)
-  (interactive "P")
-  (let ((start-indent (current-indentation)) (beg (point)))
-    (indent-jump--step
-     1
-     (lambda (start-indent) (< (current-indentation) start-indent)))
-    (unless (> (current-indentation) start-indent)
-      (goto-char beg))))
-
-
 (defun indent-jump--step (direction step-fun)
   (let ((start-indent (current-indentation)))
     (while
@@ -985,7 +1007,6 @@
              (or (is-empty-line)
                  (funcall step-fun start-indent)))))
   (back-to-indentation))
-
 
 
 (defun indent-fold (args)
@@ -1034,6 +1055,7 @@
 
 
 (add-hook 'prog-mode-hook 'maca/folding-indent)
+
 
 
 ;; Disable graphical elements
