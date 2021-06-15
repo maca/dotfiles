@@ -902,10 +902,12 @@
 (evil-define-key '(normal) 'maca/folding-indent
   "j"  'evil-next-visual-line
   "k"  'evil-previous-visual-line
-  "gj" 'jump-to-same-indent
-  "gk" (lambda () (interactive) (jump-to-same-indent -1))
-  "za" 'fold-all-of-same-indentation
-  "zi" 'fold-under-indentation
+  "gj" 'indent-jump
+  "gk" (lambda () (interactive) (indent-jump -1))
+  "gh" 'indent-jump-level-up
+  "gl" 'indent-jump-level-down
+  "za" 'indent-fold-all
+  "zi" 'indent-fold
   "zO" 'vimish-fold-unfold-all
   "zC" 'vimish-fold-refold-all
   "zD" 'evil-vimish-fold/delete-all)
@@ -925,47 +927,74 @@
   (zerop (- (line-end-position) (line-beginning-position))))
 
 
-(defun jump-to-same-indent (&optional direction)
+(defun indent-jump (&optional direction)
   "Jump back or forth to the next line with the same indentation level"
   (interactive "P")
   (unless direction (setq direction 1))
   (unless (and (not (and (< direction 1) (is-first-line)))
                (not (and (> direction 0) (is-last-line)))
-               (jump-to-same-indent-step direction))
-    (while (and (jump-to-same-indent-step (* -1 direction))
+               (indent-jump--jump direction))
+    (while (and (indent-jump--jump (* -1 direction))
                 (not (bobp))
                 (not (eobp)))))
   (back-to-indentation))
 
 
-(defun jump-to-same-indent-step (direction)
+(defun indent-jump--jump (direction)
   (interactive "P")
   (let ((beg (point)) (start-indent (current-indentation)))
-    (jump-to-same-indentation-loop direction)
+    (indent-jump--loop direction)
     (if (and (eq (current-indentation) start-indent)
              (not (is-empty-line)))
         (point)
       (goto-char beg) nil)))
 
 
-(defun jump-to-same-indentation-loop (direction)
+(defun indent-jump--loop (direction)
+  (indent-jump--step
+   direction
+   (lambda (start-indent) (> (current-indentation) start-indent))))
+
+
+(defun indent-jump-level-up (args)
+  (interactive "P")
+  (let ((start-indent (current-indentation)) (beg (point)))
+    (indent-jump--step
+     -1
+     (lambda (start-indent) (>= (current-indentation) start-indent)))
+    (unless (< (current-indentation) start-indent)
+      (goto-char beg))))
+
+
+(defun indent-jump-level-down (args)
+  (interactive "P")
+  (let ((start-indent (current-indentation)) (beg (point)))
+    (indent-jump--step
+     1
+     (lambda (start-indent) (< (current-indentation) start-indent)))
+    (unless (> (current-indentation) start-indent)
+      (goto-char beg))))
+
+
+(defun indent-jump--step (direction step-fun)
   (let ((start-indent (current-indentation)))
     (while
         (and (zerop (forward-line direction))
              (not (is-first-line))
              (not (is-last-line))
              (or (is-empty-line)
-                 (> (current-indentation) start-indent)))
-      (back-to-indentation))))
+                 (funcall step-fun start-indent)))))
+  (back-to-indentation))
 
 
-(defun fold-under-indentation (args)
+
+(defun indent-fold (args)
   "Fold all under indentation"
   (interactive "P")
   (when vimish-fold-mode
     (let* ((beg (point))
            (end (save-excursion
-                  (jump-to-same-indentation-loop 1)
+                  (indent-jump--loop 1)
                   (unless (is-last-line) (forward-line -1))
                   (while
                       (= (current-indentation)
@@ -984,21 +1013,22 @@
                        (vimish-fold-refold)))))
                (overlay-start fold)))
             ((zerop (count-lines beg end))
-             (progn (forward-line 1) (fold-under-indentation 1) t))
+             (progn (forward-line 1) (indent-fold 1) t))
             (t (progn
                  (vimish-fold beg end)
-                 (jump-to-same-indentation-loop 1)
-                 (beginning-of-line 1)
+                 (indent-jump 1)
+                 (when (< (point) beg) (indent-jump -1))
+                 (back-to-indentation)
                  t))))))
 
 
-(defun fold-all-of-same-indentation (args)
+(defun indent-fold-all (args)
   "Fold all with same indentation"
   (interactive "P")
   (let ((beg (point)) (start-indent (current-indentation)))
     (save-excursion
       (while (and (eq (current-indentation) start-indent)
-                  (fold-under-indentation 1))))
+                  (indent-fold 1))))
     (unless (eq (point) beg)
       (evil-first-non-blank))))
 
