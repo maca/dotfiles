@@ -917,8 +917,8 @@
   "Jump back or forth to the next line with the same indentation level"
   (interactive "P")
   (unless direction (setq direction 1))
-  (unless (and (not (save-excursion (beginning-of-line 1) (bobp)))
-               (not (save-excursion (end-of-line 1) (eobp)))
+  (unless (and (not (and (< direction 1) (is-first-line)))
+               (not (and (> direction 0) (is-last-line)))
                (jump-to-same-indent-step direction))
     (while (and (jump-to-same-indent-step (* -1 direction))
                 (not (bobp))
@@ -926,12 +926,24 @@
   (back-to-indentation))
 
 
+(defun is-last-line ()
+  (save-excursion (end-of-line 1) (eobp)))
+
+
+(defun is-first-line ()
+  (save-excursion (beginning-of-line 1) (bobp)))
+
+
+(defun is-empty-line ()
+  (zerop (- (line-end-position) (line-beginning-position)))  )
+
+
 (defun jump-to-same-indent-step (direction)
   (interactive "P")
   (let ((beg (point)) (start-indent (current-indentation)))
-    (jump-to-same-indentation-loop  direction start-indent)
+    (jump-to-same-indentation-loop direction start-indent)
     (if (and (eq (current-indentation) start-indent)
-             (not (zerop (- (line-end-position) (line-beginning-position)))))
+             (not (is-empty-line)))
         (point)
       (goto-char beg) nil)))
 
@@ -939,9 +951,9 @@
 (defun jump-to-same-indentation-loop (direction start-indent)
     (while
         (and (zerop (forward-line direction))
-             (not (save-excursion (beginning-of-line 1) (bobp)))
-             (not (save-excursion (end-of-line 1) (eobp)))
-             (or (zerop (- (line-end-position) (line-beginning-position)))
+             (not (is-first-line))
+             (not (is-last-line))
+             (or (is-empty-line)
                  (> (current-indentation) start-indent)))
       (back-to-indentation)))
 
@@ -988,8 +1000,6 @@
 
 (add-hook 'prog-mode-hook 'maca/folding-indent)
 
-
-(setq debug-on-quit t)
 
 ;; Disable graphical elements
 (menu-bar-mode -1)
