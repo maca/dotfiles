@@ -985,20 +985,18 @@
 
 (defun indent-jump--jump (direction)
   (let ((beg (point)) (start-indent (current-indentation)))
-    (indent-jump--loop direction)
+    (indent-jump--step direction)
     (if (and (eq (current-indentation) start-indent)
              (not (is-empty-line)))
         (point)
       (goto-char beg) nil)))
 
 
-(defun indent-jump--loop (direction)
-  (indent-jump--step
-   direction
-   (lambda (start-indent) (> (current-indentation) start-indent))))
-
-
-(defun indent-jump--step (direction step-fun)
+(defun indent-jump--step (direction &optional step-fun)
+  (setq step-fun
+        (or step-fun
+            (lambda (start-indent)
+              (> (current-indentation) start-indent))))
   (let ((start-indent (current-indentation)))
     (while
         (and (zerop (forward-line direction))
@@ -1015,7 +1013,7 @@
   (when vimish-fold-mode
     (let* ((beg (point))
            (end (save-excursion
-                  (indent-jump--loop 1)
+                  (indent-jump--step 1)
                   (unless (is-last-line) (forward-line -1))
                   (while
                       (= (current-indentation)
