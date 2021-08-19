@@ -585,6 +585,10 @@
   :config
   (setq ruby-insert-encoding-magic-comment nil))
 
+(use-package feature-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode)))
+
 (use-package go-mode
   :ensure t)
 
