@@ -1058,6 +1058,8 @@
 
 (add-hook 'prog-mode-hook 'maca/folding-indent)
 
+(Add-hook 'prog-mode-hook 'maca/folding-indent)
+(add-hook 'feature-mode-hook 'maca/folding-indent)
 
 
 ;; Disable graphical elements
