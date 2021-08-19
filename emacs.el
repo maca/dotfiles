@@ -1050,13 +1050,12 @@
   (interactive "P")
   (let ((beg (point)) (start-indent (current-indentation)))
     (save-excursion
+      (while (indent-jump--jump -1))
       (while (and (eq (current-indentation) start-indent)
                   (indent-fold 1))))
-    (unless (eq (point) beg)
-      (evil-first-non-blank))))
+    (back-to-indentation)))
 
 
-(add-hook 'prog-mode-hook 'maca/folding-indent)
 
 (Add-hook 'prog-mode-hook 'maca/folding-indent)
 (add-hook 'feature-mode-hook 'maca/folding-indent)
