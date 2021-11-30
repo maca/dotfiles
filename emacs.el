@@ -227,6 +227,7 @@
     (evil-collection-init 'magit)
     (evil-collection-init 'term)
     (evil-collection-init 'vterm)
+    (evil-collection-init 'dired)
     (evil-collection-init 'elisp-mode))
 
   (use-package evil-indent-textobject :ensure t))
@@ -1056,8 +1057,25 @@
     (back-to-indentation)))
 
 
+(defun translate-strings (&optional b e)
+  "hello"
+  (interactive "r")
+  (save-excursion
+    (goto-char b)
+    (while
+        (and (re-search-forward "\"\\(.+?\\)\"" nil t)
+             (< (point) e))
+      (replace-match
+       (concat "\""
+               (string-trim
+                (shell-command-to-string
+                 (concat "trans --brief en:es '" (match-string 1) "'")))
+               "\"")
+       t))))
 
-(Add-hook 'prog-mode-hook 'maca/folding-indent)
+
+
+(add-hook 'prog-mode-hook 'maca/folding-indent)
 (add-hook 'feature-mode-hook 'maca/folding-indent)
 
 
