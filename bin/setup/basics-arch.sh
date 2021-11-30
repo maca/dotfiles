@@ -4,9 +4,10 @@
 # bash <(curl -s https://raw.githubusercontent.com/maca/dotfiles/master/bin/setup/basics-arch.sh)
 
 
-pacman -S git vim zsh pass pass-otp the_silver_searcher fd binutils \
+pacman -Sy git vim zsh pass pass-otp the_silver_searcher fd binutils \
   patch make automake pkgconf fakeroot openssh ruby tmux \
-  rsync keychain linux-headers base-devel patch unzip ntp fzf emacs qrencode
+  rsync keychain linux-headers base-devel patch unzip ntp fzf emacs qrencode \
+  systemd-resolvconf
 
 
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
