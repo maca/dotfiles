@@ -44,9 +44,6 @@ mount -a
 sudo chmod 777 /scratch
 
 read -p "¿como te llamas? " user
-useradd -m -g users -G wheel -s /bin/zsh $user
-passwd $user
-visudo
 
 
 echo "SSH Key setup"
