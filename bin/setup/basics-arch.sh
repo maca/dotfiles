@@ -6,7 +6,7 @@
 
 pacman -Sy git vim zsh pass pass-otp the_silver_searcher fd binutils \
   patch make automake pkgconf fakeroot openssh ruby tmux \
-  rsync keychain linux-headers base-devel patch unzip ntp fzf emacs qrencode \
+  rsync keychain linux-headers base-devel patch ntp fzf emacs qrencode \
   systemd-resolvconf
 
 
