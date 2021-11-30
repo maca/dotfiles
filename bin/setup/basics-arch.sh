@@ -51,4 +51,4 @@ su - $user -c "ssh-keygen -t ed25519 -C '$user@$(cat /etc/hostname)'"
 
 
 cat "Public ssh key:"
-qrencode -t ansiutf8 < /home/$user/home/maca/.ssh/id_ed25519.pub
+qrencode -t ansiutf8 < /home/$user/ssh/id_ed25519.pub

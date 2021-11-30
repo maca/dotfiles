@@ -3,7 +3,7 @@
 sudo pacman -Syu
 sudo pacman -S\
   alacritty xorg-server xorg-xinit chromium \
-  pulseaudio pulseaudio-alsa ttf-liberation ttf-jetbrains-mono \
+  ttf-liberation ttf-jetbrains-mono \
   ttf-dejavu terminus-font noto-fonts-emoji noto-fonts-cjk \
   gmrun xcompmgr pavucontrol xautolock slock redshift acpi \
   acpilight xf86-input-libinput xorg-xinput gpicview \
@@ -15,11 +15,9 @@ cd /tmp
 
 sudo pacman-key --recv-keys 011FDC52DA839335
 
-aur -si pulseaudio-ctl bubbles-git xkbset xbindkeys
 
 cd -
 mkdir -p ~/.config/fontconfig/
-mkdir -p ~/.config/pulseaudio-ctl/
 
 ln -fs $HOME/dotfiles/bubbles.conf ~/.config/bubbles.conf
 ln -fs $HOME/dotfiles/termite ~/.config/termite
@@ -27,7 +25,13 @@ ln -fs $HOME/dotfiles/xbindkeysrc ~/.xbindkeysrc
 ln -fs $HOME/dotfiles/redshift.conf ~/.config/redshift.conf
 ln -fs $HOME/dotfiles/xinitrc ~/.xinitrc
 ln -fs $HOME/dotfiles/Xresources ~/.Xresources
-ln -fs $HOME/dotfiles/pulseaudio-ctl.config ~/.config/pulseaudio-ctl/config
+
+aur -si xkbset xbindkeys
+
+# pacman -S pulseaudio pulseaudio-alsa
+# aur -si pulseaudio-ctl bubbles-git
+# mkdir -p ~/.config/pulseaudio-ctl/
+# ln -fs $HOME/dotfiles/pulseaudio-ctl.config ~/.config/pulseaudio-ctl/config
 
 # Brightness control
 sudo usermod -aG video $(whoami)
