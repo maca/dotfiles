@@ -159,9 +159,12 @@ alias reboot="sudo reboot"
 alias shutdown="sudo shutdown"
 alias mount="sudo mount"
 alias umount="sudo umount"
-alias mpv="mpv --sub-scale=0.6"
+alias mpv="mpv --sub-scale=0.4"
 alias ls='ls --color=auto'
+alias wifi=iwctl
 alias spotify='LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify'
+alias json-merge "jq -s '.[0] * .[1]'"
+export GDK_SCALE=2
 
 
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
