@@ -1,36 +1,34 @@
 #!/bin/sh
 
 
+set +e
 ACTIVE=`xrandr --listactivemonitors | wc -l | awk '{print $1-1}'`
 pannelRes=`/usr/bin/xrandr -q | grep eDP-1 -A1 | sed -n '2 p' | grep -o -E '[[:digit:]]{4}x[[:digit:]]{4}'`
-bigMonRes=`/usr/bin/xrandr -q | grep DP-1-0 -A1 | sed -n '2 p' | grep -o -E '[[:digit:]]{4}x[[:digit:]]{4}'`
+bigMonRes=`/usr/bin/xrandr -q | grep DP-1-1 -A1 | sed -n '2 p' | grep -o -E '[[:digit:]]{4}x[[:digit:]]{4}'`
 
 
 echo $pannelRes
 echo $bigMonRes
 
 
-
 if [ -n "$MONITOR_HOTPLUGGED" ] || [ $ACTIVE -eq 1 ]; then
     /usr/bin/xrandr \
-      --output eDP-1 --primary --mode $pannelRes --pos 3840x0 --rotate normal \
-      --output DP-1-0 --primary --mode $bigMonRes --rotate normal \
-      --output DVI-I-1-1 $(
-        if echo /usr/bin/xrandr -q | grep -q 'DVI-I-1-1 connected'; then
-            echo '--mode 1920x1080 --pos 0x344 --rotate left'
+      --output eDP-1 --primary --mode $pannelRes --pos 3840x0 \
+      --output DP-1-1 --primary --mode $bigMonRes \
+      --output HDMI-1-1 $(
+        if /usr/bin/xrandr -q | grep -q 'HDMI-1-1 connected'; then
+            echo '--mode 3840x2160 --rotate left'
         else
             echo '--off'
         fi
       ) \
-      --output DP-1 --off \
-      --output HDMI-1 --off \
       --output DP-2 --off
 else
     /usr/bin/xrandr \
       --output eDP-1 --primary --mode "$pannelRes" --rotate normal \
-      --output DP-1-0 --off \
+      --output DP-1-1 --off \
       --output DVI-I-1-1 --off \
+      --output HDMI-1-1 --off \
       --output DP-1 --off \
-      --output HDMI-1 --off \
       --output DP-2 --off
 fi
