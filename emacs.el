@@ -31,8 +31,8 @@
 ;; Highlight text over 81 cols, trailing whitespace and tabs
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
-(setq whitespace-line-column 81)
-(setq-default fill-column 81)
+(setq whitespace-line-column 80)
+(setq-default fill-column 80)
 (setq indent-tabs-mode nil)
 (setq tab-width 1)
 (setq js-indent-level 2)
@@ -1084,6 +1084,18 @@
 
 (add-hook 'prog-mode-hook 'maca/folding-indent)
 (add-hook 'feature-mode-hook 'maca/folding-indent)
+
+
+;;Font sizing
+(defun readjust-font-size (&optional frame)
+  "Adjust font size based on frame monitor size"
+  (if (< (third (cdr (second (frame-monitor-attributes)))) 2560)
+      (set-face-attribute 'default nil :height 145)
+    (set-face-attribute 'default nil :height 241)
+    ))
+
+(add-hook 'window-size-change-functions #'readjust-font-size)
+;; Font sizing
 
 
 ;; Disable graphical elements
