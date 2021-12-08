@@ -601,7 +601,14 @@
 (use-package elm-mode
   :ensure t
   :config
-  (add-hook 'elm-mode-hook 'elm-format-on-save-mode))
+  (progn
+    (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
+    (setenv "PATH"
+            (concat
+             (getenv "HOME") "/.yarn/bin" ":"
+             (getenv "PATH")))
+
+    (setq exec-path (append exec-path '("/home/maca/.yarn/bin")))))
 
 (use-package haskell-mode
   :ensure t
@@ -660,7 +667,7 @@
 ;; Ligatures
 ;;
 (use-package ligature
-  :load-path "~/.emacs.d/ligature.el"
+  :load-path "~/dotfiles/emacs"
   :config
   ;; Enable the "www" ligature in every possible major mode
   (ligature-set-ligatures 't '("www"))
