@@ -5,7 +5,7 @@ sudo pacman -S\
   alacritty xorg-server xorg-xinit chromium \
   ttf-liberation ttf-jetbrains-mono \
   ttf-dejavu terminus-font noto-fonts-emoji noto-fonts-cjk \
-  gmrun xcompmgr pavucontrol xautolock slock redshift acpi \
+  gmrun xcompmgr xautolock slock redshift acpi \
   acpilight xf86-input-libinput xorg-xinput gpicview \
   libpng poppler-glib imagemagick unclutter browserpass \
   browserpass-chromium nautilus dmenu dhcpcd
@@ -99,7 +99,7 @@ sudo sh -c "cat > /etc/udev/rules.d/keyboard.rules" <<EOF
 SUBSYSTEM=="input", ATTRS{idVendor}=="0853", ATTRS{idProduct}=="0100", SYMLINK+="keyboard", TAG+="systemd"
 EOF
 
-systemctl --user enable sticky_keys
+systemctl --user enable --now sticky_keys
 
 
 ### Monitor hot plug

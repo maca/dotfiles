@@ -1,13 +1,13 @@
-"pulseaudio-ctl up"
+"pamixer -i 5 --allow-boost"
    XF86AudioRaiseVolume
 
-"pulseaudio-ctl down"
+"pamixer -d 5"
    XF86AudioLowerVolume
 
-"pulseaudio-ctl mute"
+"pamixer -t"
   XF86AudioMute
 
-"pulseaudio-ctl mute-input"
+"pamixer --source 45 -t"
   XF86AudioMicMute
 
 "xbacklight -dec 5"
