@@ -14,6 +14,7 @@ PATH="/usr/lib/ruby/gems/3.0.0/bin:$PATH"
 BUNDLE_PATH=$(ruby -e 'print Gem.user_dir')
 
 export ERL_AFLAGS="-kernel shell_history enabled"
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 if test -f $(which yarn); then
    PATH="$(yarn global bin):$PATH"
 fi
