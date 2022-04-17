@@ -9,6 +9,9 @@ which gtm >/dev/null && source $HOME/bin/gtm.sh
 export GOPATH=~/.go
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/bin"
+if [ -e $HOME/bin-extra ]; then
+  export PATH="$PATH:$HOME/bin-extra"
+fi
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 
 
