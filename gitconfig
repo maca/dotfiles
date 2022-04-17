@@ -15,12 +15,6 @@
   diff = auto
   status = auto
   branch = auto
-[giggle]
-  main-window-maximized = false
-  main-window-geometry = 1364x747+0+19
-  file-view-vpane-position = 403
-  main-window-view = HistoryView
-  history-view-vpane-position = 318
 [push]
   default = matching
 [pager]
@@ -31,7 +25,7 @@
   excludesfile = ~/.gitignore
 [init]
   templatedir = /home/maca/dotfiles/git-hooks
-	defaultBranch = main
+  defaultBranch = main
 [merge]
   tool = diffconflicts
 [mergetool "diffconflicts"]
