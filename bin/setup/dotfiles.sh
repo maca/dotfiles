@@ -24,9 +24,9 @@ ln -fs $HOME/dotfiles/pam_environment ~/.pam_environment
 
 
 cd $HOME
+echo "AddKeysToAgent yes" >> ~/.ssh/config
 
 git clone git@gitlab.com:aelita/pass.git $HOME/.password-store
 ln -fs $HOME/dotfiles/password-store/hooks ~/.password-store/.git/
 
 
-echo "AddKeysToAgent yes" >> ~/.ssh/config
