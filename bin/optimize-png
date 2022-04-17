@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for PNG in $(find . -name '*.png'); do
+  pngquant --strip --ext .png --quality=30-40 --force 256 ${PNG}
+  echo "Optimized PNG: ${PNG}"
+done
