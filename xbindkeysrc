@@ -7,7 +7,7 @@
 "pamixer -t"
   XF86AudioMute
 
-"pamixer --source 45 -t"
+"/home/maca/bin/toggle-mute"
   XF86AudioMicMute
 
 "xbacklight -dec 5"

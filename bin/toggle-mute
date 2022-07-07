@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pamixer --list-source | grep Microphone | awk '{print sprintf("pamixer --source %s -t", $1)}' | paste -sd ';'  | sh
