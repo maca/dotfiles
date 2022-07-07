@@ -8,7 +8,8 @@ if test -f /usr/share/chruby/chruby.sh; then
     source /usr/share/chruby/auto.sh
 fi
 
-BUNDLE_DEFAULT_INSTALL_USES_PATH=$(ruby -e 'print Gem.user_dir')
+BUNDLE_PATH=$(ruby -e 'print Gem.user_dir')
+GEM_HOME=$(ruby -e 'print Gem.user_dir')
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="/usr/lib/ruby/gems/3.0.0/bin:$PATH"
 BUNDLE_PATH=$(ruby -e 'print Gem.user_dir')
