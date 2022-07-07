@@ -1,8 +1,4 @@
-*.swp
-.swm
-.swn
-*.swo
-.env
-.ignore
-tags
-TAGS
+elm-stuff
+/.gtm/
+/build/
+node_modules
