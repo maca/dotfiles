@@ -452,7 +452,7 @@ or the current buffer directory."
 (use-package neotree
   :ensure t
   :config
-
+  (setq neo-window-fixed-size nil)
   (evil-leader/set-key
     "m" 'my-neotree-project-dir-toggle)
 
